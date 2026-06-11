@@ -1,0 +1,10 @@
+{
+  "license": "CC0-1.0",
+  "local_path": "data/processed/historical_matches.parquet",
+  "notes": "Derived canonical parquet from immutable raw captures: {'former_names.csv': '2d57f59a3ac13b24c2fcf208ced5a38710529d122da38929838d0980b002677e', 'results.csv': '50f17eb331a3d8367184f3314cf41616782f842ebb39e42191260b414b56bc78', 'shootouts.csv': 'e52e503badc11021d5d243ddf2288346f63ad028bf8de75ae9cfb72c5475d807'}",
+  "retrieved_at_utc": "2026-06-11T22:23:12.161183Z",
+  "sha256": "067ada821b9e33e987525f66e668e89301b9945b7f7526509868dd8c7b22b239",
+  "source": "martj42",
+  "source_url": "https://www.kaggle.com/datasets/martj42/international-football-results-from-1872-to-2017",
+  "source_version": "2026-06-11"
+}

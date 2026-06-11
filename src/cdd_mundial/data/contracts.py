@@ -16,12 +16,18 @@ class CanonicalSchema(pa.DataFrameModel):
 class TeamsSchema(CanonicalSchema):
     team_id: Series[str] = pa.Field(unique=True, str_matches=r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
     canonical_name: Series[str]
-    fifa_code: Series[str] = pa.Field(nullable=True, unique=True)
-    elo_code: Series[str] = pa.Field(nullable=True, unique=True)
+    fifa_code: Series[str] = pa.Field(nullable=True)
+    elo_code: Series[str] = pa.Field(nullable=True)
     confederation: Series[str]
     is_world_cup_2026: Series[bool]
     active_from: Series[str]
     active_to: Series[str] = pa.Field(nullable=True)
+
+    @pa.dataframe_check
+    def populated_codes_are_unique(cls, frame: pd.DataFrame) -> bool:
+        return all(
+            frame[column].dropna().is_unique for column in ("fifa_code", "elo_code")
+        )
 
 
 class TeamAliasesSchema(CanonicalSchema):
@@ -120,4 +126,3 @@ class OddsSchema(CanonicalSchema):
     def probabilities_are_normalized(cls, frame: pd.DataFrame) -> Series[bool]:
         probability_sum = frame["prob_home"] + frame["prob_draw"] + frame["prob_away"]
         return (probability_sum - 1.0).abs() <= 1e-9
-

@@ -3,13 +3,16 @@ import json
 from pathlib import Path
 
 import pandas as pd
+import pytest
 
 from cdd_mundial.data.contracts import HistoricalMatchesSchema
 from cdd_mundial.data.identities import TeamResolver
 from cdd_mundial.data.ingest_martj42 import (
     DATASET_HANDLE,
+    audit_martj42_identity_coverage,
     build_historical_matches,
     download_martj42,
+    verify_martj42_materialization,
 )
 from cdd_mundial.data.provenance import file_sha256
 
@@ -55,6 +58,11 @@ def test_download_captures_source_files_and_cc0_manifests(
         payload = json.loads(manifest.read_text(encoding="utf-8"))
         assert payload["license"] == "CC0-1.0"
         assert payload["sha256"] == file_sha256(path)
+
+
+def test_download_rejects_unsafe_source_versions() -> None:
+    with pytest.raises(ValueError, match="safe path segment"):
+        download_martj42("../escape")
 
 
 def test_build_historical_matches_preserves_source_semantics(test_workspace: Path) -> None:
@@ -104,3 +112,61 @@ def test_collision_suffixes_are_deterministic(test_workspace: Path) -> None:
         "2022-11-22-argentina-canada",
         "2022-11-22-argentina-canada-2",
     ]
+
+
+def test_identity_audit_reports_every_unresolved_historical_name(
+    test_workspace: Path,
+) -> None:
+    results = pd.read_csv(FIXTURE_ROOT / "results.csv")
+    results.loc[0, "home_team"] = "Atlantis"
+    results_path = test_workspace / "results.csv"
+    results.to_csv(results_path, index=False)
+
+    report = audit_martj42_identity_coverage(
+        results_path,
+        FIXTURE_ROOT / "shootouts.csv",
+        resolver=TeamResolver.from_csv(),
+    )
+
+    assert report.to_dict("records") == [
+        {
+            "source_name": "Atlantis",
+            "first_seen": "2022-11-22",
+            "last_seen": "2022-11-22",
+            "match_count": 1,
+        }
+    ]
+
+
+def test_materialization_verifier_requires_real_artifacts(test_workspace: Path) -> None:
+    with pytest.raises(FileNotFoundError, match="historical_matches.parquet"):
+        verify_martj42_materialization(data_root=test_workspace / "data")
+
+
+def test_build_excludes_unplayed_rows_and_rejects_partial_scores(
+    test_workspace: Path,
+) -> None:
+    results = pd.read_csv(FIXTURE_ROOT / "results.csv")
+    unplayed = results.iloc[[0]].copy()
+    unplayed[["home_score", "away_score"]] = None
+    results_path = test_workspace / "results.csv"
+    pd.concat([results, unplayed], ignore_index=True).to_csv(results_path, index=False)
+
+    built = build_historical_matches(
+        results_path,
+        FIXTURE_ROOT / "shootouts.csv",
+        output_path=test_workspace / "historical_matches.parquet",
+        source_version="fixture-v1",
+    )
+    assert len(built) == len(results)
+
+    partial = results.copy()
+    partial.loc[0, "home_score"] = None
+    partial.to_csv(results_path, index=False)
+    with pytest.raises(ValueError, match="only one score"):
+        build_historical_matches(
+            results_path,
+            FIXTURE_ROOT / "shootouts.csv",
+            output_path=test_workspace / "partial.parquet",
+            source_version="fixture-v1",
+        )

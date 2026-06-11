@@ -35,6 +35,7 @@ addopts = "-ra -p no:cacheprovider"
 markers = [
     "network: tests that access external services",
     "manual: tests that require explicit human review",
+    "data_acceptance: tests that require real materialized data artifacts",
 ]
 
 [tool.ruff]

@@ -40,11 +40,27 @@ class TeamResolver:
     def from_csv(
         cls,
         teams_path: Path = Path("data/external/teams.csv"),
+        historical_teams_path: Path = Path("data/external/historical_teams.csv"),
         aliases_path: Path = Path("data/external/team_aliases.csv"),
     ) -> TeamResolver:
         """Load and validate the reviewed identity registry."""
+        team_frames = [
+            pd.read_csv(teams_path, dtype=str, keep_default_na=False).replace("", None)
+        ]
+        if historical_teams_path.exists():
+            team_frames.append(
+                pd.read_csv(
+                    historical_teams_path,
+                    dtype=str,
+                    keep_default_na=False,
+                ).replace("", None)
+            )
+        teams = pd.concat(team_frames, ignore_index=True)
+        teams["is_world_cup_2026"] = teams["is_world_cup_2026"].map(
+            lambda value: str(value).lower() == "true"
+        )
         return cls(
-            pd.read_csv(teams_path, dtype=str, keep_default_na=False).replace("", None),
+            teams,
             pd.read_csv(aliases_path, dtype=str, keep_default_na=False).replace("", None),
         )
 

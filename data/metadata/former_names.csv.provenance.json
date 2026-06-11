@@ -1,0 +1,10 @@
+{
+  "license": "CC0-1.0",
+  "local_path": "data/raw/martj42/2026-06-11/former_names.csv",
+  "notes": "Unmodified capture downloaded with kagglehub.",
+  "retrieved_at_utc": "2026-06-11T22:21:42.218434Z",
+  "sha256": "2d57f59a3ac13b24c2fcf208ced5a38710529d122da38929838d0980b002677e",
+  "source": "martj42",
+  "source_url": "https://www.kaggle.com/datasets/martj42/international-football-results-from-1872-to-2017",
+  "source_version": "2026-06-11"
+}
