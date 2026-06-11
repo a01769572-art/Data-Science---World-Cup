@@ -1,0 +1,241 @@
+source,source_name,team_id,valid_from,valid_to,mapping_note
+martj42,Algeria,algeria,1962-01-01,,Exact martj42 team name
+martj42,Argentina,argentina,1901-01-01,,Exact martj42 team name
+martj42,Australia,australia,1922-01-01,,Exact martj42 team name
+martj42,Austria,austria,1904-01-01,,Exact martj42 team name
+martj42,Belgium,belgium,1904-01-01,,Exact martj42 team name
+martj42,Bosnia and Herzegovina,bosnia-and-herzegovina,1992-01-01,,Exact martj42 team name
+martj42,Brazil,brazil,1914-01-01,,Exact martj42 team name
+martj42,Canada,canada,1924-01-01,,Exact martj42 team name
+martj42,Cape Verde,cape-verde,1979-01-01,,Exact martj42 team name
+martj42,Colombia,colombia,1938-01-01,,Exact martj42 team name
+martj42,Croatia,croatia,1990-01-01,,Exact martj42 team name
+martj42,Curacao,curacao,2011-01-01,,ASCII spelling used by martj42
+martj42,Czech Republic,czechia,1994-01-01,,Historical martj42 display name
+martj42,DR Congo,dr-congo,1960-01-01,,Exact martj42 team name
+martj42,Ecuador,ecuador,1938-01-01,,Exact martj42 team name
+martj42,Egypt,egypt,1920-01-01,,Exact martj42 team name
+martj42,England,england,1872-01-01,,Exact martj42 team name
+martj42,France,france,1904-01-01,,Exact martj42 team name
+martj42,Germany,germany,1908-01-01,,Successor name used by martj42
+martj42,Ghana,ghana,1957-01-01,,Exact martj42 team name
+martj42,Haiti,haiti,1934-01-01,,Exact martj42 team name
+martj42,Iran,iran,1941-01-01,,Exact martj42 team name
+martj42,Iraq,iraq,1957-01-01,,Exact martj42 team name
+martj42,Ivory Coast,ivory-coast,1960-01-01,,English martj42 team name
+martj42,Japan,japan,1923-01-01,,Exact martj42 team name
+martj42,Jordan,jordan,1953-01-01,,Exact martj42 team name
+martj42,Mexico,mexico,1923-01-01,,Exact martj42 team name
+martj42,Morocco,morocco,1957-01-01,,Exact martj42 team name
+martj42,Netherlands,netherlands,1905-01-01,,Exact martj42 team name
+martj42,New Zealand,new-zealand,1922-01-01,,Exact martj42 team name
+martj42,Norway,norway,1908-01-01,,Exact martj42 team name
+martj42,Panama,panama,1938-01-01,,Exact martj42 team name
+martj42,Paraguay,paraguay,1919-01-01,,Exact martj42 team name
+martj42,Portugal,portugal,1921-01-01,,Exact martj42 team name
+martj42,Qatar,qatar,1970-01-01,,Exact martj42 team name
+martj42,Saudi Arabia,saudi-arabia,1957-01-01,,Exact martj42 team name
+martj42,Scotland,scotland,1872-01-01,,Exact martj42 team name
+martj42,Senegal,senegal,1961-01-01,,Exact martj42 team name
+martj42,South Africa,south-africa,1906-01-01,,Exact martj42 team name
+martj42,South Korea,south-korea,1948-01-01,,English martj42 team name
+martj42,Spain,spain,1920-01-01,,Exact martj42 team name
+martj42,Sweden,sweden,1908-01-01,,Exact martj42 team name
+martj42,Switzerland,switzerland,1905-01-01,,Exact martj42 team name
+martj42,Tunisia,tunisia,1957-01-01,,Exact martj42 team name
+martj42,Turkey,turkiye,1923-01-01,,Historical English martj42 name
+martj42,United States,united-states,1885-01-01,,Exact martj42 team name
+martj42,Uruguay,uruguay,1901-01-01,,Exact martj42 team name
+martj42,Uzbekistan,uzbekistan,1992-01-01,,Exact martj42 team name
+eloratings,Algeria,algeria,1962-01-01,,Current Elo display name
+eloratings,Argentina,argentina,1901-01-01,,Current Elo display name
+eloratings,Australia,australia,1922-01-01,,Current Elo display name
+eloratings,Austria,austria,1904-01-01,,Current Elo display name
+eloratings,Belgium,belgium,1904-01-01,,Current Elo display name
+eloratings,Bosnia and Herzegovina,bosnia-and-herzegovina,1992-01-01,,Current Elo display name
+eloratings,Brazil,brazil,1914-01-01,,Current Elo display name
+eloratings,Canada,canada,1924-01-01,,Current Elo display name
+eloratings,Cape Verde,cape-verde,1979-01-01,,Current Elo display name
+eloratings,Colombia,colombia,1938-01-01,,Current Elo display name
+eloratings,Croatia,croatia,1990-01-01,,Current Elo display name
+eloratings,Curacao,curacao,2011-01-01,,ASCII provider display name
+eloratings,Czech Republic,czechia,1994-01-01,,Current Elo display name
+eloratings,DR Congo,dr-congo,1960-01-01,,Current Elo display name
+eloratings,Ecuador,ecuador,1938-01-01,,Current Elo display name
+eloratings,Egypt,egypt,1920-01-01,,Current Elo display name
+eloratings,England,england,1872-01-01,,Current Elo display name
+eloratings,France,france,1904-01-01,,Current Elo display name
+eloratings,Germany,germany,1908-01-01,,Current Elo display name
+eloratings,Ghana,ghana,1957-01-01,,Current Elo display name
+eloratings,Haiti,haiti,1934-01-01,,Current Elo display name
+eloratings,Iran,iran,1941-01-01,,Current Elo display name
+eloratings,Iraq,iraq,1957-01-01,,Current Elo display name
+eloratings,Ivory Coast,ivory-coast,1960-01-01,,Current Elo display name
+eloratings,Japan,japan,1923-01-01,,Current Elo display name
+eloratings,Jordan,jordan,1953-01-01,,Current Elo display name
+eloratings,Mexico,mexico,1923-01-01,,Current Elo display name
+eloratings,Morocco,morocco,1957-01-01,,Current Elo display name
+eloratings,Netherlands,netherlands,1905-01-01,,Current Elo display name
+eloratings,New Zealand,new-zealand,1922-01-01,,Current Elo display name
+eloratings,Norway,norway,1908-01-01,,Current Elo display name
+eloratings,Panama,panama,1938-01-01,,Current Elo display name
+eloratings,Paraguay,paraguay,1919-01-01,,Current Elo display name
+eloratings,Portugal,portugal,1921-01-01,,Current Elo display name
+eloratings,Qatar,qatar,1970-01-01,,Current Elo display name
+eloratings,Saudi Arabia,saudi-arabia,1957-01-01,,Current Elo display name
+eloratings,Scotland,scotland,1872-01-01,,Current Elo display name
+eloratings,Senegal,senegal,1961-01-01,,Current Elo display name
+eloratings,South Africa,south-africa,1906-01-01,,Current Elo display name
+eloratings,South Korea,south-korea,1948-01-01,,Current Elo display name
+eloratings,Spain,spain,1920-01-01,,Current Elo display name
+eloratings,Sweden,sweden,1908-01-01,,Current Elo display name
+eloratings,Switzerland,switzerland,1905-01-01,,Current Elo display name
+eloratings,Tunisia,tunisia,1957-01-01,,Current Elo display name
+eloratings,Turkey,turkiye,1923-01-01,,Current Elo display name
+eloratings,USA,united-states,1885-01-01,,Provider abbreviation
+eloratings,Uruguay,uruguay,1901-01-01,,Current Elo display name
+eloratings,Uzbekistan,uzbekistan,1992-01-01,,Current Elo display name
+fifa,Algeria,algeria,1962-01-01,,FIFA display name
+fifa,Argentina,argentina,1901-01-01,,FIFA display name
+fifa,Australia,australia,1922-01-01,,FIFA display name
+fifa,Austria,austria,1904-01-01,,FIFA display name
+fifa,Belgium,belgium,1904-01-01,,FIFA display name
+fifa,Bosnia and Herzegovina,bosnia-and-herzegovina,1992-01-01,,FIFA display name
+fifa,Brazil,brazil,1914-01-01,,FIFA display name
+fifa,Canada,canada,1924-01-01,,FIFA display name
+fifa,Cabo Verde,cape-verde,1979-01-01,,FIFA display name
+fifa,Colombia,colombia,1938-01-01,,FIFA display name
+fifa,Croatia,croatia,1990-01-01,,FIFA display name
+fifa,Curacao,curacao,2011-01-01,,ASCII transcription of FIFA display
+fifa,Czechia,czechia,1994-01-01,,FIFA display name
+fifa,DR Congo,dr-congo,1960-01-01,,FIFA display name
+fifa,Ecuador,ecuador,1938-01-01,,FIFA display name
+fifa,Egypt,egypt,1920-01-01,,FIFA display name
+fifa,England,england,1872-01-01,,FIFA display name
+fifa,France,france,1904-01-01,,FIFA display name
+fifa,Germany,germany,1908-01-01,,FIFA display name
+fifa,Ghana,ghana,1957-01-01,,FIFA display name
+fifa,Haiti,haiti,1934-01-01,,ASCII transcription of FIFA display
+fifa,IR Iran,iran,1941-01-01,,FIFA ranking display name
+fifa,Iraq,iraq,1957-01-01,,FIFA display name
+fifa,Cote d'Ivoire,ivory-coast,1960-01-01,,ASCII transcription of FIFA display
+fifa,Japan,japan,1923-01-01,,FIFA display name
+fifa,Jordan,jordan,1953-01-01,,FIFA display name
+fifa,Mexico,mexico,1923-01-01,,FIFA display name
+fifa,Morocco,morocco,1957-01-01,,FIFA display name
+fifa,Netherlands,netherlands,1905-01-01,,FIFA display name
+fifa,New Zealand,new-zealand,1922-01-01,,FIFA display name
+fifa,Norway,norway,1908-01-01,,FIFA display name
+fifa,Panama,panama,1938-01-01,,FIFA display name
+fifa,Paraguay,paraguay,1919-01-01,,FIFA display name
+fifa,Portugal,portugal,1921-01-01,,FIFA display name
+fifa,Qatar,qatar,1970-01-01,,FIFA display name
+fifa,Saudi Arabia,saudi-arabia,1957-01-01,,FIFA display name
+fifa,Scotland,scotland,1872-01-01,,FIFA display name
+fifa,Senegal,senegal,1961-01-01,,FIFA display name
+fifa,South Africa,south-africa,1906-01-01,,FIFA display name
+fifa,Korea Republic,south-korea,1948-01-01,,FIFA display name
+fifa,Spain,spain,1920-01-01,,FIFA display name
+fifa,Sweden,sweden,1908-01-01,,FIFA display name
+fifa,Switzerland,switzerland,1905-01-01,,FIFA display name
+fifa,Tunisia,tunisia,1957-01-01,,FIFA display name
+fifa,Turkiye,turkiye,1923-01-01,,ASCII transcription of FIFA display
+fifa,USA,united-states,1885-01-01,,FIFA display abbreviation
+fifa,Uruguay,uruguay,1901-01-01,,FIFA display name
+fifa,Uzbekistan,uzbekistan,1992-01-01,,FIFA display name
+fixture,Algeria,algeria,1962-01-01,,Reviewed 2026 fixture display
+fixture,Argentina,argentina,1901-01-01,,Reviewed 2026 fixture display
+fixture,Australia,australia,1922-01-01,,Reviewed 2026 fixture display
+fixture,Austria,austria,1904-01-01,,Reviewed 2026 fixture display
+fixture,Belgium,belgium,1904-01-01,,Reviewed 2026 fixture display
+fixture,Bosnia and Herzegovina,bosnia-and-herzegovina,1992-01-01,,Reviewed 2026 fixture display
+fixture,Brazil,brazil,1914-01-01,,Reviewed 2026 fixture display
+fixture,Canada,canada,1924-01-01,,Reviewed 2026 fixture display
+fixture,Cape Verde,cape-verde,1979-01-01,,Reviewed 2026 fixture display
+fixture,Colombia,colombia,1938-01-01,,Reviewed 2026 fixture display
+fixture,Croatia,croatia,1990-01-01,,Reviewed 2026 fixture display
+fixture,Curacao,curacao,2011-01-01,,ASCII fixture display
+fixture,Czechia,czechia,1994-01-01,,Reviewed 2026 fixture display
+fixture,DR Congo,dr-congo,1960-01-01,,Reviewed 2026 fixture display
+fixture,Ecuador,ecuador,1938-01-01,,Reviewed 2026 fixture display
+fixture,Egypt,egypt,1920-01-01,,Reviewed 2026 fixture display
+fixture,England,england,1872-01-01,,Reviewed 2026 fixture display
+fixture,France,france,1904-01-01,,Reviewed 2026 fixture display
+fixture,Germany,germany,1908-01-01,,Reviewed 2026 fixture display
+fixture,Ghana,ghana,1957-01-01,,Reviewed 2026 fixture display
+fixture,Haiti,haiti,1934-01-01,,Reviewed 2026 fixture display
+fixture,Iran,iran,1941-01-01,,Reviewed 2026 fixture display
+fixture,Iraq,iraq,1957-01-01,,Reviewed 2026 fixture display
+fixture,Ivory Coast,ivory-coast,1960-01-01,,Reviewed 2026 fixture display
+fixture,Japan,japan,1923-01-01,,Reviewed 2026 fixture display
+fixture,Jordan,jordan,1953-01-01,,Reviewed 2026 fixture display
+fixture,Mexico,mexico,1923-01-01,,Reviewed 2026 fixture display
+fixture,Morocco,morocco,1957-01-01,,Reviewed 2026 fixture display
+fixture,Netherlands,netherlands,1905-01-01,,Reviewed 2026 fixture display
+fixture,New Zealand,new-zealand,1922-01-01,,Reviewed 2026 fixture display
+fixture,Norway,norway,1908-01-01,,Reviewed 2026 fixture display
+fixture,Panama,panama,1938-01-01,,Reviewed 2026 fixture display
+fixture,Paraguay,paraguay,1919-01-01,,Reviewed 2026 fixture display
+fixture,Portugal,portugal,1921-01-01,,Reviewed 2026 fixture display
+fixture,Qatar,qatar,1970-01-01,,Reviewed 2026 fixture display
+fixture,Saudi Arabia,saudi-arabia,1957-01-01,,Reviewed 2026 fixture display
+fixture,Scotland,scotland,1872-01-01,,Reviewed 2026 fixture display
+fixture,Senegal,senegal,1961-01-01,,Reviewed 2026 fixture display
+fixture,South Africa,south-africa,1906-01-01,,Reviewed 2026 fixture display
+fixture,South Korea,south-korea,1948-01-01,,Reviewed 2026 fixture display
+fixture,Spain,spain,1920-01-01,,Reviewed 2026 fixture display
+fixture,Sweden,sweden,1908-01-01,,Reviewed 2026 fixture display
+fixture,Switzerland,switzerland,1905-01-01,,Reviewed 2026 fixture display
+fixture,Tunisia,tunisia,1957-01-01,,Reviewed 2026 fixture display
+fixture,Turkiye,turkiye,1923-01-01,,ASCII fixture display
+fixture,United States,united-states,1885-01-01,,Reviewed 2026 fixture display
+fixture,Uruguay,uruguay,1901-01-01,,Reviewed 2026 fixture display
+fixture,Uzbekistan,uzbekistan,1992-01-01,,Reviewed 2026 fixture display
+odds,Algeria,algeria,1962-01-01,,Expected market display name
+odds,Argentina,argentina,1901-01-01,,Expected market display name
+odds,Australia,australia,1922-01-01,,Expected market display name
+odds,Austria,austria,1904-01-01,,Expected market display name
+odds,Belgium,belgium,1904-01-01,,Expected market display name
+odds,Bosnia and Herzegovina,bosnia-and-herzegovina,1992-01-01,,Expected market display name
+odds,Brazil,brazil,1914-01-01,,Expected market display name
+odds,Canada,canada,1924-01-01,,Expected market display name
+odds,Cape Verde,cape-verde,1979-01-01,,Expected market display name
+odds,Colombia,colombia,1938-01-01,,Expected market display name
+odds,Croatia,croatia,1990-01-01,,Expected market display name
+odds,Curacao,curacao,2011-01-01,,Expected ASCII market display
+odds,Czech Republic,czechia,1994-01-01,,Expected market display name
+odds,DR Congo,dr-congo,1960-01-01,,Expected market display name
+odds,Ecuador,ecuador,1938-01-01,,Expected market display name
+odds,Egypt,egypt,1920-01-01,,Expected market display name
+odds,England,england,1872-01-01,,Expected market display name
+odds,France,france,1904-01-01,,Expected market display name
+odds,Germany,germany,1908-01-01,,Expected market display name
+odds,Ghana,ghana,1957-01-01,,Expected market display name
+odds,Haiti,haiti,1934-01-01,,Expected market display name
+odds,Iran,iran,1941-01-01,,Expected market display name
+odds,Iraq,iraq,1957-01-01,,Expected market display name
+odds,Ivory Coast,ivory-coast,1960-01-01,,Expected market display name
+odds,Japan,japan,1923-01-01,,Expected market display name
+odds,Jordan,jordan,1953-01-01,,Expected market display name
+odds,Mexico,mexico,1923-01-01,,Expected market display name
+odds,Morocco,morocco,1957-01-01,,Expected market display name
+odds,Netherlands,netherlands,1905-01-01,,Expected market display name
+odds,New Zealand,new-zealand,1922-01-01,,Expected market display name
+odds,Norway,norway,1908-01-01,,Expected market display name
+odds,Panama,panama,1938-01-01,,Expected market display name
+odds,Paraguay,paraguay,1919-01-01,,Expected market display name
+odds,Portugal,portugal,1921-01-01,,Expected market display name
+odds,Qatar,qatar,1970-01-01,,Expected market display name
+odds,Saudi Arabia,saudi-arabia,1957-01-01,,Expected market display name
+odds,Scotland,scotland,1872-01-01,,Expected market display name
+odds,Senegal,senegal,1961-01-01,,Expected market display name
+odds,South Africa,south-africa,1906-01-01,,Expected market display name
+odds,South Korea,south-korea,1948-01-01,,Expected market display name
+odds,Spain,spain,1920-01-01,,Expected market display name
+odds,Sweden,sweden,1908-01-01,,Expected market display name
+odds,Switzerland,switzerland,1905-01-01,,Expected market display name
+odds,Tunisia,tunisia,1957-01-01,,Expected market display name
+odds,Turkey,turkiye,1923-01-01,,Expected market display name
+odds,USA,united-states,1885-01-01,,Expected market abbreviation
+odds,Uruguay,uruguay,1901-01-01,,Expected market display name
+odds,Uzbekistan,uzbekistan,1992-01-01,,Expected market display name
