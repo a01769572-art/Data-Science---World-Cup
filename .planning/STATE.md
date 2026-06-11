@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 01-01-PLAN.md
-last_updated: "2026-06-11T17:35:04.203Z"
+stopped_at: Completed 01-02-PLAN.md
+last_updated: "2026-06-11T17:56:36.066Z"
 last_activity: 2026-06-11
 progress:
   total_phases: 6
   completed_phases: 0
   total_plans: 5
-  completed_plans: 1
-  percent: 20
+  completed_plans: 2
+  percent: 40
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-06-11)
 ## Current Position
 
 Phase: 01 (Fundación de Datos) — EXECUTING
-Plan: 2 of 5
+Plan: 3 of 5
 Status: Ready to execute
 Last activity: 2026-06-11
 
-Progress: [██░░░░░░░░] 20%
+Progress: [████░░░░░░] 40%
 
 **HARD DEADLINE:** Fases 1-4 deben estar publicando pronósticos antes del 2026-06-27 (fin de fase de grupos). El torneo empezó HOY.
 
@@ -38,23 +38,24 @@ Progress: [██░░░░░░░░] 20%
 
 **Velocity:**
 
-- Total plans completed: 1
-- Average duration: 20 min
-- Total execution time: 20 min
+- Total plans completed: 2
+- Average duration: 12 min
+- Total execution time: 24 min
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| Phase 01 | 1 | 20 min | 20 min |
+| Phase 01 | 2 | 24 min | 12 min |
 
 **Recent Trend:**
 
-- Last 5 plans: 20 min
-- Trend: Initial plan completed
+- Last 5 plans: 20 min, 4 min
+- Trend: Data foundation plans are completing faster after scaffold setup
 
 *Updated after each plan completion*
 | Phase 01 P01 | 20min | 3 tasks | 11 files |
+| Phase 01 P02 | 4min | 3 tasks | 9 files |
 
 ## Accumulated Context
 
@@ -69,6 +70,9 @@ Recent decisions affecting current work:
 - [Phase 01]: Canonical Pandera schemas inherit strict=True and coerce=True from one shared base contract. — Keeps every canonical stage exit consistent and rejects schema drift.
 - [Phase 01]: Immutable captures use exclusive creation and checksum comparison. — Identical replay is safe while changed payloads cannot mutate raw history.
 - [Phase 01]: Tests use workspace-local unique artifacts. — Windows and OneDrive temp ACLs were unreliable in the execution environment.
+- [Phase 01]: Canonical IDs are authored lowercase ASCII slugs and are never derived during ingestion. — Stable reviewed identities prevent silent cross-source merges.
+- [Phase 01]: Martj42 scores remain unchanged while shootout winners are stored separately. — This preserves the source's full-time-including-extra-time semantics.
+- [Phase 01]: Historical match IDs use date and original source names with deterministic collision suffixes. — IDs remain reproducible without depending on runtime canonical slug generation.
 
 ### Pending Todos
 
@@ -78,7 +82,6 @@ None yet.
 
 - [Phase 3 prerequisito]: Reglamento oficial FIFA 2026 (orden de desempates, asignación de mejores terceros a R32, puntos fair-play) NO verificado en research — fetch del PDF oficial es la primera tarea del simulador
 - [Phase 1]: Fuente de cuotas 2026 (disponibilidad/formato) sin verificar — confirmar durante ingesta
-- [Phase 1]: Convenciones del dataset martj42 (penales-como-empates, semántica del flag neutral) — verificar empíricamente al ingestar
 - [Stack]: Pin pandas ~=2.3.3 (NO 3.x — seaborn 0.13.2 incompatible); no tocar el pin a mitad de torneo
 
 ## Deferred Items
@@ -91,6 +94,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-06-11T17:35:04.199Z
-Stopped at: Completed 01-01-PLAN.md
+Last session: 2026-06-11T17:56:35.975Z
+Stopped at: Completed 01-02-PLAN.md
 Resume file: None
