@@ -1,17 +1,29 @@
 {
   "provider": "the-odds-api",
   "sports_endpoint": "https://api.the-odds-api.com/v4/sports",
-  "sport_key": null,
+  "sport_key": "soccer_fifa_world_cup",
   "terms_url": "https://the-odds-api.com/terms-and-conditions.html",
   "license_or_terms_summary": "The Odds API terms (reviewed 2026-06-11) permit using odds data in analytical tools, dashboards, and user-facing applications, including commercial use, provided the data is not resold, repackaged, or redistributed as a standalone data product (no raw feeds, downloadable files, or derivative data services). Provider names may be referenced factually without implying endorsement.",
   "raw_storage": "ignored",
   "derived_storage": "data/processed/odds_2026.parquet (gitignored, regenerated from code); only de-margined benchmark probabilities and aggregate comparisons appear in committed reports and notebooks",
-  "probed_at_utc": "2026-06-11T23:26:00Z",
-  "decision": "The Odds API v4 is selected as the World Cup 2026 odds provider. An unauthenticated capability probe on 2026-06-11 confirmed the sports endpoint is live and key-gated (HTTP 401, error_code MISSING_KEY), so a personal ODDS_API_KEY is required and must live only in the ignored local .env. Terms permit analytical benchmark use without redistributing raw payloads, therefore raw provider responses are stored only under the gitignored data/raw/odds/ path. The active World Cup 2026 sport_key is intentionally null here: it is resolved at runtime by probe_odds_provider once the credential exists, never hard-coded. The authored CSV template data/external/odds_2026_template.csv remains the manual import fallback if the provider tier lacks World Cup three-way markets.",
+  "probed_at_utc": "2026-06-11T23:44:15Z",
+  "decision": "The Odds API v4 is confirmed as the World Cup 2026 odds provider. The authenticated capability probe on 2026-06-11 succeeded with the personal credential loaded from the ignored local .env: the sports endpoint exposed exactly one active men's FIFA World Cup soccer competition (sport_key soccer_fifa_world_cup, title 'FIFA World Cup', non-outright), and its odds endpoint returned 71 events, all 71 carrying an exact home/draw/away three-outcome h2h market in decimal format. Terms permit analytical benchmark use without redistributing raw payloads, therefore raw provider responses are stored only under the gitignored data/raw/odds/ path. The authored CSV template data/external/odds_2026_template.csv remains the manual import fallback if provider coverage lapses during the tournament.",
   "probe_evidence": {
-    "method": "GET https://api.the-odds-api.com/v4/sports without apiKey",
-    "http_status": 401,
-    "error_code": "MISSING_KEY",
-    "details_url": "https://the-odds-api.com/liveapi/guides/v4/api-error-codes.html#missing-key"
+    "method": "Authenticated GET on /v4/sports and /v4/sports/soccer_fifa_world_cup/odds (markets=h2h, regions=eu, decimal); credential supplied only via the ODDS_API_KEY environment variable and redacted from all logs and artifacts",
+    "http_status": 200,
+    "sport_key": "soccer_fifa_world_cup",
+    "sport_title": "FIFA World Cup",
+    "event_count": 71,
+    "three_way_event_count": 71,
+    "raw_capture_paths": [
+      "data/raw/odds/20260611T234415Z_sports.json",
+      "data/raw/odds/20260611T234415Z_odds_soccer_fifa_world_cup.json"
+    ],
+    "unauthenticated_baseline": {
+      "method": "GET https://api.the-odds-api.com/v4/sports without apiKey",
+      "http_status": 401,
+      "error_code": "MISSING_KEY",
+      "details_url": "https://the-odds-api.com/liveapi/guides/v4/api-error-codes.html#missing-key"
+    }
   }
 }
