@@ -12,12 +12,14 @@ Un proyecto de portafolio metodológicamente riguroso y profundamente documentad
 
 ### Validated
 
-(None yet — ship to validate)
+- [x] Base histórica martj42 materializada: 49,405 partidos completados entre 1872-11-30 y 2026-06-10, 336 identidades exactas, parquet validado y procedencia SHA-256. Validado en Phase 1 / remediación DATA-01.
+- [x] Tabla canónica de las 48 selecciones del Mundial con cobertura explícita para martj42, eloratings, FIFA, fixture y cuotas. Validado en Phase 1 / DATA-02.
+- [x] Fixture oficial 2026 congelado: 104 partidos, 72 de grupos, horarios UTC y revisión humana contra FIFA. Validado en Phase 1 / DATA-04.
 
 ### Active
 
-- [ ] Base de datos limpia y unificada de partidos internacionales históricos (Kaggle + Elo ratings + fixture oficial 2026)
-- [ ] Tabla maestra canónica de selecciones para mapear todas las fuentes
+- [ ] Recomputación de Elo propio desde el histórico como fuente primaria; la ingesta del snapshot actual de eloratings ya existe, pero DATA-03 sigue incompleto
+- [ ] Benchmark de cuotas de mercado de-margined y revisado legalmente
 - [ ] Pipeline de features reproducible (Elo dinámico, forma reciente, ranking FIFA, contexto anfitrión)
 - [ ] Modelo Dixon-Coles (Poisson bivariado con decaimiento temporal) que produce goles esperados (λ)
 - [ ] Clasificador ML (XGBoost/LightGBM) de 3 clases con validación temporal estricta
@@ -44,7 +46,8 @@ Un proyecto de portafolio metodológicamente riguroso y profundamente documentad
 - **Timing crítico:** el Mundial inició HOY (11 jun 2026). El proyecto se construye en modo exprés durante la fase de grupos y gana valor en eliminatorias. Cada día de retraso = partidos sin pronosticar, pero la simulación condicional sigue siendo válida en cualquier punto del torneo.
 - **Documento de diseño previo:** `PROYECTO_MUNDIAL_2026.md` en la raíz del repo contiene el diseño detallado (arquitectura de 3 capas, fuentes de datos priorizadas, cronograma exprés, riesgos). Es la referencia de diseño del proyecto.
 - **Formato del torneo:** 48 selecciones, 12 grupos de 4, 104 partidos; avanzan 2 por grupo + 8 mejores terceros a Ronda de 32; sedes en México/EUA/Canadá.
-- **Fuentes de datos:** Kaggle `martj42/international-football-results` (~48k partidos desde 1872), eloratings.net (scraping), FIFA rankings, fixture oficial 2026, cuotas como benchmark. Usuario tiene cuenta Kaggle sin API key (configurar token o descarga manual única).
+- **Fuentes de datos:** Snapshot Kaggle `martj42` materializado el 2026-06-11 con 49,405 partidos completados y 336 identidades; eloratings.net para ratings actuales; fixture oficial FIFA 2026; cuotas como benchmark pendiente. La descarga pública de martj42 funcionó vía kagglehub sin API key.
+- **Lección de validación:** DATA-01 fue marcado inicialmente completo usando mocks y fixtures temporales. El debug `data01-historical-not-built` añadió una corrida real obligatoria, cobertura histórica completa y un gate de aceptación que exige parquet, raw inmutable y checksums de procedencia.
 - **Workflow LLM↔humano:** Claude escribe todo el código (notebooks vía MCP Jupyter, módulos .py); Jesús decide alcance/metodología, valida supuestos, detecta leakage, aporta conocimiento futbolístico y ejecuta pasos interactivos (logins, descargas).
 - **Validación de modelos:** splits temporales estrictos; conjuntos de validación = Mundiales 2018/2022, Euro 2024, Copa América 2024. Accuracy es métrica engañosa en fútbol — log-loss, Brier/RPS y diagramas de confiabilidad son las métricas reales.
 - **Entorno:** Windows 11, VS Code, Python 3.11+ (venv `cdd-mundial`), JupyterLab + MCP Jupyter, git. Gemini API key disponible en `~/.claude/.env` para tareas batch auxiliares.
@@ -70,6 +73,7 @@ Un proyecto de portafolio metodológicamente riguroso y profundamente documentad
 | Notebooks didácticos (MD→code→MD) como requerimiento duro | Core value es aprendizaje + portafolio; el repo debe enseñar | — Pending |
 | GitHub público | Valor de portafolio | — Pending |
 | Actualización por jornada (no snapshot único) | Diferenciador del proyecto: pronóstico vivo con tracking de calibración real | — Pending |
+| DATA-01 exige evidencia de producción, no solo fixtures | Las pruebas unitarias con mocks permitieron un falso positivo; el requisito solo se considera completo cuando existen raw, parquet real, cobertura total y checksums válidos | Implemented 2026-06-11 |
 
 ## Evolution
 
@@ -89,4 +93,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-06-11 after initialization*
+*Last updated: 2026-06-11 after DATA-01 materialization debug*

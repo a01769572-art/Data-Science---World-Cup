@@ -37,7 +37,7 @@ patterns-established:
   - "Canonical outputs reject undeclared source columns and validate cross-column invariants at stage exits."
   - "Every acquired artifact can carry a sorted UTF-8 JSON manifest with UTC timestamp, checksum, version, and license."
 
-requirements-completed: [DATA-01, DOC-03]
+requirements-completed: []
 
 duration: 20min
 completed: 2026-06-11
@@ -125,6 +125,10 @@ None - no external service configuration required.
 
 - Package, contracts, provenance, and test infrastructure are ready for historical ingestion and canonical identity work in plan 01-02.
 - Live fixture and odds availability remain execution-time probes in later Phase 1 plans.
+
+## Requirement Clarification
+
+This plan established the infrastructure for DATA-01 and DOC-03 but did not complete either requirement by itself. DATA-01 was completed by the real martj42 materialization and acceptance remediation recorded in plan 01-02. DOC-03 remains pending until the portfolio README exists and the GitHub repository is verified public.
 
 ## Self-Check: PASSED
 

@@ -77,6 +77,7 @@ Recent decisions affecting current work:
 - [Phase 01]: External TSV acquisition uses bounded timeouts, limited retries, response validation, and immutable captures. — Prevents unbounded provider access and rejects non-tabular error responses.
 - [Phase 01]: Knockout participants remain official slot references until results determine canonical teams. — Avoids guessing future participants while preserving a stable tournament bracket.
 - [Phase 01]: The official 2026 fixture cross-check is accepted after explicit human approval: Todo correcto. — Closes the plan's blocking integrity checkpoint.
+- [Phase 01 debug]: DATA-01 completion requires a production materialization gate, not only mocked acquisition and fixture round-trips. — Prevents tests from passing while required data artifacts are absent.
 
 ### Pending Todos
 
@@ -86,6 +87,8 @@ None yet.
 
 - [Phase 3 prerequisito]: Reglamento oficial FIFA 2026 (orden de desempates, asignación de mejores terceros a R32, puntos fair-play) NO verificado en research — fetch del PDF oficial es la primera tarea del simulador
 - [Phase 1]: Fuente de cuotas 2026 (disponibilidad/formato) sin verificar — confirmar durante ingesta
+- [Phase 1]: DATA-03 sigue incompleto — existe el snapshot Elo actual, pero falta recomputar Elo propio desde los 49,405 partidos históricos.
+- [Phase 1]: DOC-03 sigue incompleto — aún faltan README de portafolio y verificación de repositorio GitHub público.
 - [Stack]: Pin pandas ~=2.3.3 (NO 3.x — seaborn 0.13.2 incompatible); no tocar el pin a mitad de torneo
 
 ## Deferred Items
@@ -98,6 +101,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-06-11T22:02:04.346Z
-Stopped at: Completed 01-03-PLAN.md
+Last session: 2026-06-11
+Stopped at: DATA-01 debug resolved and planning documentation synchronized
 Resume file: None

@@ -30,11 +30,12 @@ El torneo empezó HOY (2026-06-11) y termina 2026-07-19 — el roadmap está dic
 **Depends on**: Nothing (first phase)
 **Requirements**: DATA-01, DATA-02, DATA-03, DATA-04, DATA-05, DOC-01, DOC-03
 **Success Criteria** (what must be TRUE):
-  1. La base histórica (~48k partidos, Kaggle martj42 vía kagglehub sin API key) carga desde parquet, pasa esquemas pandera, con `data/raw/` inmutable y metadatos de extracción
+  1. La base histórica materializada contiene 49,405 partidos completados de martj42, 336 identidades exactas, carga desde parquet, pasa esquemas pandera y conserva `data/raw/` inmutable con metadatos y checksums verificables
   2. Las 48 selecciones del Mundial 2026 resuelven contra `teams.csv` en cada fuente (Kaggle, eloratings, FIFA, fixture, cuotas) y el test de cobertura pasa como gate duro
   3. Los ratings Elo actuales (eloratings.net TSV) y el fixture oficial 2026 (104 partidos, 12 grupos, sedes) están cargados, validados y versionados en `data/external/`
   4. Las probabilidades implícitas de-margined de una fuente de cuotas están disponibles como benchmark
   5. El repo vive en GitHub público con README de calidad portafolio y los notebooks existentes siguen la estructura MD→código→MD
+**Execution note (2026-06-11)**: DATA-01 fue remediado tras detectar que la validación original solo usaba fixtures. DATA-03 permanece pendiente porque el snapshot Elo actual no satisface la recomputación de Elo propio. DOC-03 permanece pendiente hasta crear el README y verificar la visibilidad pública.
 **Plans**: TBD
 
 ### Phase 2: Modelos Baseline (Elo + Dixon-Coles)

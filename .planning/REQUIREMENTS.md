@@ -49,7 +49,7 @@
 
 - [ ] **DOC-01**: Todo notebook sigue la estructura didáctica obligatoria: celda markdown que documenta (qué/por qué) → celda de código → celda markdown que interpreta resultados
 - [ ] **DOC-02**: Todo pronóstico publicado es reproducible: seeds fijas en simulación, raw inmutable, datos procesados con metadatos de extracción, artefactos de modelo versionados por fecha
-- [x] **DOC-03**: El repo vive en GitHub público con README de calidad portafolio (sin claves ni datos de licencia restrictiva)
+- [ ] **DOC-03**: El repo vive en GitHub público con README de calidad portafolio (sin claves ni datos de licencia restrictiva)
 - [ ] **DOC-04**: Al cerrar cada fase se escriben notas de aprendizaje de conceptos (Elo, Dixon-Coles, calibración, Monte Carlo) en el vault de Obsidian (SecondBrain)
 - [ ] **DOC-05**: Al terminar el torneo se publica un post-mortem con la evaluación final honesta: log-loss real de los 104 partidos vs. benchmarks, qué funcionó, qué no, lecciones
 
@@ -106,7 +106,7 @@ Deferred — valiosos pero no bloquean el valor core de v1:
 | LIVE-05 | Phase 6 | Pending |
 | DOC-01 | Phase 1 | Pending |
 | DOC-02 | Phase 4 | Pending |
-| DOC-03 | Phase 1 | Complete |
+| DOC-03 | Phase 1 | Pending |
 | DOC-04 | Phase 6 | Pending |
 | DOC-05 | Phase 6 | Pending |
 
