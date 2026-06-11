@@ -78,7 +78,46 @@ Deferred — valiosos pero no bloquean el valor core de v1:
 
 ## Traceability
 
-(Filled by roadmap — maps REQ-IDs to phases)
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| DATA-01 | Phase 1 | Pending |
+| DATA-02 | Phase 1 | Pending |
+| DATA-03 | Phase 1 | Pending |
+| DATA-04 | Phase 1 | Pending |
+| DATA-05 | Phase 1 | Pending |
+| DATA-06 | Phase 4 | Pending |
+| MODEL-01 | Phase 2 | Pending |
+| MODEL-02 | Phase 2 | Pending |
+| MODEL-03 | Phase 2 | Pending |
+| MODEL-04 | Phase 2 | Pending |
+| SIM-01 | Phase 3 | Pending |
+| SIM-02 | Phase 3 | Pending |
+| SIM-03 | Phase 3 | Pending |
+| SIM-04 | Phase 3 | Pending |
+| SIM-05 | Phase 3 | Pending |
+| ML-01 | Phase 5 | Pending |
+| ML-02 | Phase 5 | Pending |
+| ML-03 | Phase 5 | Pending |
+| ML-04 | Phase 5 | Pending |
+| LIVE-01 | Phase 4 | Pending |
+| LIVE-02 | Phase 4 | Pending |
+| LIVE-03 | Phase 4 | Pending |
+| LIVE-04 | Phase 4 | Pending |
+| LIVE-05 | Phase 6 | Pending |
+| DOC-01 | Phase 1 | Pending |
+| DOC-02 | Phase 4 | Pending |
+| DOC-03 | Phase 1 | Pending |
+| DOC-04 | Phase 6 | Pending |
+| DOC-05 | Phase 6 | Pending |
+
+**Coverage:** 29/29 v1 requirements mapped — no orphans, no duplicates.
+
+**Notas de mapeo:**
+- DATA-06 (ingesta de resultados en vivo) vive en Phase 4, no Phase 1 — es parte del pipeline diario, no de la fundación histórica
+- DOC-01 (estructura didáctica) se establece como convención en Phase 1 y se aplica como constraint en todas las fases siguientes
+- DOC-02 (reproducibilidad) se verifica en Phase 4 — el primer pronóstico publicado es donde la regeneración end-to-end se vuelve comprobable
+- DOC-04 (notas Obsidian) se ejecuta al cierre de CADA fase (ritual de transición) y se verifica completo en Phase 6
 
 ---
 *Defined: 2026-06-11 — initial v1 scoping after domain research*
+*Traceability mapped: 2026-06-11 — roadmap v1 (6 phases)*
