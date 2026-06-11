@@ -40,9 +40,10 @@ created: 2026-06-11
 |---------|------|------|-------------|------------|-----------------|-----------|-------------------|-------------|--------|
 | 01-01-01 | 01 | 1 | DOC-03 | T-01-01 | Secrets and restricted raw captures are excluded | config | `python -m pytest -q tests/test_repository.py` | No - W0 | pending |
 | 01-01-02 | 01 | 1 | DATA-01 | T-01-02 | Canonical outputs reject schema drift and invalid invariants | unit | `python -m pytest -q tests/test_contracts.py` | No - W0 | pending |
-| 01-02-01 | 02 | 2 | DATA-02 | T-01-03 | Runtime fuzzy matching is rejected | unit | `python -m pytest -q tests/test_identities.py` | No - W0 | pending |
-| 01-02-02 | 02 | 2 | DATA-01 | T-01-04 | Scores preserve source semantics | contract | `python -m pytest -q tests/test_ingest_martj42.py` | No - W0 | pending |
-| 01-02-03 | 02 | 2 | DATA-01, DATA-02 | T-01-03 | Unresolved identities fail the pipeline | integration | `python -m pytest -q tests/test_data_foundation.py` | No - W0 | pending |
+| 01-02-01 | 02 | 2 | DATA-02 | T-01-03 | Runtime fuzzy matching is rejected | unit | `python -m pytest -q tests/test_identities.py` | Yes | green |
+| 01-02-02 | 02 | 2 | DATA-01 | T-01-04 | Scores preserve source semantics | contract | `python -m pytest -q tests/test_ingest_martj42.py` | Yes | green |
+| 01-02-03 | 02 | 2 | DATA-01, DATA-02 | T-01-03 | Unresolved identities fail the pipeline | integration | `python -m pytest -q tests/test_data_foundation.py` | Yes | green |
+| DATA-01-ACCEPTANCE | remediation | gate | DATA-01 | T-01-03, T-01-04 | Real parquet, complete historical identities, raw captures, and provenance checksums are required | acceptance | `python -m pytest -q -m data_acceptance tests/test_data01_acceptance.py` | Yes | green |
 | 01-03-01 | 03 | 2 | DATA-03 | T-01-05 | HTTP responses are bounded, checked, and cached | contract | `python -m pytest -q tests/test_ingest_elo.py` | No - W0 | pending |
 | 01-03-02 | 03 | 2 | DATA-04 | T-01-06 | Fixture IDs/timestamps are unique and canonical | contract | `python -m pytest -q tests/test_fixture.py` | No - W0 | pending |
 | 01-04-01 | 04 | 2 | DATA-05 | T-01-01 | API key never enters artifacts or logs | unit | `python -m pytest -q tests/test_odds.py` | No - W0 | pending |

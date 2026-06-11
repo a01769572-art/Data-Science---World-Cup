@@ -9,9 +9,10 @@ requires:
     provides: Strict dataframe contracts, immutable captures, and provenance manifests
 provides:
   - Canonical registry and exact source-keyed aliases for 48 World Cup participants
+  - Exact historical martj42 identity extension covering all 336 captured source names
   - Deterministic team resolution with explicit unknown and ambiguity failures
   - Immutable martj42 acquisition and validated historical parquet construction
-  - Integration gates for identity coverage, score semantics, and raw-file checksums
+  - Real-artifact acceptance gate for identity coverage, schema, row counts, and provenance checksums
 affects: [phase-01-source-ingestion, phase-02-models, phase-03-simulator]
 
 tech-stack:
@@ -112,7 +113,13 @@ None - tests mock acquisition and require no Kaggle authentication.
 
 ## Known Stubs
 
-None.
+The original completion used fixture-only evidence and did not materialize production data. This was remediated on 2026-06-11 by acquiring snapshot `2026-06-11`, expanding exact identity coverage to 336 names, materializing 49,405 completed matches, recording raw and derived provenance, and adding `tests/test_data01_acceptance.py`.
+
+## Remediation Verification
+
+- `.\.venv\python.exe -m cdd_mundial.data.ingest_martj42 --source-version 2026-06-11` - built and verified 49,405 rows, 336 identities, and 72 excluded unplayed fixtures.
+- `.\.venv\python.exe -m pytest -q -m data_acceptance tests/test_data01_acceptance.py` - real DATA-01 gate passed.
+- Parquet SHA-256: `067ada821b9e33e987525f66e668e89301b9945b7f7526509868dd8c7b22b239`.
 
 ## Next Phase Readiness
 

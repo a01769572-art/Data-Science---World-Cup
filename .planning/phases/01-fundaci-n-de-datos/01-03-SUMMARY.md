@@ -39,7 +39,7 @@ patterns-established:
   - "Public tabular HTTP sources are rejected when empty or HTML and are captured before parsing."
   - "Tournament reference data must pass both schema validation and whole-tournament structural invariants."
 
-requirements-completed: [DATA-02, DATA-03, DATA-04]
+requirements-completed: [DATA-02, DATA-04]
 
 duration: 18min
 completed: 2026-06-11
@@ -63,6 +63,7 @@ completed: 2026-06-11
 - Added immutable Elo TSV captures, provenance manifests, canonical alias resolution, Pandera validation, and parquet output.
 - Froze the complete 104-match tournament fixture with 72 group matches, 12 six-match groups, canonical group participants, UTC kickoffs, and unresolved knockout slots.
 - Received explicit human approval of the official FIFA schedule comparison: **"Todo correcto"**.
+- DATA-03 remains pending because custom Elo recomputation from the historical dataset is not implemented; this plan completed only the current-rating ingestion portion.
 
 ## Task Commits
 
