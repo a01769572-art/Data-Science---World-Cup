@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Roadmap + STATE created; requirements traceability updated
-last_updated: "2026-06-11T16:41:22.232Z"
-last_activity: 2026-06-11 -- Phase 1 planning complete
+stopped_at: Completed 01-01-PLAN.md
+last_updated: "2026-06-11T17:35:04.203Z"
+last_activity: 2026-06-11
 progress:
   total_phases: 6
   completed_phases: 0
   total_plans: 5
-  completed_plans: 0
-  percent: 0
+  completed_plans: 1
+  percent: 20
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-11)
 
 **Core value:** Proyecto de portafolio metodológicamente riguroso y profundamente documentado que enseña ciencia de datos end-to-end real — si los pronósticos fallan pero el proceso es sólido y el aprendizaje quedó capturado, el proyecto cumplió.
-**Current focus:** Phase 1 — Fundación de Datos
+**Current focus:** Phase 01 — Fundación de Datos
 
 ## Current Position
 
-Phase: 1 of 6 (Fundación de Datos)
-Plan: 0 of 5 planned; ready to execute
+Phase: 01 (Fundación de Datos) — EXECUTING
+Plan: 2 of 5
 Status: Ready to execute
-Last activity: 2026-06-11 -- Phase 1 planning complete
+Last activity: 2026-06-11
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [██░░░░░░░░] 20%
 
 **HARD DEADLINE:** Fases 1-4 deben estar publicando pronósticos antes del 2026-06-27 (fin de fase de grupos). El torneo empezó HOY.
 
@@ -38,22 +38,23 @@ Progress: [░░░░░░░░░░] 0%
 
 **Velocity:**
 
-- Total plans completed: 0
-- Average duration: -
-- Total execution time: 0 hours
+- Total plans completed: 1
+- Average duration: 20 min
+- Total execution time: 20 min
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| - | - | - | - |
+| Phase 01 | 1 | 20 min | 20 min |
 
 **Recent Trend:**
 
-- Last 5 plans: -
-- Trend: -
+- Last 5 plans: 20 min
+- Trend: Initial plan completed
 
 *Updated after each plan completion*
+| Phase 01 P01 | 20min | 3 tasks | 11 files |
 
 ## Accumulated Context
 
@@ -65,6 +66,9 @@ Recent decisions affecting current work:
 - [Roadmap]: Fases 2 y 3 paralelizables vía contrato `predict_lambdas(team_a, team_b, ctx)` — el simulador se construye contra λs stub
 - [Roadmap]: Fase 5 (ML) es upgrade gated, no critical path — solo reemplaza al baseline si lo vence en log-loss en los 4 holdouts
 - [Roadmap]: El snapshot log append-only arranca con el PRIMER pronóstico publicado (Fase 4) — no se puede rellenar retroactivamente
+- [Phase 01]: Canonical Pandera schemas inherit strict=True and coerce=True from one shared base contract. — Keeps every canonical stage exit consistent and rejects schema drift.
+- [Phase 01]: Immutable captures use exclusive creation and checksum comparison. — Identical replay is safe while changed payloads cannot mutate raw history.
+- [Phase 01]: Tests use workspace-local unique artifacts. — Windows and OneDrive temp ACLs were unreliable in the execution environment.
 
 ### Pending Todos
 
@@ -87,6 +91,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-06-11
-Stopped at: Roadmap + STATE created; requirements traceability updated
+Last session: 2026-06-11T17:35:04.199Z
+Stopped at: Completed 01-01-PLAN.md
 Resume file: None

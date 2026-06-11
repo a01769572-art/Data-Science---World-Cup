@@ -8,7 +8,7 @@
 
 ### Datos
 
-- [ ] **DATA-01**: El sistema cuenta con una base histórica unificada de partidos internacionales (Kaggle `martj42` vía kagglehub, sin API key) almacenada en parquet y validada con esquemas pandera, con `data/raw/` inmutable
+- [x] **DATA-01**: El sistema cuenta con una base histórica unificada de partidos internacionales (Kaggle `martj42` vía kagglehub, sin API key) almacenada en parquet y validada con esquemas pandera, con `data/raw/` inmutable
 - [ ] **DATA-02**: Existe una tabla maestra canónica de selecciones (`teams.csv`) contra la que se mapea toda fuente, con tests de cobertura que garantizan que las 48 selecciones del Mundial resuelven en cada fuente
 - [ ] **DATA-03**: El sistema ingesta ratings Elo actuales (eloratings.net TSV vía requests) y recomputa Elo propio desde el histórico como fuente primaria
 - [ ] **DATA-04**: El fixture oficial 2026 (104 partidos, 12 grupos, sedes, horarios) está cargado, validado y versionado en `data/external/`
@@ -49,7 +49,7 @@
 
 - [ ] **DOC-01**: Todo notebook sigue la estructura didáctica obligatoria: celda markdown que documenta (qué/por qué) → celda de código → celda markdown que interpreta resultados
 - [ ] **DOC-02**: Todo pronóstico publicado es reproducible: seeds fijas en simulación, raw inmutable, datos procesados con metadatos de extracción, artefactos de modelo versionados por fecha
-- [ ] **DOC-03**: El repo vive en GitHub público con README de calidad portafolio (sin claves ni datos de licencia restrictiva)
+- [x] **DOC-03**: El repo vive en GitHub público con README de calidad portafolio (sin claves ni datos de licencia restrictiva)
 - [ ] **DOC-04**: Al cerrar cada fase se escriben notas de aprendizaje de conceptos (Elo, Dixon-Coles, calibración, Monte Carlo) en el vault de Obsidian (SecondBrain)
 - [ ] **DOC-05**: Al terminar el torneo se publica un post-mortem con la evaluación final honesta: log-loss real de los 104 partidos vs. benchmarks, qué funcionó, qué no, lecciones
 
@@ -80,7 +80,7 @@ Deferred — valiosos pero no bloquean el valor core de v1:
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DATA-01 | Phase 1 | Pending |
+| DATA-01 | Phase 1 | Complete |
 | DATA-02 | Phase 1 | Pending |
 | DATA-03 | Phase 1 | Pending |
 | DATA-04 | Phase 1 | Pending |
@@ -106,7 +106,7 @@ Deferred — valiosos pero no bloquean el valor core de v1:
 | LIVE-05 | Phase 6 | Pending |
 | DOC-01 | Phase 1 | Pending |
 | DOC-02 | Phase 4 | Pending |
-| DOC-03 | Phase 1 | Pending |
+| DOC-03 | Phase 1 | Complete |
 | DOC-04 | Phase 6 | Pending |
 | DOC-05 | Phase 6 | Pending |
 

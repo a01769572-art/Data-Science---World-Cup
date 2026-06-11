@@ -101,7 +101,7 @@ Phases execute in numeric order: 1 → 2 ∥ 3 → 4 → 5 ∥ 6 (2-3 paraleliza
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Fundación de Datos | 0/5 | Planned    |  |
+| 1. Fundación de Datos | 1/5 | In Progress|  |
 | 2. Modelos Baseline | 0/TBD | Not started | - |
 | 3. Simulador del Torneo | 0/TBD | Not started | - |
 | 4. Primer Pronóstico + Pipeline Diario | 0/TBD | Not started | - |
