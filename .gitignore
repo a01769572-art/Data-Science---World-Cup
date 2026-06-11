@@ -24,6 +24,7 @@ anaconda_projects/
 # Restricted or generated data
 data/raw/restricted/
 data/raw/odds/
+data/raw/eloratings/
 data/processed/
 
 # Generated model artifacts

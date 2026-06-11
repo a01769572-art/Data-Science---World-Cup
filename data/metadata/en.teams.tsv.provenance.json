@@ -1,0 +1,10 @@
+{
+  "license": "Source terms not stated; captured for reproducible research.",
+  "local_path": "data/raw/eloratings/2026-06-11T18-11-05Z/en.teams.tsv",
+  "notes": "Unmodified TSV response from eloratings.net.",
+  "retrieved_at_utc": "2026-06-11T18:11:05.549548Z",
+  "sha256": "ff4b8c9c7bcdad56e81a007726c1a655c6dabdf77bca151b1d619f24125dbc90",
+  "source": "eloratings",
+  "source_url": "https://www.eloratings.net/en.teams.tsv",
+  "source_version": "2026-06-11T18-11-05Z"
+}

@@ -1,0 +1,10 @@
+{
+  "license": "Source terms not stated; captured for reproducible research.",
+  "local_path": "data/raw/eloratings/2026-06-11T18-11-05Z/World.tsv",
+  "notes": "Unmodified TSV response from eloratings.net.",
+  "retrieved_at_utc": "2026-06-11T18:11:05.549548Z",
+  "sha256": "5727bea4a760e294837536efa18f74531553297600f5c55ccae88d48db0a1e15",
+  "source": "eloratings",
+  "source_url": "https://www.eloratings.net/World.tsv",
+  "source_version": "2026-06-11T18-11-05Z"
+}
