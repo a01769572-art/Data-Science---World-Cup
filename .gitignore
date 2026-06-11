@@ -17,6 +17,8 @@ dist/
 
 # Notebook and editor state
 .ipynb_checkpoints/
+.jupyter-runtime/
+anaconda_projects/
 .jupyter/
 
 # Restricted or generated data
