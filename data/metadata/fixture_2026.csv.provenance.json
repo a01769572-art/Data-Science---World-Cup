@@ -1,0 +1,10 @@
+{
+  "license": "Authored normalized reference dataset from publicly stated schedule facts.",
+  "local_path": "data/external/fixture_2026.csv",
+  "notes": "Normalized on 2026-06-11 from structured match tables that cite the current FIFA schedule; blocking human comparison against FIFA remains required.",
+  "retrieved_at_utc": "2026-06-11T18:00:00Z",
+  "sha256": "61684a33b5def1bc215e95995ea4b35fd9c9dd93d77e1a1eaa025a338b1781ce",
+  "source": "fifa-world-cup-2026-fixture",
+  "source_url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/scores-fixtures",
+  "source_version": "verified-2026-06-11"
+}

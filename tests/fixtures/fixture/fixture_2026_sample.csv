@@ -1,0 +1,3 @@
+match_id,stage,group,home_slot,away_slot,home_team_id,away_team_id,kickoff_utc,venue,host_city,host_country,status,source_url,verified_at_utc
+WC26-001,group,A,A1,A2,mexico,south-africa,2026-06-11T19:00:00Z,Estadio Azteca,Mexico City,MEX,scheduled,https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/scores-fixtures,2026-06-11T18:00:00Z
+WC26-073,round_of_32,,2A,2B,,,2026-06-28T19:00:00Z,SoFi Stadium,Los Angeles,USA,scheduled,https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/scores-fixtures,2026-06-11T18:00:00Z
