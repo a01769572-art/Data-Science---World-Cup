@@ -1,0 +1,4 @@
+date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
+2022-11-22,Argentina,Canada,2,0,Friendly,Buenos Aires,Argentina,FALSE
+2022-12-01,Mexico,Brazil,1,2,Friendly,Los Angeles,United States,TRUE
+2022-12-18,Argentina,France,3,3,FIFA World Cup,Doha,Qatar,TRUE
