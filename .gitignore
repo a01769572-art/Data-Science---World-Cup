@@ -1,0 +1,33 @@
+# Local environments and secrets
+.env
+.venv/
+venv/
+
+# Python caches and build output
+__pycache__/
+*.py[cod]
+.pytest_cache/
+pytest-cache-files-*/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+
+# Notebook and editor state
+.ipynb_checkpoints/
+.jupyter/
+
+# Restricted or generated data
+data/raw/restricted/
+data/raw/odds/
+data/processed/
+
+# Generated model artifacts
+models/
+artifacts/
+*.joblib
+*.pkl
+
+# Authored CSV reference files and provenance manifests are intentionally allowed.
+!data/external/**/*.csv
+!data/metadata/**/*.json

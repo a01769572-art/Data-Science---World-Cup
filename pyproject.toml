@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cdd-mundial"
+version = "0.1.0"
+description = "Reproducible data and forecasting pipeline for the 2026 FIFA World Cup"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "pandas~=2.3.3",
+    "numpy>=2,<2.5",
+    "pyarrow>=18",
+    "pandera[pandas]~=0.31",
+    "kagglehub>=1,<2",
+    "requests>=2.32,<3",
+    "python-dotenv>=1,<2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8,<9",
+    "ruff>=0.11,<1",
+    "jupyterlab>=4,<5",
+    "ipykernel>=6,<7",
+    "nbformat>=5,<6",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = [
+    "network: tests that access external services",
+    "manual: tests that require explicit human review",
+]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
