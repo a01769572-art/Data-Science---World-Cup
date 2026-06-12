@@ -30,6 +30,8 @@ data/processed/
 # Generated model artifacts
 models/
 artifacts/
+# Source package for structural models is code, not a generated artifact.
+!src/cdd_mundial/models/
 *.joblib
 *.pkl
 
