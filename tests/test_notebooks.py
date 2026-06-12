@@ -16,6 +16,7 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 NOTEBOOKS_DIR = ROOT / "notebooks"
 PHASE1_NOTEBOOK = NOTEBOOKS_DIR / "01_data_foundation.ipynb"
+PHASE2_NOTEBOOK = NOTEBOOKS_DIR / "02_modelos_baseline.ipynb"
 
 WHAT_AND_WHY = "What and why"
 INTERPRETATION = "Interpretation"
@@ -85,6 +86,10 @@ def test_phase1_notebook_exists() -> None:
     assert PHASE1_NOTEBOOK.exists(), "DOC-01 requires notebooks/01_data_foundation.ipynb"
 
 
+def test_phase2_notebook_exists() -> None:
+    assert PHASE2_NOTEBOOK.exists(), "Phase 2 requires notebooks/02_modelos_baseline.ipynb"
+
+
 @pytest.mark.parametrize("path", project_notebooks(), ids=lambda path: path.name)
 def test_notebook_has_no_empty_code_cells(path: Path) -> None:
     notebook = read_notebook(path)
@@ -117,15 +122,20 @@ def test_phase1_notebook_imports_production_package() -> None:
     )
 
 
-def test_phase1_notebook_does_not_redefine_ingestion_logic() -> None:
-    notebook = read_notebook(PHASE1_NOTEBOOK)
+@pytest.mark.parametrize(
+    "path",
+    [PHASE1_NOTEBOOK, PHASE2_NOTEBOOK],
+    ids=lambda path: path.name,
+)
+def test_didactic_notebooks_do_not_redefine_production_logic(path: Path) -> None:
+    notebook = read_notebook(path)
     for index, cell in enumerate(notebook.cells):
         if cell.cell_type != "code":
             continue
         for fragment in FORBIDDEN_CODE_FRAGMENTS:
             assert fragment not in cell.source, (
-                f"code cell {index} contains forbidden fragment {fragment!r}; "
-                "ingestion logic belongs in src/cdd_mundial/data"
+                f"{path.name}: code cell {index} contains forbidden fragment "
+                f"{fragment!r}; production logic belongs in src/cdd_mundial"
             )
 
 
@@ -144,6 +154,27 @@ def test_phase1_notebook_has_required_section_headings() -> None:
 
 def test_phase1_notebook_uses_a_deterministic_python_kernel() -> None:
     notebook = read_notebook(PHASE1_NOTEBOOK)
+    kernelspec = notebook.metadata.get("kernelspec", {})
+    assert kernelspec.get("name") == "python3"
+    assert kernelspec.get("language") == "python"
+
+
+def test_phase2_notebook_imports_models_and_contains_required_analysis() -> None:
+    notebook = read_notebook(PHASE2_NOTEBOOK)
+    code = "\n".join(cell.source for cell in notebook.cells if cell.cell_type == "code")
+    markdown = "\n".join(
+        cell.source for cell in notebook.cells if cell.cell_type == "markdown"
+    )
+
+    assert re.search(r"from\s+cdd_mundial\.models", code)
+    assert "calibration_curve" in code
+    assert "wdl_from_lambdas" in code
+    assert "ln(2)" in markdown
+    assert "FiveThirtyEight" in markdown
+
+
+def test_phase2_notebook_uses_a_deterministic_python_kernel() -> None:
+    notebook = read_notebook(PHASE2_NOTEBOOK)
     kernelspec = notebook.metadata.get("kernelspec", {})
     assert kernelspec.get("name") == "python3"
     assert kernelspec.get("language") == "python"

@@ -18,6 +18,7 @@ dist/
 # Notebook and editor state
 .ipynb_checkpoints/
 .jupyter-runtime/
+.jupyter_ystore.db
 anaconda_projects/
 .jupyter/
 
