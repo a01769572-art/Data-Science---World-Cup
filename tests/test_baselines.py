@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import numpy as np
-import pytest
 
 from cdd_mundial.models.baselines import OrderedLogit, fit_solo_elo, solo_elo_probs, uniform_wdl
 
