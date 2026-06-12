@@ -1,0 +1,10 @@
+{
+  "license": "CC0-1.0 (derived from martj42)",
+  "local_path": "data/processed/models/holdout_predictions_2026-06-12.parquet",
+  "notes": "chosen_xi=0.00095; gate_passed=True; mean_log_loss={'dixon_coles': 0.9671839414004801, 'uniform': 1.0986122886681098, 'solo_elo': 0.9830166784963363}",
+  "retrieved_at_utc": "2026-06-12T15:37:02.133129Z",
+  "sha256": "0834afba043b3fd8f3bde0a264246420a07933f648187668f5950ac21d4cb037",
+  "source": "cdd-mundial-validation",
+  "source_url": "local:src/cdd_mundial/models/validation.py",
+  "source_version": "2026-06-11"
+}

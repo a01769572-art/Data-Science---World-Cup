@@ -290,17 +290,21 @@ def fit_dixon_coles(matches: pd.DataFrame, cutoff: pd.Timestamp, xi: float) -> D
     n_teams = len(teams)
 
     goal_mean = float(np.concatenate([x, y]).mean())
-    x0 = np.concatenate([np.zeros(2 * n_teams), [np.log(goal_mean), 0.1, 0.0]])
+    # A neutral gamma start avoids a degenerate high-c/negative-gamma basin seen
+    # in sparse recent windows while leaving the fitted home effect unconstrained.
+    x0 = np.concatenate([np.zeros(2 * n_teams), [np.log(goal_mean), 0.0, 0.0]])
     bounds = [(None, None)] * (2 * n_teams + 2) + [(-0.2, 0.2)]
 
-    result = minimize(
-        neg_log_lik,
-        x0,
-        args=(x, y, home_idx, away_idx, is_home, w, n_teams),
-        jac=grad_neg_log_lik,
-        method="L-BFGS-B",
-        bounds=bounds,
-    )
+    with np.errstate(divide="ignore", invalid="ignore"):
+        result = minimize(
+            neg_log_lik,
+            x0,
+            args=(x, y, home_idx, away_idx, is_home, w, n_teams),
+            jac=grad_neg_log_lik,
+            method="L-BFGS-B",
+            bounds=bounds,
+            options={"ftol": 1e-8, "maxiter": 3000, "maxls": 50},
+        )
     if not result.success:
         raise ValueError(f"Dixon-Coles fit did not converge: {result.message}")
 

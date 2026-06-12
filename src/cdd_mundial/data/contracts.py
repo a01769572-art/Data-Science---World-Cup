@@ -89,6 +89,21 @@ class EloHistorySchema(CanonicalSchema):
         return ~frame.duplicated(subset=["match_id", "team_id"])
 
 
+class HoldoutPredictionsSchema(CanonicalSchema):
+    match_id: Series[str]
+    holdout: Series[str] = pa.Field(isin=["wc2018", "wc2022", "euro2024", "copa2024"])
+    model: Series[str] = pa.Field(isin=["dixon_coles", "uniform", "solo_elo"])
+    p_home_win: Series[float] = pa.Field(ge=0, le=1)
+    p_draw: Series[float] = pa.Field(ge=0, le=1)
+    p_away_win: Series[float] = pa.Field(ge=0, le=1)
+    outcome_idx: Series[int] = pa.Field(isin=[0, 1, 2])
+
+    @pa.dataframe_check
+    def probabilities_are_normalized(cls, frame: pd.DataFrame) -> Series[bool]:
+        total = frame["p_home_win"] + frame["p_draw"] + frame["p_away_win"]
+        return (total - 1.0).abs() <= 1e-6
+
+
 class FixtureSchema(CanonicalSchema):
     match_id: Series[str] = pa.Field(unique=True)
     stage: Series[str]

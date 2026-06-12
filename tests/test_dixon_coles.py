@@ -21,6 +21,7 @@ from cdd_mundial.models.dixon_coles import (
     score_matrix,
     wdl_from_lambdas,
 )
+from cdd_mundial.models.loading import load_matches
 
 TRUE_C = 0.2
 TRUE_GAMMA = 0.3
@@ -126,6 +127,21 @@ def test_low_weight_matches_are_excluded_from_training() -> None:
     model = fit_dixon_coles(matches, cutoff=pd.Timestamp("2026-01-01"), xi=0.0018)
 
     assert "ancient" not in model.teams
+
+
+@pytest.mark.data_acceptance
+def test_recent_copa_window_converges_with_fast_decay() -> None:
+    matches = load_matches()
+
+    model = fit_dixon_coles(
+        matches,
+        cutoff=pd.Timestamp("2024-06-20"),
+        xi=0.0018,
+    )
+
+    assert model.xi == 0.0018
+    assert model.cutoff == "2024-06-20"
+    assert np.isfinite([model.c, model.gamma, model.rho]).all()
 
 
 def test_identifiability_centering_holds(synthetic_fit: tuple) -> None:

@@ -1,0 +1,10 @@
+{
+  "license": "CC0-1.0 (derived from martj42)",
+  "local_path": "data/processed/models/dc_params_2026-06-12.json",
+  "notes": "chosen_xi=0.00095; gate_passed=True; mean_log_loss={'dixon_coles': 0.9671839414004801, 'uniform': 1.0986122886681098, 'solo_elo': 0.9830166784963363}",
+  "retrieved_at_utc": "2026-06-12T15:37:02.122851Z",
+  "sha256": "126552804e0176adb12adbd18dd16f7db8f41e6c62c2c45dc6e0a6ae57b5a290",
+  "source": "cdd-mundial-validation",
+  "source_url": "local:src/cdd_mundial/models/validation.py",
+  "source_version": "2026-06-11"
+}
