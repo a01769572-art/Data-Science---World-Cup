@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-01-PLAN.md
-last_updated: "2026-06-12T14:44:57.733Z"
+stopped_at: Completed 02-02-PLAN.md
+last_updated: "2026-06-12T14:58:25.454Z"
 last_activity: 2026-06-12
 progress:
   total_phases: 6
   completed_phases: 1
   total_plans: 10
-  completed_plans: 6
-  percent: 60
+  completed_plans: 7
+  percent: 70
 ---
 
 # Project State
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-06-11)
 ## Current Position
 
 Phase: 02 (modelos-baseline) — EXECUTING
-Plan: 2 of 5
+Plan: 3 of 5
 Status: Ready to execute
 Last activity: 2026-06-12
 
@@ -60,6 +60,7 @@ Progress: [██████████] 100%
 | Phase 01 P04 | 35min | 2 tasks + 1 checkpoint | 10 files |
 | Phase 01 P05 | 16min | 2 tasks | 5 files |
 | Phase 02 P01 | 14min | 3 tasks | 11 files |
+| Phase 02 P02 | 9min | 3 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -91,6 +92,10 @@ Recent decisions affecting current work:
 - [Phase 02]: Tabla K canonica WFE de 5 niveles (60/50/40/30/20) con continentales=50 — D-01 ordena seguir la fuente canonica WFE y la tabla literal de D-01 difiere de ella (pitfall 3)
 - [Phase 02]: Nations Leagues clasifican qualifier_major K=40 (A2); predecesores continentales historicos en other K=30 — Assumption A2 del RESEARCH; impacto marginal por decaimiento temporal
 - [Phase 02]: Partidos con ET o penales se etiquetan empate de 90 minutos en load_matches — Los marcadores martj42 son FT+ET y no definen el outcome en esos 677 partidos (D-05, pitfall 6)
+- [Phase 02]: Ventaja local +100 aplicada a home_team_id cuando neutral==False en TODO el historico (OQ1) — Reconciliacion WFE del Director; D-02 (solo MEX/USA/CAN) aplica unicamente a prediccion 2026
+- [Phase 02]: Margen de victoria = variante FiveThirtyEight con rama de empate factor 1.0 — La formula cruda da log(1)=0 y congelaria el 22.7% de partidos empatados (pitfall 1); atribucion documentada
+- [Phase 02]: Baseline solo-Elo = ordered logit con MLE sobre (c1, d, log_s) libres — Resuelve OQ4 con la recomendacion del RESEARCH; reparametrizacion garantiza c1<c2 y scale>0 sin bounds
+- [Phase 02]: Cold-start 1000 sobre todo el historico; validacion por Spearman (0.979 vs eloratings.net) — Warm-start inviable: el snapshot cubre 48 de 336 equipos (pitfall 9); solo los rangos/diferencias importan
 
 ### Pending Todos
 
@@ -111,6 +116,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-06-12T14:44:45.162Z
-Stopped at: Completed 02-01-PLAN.md
+Last session: 2026-06-12T14:58:25.445Z
+Stopped at: Completed 02-02-PLAN.md
 Resume file: None
