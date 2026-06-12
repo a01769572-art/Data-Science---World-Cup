@@ -18,8 +18,8 @@
 ### Modelos baseline
 
 - [x] **MODEL-01**: El sistema calcula un Elo dinámico custom (estilo World Football Elo: K por torneo, ventaja local, margen de victoria) con parámetros optimizados en histórico
-- [ ] **MODEL-02**: El sistema entrena un modelo Dixon-Coles (Poisson bivariado con corrección de marcadores bajos y decaimiento temporal calibrado para fútbol de selecciones) que expone la interfaz `predict_lambdas(team_a, team_b, ctx)` — el contrato que consume el simulador
-- [ ] **MODEL-03**: El sistema deriva probabilidades W/D/L de la matriz de marcadores Dixon-Coles (la probabilidad de empate sale del modelo de goles, no de un logistic Elo)
+- [x] **MODEL-02**: El sistema entrena un modelo Dixon-Coles (Poisson bivariado con corrección de marcadores bajos y decaimiento temporal calibrado para fútbol de selecciones) que expone la interfaz `predict_lambdas(team_a, team_b, ctx)` — el contrato que consume el simulador
+- [x] **MODEL-03**: El sistema deriva probabilidades W/D/L de la matriz de marcadores Dixon-Coles (la probabilidad de empate sale del modelo de goles, no de un logistic Elo)
 - [x] **MODEL-04**: Todo modelo se valida con splits temporales estrictos contra 4 torneos holdout (Mundial 2018, Mundial 2022, Euro 2024, Copa América 2024) usando log-loss, Brier y RPS
 
 ### Simulador
@@ -87,8 +87,8 @@ Deferred — valiosos pero no bloquean el valor core de v1:
 | DATA-05 | Phase 1 | Complete |
 | DATA-06 | Phase 4 | Pending |
 | MODEL-01 | Phase 2 | Complete |
-| MODEL-02 | Phase 2 | Pending |
-| MODEL-03 | Phase 2 | Pending |
+| MODEL-02 | Phase 2 | Complete |
+| MODEL-03 | Phase 2 | Complete |
 | MODEL-04 | Phase 2 | Complete |
 | SIM-01 | Phase 3 | Pending |
 | SIM-02 | Phase 3 | Pending |

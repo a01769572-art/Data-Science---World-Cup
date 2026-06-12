@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-02-PLAN.md
-last_updated: "2026-06-12T14:58:25.454Z"
+stopped_at: Completed 02-03-PLAN.md
+last_updated: "2026-06-12T15:13:32.381Z"
 last_activity: 2026-06-12
 progress:
   total_phases: 6
   completed_phases: 1
   total_plans: 10
-  completed_plans: 7
-  percent: 70
+  completed_plans: 8
+  percent: 80
 ---
 
 # Project State
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-06-11)
 ## Current Position
 
 Phase: 02 (modelos-baseline) — EXECUTING
-Plan: 3 of 5
+Plan: 4 of 5
 Status: Ready to execute
 Last activity: 2026-06-12
 
@@ -61,6 +61,7 @@ Progress: [██████████] 100%
 | Phase 01 P05 | 16min | 2 tasks | 5 files |
 | Phase 02 P01 | 14min | 3 tasks | 11 files |
 | Phase 02 P02 | 9min | 3 tasks | 7 files |
+| Phase 02 P03 | 10min | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -96,6 +97,8 @@ Recent decisions affecting current work:
 - [Phase 02]: Margen de victoria = variante FiveThirtyEight con rama de empate factor 1.0 — La formula cruda da log(1)=0 y congelaria el 22.7% de partidos empatados (pitfall 1); atribucion documentada
 - [Phase 02]: Baseline solo-Elo = ordered logit con MLE sobre (c1, d, log_s) libres — Resuelve OQ4 con la recomendacion del RESEARCH; reparametrizacion garantiza c1<c2 y scale>0 sin bounds
 - [Phase 02]: Cold-start 1000 sobre todo el historico; validacion por Spearman (0.979 vs eloratings.net) — Warm-start inviable: el snapshot cubre 48 de 336 equipos (pitfall 9); solo los rangos/diferencias importan
+- [Phase 02]: Identifiabilidad Dixon-Coles via penalizacion suave 1000*(sum att^2 + sum dfn^2) en la NLL con gradiente exacto — Elimina la direccion plana sin reparametrizar a n-1 libres (pitfall 7c); sumas del fit < 0.01 verificadas por test
+- [Phase 02]: Contrato D-09 congelado con cache de produccion por (path, mtime) y test de firma inspect.signature — Phase 3 consume predict_lambdas a ciegas; el cache evita releer JSON por llamada y se invalida solo con cada re-fit diario (T-02-12)
 
 ### Pending Todos
 
@@ -116,6 +119,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-06-12T14:58:25.445Z
-Stopped at: Completed 02-02-PLAN.md
+Last session: 2026-06-12T15:13:32.372Z
+Stopped at: Completed 02-03-PLAN.md
 Resume file: None
