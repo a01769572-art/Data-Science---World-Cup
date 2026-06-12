@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 01-03-PLAN.md
-last_updated: "2026-06-11T22:30:00Z"
-last_activity: 2026-06-11
+stopped_at: Completed 01-04-PLAN.md
+last_updated: "2026-06-12T00:05:00Z"
+last_activity: 2026-06-12
 progress:
   total_phases: 6
   completed_phases: 0
   total_plans: 5
-  completed_plans: 3
-  percent: 60
+  completed_plans: 4
+  percent: 80
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-06-11)
 ## Current Position
 
 Phase: 01 (Fundación de Datos) — EXECUTING
-Plan: 4 of 5
+Plan: 5 of 5
 Status: Ready to execute
-Last activity: 2026-06-11
+Last activity: 2026-06-12
 
-Progress: [██████░░░░] 60%
+Progress: [████████░░] 80%
 
 **HARD DEADLINE:** Fases 1-4 deben estar publicando pronósticos antes del 2026-06-27 (fin de fase de grupos). El torneo empezó HOY.
 
@@ -38,25 +38,26 @@ Progress: [██████░░░░] 60%
 
 **Velocity:**
 
-- Total plans completed: 3
-- Average duration: 14 min
-- Total execution time: 42 min
+- Total plans completed: 4
+- Average duration: 19 min
+- Total execution time: 77 min
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| Phase 01 | 3 | 42 min | 14 min |
+| Phase 01 | 4 | 77 min | 19 min |
 
 **Recent Trend:**
 
-- Last 5 plans: 20 min, 4 min, 18 min
-- Trend: Data foundation plans are completing faster after scaffold setup
+- Last 5 plans: 20 min, 4 min, 18 min, 35 min
+- Trend: Plan 04 spanned two sessions around a credential checkpoint; live provider integration adds wall time
 
 *Updated after each plan completion*
 | Phase 01 P01 | 20min | 3 tasks | 11 files |
 | Phase 01 P02 | 4min | 3 tasks | 9 files |
 | Phase 01 P03 | 18min | 2 tasks | 14 files |
+| Phase 01 P04 | 35min | 2 tasks + 1 checkpoint | 10 files |
 
 ## Accumulated Context
 
@@ -78,6 +79,9 @@ Recent decisions affecting current work:
 - [Phase 01]: Knockout participants remain official slot references until results determine canonical teams. — Avoids guessing future participants while preserving a stable tournament bracket.
 - [Phase 01]: The official 2026 fixture cross-check is accepted after explicit human approval: Todo correcto. — Closes the plan's blocking integrity checkpoint.
 - [Phase 01 debug]: DATA-01 completion requires a production materialization gate, not only mocked acquisition and fixture round-trips. — Prevents tests from passing while required data artifacts are absent.
+- [Phase 01]: The Odds API v4 is the odds provider; raw payloads live only under gitignored data/raw/odds/ and only de-margined derivatives are publishable. — Terms permit analytical use but forbid raw redistribution.
+- [Phase 01]: Exchange lay quotes (h2h_lay) are never consumed as back prices in the odds benchmark. — Lay prices invert market semantics and would corrupt implied probabilities.
+- [Phase 01]: Multiple reviewed alias name variants per (team, source) are legitimate coverage. — Live providers spell names differently than expected; resolution stays keyed by exact source_name.
 
 ### Pending Todos
 
@@ -86,7 +90,6 @@ None yet.
 ### Blockers/Concerns
 
 - [Phase 3 prerequisito]: Reglamento oficial FIFA 2026 (orden de desempates, asignación de mejores terceros a R32, puntos fair-play) NO verificado en research — fetch del PDF oficial es la primera tarea del simulador
-- [Phase 1]: Fuente de cuotas 2026 (disponibilidad/formato) sin verificar — confirmar durante ingesta
 - [Phase 1]: DATA-03 sigue incompleto — existe el snapshot Elo actual, pero falta recomputar Elo propio desde los 49,405 partidos históricos.
 - [Phase 1]: DOC-03 sigue incompleto — aún faltan README de portafolio y verificación de repositorio GitHub público.
 - [Stack]: Pin pandas ~=2.3.3 (NO 3.x — seaborn 0.13.2 incompatible); no tocar el pin a mitad de torneo
@@ -101,6 +104,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-06-11
-Stopped at: DATA-01 debug resolved and planning documentation synchronized
+Last session: 2026-06-12
+Stopped at: Completed 01-04-PLAN.md (odds benchmark live; 1385 rows, 71 fixtures)
 Resume file: None

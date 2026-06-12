@@ -12,7 +12,7 @@
 - [x] **DATA-02**: Existe una tabla maestra canónica de selecciones (`teams.csv`) contra la que se mapea toda fuente, con tests de cobertura que garantizan que las 48 selecciones del Mundial resuelven en cada fuente
 - [ ] **DATA-03**: El sistema ingesta ratings Elo actuales (eloratings.net TSV vía requests) y recomputa Elo propio desde el histórico como fuente primaria
 - [x] **DATA-04**: El fixture oficial 2026 (104 partidos, 12 grupos, sedes, horarios) está cargado, validado y versionado en `data/external/`
-- [ ] **DATA-05**: El sistema ingesta cuotas de mercado de una fuente y calcula probabilidades implícitas de-margined para usar como benchmark
+- [x] **DATA-05**: El sistema ingesta cuotas de mercado de una fuente y calcula probabilidades implícitas de-margined para usar como benchmark
 - [ ] **DATA-06**: Existe un pipeline de ingesta de resultados del torneo en curso con fallback manual editable (`results_2026.csv`) para que un scraper roto nunca bloquee la corrida diaria
 
 ### Modelos baseline
@@ -84,7 +84,7 @@ Deferred — valiosos pero no bloquean el valor core de v1:
 | DATA-02 | Phase 1 | Complete |
 | DATA-03 | Phase 1 | Pending |
 | DATA-04 | Phase 1 | Complete |
-| DATA-05 | Phase 1 | Pending |
+| DATA-05 | Phase 1 | Complete |
 | DATA-06 | Phase 4 | Pending |
 | MODEL-01 | Phase 2 | Pending |
 | MODEL-02 | Phase 2 | Pending |
