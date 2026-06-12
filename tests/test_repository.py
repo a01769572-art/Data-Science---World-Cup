@@ -32,6 +32,11 @@ def test_python_and_tournament_safe_dependency_pins(pyproject: dict) -> None:
         "kagglehub>=1,<2",
         "requests>=2.32,<3",
         "python-dotenv>=1,<2",
+        "scipy~=1.17",
+        "scikit-learn~=1.9",
+        "matplotlib~=3.10",
+        "seaborn==0.13.2",
+        "joblib>=1.4",
     }
     expected_dev = {
         "pytest>=8,<9",
