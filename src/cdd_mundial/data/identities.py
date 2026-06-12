@@ -119,17 +119,7 @@ def build_coverage_report(
                 (active_resolver.aliases["team_id"] == team_id)
                 & (active_resolver.aliases["source"] == source)
             ]
-            if len(aliases) == 1:
-                rows.append(
-                    {
-                        "team_id": team_id,
-                        "source": source,
-                        "resolved": True,
-                        "source_name": aliases.iloc[0]["source_name"],
-                        "reason": "reviewed alias",
-                    }
-                )
-            elif aliases.empty:
+            if aliases.empty:
                 rows.append(
                     {
                         "team_id": team_id,
@@ -140,13 +130,16 @@ def build_coverage_report(
                     }
                 )
             else:
+                # Multiple rows are legitimate reviewed name variants (e.g. provider
+                # spelling differences); resolution stays keyed by exact source_name,
+                # and true duplicates are rejected by TeamAliasesSchema uniqueness.
                 rows.append(
                     {
                         "team_id": team_id,
                         "source": source,
-                        "resolved": False,
-                        "source_name": None,
-                        "reason": "multiple reviewed aliases",
+                        "resolved": True,
+                        "source_name": aliases.iloc[0]["source_name"],
+                        "reason": "reviewed alias",
                     }
                 )
 

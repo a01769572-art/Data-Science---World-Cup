@@ -121,6 +121,7 @@ def odds_frame() -> pd.DataFrame:
                 "match_id": "WC26-001",
                 "captured_at_utc": "2026-06-11T12:00:00Z",
                 "commence_time_utc": "2026-06-11T19:00:00Z",
+                "provider_update_utc": "2026-06-11T11:55:00Z",
                 "home_team_id": "mexico",
                 "away_team_id": "south-africa",
                 "market": "h2h",

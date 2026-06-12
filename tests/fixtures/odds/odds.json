@@ -1,0 +1,79 @@
+[
+  {
+    "id": "evt-cze-kor",
+    "sport_key": "soccer_fifa_world_cup",
+    "sport_title": "FIFA World Cup",
+    "commence_time": "2026-06-12T02:00:00Z",
+    "home_team": "Czech Republic",
+    "away_team": "South Korea",
+    "bookmakers": [
+      {
+        "key": "pinnacle",
+        "title": "Pinnacle",
+        "last_update": "2026-06-11T22:00:00Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2026-06-11T22:00:00Z",
+            "outcomes": [
+              { "name": "Czech Republic", "price": 3.06 },
+              { "name": "South Korea", "price": 2.69 },
+              { "name": "Draw", "price": 3.1 }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betfair_ex_eu",
+        "title": "Betfair",
+        "last_update": "2026-06-11T22:05:00Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2026-06-11T22:05:00Z",
+            "outcomes": [
+              { "name": "Czech Republic", "price": 3.1 },
+              { "name": "South Korea", "price": 2.7 },
+              { "name": "Draw", "price": 3.15 }
+            ]
+          },
+          {
+            "key": "h2h_lay",
+            "last_update": "2026-06-11T22:05:00Z",
+            "outcomes": [
+              { "name": "Czech Republic", "price": 3.2 },
+              { "name": "South Korea", "price": 2.75 },
+              { "name": "Draw", "price": 3.25 }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "evt-can-bih",
+    "sport_key": "soccer_fifa_world_cup",
+    "sport_title": "FIFA World Cup",
+    "commence_time": "2026-06-12T19:00:00Z",
+    "home_team": "Canada",
+    "away_team": "Bosnia & Herzegovina",
+    "bookmakers": [
+      {
+        "key": "pinnacle",
+        "title": "Pinnacle",
+        "last_update": "2026-06-11T22:00:00Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "last_update": "2026-06-11T22:00:00Z",
+            "outcomes": [
+              { "name": "Canada", "price": 1.8 },
+              { "name": "Bosnia & Herzegovina", "price": 4.8 },
+              { "name": "Draw", "price": 3.5 }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

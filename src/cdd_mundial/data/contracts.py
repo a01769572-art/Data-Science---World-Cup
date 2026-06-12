@@ -104,6 +104,7 @@ class OddsSchema(CanonicalSchema):
     match_id: Series[str]
     captured_at_utc: Series[str] = pa.Field(str_matches=r".*Z$")
     commence_time_utc: Series[str] = pa.Field(str_matches=r".*Z$")
+    provider_update_utc: Series[str] = pa.Field(nullable=True, str_matches=r".*Z$")
     home_team_id: Series[str]
     away_team_id: Series[str]
     market: Series[str] = pa.Field(isin=["h2h"])

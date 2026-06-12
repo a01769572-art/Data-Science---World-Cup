@@ -484,6 +484,7 @@ odds,Argentina,argentina,1901-01-01,,Expected market display name
 odds,Australia,australia,1922-01-01,,Expected market display name
 odds,Austria,austria,1904-01-01,,Expected market display name
 odds,Belgium,belgium,1904-01-01,,Expected market display name
+odds,Bosnia & Herzegovina,bosnia-and-herzegovina,1992-01-01,,Live provider display name (ampersand variant)
 odds,Bosnia and Herzegovina,bosnia-and-herzegovina,1992-01-01,,Expected market display name
 odds,Brazil,brazil,1914-01-01,,Expected market display name
 odds,Canada,canada,1924-01-01,,Expected market display name
@@ -491,6 +492,7 @@ odds,Cape Verde,cape-verde,1979-01-01,,Expected market display name
 odds,Colombia,colombia,1938-01-01,,Expected market display name
 odds,Croatia,croatia,1990-01-01,,Expected market display name
 odds,Curacao,curacao,2011-01-01,,Expected ASCII market display
+odds,Curaçao,curacao,2011-01-01,,Live provider display name (with cedilla)
 odds,Czech Republic,czechia,1994-01-01,,Expected market display name
 odds,DR Congo,dr-congo,1960-01-01,,Expected market display name
 odds,Ecuador,ecuador,1938-01-01,,Expected market display name
