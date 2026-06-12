@@ -1,4 +1,5 @@
 from pathlib import Path
+import subprocess
 import tomllib
 
 import pytest
@@ -74,6 +75,24 @@ def test_reference_csvs_and_metadata_manifests_are_allowed(
 ) -> None:
     assert "!data/external/**/*.csv" in gitignore_lines
     assert "!data/metadata/**/*.json" in gitignore_lines
+
+
+def test_documentation_artifacts_are_tracked_and_secrets_are_not() -> None:
+    tracked = set(
+        subprocess.run(
+            ["git", "ls-files"],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout.splitlines()
+    )
+    assert "README.md" in tracked, "DOC-03 requires the portfolio README to be committed"
+    assert "notebooks/01_data_foundation.ipynb" in tracked, (
+        "DOC-01 requires the didactic Phase 1 notebook to be committed"
+    )
+    assert ".env" not in tracked
+    assert ".env.example" in tracked
 
 
 def test_env_example_declares_only_an_empty_api_key() -> None:

@@ -20,8 +20,14 @@ PHASE1_NOTEBOOK = NOTEBOOKS_DIR / "01_data_foundation.ipynb"
 WHAT_AND_WHY = "What and why"
 INTERPRETATION = "Interpretation"
 
+# Literal secret assignments only: the value must be one contiguous token-like
+# string (real credentials have no spaces) and must not be an environment-variable
+# reference placeholder such as %VAR%, $VAR, or ${VAR}.
 SECRET_PATTERNS = (
-    re.compile(r"(?i)\b(api[_-]?key|apikey|secret|token|passwd|password)\b\s*[:=]\s*[\"'][^\"']{4,}[\"']"),
+    re.compile(
+        r"(?i)\b(api[_-]?key|apikey|secret|token|passwd|password)\b"
+        r"\s*[:=]\s*[\"'](?![%$])[A-Za-z0-9_\-./+=]{8,}[\"']"
+    ),
     re.compile(r"(?i)bearer\s+[a-z0-9_\-.]{16,}"),
     re.compile(r"\bsk-[A-Za-z0-9]{20,}\b"),
 )
