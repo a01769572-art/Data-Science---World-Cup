@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: ready_to_execute
-stopped_at: Phase 02 planned
-last_updated: "2026-06-12T06:00:00.000Z"
+status: executing
+stopped_at: Completed 02-01-PLAN.md
+last_updated: "2026-06-12T14:44:57.733Z"
 last_activity: 2026-06-12
 progress:
   total_phases: 6
   completed_phases: 1
-  total_plans: 5
-  completed_plans: 5
-  percent: 100
+  total_plans: 10
+  completed_plans: 6
+  percent: 60
 ---
 
 # Project State
@@ -21,13 +21,13 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-11)
 
 **Core value:** Proyecto de portafolio metodológicamente riguroso y profundamente documentado que enseña ciencia de datos end-to-end real — si los pronósticos fallan pero el proceso es sólido y el aprendizaje quedó capturado, el proyecto cumplió.
-**Current focus:** Phase 02 — Modelos Baseline
+**Current focus:** Phase 02 — modelos-baseline
 
 ## Current Position
 
-Phase: 02 (Modelos Baseline) — PLANNED
-Plan: 5 of 5
-Status: Phase planned — ready to execute
+Phase: 02 (modelos-baseline) — EXECUTING
+Plan: 2 of 5
+Status: Ready to execute
 Last activity: 2026-06-12
 
 Progress: [██████████] 100%
@@ -59,6 +59,7 @@ Progress: [██████████] 100%
 | Phase 01 P03 | 18min | 2 tasks | 14 files |
 | Phase 01 P04 | 35min | 2 tasks + 1 checkpoint | 10 files |
 | Phase 01 P05 | 16min | 2 tasks | 5 files |
+| Phase 02 P01 | 14min | 3 tasks | 11 files |
 
 ## Accumulated Context
 
@@ -87,6 +88,9 @@ Recent decisions affecting current work:
 - [Phase 01]: Phase acceptance validates materialized artifacts when present and committed parser fixtures in clean environments. — Prevents silent skips while keeping the non-network suite reproducible from a fresh clone.
 - [Phase 01]: Public-repository completion requires automated leak gates, GitHub visibility verification, and explicit human approval of rendered documentation. — Combines machine-verifiable hygiene with human judgment of portfolio quality.
 - [Phase 01]: DATA-03 Phase 1 evidence covers the complete current Elo snapshot; custom historical Elo recomputation remains the Phase 2 MODEL-01 deliverable. — Preserves the accepted phase boundary without overstating what the snapshot proves.
+- [Phase 02]: Tabla K canonica WFE de 5 niveles (60/50/40/30/20) con continentales=50 — D-01 ordena seguir la fuente canonica WFE y la tabla literal de D-01 difiere de ella (pitfall 3)
+- [Phase 02]: Nations Leagues clasifican qualifier_major K=40 (A2); predecesores continentales historicos en other K=30 — Assumption A2 del RESEARCH; impacto marginal por decaimiento temporal
+- [Phase 02]: Partidos con ET o penales se etiquetan empate de 90 minutos en load_matches — Los marcadores martj42 son FT+ET y no definen el outcome en esos 677 partidos (D-05, pitfall 6)
 
 ### Pending Todos
 
@@ -107,6 +111,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-06-12T01:22:19.457Z
-Stopped at: Completed 01-05-PLAN.md
+Last session: 2026-06-12T14:44:45.162Z
+Stopped at: Completed 02-01-PLAN.md
 Resume file: None
