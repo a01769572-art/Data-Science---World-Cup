@@ -117,5 +117,5 @@ re_verification:
 
 ---
 
-_Verified: 2026-06-12T16:02:05Z_  
+_Verified: 2026-06-12T16:02:05Z_
 _Verifier: the agent (gsd-verifier)_
