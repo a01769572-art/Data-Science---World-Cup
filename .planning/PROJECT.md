@@ -15,13 +15,14 @@ Un proyecto de portafolio metodológicamente riguroso y profundamente documentad
 - [x] Base histórica martj42 materializada: 49,405 partidos completados entre 1872-11-30 y 2026-06-10, 336 identidades exactas, parquet validado y procedencia SHA-256. Validado en Phase 1 / remediación DATA-01.
 - [x] Tabla canónica de las 48 selecciones del Mundial con cobertura explícita para martj42, eloratings, FIFA, fixture y cuotas. Validado en Phase 1 / DATA-02.
 - [x] Fixture oficial 2026 congelado: 104 partidos, 72 de grupos, horarios UTC y revisión humana contra FIFA. Validado en Phase 1 / DATA-04.
+- [x] Elo dinámico WFE recomputado sobre 49,405 partidos, con K canónico, ventaja local, margen de victoria y correlación de rangos 0.979 contra snapshot externo. Validado en Phase 2 / MODEL-01.
+- [x] Dixon-Coles con gradiente analítico, contrato `predict_lambdas`, W/D/L desde matriz de marcadores y modelo de producción fechado. Validado en Phase 2 / MODEL-02 y MODEL-03.
+- [x] Validación temporal estricta en cuatro holdouts con log-loss, Brier, RPS y gate D-13 aprobado; notebook didáctico ejecutado. Validado en Phase 2 / MODEL-04 y DOC-01.
 
 ### Active
 
-- [ ] Recomputación de Elo propio desde el histórico como fuente primaria; la ingesta del snapshot actual de eloratings ya existe, pero DATA-03 sigue incompleto
 - [ ] Benchmark de cuotas de mercado de-margined y revisado legalmente
 - [ ] Pipeline de features reproducible (Elo dinámico, forma reciente, ranking FIFA, contexto anfitrión)
-- [ ] Modelo Dixon-Coles (Poisson bivariado con decaimiento temporal) que produce goles esperados (λ)
 - [ ] Clasificador ML (XGBoost/LightGBM) de 3 clases con validación temporal estricta
 - [ ] Ensemble ponderado + calibración isotónica de probabilidades
 - [ ] Motor de simulación Monte Carlo con reglas FIFA 2026 completas (48 equipos, 12 grupos, mejores terceros, desempates, penales)
@@ -29,7 +30,6 @@ Un proyecto de portafolio metodológicamente riguroso y profundamente documentad
 - [ ] Pipeline de actualización por jornada (ingesta resultados → re-cálculo → re-simulación → reporte)
 - [ ] Reportes de pronóstico por jornada con matplotlib/seaborn
 - [ ] Tracking de calibración en vivo (log-loss acumulado vs. benchmarks)
-- [ ] Notebooks con estructura didáctica obligatoria: celda MD documenta → celda código → celda MD interpreta
 - [ ] Post-mortem de precisión al final del torneo
 - [ ] Notas de aprendizaje en Obsidian (SecondBrain) al cerrar cada fase
 
@@ -93,4 +93,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-06-11 after DATA-01 materialization debug*
+*Last updated: 2026-06-12 after Phase 2 completion*

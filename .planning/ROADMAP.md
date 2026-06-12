@@ -17,7 +17,7 @@ El torneo empezó HOY (2026-06-11) y termina 2026-07-19 — el roadmap está dic
 - Decimal phases (2.1, 2.2): Urgent insertions (marked with INSERTED)
 
 - [x] **Phase 1: Fundación de Datos** - Base histórica unificada, tabla maestra de selecciones, fixture 2026, Elo ratings y cuotas — todo validado con pandera
-- [ ] **Phase 2: Modelos Baseline (Elo + Dixon-Coles)** - Elo dinámico custom y Dixon-Coles que expone `predict_lambdas`, validados temporalmente contra 4 torneos holdout
+- [x] **Phase 2: Modelos Baseline (Elo + Dixon-Coles)** - Elo dinámico custom y Dixon-Coles que expone `predict_lambdas`, validados temporalmente contra 4 torneos holdout
 - [ ] **Phase 3: Simulador del Torneo** - Reglas FIFA 2026 completas (48 equipos, mejores terceros) + Monte Carlo vectorizado condicional al estado real — paralelizable con Fase 2
 - [ ] **Phase 4: Primer Pronóstico + Pipeline Diario** - Pipeline de jornada de un comando, snapshot append-only pre-kickoff, primer reporte publicado ≤ 27 jun
 - [ ] **Phase 5: ML + Ensemble (upgrade gated)** - XGBoost + ensemble calibrado que solo reemplaza al baseline si lo vence en los 4 holdouts
@@ -43,7 +43,7 @@ El torneo empezó HOY (2026-06-11) y termina 2026-07-19 — el roadmap está dic
 **Depends on**: Phase 1
 **Requirements**: MODEL-01, MODEL-02, MODEL-03, MODEL-04
 **Success Criteria** (what must be TRUE):
-  1. El Elo dinámico custom (K por torneo, ventaja local condicional a sede neutral, multiplicador por margen, efecto anfitrión MEX/USA/CAN) está recomputado desde el histórico con parámetros optimizados
+  1. El Elo dinámico custom (K canónico WFE por torneo, ventaja local condicional a sede neutral y multiplicador por margen) está recomputado desde el histórico y validado por correlación de rangos contra un snapshot externo
   2. `predict_lambdas(team_a, team_b, ctx)` devuelve goles esperados Dixon-Coles (ρ acotado, decaimiento temporal calibrado para selecciones, neutral-aware) para cualquier par de selecciones del Mundial — el contrato que consume el simulador queda congelado
   3. Las probabilidades W/D/L se derivan de la matriz de marcadores Dixon-Coles (no de un logistic sobre Elo) y la cuota de empates cae en el rango sano 24–28%
   4. Log-loss, Brier y RPS contra los 4 torneos holdout (Mundial 2018/2022, Euro 2024, Copa América 2024) están reportados y el baseline vence a los baselines naive (uniforme, solo-Elo)
@@ -110,7 +110,7 @@ Phases execute in numeric order: 1 → 2 ∥ 3 → 4 → 5 ∥ 6 (2-3 paraleliza
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Fundación de Datos | 5/5 | Complete | 2026-06-12 |
-| 2. Modelos Baseline | 5/5 | Verifying | - |
+| 2. Modelos Baseline | 5/5 | Complete | 2026-06-12 |
 | 3. Simulador del Torneo | 0/TBD | Not started | - |
 | 4. Primer Pronóstico + Pipeline Diario | 0/TBD | Not started | - |
 | 5. ML + Ensemble (gated) | 0/TBD | Not started | - |

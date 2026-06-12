@@ -17,7 +17,7 @@
 
 ### Modelos baseline
 
-- [x] **MODEL-01**: El sistema calcula un Elo dinámico custom (estilo World Football Elo: K por torneo, ventaja local, margen de victoria) con parámetros optimizados en histórico
+- [x] **MODEL-01**: El sistema calcula un Elo dinámico custom con parámetros canónicos World Football Elo (K por torneo, ventaja local y margen de victoria), recomputado sobre el histórico y validado contra un snapshot externo; la optimización de K queda diferida a Phase 5/post-mortem
 - [x] **MODEL-02**: El sistema entrena un modelo Dixon-Coles (Poisson bivariado con corrección de marcadores bajos y decaimiento temporal calibrado para fútbol de selecciones) que expone la interfaz `predict_lambdas(team_a, team_b, ctx)` — el contrato que consume el simulador
 - [x] **MODEL-03**: El sistema deriva probabilidades W/D/L de la matriz de marcadores Dixon-Coles (la probabilidad de empate sale del modelo de goles, no de un logistic Elo)
 - [x] **MODEL-04**: Todo modelo se valida con splits temporales estrictos contra 4 torneos holdout (Mundial 2018, Mundial 2022, Euro 2024, Copa América 2024) usando log-loss, Brier y RPS
