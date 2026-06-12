@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-03-PLAN.md
-last_updated: "2026-06-12T15:13:32.381Z"
+stopped_at: Completed 02-04-PLAN.md
+last_updated: "2026-06-12T15:38:28Z"
 last_activity: 2026-06-12
 progress:
   total_phases: 6
   completed_phases: 1
   total_plans: 10
-  completed_plans: 8
-  percent: 80
+  completed_plans: 9
+  percent: 90
 ---
 
 # Project State
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-06-11)
 ## Current Position
 
 Phase: 02 (modelos-baseline) — EXECUTING
-Plan: 4 of 5
+Plan: 5 of 5
 Status: Ready to execute
 Last activity: 2026-06-12
 
@@ -62,6 +62,7 @@ Progress: [██████████] 100%
 | Phase 02 P01 | 14min | 3 tasks | 11 files |
 | Phase 02 P02 | 9min | 3 tasks | 7 files |
 | Phase 02 P03 | 10min | 2 tasks | 3 files |
+| Phase 02 P04 | 25min | 2 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -69,6 +70,9 @@ Progress: [██████████] 100%
 
 Decisions are logged in PROJECT.md Key Decisions table.
 Recent decisions affecting current work:
+
+- [Phase 02]: xi=0.00095 selected by mean log-loss across four holdouts; D-13 passed (DC 0.9672 < solo-Elo 0.9830 < uniform 1.0986).
+- [Phase 02]: L-BFGS-B now starts gamma at zero with explicit convergence options to avoid a degenerate recent-window basin.
 
 - [Roadmap]: Fases 2 y 3 paralelizables vía contrato `predict_lambdas(team_a, team_b, ctx)` — el simulador se construye contra λs stub
 - [Roadmap]: Fase 5 (ML) es upgrade gated, no critical path — solo reemplaza al baseline si lo vence en log-loss en los 4 holdouts
@@ -119,6 +123,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-06-12T15:13:32.372Z
-Stopped at: Completed 02-03-PLAN.md
+Last session: 2026-06-12T15:38:28Z
+Stopped at: Completed 02-04-PLAN.md
 Resume file: None

@@ -53,7 +53,7 @@ Plans:
 - [x] 02-01-PLAN.md — Fundaciones: deps Wave 0, tabla K torneo→factor, load_matches con outcome 90', métricas RPS/Brier
 - [x] 02-02-PLAN.md — Elo dinámico WFE recomputado + materialización con provenance + baseline solo-Elo (ordered logit)
 - [x] 02-03-PLAN.md — Dixon-Coles: MLE con gradiente analítico, contrato predict_lambdas congelado, W/D/L de matriz
-- [ ] 02-04-PLAN.md — Validación temporal: 4 holdouts fit-at-cutoff, mini-grid ξ, gate D-13, fit de producción
+- [x] 02-04-PLAN.md — Validación temporal: 4 holdouts fit-at-cutoff, mini-grid ξ, gate D-13, fit de producción
 - [ ] 02-05-PLAN.md — Notebook didáctico (derivaciones D-14, reliability diagram) + gates estructurales extendidos
 
 ### Phase 3: Simulador del Torneo
@@ -110,7 +110,7 @@ Phases execute in numeric order: 1 → 2 ∥ 3 → 4 → 5 ∥ 6 (2-3 paraleliza
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Fundación de Datos | 5/5 | Complete | 2026-06-12 |
-| 2. Modelos Baseline | 5/5 | Ready to execute | - |
+| 2. Modelos Baseline | 4/5 | In Progress | - |
 | 3. Simulador del Torneo | 0/TBD | Not started | - |
 | 4. Primer Pronóstico + Pipeline Diario | 0/TBD | Not started | - |
 | 5. ML + Ensemble (gated) | 0/TBD | Not started | - |
