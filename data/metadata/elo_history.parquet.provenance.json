@@ -1,0 +1,10 @@
+{
+  "license": "CC0-1.0 (derived from martj42)",
+  "local_path": "data/processed/models/elo_history.parquet",
+  "notes": "Recomputed WFE-style Elo from historical_matches.parquet sha256=067ada821b9e33e987525f66e668e89301b9945b7f7526509868dd8c7b22b239",
+  "retrieved_at_utc": "2026-06-12T14:51:42.505532Z",
+  "sha256": "5225da7eb16e243cde802f88ce5b0317fe1794473f2fe5151e40c396b0df7907",
+  "source": "cdd-mundial-elo-recompute",
+  "source_url": "local:src/cdd_mundial/models/elo.py",
+  "source_version": "2026-06-11"
+}

@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
 import pytest
+from scipy.stats import spearmanr
 
 from cdd_mundial.models.elo import (
     HOME_BONUS,
@@ -14,6 +17,7 @@ from cdd_mundial.models.elo import (
     margin_factor,
     ratings_asof,
     recompute_elo,
+    verify_elo_materialization,
 )
 from cdd_mundial.models.loading import load_matches
 from cdd_mundial.models.tournaments import TournamentKTable, UnknownTournamentError
@@ -149,3 +153,32 @@ def test_unknown_tournament_fails_loudly() -> None:
 def test_margin_factor_draw_branch_is_one() -> None:
     assert margin_factor(0, 1800.0, 1200.0) == 1.0
     assert margin_factor(2, 1500.0, 1500.0) == pytest.approx(np.log(3.0), abs=1e-12)
+
+
+@pytest.mark.data_acceptance
+def test_model01_real_elo_materialization() -> None:
+    summary = verify_elo_materialization(data_root=Path("data"))
+
+    assert summary["matches"] > 49_000
+    assert summary["teams"] > 300
+    assert summary["top_rating"] > INITIAL_RATING
+
+
+@pytest.mark.data_acceptance
+def test_model01_spearman_vs_eloratings_snapshot() -> None:
+    # Comparar RANGOS, nunca niveles absolutos (pitfall 2/9: cold-start centra ~1000
+    # mientras eloratings.net centra ~1500 — solo las diferencias/rangos importan).
+    recomputed = pd.read_parquet("data/processed/models/elo_ratings.parquet")
+    reference = pd.read_parquet("data/processed/elo_current.parquet")
+    teams = pd.read_csv("data/external/teams.csv")
+    world_cup_ids = teams.loc[teams["is_world_cup_2026"], "team_id"]
+
+    merged = recomputed[recomputed["team_id"].isin(world_cup_ids)].merge(
+        reference, on="team_id", suffixes=("_recomputed", "_reference")
+    )
+
+    assert len(merged) == 48
+    correlation = spearmanr(
+        merged["elo_rating_recomputed"], merged["elo_rating_reference"]
+    ).statistic
+    assert correlation >= 0.9

@@ -2,11 +2,22 @@
 
 from __future__ import annotations
 
+import argparse
 from collections import defaultdict
+from datetime import datetime, timezone
+import json
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
+from cdd_mundial.data.contracts import EloHistorySchema, EloRatingsSchema
+from cdd_mundial.data.provenance import (
+    ProvenanceRecord,
+    file_sha256,
+    write_provenance_manifest,
+)
+from cdd_mundial.models.loading import load_matches
 from cdd_mundial.models.tournaments import TournamentKTable
 
 INITIAL_RATING = 1000.0
@@ -116,3 +127,125 @@ def ratings_asof(history: pd.DataFrame, date: pd.Timestamp) -> dict[str, float]:
     prior = history.loc[match_dates < date]
     latest = prior.sort_values("date", kind="stable").groupby("team_id")["rating_post"].last()
     return defaultdict(lambda: INITIAL_RATING, latest.to_dict())
+
+
+def snapshot_ratings(history: pd.DataFrame, source_version: str) -> pd.DataFrame:
+    """Return the current EloRatingsSchema snapshot: last rating_post per team."""
+    ordered = history.sort_values("date", kind="stable")
+    latest = ordered.groupby("team_id", as_index=False)["rating_post"].last()
+    snapshot = pd.DataFrame(
+        {
+            "team_id": latest["team_id"],
+            "elo_rating": latest["rating_post"].astype(float),
+        }
+    )
+    snapshot["rank"] = (
+        snapshot["elo_rating"].rank(method="dense", ascending=False).astype(int)
+    )
+    max_date = str(ordered["date"].max())
+    snapshot["rating_date_utc"] = f"{max_date}T00:00:00Z"
+    snapshot["source"] = "cdd-mundial-recompute"
+    snapshot["source_version"] = source_version
+    return snapshot.sort_values("rank", kind="stable").reset_index(drop=True)
+
+
+def _write_artifact_provenance(
+    artifact_path: Path,
+    source_version: str,
+    input_path: Path,
+    metadata_root: Path,
+) -> None:
+    write_provenance_manifest(
+        ProvenanceRecord(
+            source="cdd-mundial-elo-recompute",
+            source_url="local:src/cdd_mundial/models/elo.py",
+            retrieved_at_utc=datetime.now(timezone.utc),
+            source_version=source_version,
+            sha256=file_sha256(artifact_path),
+            license="CC0-1.0 (derived from martj42)",
+            local_path=artifact_path,
+            notes=(
+                "Recomputed WFE-style Elo from historical_matches.parquet "
+                f"sha256={file_sha256(input_path)}"
+            ),
+        ),
+        metadata_root,
+    )
+
+
+def materialize_elo(data_root: Path = Path("data")) -> dict[str, float | int | str]:
+    """Recompute, validate, and serialize the Elo history and snapshot with provenance."""
+    input_path = data_root / "processed" / "historical_matches.parquet"
+    matches = load_matches(path=input_path)
+    versions = matches["source_version"].drop_duplicates().tolist()
+    if len(versions) != 1:
+        raise ValueError(f"historical parquet must contain one source version: {versions}")
+    source_version = str(versions[0])
+
+    history = recompute_elo(matches, TournamentKTable.from_csv())
+    validated_history = EloHistorySchema.validate(history)
+    models_root = data_root / "processed" / "models"
+    models_root.mkdir(parents=True, exist_ok=True)
+    history_path = models_root / "elo_history.parquet"
+    validated_history.to_parquet(history_path, index=False)
+
+    snapshot = EloRatingsSchema.validate(snapshot_ratings(validated_history, source_version))
+    ratings_path = models_root / "elo_ratings.parquet"
+    snapshot.to_parquet(ratings_path, index=False)
+
+    metadata_root = data_root / "metadata"
+    for artifact_path in (history_path, ratings_path):
+        _write_artifact_provenance(artifact_path, source_version, input_path, metadata_root)
+
+    top = snapshot.iloc[0]
+    return {
+        "matches": int(validated_history["match_id"].nunique()),
+        "teams": int(snapshot["team_id"].nunique()),
+        "top_team": str(top["team_id"]),
+        "top_rating": float(top["elo_rating"]),
+    }
+
+
+def verify_elo_materialization(data_root: Path = Path("data")) -> dict[str, float | int | str]:
+    """Fail unless both Elo artifacts exist, validate, and cover enough teams."""
+    models_root = data_root / "processed" / "models"
+    history_path = models_root / "elo_history.parquet"
+    ratings_path = models_root / "elo_ratings.parquet"
+    for path in (history_path, ratings_path):
+        if not path.exists():
+            raise FileNotFoundError(f"required MODEL-01 artifact is missing: {path}")
+
+    history = EloHistorySchema.validate(pd.read_parquet(history_path))
+    snapshot = EloRatingsSchema.validate(pd.read_parquet(ratings_path))
+    team_count = int(snapshot["team_id"].nunique())
+    if team_count < 300:
+        raise ValueError(f"Elo snapshot covers too few teams: {team_count} < 300")
+
+    top = snapshot.sort_values("rank", kind="stable").iloc[0]
+    return {
+        "matches": int(history["match_id"].nunique()),
+        "teams": team_count,
+        "top_team": str(top["team_id"]),
+        "top_rating": float(top["elo_rating"]),
+    }
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Materialize and verify the recomputed Elo.")
+    parser.add_argument("--data-root", type=Path, default=Path("data"))
+    parser.add_argument(
+        "--verify-only",
+        action="store_true",
+        help="Verify existing artifacts without recomputing.",
+    )
+    args = parser.parse_args()
+    summary = (
+        verify_elo_materialization(args.data_root)
+        if args.verify_only
+        else materialize_elo(args.data_root)
+    )
+    print(json.dumps(summary, indent=2, sort_keys=True))
+
+
+if __name__ == "__main__":
+    main()

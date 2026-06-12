@@ -75,6 +75,20 @@ class EloRatingsSchema(CanonicalSchema):
     source_version: Series[str]
 
 
+class EloHistorySchema(CanonicalSchema):
+    match_id: Series[str]
+    date: Series[str]
+    team_id: Series[str]
+    opponent_id: Series[str]
+    rating_pre: Series[float] = pa.Field(gt=0)
+    rating_post: Series[float] = pa.Field(gt=0)
+    k_factor: Series[int] = pa.Field(isin=[20, 30, 40, 50, 60])
+
+    @pa.dataframe_check
+    def one_row_per_team_per_match(cls, frame: pd.DataFrame) -> Series[bool]:
+        return ~frame.duplicated(subset=["match_id", "team_id"])
+
+
 class FixtureSchema(CanonicalSchema):
     match_id: Series[str] = pa.Field(unique=True)
     stage: Series[str]
