@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: executing
-stopped_at: Completed 01-04-PLAN.md
-last_updated: "2026-06-12T00:05:00Z"
+status: verifying
+stopped_at: Completed 01-05-PLAN.md
+last_updated: "2026-06-12T01:22:19.461Z"
 last_activity: 2026-06-12
 progress:
   total_phases: 6
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 5
-  completed_plans: 4
-  percent: 80
+  completed_plans: 5
+  percent: 100
 ---
 
 # Project State
@@ -25,12 +25,12 @@ See: .planning/PROJECT.md (updated 2026-06-11)
 
 ## Current Position
 
-Phase: 01 (Fundación de Datos) — EXECUTING
+Phase: 01 (Fundación de Datos) — VERIFYING
 Plan: 5 of 5
-Status: Ready to execute
+Status: Phase complete — ready for verification
 Last activity: 2026-06-12
 
-Progress: [████████░░] 80%
+Progress: [██████████] 100%
 
 **HARD DEADLINE:** Fases 1-4 deben estar publicando pronósticos antes del 2026-06-27 (fin de fase de grupos). El torneo empezó HOY.
 
@@ -38,26 +38,27 @@ Progress: [████████░░] 80%
 
 **Velocity:**
 
-- Total plans completed: 4
+- Total plans completed: 5
 - Average duration: 19 min
-- Total execution time: 77 min
+- Total execution time: 93 min
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| Phase 01 | 4 | 77 min | 19 min |
+| Phase 01 | 5 | 93 min | 19 min |
 
 **Recent Trend:**
 
-- Last 5 plans: 20 min, 4 min, 18 min, 35 min
-- Trend: Plan 04 spanned two sessions around a credential checkpoint; live provider integration adds wall time
+- Last 5 plans: 20 min, 4 min, 18 min, 35 min, 16 min
+- Trend: Phase 1 closed in 93 active minutes; external credential and human-verification waits are excluded
 
 *Updated after each plan completion*
 | Phase 01 P01 | 20min | 3 tasks | 11 files |
 | Phase 01 P02 | 4min | 3 tasks | 9 files |
 | Phase 01 P03 | 18min | 2 tasks | 14 files |
 | Phase 01 P04 | 35min | 2 tasks + 1 checkpoint | 10 files |
+| Phase 01 P05 | 16min | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -82,6 +83,10 @@ Recent decisions affecting current work:
 - [Phase 01]: The Odds API v4 is the odds provider; raw payloads live only under gitignored data/raw/odds/ and only de-margined derivatives are publishable. — Terms permit analytical use but forbid raw redistribution.
 - [Phase 01]: Exchange lay quotes (h2h_lay) are never consumed as back prices in the odds benchmark. — Lay prices invert market semantics and would corrupt implied probabilities.
 - [Phase 01]: Multiple reviewed alias name variants per (team, source) are legitimate coverage. — Live providers spell names differently than expected; resolution stays keyed by exact source_name.
+- [Phase 01]: Didactic notebooks import cdd_mundial.data production functions and enforce What and why -> code -> Interpretation structurally. — Keeps teaching artifacts synchronized with tested production logic.
+- [Phase 01]: Phase acceptance validates materialized artifacts when present and committed parser fixtures in clean environments. — Prevents silent skips while keeping the non-network suite reproducible from a fresh clone.
+- [Phase 01]: Public-repository completion requires automated leak gates, GitHub visibility verification, and explicit human approval of rendered documentation. — Combines machine-verifiable hygiene with human judgment of portfolio quality.
+- [Phase 01]: DATA-03 Phase 1 evidence covers the complete current Elo snapshot; custom historical Elo recomputation remains the Phase 2 MODEL-01 deliverable. — Preserves the accepted phase boundary without overstating what the snapshot proves.
 
 ### Pending Todos
 
@@ -90,8 +95,6 @@ None yet.
 ### Blockers/Concerns
 
 - [Phase 3 prerequisito]: Reglamento oficial FIFA 2026 (orden de desempates, asignación de mejores terceros a R32, puntos fair-play) NO verificado en research — fetch del PDF oficial es la primera tarea del simulador
-- [Phase 1]: DATA-03 sigue incompleto — existe el snapshot Elo actual, pero falta recomputar Elo propio desde los 49,405 partidos históricos.
-- [Phase 1]: DOC-03 sigue incompleto — aún faltan README de portafolio y verificación de repositorio GitHub público.
 - [Stack]: Pin pandas ~=2.3.3 (NO 3.x — seaborn 0.13.2 incompatible); no tocar el pin a mitad de torneo
 
 ## Deferred Items
@@ -104,6 +107,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-06-12
-Stopped at: Completed 01-04-PLAN.md (odds benchmark live; 1385 rows, 71 fixtures)
+Last session: 2026-06-12T01:22:19.457Z
+Stopped at: Completed 01-05-PLAN.md
 Resume file: None

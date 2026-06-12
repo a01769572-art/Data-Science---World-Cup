@@ -16,7 +16,7 @@ El torneo empezó HOY (2026-06-11) y termina 2026-07-19 — el roadmap está dic
 - Integer phases (1, 2, 3): Planned milestone work
 - Decimal phases (2.1, 2.2): Urgent insertions (marked with INSERTED)
 
-- [ ] **Phase 1: Fundación de Datos** - Base histórica unificada, tabla maestra de selecciones, fixture 2026, Elo ratings y cuotas — todo validado con pandera
+- [x] **Phase 1: Fundación de Datos** - Base histórica unificada, tabla maestra de selecciones, fixture 2026, Elo ratings y cuotas — todo validado con pandera
 - [ ] **Phase 2: Modelos Baseline (Elo + Dixon-Coles)** - Elo dinámico custom y Dixon-Coles que expone `predict_lambdas`, validados temporalmente contra 4 torneos holdout
 - [ ] **Phase 3: Simulador del Torneo** - Reglas FIFA 2026 completas (48 equipos, mejores terceros) + Monte Carlo vectorizado condicional al estado real — paralelizable con Fase 2
 - [ ] **Phase 4: Primer Pronóstico + Pipeline Diario** - Pipeline de jornada de un comando, snapshot append-only pre-kickoff, primer reporte publicado ≤ 27 jun
@@ -35,8 +35,8 @@ El torneo empezó HOY (2026-06-11) y termina 2026-07-19 — el roadmap está dic
   3. Los ratings Elo actuales (eloratings.net TSV) y el fixture oficial 2026 (104 partidos, 12 grupos, sedes) están cargados, validados y versionados en `data/external/`
   4. Las probabilidades implícitas de-margined de una fuente de cuotas están disponibles como benchmark
   5. El repo vive en GitHub público con README de calidad portafolio y los notebooks existentes siguen la estructura MD→código→MD
-**Execution note (2026-06-11)**: DATA-01 fue remediado tras detectar que la validación original solo usaba fixtures. DATA-03 permanece pendiente porque el snapshot Elo actual no satisface la recomputación de Elo propio. DOC-03 permanece pendiente hasta crear el README y verificar la visibilidad pública.
-**Plans**: TBD
+**Execution note (2026-06-12)**: Phase 1 acceptance passes end-to-end. DATA-03 covers the complete current Elo snapshot; custom historical Elo recomputation remains the Phase 2 `MODEL-01` deliverable. DOC-03 is complete with a portfolio README, automated leak gates, public GitHub visibility, and explicit human approval.
+**Plans**: 5/5 complete
 
 ### Phase 2: Modelos Baseline (Elo + Dixon-Coles)
 **Goal**: El sistema produce goles esperados (λ) y probabilidades W/D/L de partido desde modelos estructurales custom, validados temporalmente — el contenido de aprendizaje core del proyecto
@@ -102,7 +102,7 @@ Phases execute in numeric order: 1 → 2 ∥ 3 → 4 → 5 ∥ 6 (2-3 paraleliza
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Fundación de Datos | 4/5 | In Progress |  |
+| 1. Fundación de Datos | 5/5 | Complete | 2026-06-12 |
 | 2. Modelos Baseline | 0/TBD | Not started | - |
 | 3. Simulador del Torneo | 0/TBD | Not started | - |
 | 4. Primer Pronóstico + Pipeline Diario | 0/TBD | Not started | - |
