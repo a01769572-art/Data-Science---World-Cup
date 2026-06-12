@@ -2,9 +2,9 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: planning
-stopped_at: Phase 02 context gathered
-last_updated: "2026-06-12T02:06:00.000Z"
+status: ready_to_execute
+stopped_at: Phase 02 planned
+last_updated: "2026-06-12T06:00:00.000Z"
 last_activity: 2026-06-12
 progress:
   total_phases: 6
@@ -21,13 +21,13 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-11)
 
 **Core value:** Proyecto de portafolio metodológicamente riguroso y profundamente documentado que enseña ciencia de datos end-to-end real — si los pronósticos fallan pero el proceso es sólido y el aprendizaje quedó capturado, el proyecto cumplió.
-**Current focus:** Phase 01 — Fundación de Datos
+**Current focus:** Phase 02 — Modelos Baseline
 
 ## Current Position
 
-Phase: 01 (Fundación de Datos) — VERIFYING
+Phase: 02 (Modelos Baseline) — PLANNED
 Plan: 5 of 5
-Status: Phase complete — ready for verification
+Status: Phase planned — ready to execute
 Last activity: 2026-06-12
 
 Progress: [██████████] 100%

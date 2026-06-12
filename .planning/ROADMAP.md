@@ -47,7 +47,14 @@ El torneo empezó HOY (2026-06-11) y termina 2026-07-19 — el roadmap está dic
   2. `predict_lambdas(team_a, team_b, ctx)` devuelve goles esperados Dixon-Coles (ρ acotado, decaimiento temporal calibrado para selecciones, neutral-aware) para cualquier par de selecciones del Mundial — el contrato que consume el simulador queda congelado
   3. Las probabilidades W/D/L se derivan de la matriz de marcadores Dixon-Coles (no de un logistic sobre Elo) y la cuota de empates cae en el rango sano 24–28%
   4. Log-loss, Brier y RPS contra los 4 torneos holdout (Mundial 2018/2022, Euro 2024, Copa América 2024) están reportados y el baseline vence a los baselines naive (uniforme, solo-Elo)
-**Plans**: TBD
+**Plans:** 5 plans
+
+Plans:
+- [ ] 02-01-PLAN.md — Fundaciones: deps Wave 0, tabla K torneo→factor, load_matches con outcome 90', métricas RPS/Brier
+- [ ] 02-02-PLAN.md — Elo dinámico WFE recomputado + materialización con provenance + baseline solo-Elo (ordered logit)
+- [ ] 02-03-PLAN.md — Dixon-Coles: MLE con gradiente analítico, contrato predict_lambdas congelado, W/D/L de matriz
+- [ ] 02-04-PLAN.md — Validación temporal: 4 holdouts fit-at-cutoff, mini-grid ξ, gate D-13, fit de producción
+- [ ] 02-05-PLAN.md — Notebook didáctico (derivaciones D-14, reliability diagram) + gates estructurales extendidos
 
 ### Phase 3: Simulador del Torneo
 **Goal**: El motor Monte Carlo simula el formato 2026 completo con reglas FIFA verificadas contra el reglamento oficial, condicional al estado real del torneo — construible en paralelo con Fase 2 vía λs stub
@@ -103,7 +110,7 @@ Phases execute in numeric order: 1 → 2 ∥ 3 → 4 → 5 ∥ 6 (2-3 paraleliza
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Fundación de Datos | 5/5 | Complete | 2026-06-12 |
-| 2. Modelos Baseline | 0/TBD | Not started | - |
+| 2. Modelos Baseline | 5/5 | Ready to execute | - |
 | 3. Simulador del Torneo | 0/TBD | Not started | - |
 | 4. Primer Pronóstico + Pipeline Diario | 0/TBD | Not started | - |
 | 5. ML + Ensemble (gated) | 0/TBD | Not started | - |
@@ -111,3 +118,4 @@ Phases execute in numeric order: 1 → 2 ∥ 3 → 4 → 5 ∥ 6 (2-3 paraleliza
 
 ---
 *Created: 2026-06-11 — deadline-driven roadmap; Phases 1-4 must complete before 2026-06-27*
+*Phase 2 planned: 2026-06-12 — 5 plans in 4 waves (02-02 ∥ 02-03 en Wave 2)*
