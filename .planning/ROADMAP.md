@@ -92,7 +92,23 @@ Plans:
   3. Cada pronóstico se persiste como snapshot append-only con timestamp UTC y `model_version`, commiteado a git ANTES del kickoff, desde el primer pronóstico publicado
   4. Cada jornada genera un reporte estático matplotlib/seaborn: tabla de avance, barras P(Campeón), distribución de posiciones por grupo, evolución de probabilidades en el tiempo
   5. El tracker de calibración en vivo muestra log-loss/RPS acumulado vs. benchmark de mercado de-margined, y todo pronóstico es regenerable desde raw + código versionado con seeds fijas
-**Plans**: TBD
+**Plans**: 5 plans
+
+Plans:
+**Wave 1**
+- [ ] 04-01-PLAN.md — Contrato canónico de `results_2026.csv`, esquemas `live` y carga fail-closed a `TournamentState`
+
+**Wave 2**
+- [ ] 04-02-PLAN.md — Materialización live-training inmutable + refit/reuse determinista + staging atómico del snapshot + CLI `python -m cdd_mundial.live`
+
+**Wave 3**
+- [ ] 04-04-PLAN.md — Freeze del benchmark, slices de publicación y ledger canónico append-only de calibración por partido
+
+**Wave 4**
+- [ ] 04-03-PLAN.md — Renderer oficial HTML estático desde snapshot finalizado + slices/ledger de calibración con Jinja2 + pandas + Matplotlib/Seaborn
+
+**Wave 5**
+- [ ] 04-05-PLAN.md — Integración end-to-end, prueba del orden materialización→simulación→reporte, notebook/runbook y primera publicación oficial pre-kickoff con bundle inmutable verificado
 
 ### Phase 5: ML + Ensemble (upgrade gated)
 **Goal**: Un ensemble ML calibrado mejora medible y honestamente al baseline — o el resultado negativo queda documentado como hallazgo; el baseline sigue publicando en paralelo en todo momento
