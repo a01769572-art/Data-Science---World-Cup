@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 3 context updated and pending plans revised
-last_updated: "2026-06-13T01:25:16.498Z"
+stopped_at: Completed 03-03-PLAN.md; stopped before 03-04
+last_updated: "2026-06-13T01:48:28.805Z"
 last_activity: 2026-06-13
 progress:
   total_phases: 6
   completed_phases: 2
   total_plans: 15
-  completed_plans: 12
-  percent: 80
+  completed_plans: 13
+  percent: 87
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-06-11)
 ## Current Position
 
 Phase: 03 (simulador-del-torneo) — EXECUTING
-Plan: 3 of 5
+Plan: 4 of 5
 Status: Ready to execute
 Last activity: 2026-06-13
 
-Progress: [███████░░░] 67%
+Progress: [█████████░] 87%
 
 **HARD DEADLINE:** Fases 1-4 deben estar publicando pronósticos antes del 2026-06-27 (fin de fase de grupos). El torneo empezó HOY.
 
@@ -66,6 +66,7 @@ Progress: [███████░░░] 67%
 | Phase 02 P05 | 13min | 2 tasks | 3 files |
 | Phase 03 P01 | 14min | 2 tasks + 1 fix tasks | 5 files files |
 | Phase 03 P02 | 7min | 2 tasks | 6 files |
+| Phase 03 P03 | 15min | 2 tasks | 10 files |
 
 ## Accumulated Context
 
@@ -111,6 +112,8 @@ Recent decisions affecting current work:
 - [Phase 03]: Las combinaciones esperadas de mejores terceros se derivan independientemente de C(12,8) + Art. 12.6, nunca de la tabla parseada del Anexo C; el mapping commiteado cubre las 495 con biyeccion y compatibilidad de tokens
 - [Phase 03]: TournamentState delgado validado contra fixture: solo resultados jugados team_a/team_b; advanced_team requerido en empates de eliminatoria y prohibido en grupos; fair-play como conduct scores observados (<=0), nunca simulados
 - [Phase 03]: Resolver compacto post-empate: q=p_win/(p_win+p_loss) con shrink opcional hacia 0.5; complemento exacto al intercambiar equipos, sin lambdas de ET (D-07/D-08); el engine debe alimentar uniformes de streams keyed por match_id + semilla
+- [Phase 03]: Wave 0 rules tests freeze the official head-to-head-first cascade through conduct score and successive FIFA ranking editions; drawing of lots is excluded. — The tests consume the verified 2026 regulations from 03-01 and end intentionally RED before 03-04 implementation.
+- [Phase 03]: Wave 0 slot tests consume all 495 reviewed Annexe C cases and keep frozen fixture tokens authoritative. — Token families constrain assignments but the official mapping uniquely selects them.
 
 ### Pending Todos
 
@@ -132,6 +135,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-06-13T01:25:16.485Z
-Stopped at: Phase 3 context updated and pending plans revised
-Resume file: .planning/phases/03-simulador-del-torneo/03-CONTEXT.md
+Last session: 2026-06-13T01:48:28.796Z
+Stopped at: Completed 03-03-PLAN.md; stopped before 03-04
+Resume file: None

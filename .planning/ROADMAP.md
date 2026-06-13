@@ -74,7 +74,7 @@ Plans:
 - [x] 03-02-PLAN.md — Bootstrap de `simulation/` + TournamentState thin + resolución compacta post-90' sin sesgo de orden
 
 **Wave 2** *(blocked on Wave 1 completion)*
-- [ ] 03-03-PLAN.md — Wave 0 Nyquist: fixtures/tests revisables para desempates, fair play, seeded lots y slot resolution oficial
+- [x] 03-03-PLAN.md — Wave 0 Nyquist: fixtures/tests revisables para desempates, conduct score, ediciones sucesivas del ranking FIFA y slot resolution oficial
 
 **Wave 3** *(blocked on Wave 2 completion)*
 - [ ] 03-04-PLAN.md — Implementación pura de `rules_fifa.py` y `slots.py` sobre el fixture congelado y el mapping oficial
