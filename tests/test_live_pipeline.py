@@ -1,0 +1,312 @@
+"""Official-run materialization and refit-vs-reuse invariants (LIVE-01, DOC-02, D-06).
+
+These tests prove the critical ordering of the official daily run *before* any
+snapshot is published:
+
+1. Live canonical results are first mapped into the canonical 90-minute match
+   schema and written as a dated, immutable derived live-training artifact with
+   deterministic provenance (SHA-256), without mutating raw/history.
+2. Elo/form features are refreshed chronologically over history + live rows.
+3. Only then is a deterministic fingerprint computed over the derived artifact
+   plus relevant feature/model parameters; an unchanged fingerprint reuses the
+   pinned dated production model artifact, while a changed fingerprint refits
+   exactly one new dated artifact whose ``model_version`` follows the
+   ``baseline-v1-YYYY-MM-DD-<shortsha>`` shape (D-13).
+
+The tests run against a tiny self-contained history + fixture so they are fast
+and never touch the real production artifacts.
+"""
+
+from __future__ import annotations
+
+from pathlib import Path
+
+import pandas as pd
+import pytest
+
+from cdd_mundial.live.materialization import (
+    compute_input_fingerprint,
+    map_live_rows_to_canonical,
+    materialize_live_training,
+    select_model_artifact,
+)
+from cdd_mundial.simulation.state import PlayedMatchResult
+
+# --- Tiny self-contained history + fixture --------------------------------
+
+_HISTORY_COLUMNS = [
+    "match_id",
+    "date",
+    "home_team_id",
+    "away_team_id",
+    "home_team_source_name",
+    "away_team_source_name",
+    "home_score",
+    "away_score",
+    "tournament",
+    "city",
+    "country",
+    "neutral",
+    "shootout_winner_team_id",
+    "result_after_extra_time",
+    "source",
+    "source_version",
+]
+
+_TEAMS = ("alpha", "bravo", "charlie", "delta")
+
+
+def _history_row(match_id: str, date: str, home: str, away: str, hs: int, as_: int) -> dict:
+    return {
+        "match_id": match_id,
+        "date": date,
+        "home_team_id": home,
+        "away_team_id": away,
+        "home_team_source_name": home.title(),
+        "away_team_source_name": away.title(),
+        "home_score": hs,
+        "away_score": as_,
+        "tournament": "Friendly",
+        "city": "Town",
+        "country": "Nowhere",
+        "neutral": True,
+        "shootout_winner_team_id": None,
+        "result_after_extra_time": False,
+        "source": "test",
+        "source_version": "2026-06-11",
+    }
+
+
+def _history_frame() -> pd.DataFrame:
+    rows = []
+    pairs = [(a, b) for a in _TEAMS for b in _TEAMS if a < b]
+    # Enough repeated matches so a Dixon-Coles fit converges on a tiny set.
+    for cycle in range(8):
+        for k, (home, away) in enumerate(pairs):
+            day = 1 + (cycle * len(pairs) + k) % 27
+            rows.append(
+                _history_row(
+                    f"H-{cycle:02d}-{k:02d}",
+                    f"2024-0{1 + cycle % 9}-{day:02d}",
+                    home,
+                    away,
+                    (k + cycle) % 4,
+                    (k + 1) % 3,
+                )
+            )
+    return pd.DataFrame(rows, columns=_HISTORY_COLUMNS)
+
+
+def _fixture_frame() -> pd.DataFrame:
+    return pd.DataFrame(
+        [
+            {
+                "match_id": "WC26-001",
+                "stage": "group",
+                "group": "A",
+                "home_team_id": "alpha",
+                "away_team_id": "bravo",
+                "kickoff_utc": "2026-06-11T19:00:00Z",
+            },
+            {
+                "match_id": "WC26-002",
+                "stage": "group",
+                "group": "A",
+                "home_team_id": "charlie",
+                "away_team_id": "delta",
+                "kickoff_utc": "2026-06-12T02:00:00Z",
+            },
+        ]
+    )
+
+
+def _played() -> tuple[PlayedMatchResult, ...]:
+    return (
+        PlayedMatchResult(
+            match_id="WC26-001", team_a="alpha", team_b="bravo", goals_a=2, goals_b=1
+        ),
+    )
+
+
+# --- map_live_rows_to_canonical ------------------------------------------
+
+
+def test_map_live_rows_match_canonical_schema_and_90min_semantics() -> None:
+    canonical = map_live_rows_to_canonical(
+        _played(),
+        fixture=_fixture_frame(),
+        source_version="2026-06-11",
+        as_of_date="2026-06-11",
+    )
+    # Exactly the canonical historical columns and a single live row.
+    assert list(canonical.columns) == _HISTORY_COLUMNS
+    assert len(canonical) == 1
+    row = canonical.iloc[0]
+    assert row["match_id"] == "WC26-001"
+    assert row["home_team_id"] == "alpha"
+    assert row["away_team_id"] == "bravo"
+    assert int(row["home_score"]) == 2
+    assert int(row["away_score"]) == 1
+    # World Cup matches are neutral venue (except hosts) and tournament-tagged.
+    assert bool(row["neutral"]) is True
+    assert row["tournament"] == "FIFA World Cup"
+    assert bool(row["result_after_extra_time"]) is False
+
+
+def test_map_live_rows_rejects_match_absent_from_fixture() -> None:
+    rogue = (
+        PlayedMatchResult(
+            match_id="WC26-999", team_a="alpha", team_b="bravo", goals_a=1, goals_b=0
+        ),
+    )
+    with pytest.raises(ValueError, match="fixture"):
+        map_live_rows_to_canonical(
+            rogue, fixture=_fixture_frame(), source_version="v", as_of_date="2026-06-11"
+        )
+
+
+# --- materialize_live_training -------------------------------------------
+
+
+def test_materialization_is_immutable_and_does_not_touch_history(
+    test_workspace: Path,
+) -> None:
+    data_root = test_workspace / "data"
+    history_path = data_root / "processed" / "historical_matches.parquet"
+    history_path.parent.mkdir(parents=True, exist_ok=True)
+    _history_frame().to_parquet(history_path, index=False)
+    history_before = history_path.read_bytes()
+
+    result = materialize_live_training(
+        _played(),
+        fixture=_fixture_frame(),
+        as_of_date="2026-06-13",
+        data_root=data_root,
+    )
+
+    artifact_path = Path(result["live_training_path"])
+    assert artifact_path.exists()
+    assert artifact_path.is_relative_to(data_root)
+    assert len(result["live_training_sha256"]) == 64
+    # Refreshed Elo features cover every team that appears in history + live.
+    assert result["elo_ratings"]  # non-empty mapping team -> rating
+    # The immutable raw history was not rewritten.
+    assert history_path.read_bytes() == history_before
+
+
+def test_materialization_replay_is_deterministic(test_workspace: Path) -> None:
+    data_root = test_workspace / "data"
+    history_path = data_root / "processed" / "historical_matches.parquet"
+    history_path.parent.mkdir(parents=True, exist_ok=True)
+    _history_frame().to_parquet(history_path, index=False)
+
+    first = materialize_live_training(
+        _played(), fixture=_fixture_frame(), as_of_date="2026-06-13", data_root=data_root
+    )
+    second = materialize_live_training(
+        _played(), fixture=_fixture_frame(), as_of_date="2026-06-13", data_root=data_root
+    )
+    # Identical canonical inputs -> identical derived checksum (immutable replay).
+    assert first["live_training_sha256"] == second["live_training_sha256"]
+
+
+def test_materialization_changes_checksum_when_results_change(
+    test_workspace: Path,
+) -> None:
+    data_root = test_workspace / "data"
+    history_path = data_root / "processed" / "historical_matches.parquet"
+    history_path.parent.mkdir(parents=True, exist_ok=True)
+    _history_frame().to_parquet(history_path, index=False)
+
+    baseline = materialize_live_training(
+        _played(), fixture=_fixture_frame(), as_of_date="2026-06-13", data_root=data_root
+    )
+    corrected = (
+        PlayedMatchResult(
+            match_id="WC26-001", team_a="alpha", team_b="bravo", goals_a=0, goals_b=3
+        ),
+    )
+    changed = materialize_live_training(
+        corrected, fixture=_fixture_frame(), as_of_date="2026-06-14", data_root=data_root
+    )
+    assert baseline["live_training_sha256"] != changed["live_training_sha256"]
+
+
+# --- fingerprint + reuse/refit -------------------------------------------
+
+
+def _materialize(data_root: Path, played, as_of: str) -> dict:
+    history_path = data_root / "processed" / "historical_matches.parquet"
+    if not history_path.exists():
+        history_path.parent.mkdir(parents=True, exist_ok=True)
+        _history_frame().to_parquet(history_path, index=False)
+    return materialize_live_training(
+        played, fixture=_fixture_frame(), as_of_date=as_of, data_root=data_root
+    )
+
+
+def test_fingerprint_is_stable_for_unchanged_inputs(test_workspace: Path) -> None:
+    data_root = test_workspace / "data"
+    mat = _materialize(data_root, _played(), "2026-06-13")
+    fp1 = compute_input_fingerprint(mat, xi=0.00095)
+    fp2 = compute_input_fingerprint(mat, xi=0.00095)
+    assert fp1 == fp2
+    assert len(fp1) == 64
+
+
+def test_fingerprint_changes_with_results_or_xi(test_workspace: Path) -> None:
+    data_root = test_workspace / "data"
+    base = _materialize(data_root, _played(), "2026-06-13")
+    base_fp = compute_input_fingerprint(base, xi=0.00095)
+
+    other_xi = compute_input_fingerprint(base, xi=0.0018)
+    assert other_xi != base_fp
+
+    corrected = (
+        PlayedMatchResult(
+            match_id="WC26-001", team_a="alpha", team_b="bravo", goals_a=0, goals_b=3
+        ),
+    )
+    changed = _materialize(data_root, corrected, "2026-06-14")
+    assert compute_input_fingerprint(changed, xi=0.00095) != base_fp
+
+
+def test_select_reuses_when_fingerprint_unchanged_and_refits_when_changed(
+    test_workspace: Path,
+) -> None:
+    data_root = test_workspace / "data"
+    mat = _materialize(data_root, _played(), "2026-06-13")
+
+    first = select_model_artifact(
+        mat, xi=0.00095, data_root=data_root, as_of_date="2026-06-13"
+    )
+    assert first["reused"] is False  # nothing pinned yet -> initial refit
+    assert Path(first["model_path"]).exists()
+    assert first["model_version"].startswith("baseline-v1-")
+    parts = first["model_version"].split("-")
+    # baseline - v1 - YYYY - MM - DD - <shortsha>
+    assert parts[:2] == ["baseline", "v1"]
+    assert len(parts[-1]) >= 7
+
+    # Same canonical inputs the next day -> deterministic reuse, no new artifact.
+    second = select_model_artifact(
+        mat, xi=0.00095, data_root=data_root, as_of_date="2026-06-14"
+    )
+    assert second["reused"] is True
+    assert second["model_path"] == first["model_path"]
+    assert second["input_fingerprint"] == first["input_fingerprint"]
+
+    # Corrected results -> changed fingerprint -> exactly one new dated artifact.
+    corrected = (
+        PlayedMatchResult(
+            match_id="WC26-001", team_a="alpha", team_b="bravo", goals_a=0, goals_b=3
+        ),
+    )
+    changed_mat = _materialize(data_root, corrected, "2026-06-15")
+    third = select_model_artifact(
+        changed_mat, xi=0.00095, data_root=data_root, as_of_date="2026-06-15"
+    )
+    assert third["reused"] is False
+    assert third["input_fingerprint"] != first["input_fingerprint"]
+    assert Path(third["model_path"]).exists()
+    assert third["model_path"] != first["model_path"]
