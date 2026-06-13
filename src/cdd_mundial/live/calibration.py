@@ -327,7 +327,14 @@ def append_ledger(ledger_path: Path, rows: pd.DataFrame) -> list[str]:
         ledger_path.parent.mkdir(parents=True, exist_ok=True)
         combined = rows.reset_index(drop=True)
 
-    combined.to_parquet(ledger_path, index=False)
+    # Atomic write (WR-02): the ledger is the single canonical append-only
+    # source of truth (D-18). Writing in place would let a crash/lock/disk-full
+    # mid-``to_parquet`` truncate or corrupt the file and destroy all prior
+    # calibration history. Write to a temp sibling on the same filesystem and
+    # atomically replace, mirroring the snapshot writer's publish discipline.
+    tmp = ledger_path.with_suffix(ledger_path.suffix + ".tmp")
+    combined.to_parquet(tmp, index=False)
+    tmp.replace(ledger_path)
     return ledger_row_ids(rows)
 
 
