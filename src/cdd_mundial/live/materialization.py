@@ -192,7 +192,16 @@ def materialize_live_training(
     deterministic = combined.sort_values(["date", "match_id"], kind="stable").reset_index(
         drop=True
     )
-    _write_immutable_parquet(deterministic, artifact_path)
+    # Content hash over the canonical sorted frame (CR-02). Unlike the parquet
+    # file bytes (which embed a pyarrow writer version and may vary
+    # compression/row-group framing across library versions and platforms),
+    # this is content-stable: identical canonical inputs always hash equal.
+    # It is the equality basis for the immutable-write guard AND the input
+    # fingerprint that drives the refit-vs-reuse decision and model_version.
+    content_sha = _canonical_content_sha(deterministic)
+    _write_immutable_parquet(deterministic, artifact_path, content_sha=content_sha)
+    # Parquet file hash is still recorded for provenance/audit, but it is NOT
+    # the reproducibility basis (see compute_input_fingerprint).
     artifact_sha = file_sha256(artifact_path)
 
     # Refresh Elo/form features chronologically over history + live rows.
@@ -211,6 +220,7 @@ def materialize_live_training(
     return {
         "live_training_path": artifact_path.as_posix(),
         "live_training_sha256": artifact_sha,
+        "live_training_content_sha256": content_sha,
         "source_version": source_version,
         "as_of_date": as_of_date,
         "live_match_ids": sorted(record.match_id for record in results),
@@ -222,22 +232,44 @@ def materialize_live_training(
     }
 
 
-def _write_immutable_parquet(frame: pd.DataFrame, destination: Path) -> None:
+def _canonical_content_sha(frame: pd.DataFrame) -> str:
+    """Content-stable SHA-256 over the canonical CSV serialization of ``frame``.
+
+    Hashing the CSV payload (rather than parquet file bytes) makes the digest
+    independent of the pyarrow writer version, compression choice, and
+    row-group framing, all of which vary across library versions/platforms and
+    would otherwise break the "identical inputs replay to the same checksum"
+    invariant (CR-02). Callers are responsible for passing an already
+    deterministically-ordered frame.
+    """
+    payload = frame.to_csv(index=False, lineterminator="\n").encode("utf-8")
+    return sha256(payload).hexdigest()
+
+
+def _write_immutable_parquet(
+    frame: pd.DataFrame, destination: Path, *, content_sha: str
+) -> None:
     """Write ``frame`` to parquet, accepting identical replay, rejecting mutation.
 
     Mirrors :func:`cdd_mundial.data.provenance.copy_immutable_capture` semantics
     for derived artifacts: if the destination already exists with the same
-    content it is left untouched; if it exists with different content the run
+    *content* it is left untouched; if it exists with different content the run
     fails loud rather than silently overwriting a dated artifact.
+
+    Equality is decided on the content hash of the canonical frame (CR-02), not
+    on raw parquet bytes: ``DataFrame.to_parquet`` is not guaranteed
+    byte-deterministic across pyarrow/OS, so a byte comparison would falsely
+    trip this guard on a legitimate identical-input re-run.
     """
     destination.parent.mkdir(parents=True, exist_ok=True)
-    new_bytes = _frame_to_parquet_bytes(frame)
     if destination.exists():
-        if destination.read_bytes() != new_bytes:
+        existing = pd.read_parquet(destination)
+        if _canonical_content_sha(existing) != content_sha:
             raise FileExistsError(
                 f"live-training artifact already exists with different content: {destination}"
             )
         return
+    new_bytes = _frame_to_parquet_bytes(frame)
     tmp = destination.with_suffix(destination.suffix + ".tmp")
     tmp.write_bytes(new_bytes)
     tmp.replace(destination)
@@ -286,9 +318,14 @@ def compute_input_fingerprint(materialization: dict[str, Any], *, xi: float) -> 
     only if the derived live-training artifact changes (corrected/new results) or
     a relevant model parameter (the Dixon-Coles decay ``xi``) changes. The team
     roster is included so a structural change in coverage also forces a refit.
+
+    The artifact identity is taken from the *content* hash of the canonical
+    frame, not the parquet file SHA (CR-02): hashing the non-deterministic
+    parquet bytes would flip the fingerprint — forcing a spurious refit and a
+    new ``model_version`` — on a different pyarrow/OS despite identical inputs.
     """
     payload = {
-        "live_training_sha256": materialization["live_training_sha256"],
+        "live_training_content_sha256": materialization["live_training_content_sha256"],
         "source_version": materialization["source_version"],
         "teams": list(materialization["teams"]),
         "xi": float(xi),
