@@ -114,9 +114,28 @@ def map_live_rows_to_canonical(
             )
         kickoff = str(_meta(record.match_id, "kickoff_utc", f"{as_of_date}T00:00:00Z"))
         date_str = kickoff[:10]
+        # Contract (WR-06): ``goals_a``/``goals_b`` on the canonical results
+        # boundary are 90-MINUTE scores, never full-time-including-ET figures.
+        # A knockout that was level after 90' carries ``advanced_team`` with an
+        # equal score; we record it as a draw decided after extra time
+        # (``result_after_extra_time=True``) and feed the literal 90' scoreline
+        # to the Dixon-Coles fit (matching the martj42 historical convention).
+        # If a post-90 (incl. ET) score were miskeyed here, the goal model would
+        # silently train on the wrong margin, so guard the only locally
+        # detectable inconsistency: a decided 90' knockout whose recorded
+        # ``advanced_team`` does not match the side that actually won on goals.
         drew_after_et = (
             record.advanced_team is not None and record.goals_a == record.goals_b
         )
+        if record.advanced_team is not None and record.goals_a != record.goals_b:
+            winner = record.team_a if record.goals_a > record.goals_b else record.team_b
+            if record.advanced_team != winner:
+                raise ValueError(
+                    f"live result {record.match_id!r}: advanced_team "
+                    f"{record.advanced_team!r} does not match the 90-minute "
+                    f"winner {winner!r}; canonical goals must be 90' scores "
+                    "(refusing to materialize a row with inconsistent margin)"
+                )
         rows.append(
             {
                 "match_id": record.match_id,
@@ -180,6 +199,19 @@ def materialize_live_training(
     # sequential Elo recomputation; load_matches already sorted history.
     history_canonical = history[list(_CANONICAL_COLUMNS)].copy()
     history_canonical["date"] = history_canonical["date"].dt.strftime("%Y-%m-%d")
+
+    # Guard match_id disjointness across the union BEFORE writing (WR-01).
+    # map_live_rows_to_canonical only checks uniqueness within the live slice;
+    # HistoricalMatchesSchema requires match_id unique over the whole frame, but
+    # that is revalidated downstream in load_matches — after the dated immutable
+    # parquet and its provenance manifest are already on disk. Fail loud here so
+    # a live/history match_id collision cannot leave a poisoned artifact.
+    overlap = set(history_canonical["match_id"]) & set(live_rows["match_id"])
+    if overlap:
+        raise ValueError(
+            f"live match_id(s) collide with history: {sorted(overlap)}"
+        )
+
     combined = pd.concat([history_canonical, live_rows], ignore_index=True)
 
     out_dir = _live_training_dir(data_root)
@@ -372,16 +404,26 @@ def select_model_artifact(
         and pinned.get("input_fingerprint") == fingerprint
         and Path(pinned["model_path"]).exists()
     ):
-        return {
-            "reused": True,
-            "model_path": pinned["model_path"],
-            "model_sha256": file_sha256(Path(pinned["model_path"])),
-            "model_version": pinned["model_version"],
-            "input_fingerprint": fingerprint,
-            "xi": float(xi),
-        }
+        # Verify on-disk integrity before reusing (WR-05): compare the recomputed
+        # digest against the SHA pinned at fit time. A model file mutated or
+        # corrupted after pinning must not be reused silently and stamped with
+        # the old model_version, which would break the version<->inputs tie
+        # (D-13). On mismatch (or a legacy record with no pinned SHA), fall
+        # through to a fresh refit rather than trusting the artifact.
+        recomputed_sha = file_sha256(Path(pinned["model_path"]))
+        pinned_sha = pinned.get("model_sha256")
+        if pinned_sha is not None and recomputed_sha == pinned_sha:
+            return {
+                "reused": True,
+                "model_path": pinned["model_path"],
+                "model_sha256": recomputed_sha,
+                "model_version": pinned["model_version"],
+                "input_fingerprint": fingerprint,
+                "xi": float(xi),
+            }
 
-    # Fingerprint changed (or first run): refit exactly one new dated artifact.
+    # Fingerprint changed, first run, or pinned model failed its integrity
+    # check: refit exactly one new dated artifact.
     short_sha = fingerprint[:7]
     frame = materialization["_frame"]
     matches = load_matches(frame=frame)
@@ -391,14 +433,19 @@ def select_model_artifact(
     model_path = models_root / f"dc_params_{as_of_date}.json"
     model.save(model_path)
     model_version = f"{MODEL_FAMILY}-{as_of_date}-{short_sha}"
+    # Persist the digest at fit time so a later reuse can prove on-disk
+    # integrity before trusting the artifact (WR-05).
+    model_sha = file_sha256(model_path)
 
     record = {
         "input_fingerprint": fingerprint,
         "model_path": model_path.as_posix(),
         "model_version": model_version,
+        "model_sha256": model_sha,
         "as_of_date": as_of_date,
         "xi": float(xi),
         "live_training_sha256": materialization["live_training_sha256"],
+        "live_training_content_sha256": materialization["live_training_content_sha256"],
     }
     record_path.write_text(
         json.dumps(record, indent=2, sort_keys=True, ensure_ascii=True) + "\n",
@@ -409,7 +456,7 @@ def select_model_artifact(
     return {
         "reused": False,
         "model_path": model_path.as_posix(),
-        "model_sha256": file_sha256(model_path),
+        "model_sha256": model_sha,
         "model_version": model_version,
         "input_fingerprint": fingerprint,
         "xi": float(xi),
