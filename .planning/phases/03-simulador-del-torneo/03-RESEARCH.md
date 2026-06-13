@@ -12,7 +12,7 @@ Verbatim copy from `03-CONTEXT.md`. [VERIFIED: .planning/phases/03-simulador-del
 ### Locked Decisions
 - **D-01:** `TournamentState` guarda solo resultados ya jugados. No debe persistir tablas derivadas ni estados intermedios redundantes; esos se recomputan desde fixture + resultados fijados.
 - **D-02:** El contrato interno para resultados jugados debe usar `team_a` / `team_b`, no `home_*` / `away_*`. La ventaja de anfitrion se modela solo via `ctx`, no via nombres de columnas.
-- **D-03:** El rules engine de la fase SI incluye la cadena completa requerida por FIFA 2026, hasta `fair play` y `drawing of lots`. No se reduce a criterios deterministicos solamente.
+- **D-03 (superseded by verified `03-01` evidence):** El rules engine sigue el Art. 13 oficial: head-to-head primero, reaplicacion residual, criterios globales, conduct score y ediciones sucesivas del ranking FIFA. No existe `drawing of lots` en la regla oficial 2026.
 - **D-04:** El criterio de exito del rules engine se centra en que los criterios queden implementados correctamente en funciones puras y testeados; no se exige una capa extra de evidencia documental mas alla de fijar la referencia oficial como prerequisito de implementacion.
 - **D-05:** El simulador se diseÃ±a desde el inicio para miles de iteraciones con `numpy`. No se prioriza una version naive partido-por-partido como arquitectura principal.
 - **D-06:** El motor debe operar sobre el fixture oficial y sus `slot` references existentes (`1A`, `3CDFGH`, `W74`, etc.), resolviendo el bracket sobre esa estructura en vez de redefinirla.
@@ -89,7 +89,7 @@ Architecturally, the right design is a pure-rules layer plus a NumPy engine laye
 |------|--------|-----------------|
 | Exact 2026 group tie-break article text | Direct official regulation URL not resolved before cutoff. [VERIFIED: this research artifact] | Plan `03-01` must archive the official PDF and quote the article text into test fixtures. [ASSUMED] |
 | Exact fair-play points table for 2026 | Direct official regulation URL not resolved before cutoff. [VERIFIED: this research artifact] | Plan `03-01` must capture the exact disciplinary scoring article from FIFA, not rely on memory. [ASSUMED] |
-| Exact wording for drawing of lots | Direct official regulation URL not resolved before cutoff. [VERIFIED: this research artifact] | Plan `03-01` must quote the official fallback criterion. [ASSUMED] |
+| Exact final fallback | Resolved by `03-01`: successive editions of the FIFA/Coca-Cola Men's World Ranking, not drawing of lots. [VERIFIED: 03-01-SUMMARY.md] | Rules and tests must consume explicit ranking-edition inputs and must not add randomized group tie resolution. |
 | Exact official mechanism for assigning the eight best third-placed teams into R32 slots | Direct official regulation annex URL not resolved before cutoff. [VERIFIED: this research artifact] | Plan `03-01` must capture the official annex table or equivalent mapping. [ASSUMED] |
 
 ### Attempted Official URLs and Outcome
@@ -246,7 +246,7 @@ def rank_group_fast(points, gd, gf):
     return np.lexsort((-gf, -gd, -points), axis=1)
 ```
 
-The fallback exists because head-to-head subsets, fair play, and lots are inherently branchy. [ASSUMED]
+The scalar fallback exists because head-to-head subsets, conduct-score comparisons, and successive FIFA-ranking editions are inherently branchy. [VERIFIED: 03-01-SUMMARY.md]
 
 ### Anti-Patterns to Avoid
 

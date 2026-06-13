@@ -3,9 +3,9 @@
 > **Audit trail only.** Do not use as input to planning, research, or execution agents.
 > Decisions are captured in CONTEXT.md - this log preserves the alternatives considered.
 
-**Date:** 2026-06-12
+**Date:** 2026-06-13
 **Phase:** 03-simulador-del-torneo
-**Areas discussed:** Tournament state, rules engine scope, Monte Carlo architecture, knockout resolution, simulation outputs
+**Areas discussed:** Tournament state, rules engine scope, Monte Carlo architecture, knockout resolution, simulation outputs, simulation artifact format
 
 ---
 
@@ -29,7 +29,7 @@
 | Full FIFA chain | Include fair play and drawing of lots within Phase 3 scope | x |
 
 **User's choice:** Keep fair play and drawing of lots in scope.
-**Notes:** The user initially suggested deterministic-only, then resolved the requirements conflict in favor of the full Phase 3 requirement.
+**Notes:** This captured the original intent. Plan `03-01` later verified that the official 2026 fallback is successive FIFA ranking editions, not drawing of lots; the official rule supersedes the earlier wording.
 
 ---
 
@@ -69,11 +69,52 @@
 
 ---
 
+## Simulation artifact format
+
+| Option | Description | Selected |
+|--------|-------------|----------|
+| Orchestration notebook | Import production `.py` functions, explain the workflow, run simulations, and analyze outputs | x |
+| Progressive reconstruction | Reproduce parts of the algorithm step by step before calling production code | |
+| Notebook-first implementation | Keep most engine logic in the notebook and only helpers in `.py` | |
+
+**User's choice:** Use the notebook as a didactic orchestration layer over production modules.
+**Notes:** The `.py` modules remain the single source of truth for reusable and tested logic.
+
+| Option | Description | Selected |
+|--------|-------------|----------|
+| One integral notebook | Cover state, rules, Monte Carlo, and analysis in `03_simulador_torneo.ipynb` | x |
+| Two notebooks | Separate rules/state from simulation/analysis | |
+| Monte Carlo only | Leave rules and state documented only in `.py` | |
+
+**User's choice:** One integral notebook.
+**Notes:** The notebook must preserve the project didactic cell sequence.
+
+| Option | Description | Selected |
+|--------|-------------|----------|
+| Quick demo plus configurable run | Execute a small reproducible example by default and expose 10k/100k configuration | x |
+| Always run 10k | Make Run All execute the hard performance batch every time | |
+| Lightweight demo only | Keep all large runs outside the notebook | |
+
+**User's choice:** Quick reproducible demonstration plus configurable 10k/100k runs.
+**Notes:** Heavy runs are opt-in and remain covered by performance tests.
+
+| Option | Description | Selected |
+|--------|-------------|----------|
+| Executed with outputs | Commit quick-run tables, diagnostics, and plots | x |
+| Cleared | Commit no cell outputs | |
+| Final outputs only | Keep only selected final tables and plots | |
+
+**User's choice:** Commit the notebook executed with quick-run results.
+**Notes:** Outputs must remain deterministic, reviewable, and free of secret material.
+
+---
+
 ## the agent's Discretion
 
 - Concrete in-memory representation of `TournamentState`
 - Exact numeric shape of the compact post-draw advancement approximation
-- Vectorization strategy and output artifact format
+- Vectorization strategy
+- Exact quick-demo simulation count, within the agreed lightweight default
 
 ## Deferred Ideas
 

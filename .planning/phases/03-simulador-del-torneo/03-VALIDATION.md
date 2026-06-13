@@ -16,12 +16,13 @@ The implementation must preserve the locked decisions in `03-CONTEXT.md`:
 
 - `TournamentState` stores only played results.
 - Internal match naming is `team_a` / `team_b`.
-- The rules cascade includes fair play and drawing of lots.
+- The rules cascade follows verified Art. 13 through conduct score and successive FIFA-ranking editions; it does not invent drawing of lots.
 - NumPy vectorization is the primary simulation architecture.
 - Knockout slots are resolved from the frozen fixture slot strings.
 - Drawn knockout matches use a compact post-90-minute advancement rule, not
   separate extra-time lambdas.
 - Outputs contain advancement probabilities and group-position marginals.
+- The integral Phase 3 notebook imports production simulation functions, preserves the didactic cell sequence, and is committed with deterministic quick-run outputs.
 
 ## Regulatory Gate
 
@@ -47,8 +48,8 @@ matching may satisfy `SIM-01`.
 
 | Requirement | Behavior under test | Test file | Primary tests | Acceptance |
 |-------------|---------------------|-----------|---------------|------------|
-| SIM-01 | Group table calculation and complete tie-break cascade | `tests/test_rules_fifa.py` | `test_points_gd_gf_order`, `test_head_to_head_subtable`, `test_fair_play_breaks_residual_tie`, `test_drawing_of_lots_is_seeded`, `test_three_way_tie`, `test_four_way_tie` | Exact expected ranking for every fixture |
-| SIM-01 | Ranking the twelve third-placed teams and selecting eight | `tests/test_rules_fifa.py` | `test_best_thirds_order`, `test_best_thirds_fair_play`, `test_best_thirds_lot_fallback` | Exactly eight qualifiers in correct order |
+| SIM-01 | Group table calculation and complete tie-break cascade | `tests/test_rules_fifa.py` | `test_head_to_head_is_applied_first`, `test_residual_tie_reapplies_head_to_head`, `test_conduct_score_breaks_residual_tie`, `test_fifa_ranking_editions_break_final_tie`, `test_three_way_tie`, `test_four_way_tie` | Exact expected ranking for every fixture |
+| SIM-01 | Ranking the twelve third-placed teams and selecting eight | `tests/test_rules_fifa.py` | `test_best_thirds_order`, `test_best_thirds_conduct_score`, `test_best_thirds_fifa_ranking_fallback` | Exactly eight qualifiers in correct order |
 | SIM-01 | Assigning best thirds to R32 slots | `tests/test_slot_resolution.py` | `test_official_third_place_mapping_cases`, `test_all_official_combinations_resolve_uniquely`, `test_assignment_respects_slot_tokens` | Blocked until regulatory gate `03-01` passes |
 | SIM-01 | Winner/loser and group-position fixture references | `tests/test_slot_resolution.py` | `test_group_position_slots`, `test_winner_slots`, `test_loser_slots`, `test_full_bracket_has_no_unresolved_participant_after_prior_rounds` | All 32 R32 entries and later rounds resolve from fixture data |
 | SIM-02 | Vectorized complete-tournament simulation | `tests/test_simulation_engine.py` | `test_simulation_shapes`, `test_vectorized_batch_matches_scalar_oracle` | Correct arrays for multiple batch sizes |
@@ -58,6 +59,7 @@ matching may satisfy `SIM-01`.
 | SIM-04 | Advancement probabilities | `tests/test_simulation_outputs.py` | `test_advancement_output_schema`, `test_round_probability_slot_totals`, `test_round_probabilities_are_monotone` | Valid 48-team probability table with tournament invariants |
 | SIM-04 | Group-position marginals | `tests/test_simulation_outputs.py` | `test_group_position_output_schema`, `test_team_position_probabilities_sum_to_one`, `test_position_column_totals` | Four marginals per team; rows and columns satisfy exact totals |
 | SIM-05 | Compact stochastic resolution after a 90-minute draw | `tests/test_knockout.py` | `test_draw_always_produces_one_winner`, `test_identical_strength_is_half`, `test_swapping_team_order_complements_probability`, `test_empirical_order_bias_is_within_tolerance` | One winner per simulation and no measurable order bias |
+| DOC-01 / D-12-D-15 | Integral simulation notebook | `tests/test_notebooks.py` | `test_phase3_notebook_exists`, `test_phase3_notebook_imports_simulation_package`, `test_phase3_notebook_is_executed`, `test_phase3_notebook_has_configurable_batch_sizes` | One executed didactic notebook backed by production modules |
 
 ## Wave 0 Test Files
 
@@ -72,6 +74,7 @@ Create these tests before or with the first implementation task:
 | `tests/test_simulation_outputs.py` | Advancement and group-position invariants |
 | `tests/test_knockout.py` | Compact post-draw resolver and order symmetry |
 | `tests/test_simulation_performance.py` | Marked performance gates and benchmark reporting |
+| `tests/test_notebooks.py` | Structural, import, execution-output, configuration, kernel, and hygiene gates for the integral notebook |
 
 ## Wave 0 Fixtures
 
@@ -85,8 +88,8 @@ Create deterministic, reviewable fixtures under
 | `three_way_tie.json` | Three tied teams requiring a mini-table and residual reapplication | Exact documented order |
 | `four_way_tie.json` | Four teams tied on initial criteria | Stable complete ranking without dropped teams |
 | `fair_play_tie.json` | Deterministic tie through head-to-head with distinct fair-play scores | Better official fair-play score ranks first |
-| `drawing_lots_tie.json` | Teams identical through fair play | Seeded lot draw is reproducible and exchangeable |
-| `best_thirds.json` | Twelve third-place records covering points, GD, GF, fair play, and lots | Correct ordered top eight |
+| `fifa_ranking_tie.json` | Teams identical through conduct score with explicit current/previous FIFA rankings | Official ranking-edition fallback produces the expected order |
+| `best_thirds.json` | Twelve third-place records covering points, GD, GF, conduct score, and FIFA rankings | Correct ordered top eight |
 | `third_place_mapping_official.json` | Official mapping cases and provenance from gate `03-01` | Exact R32 assignment for each selected group set |
 | `conditioned_results.json` | At least one played group match and one played knockout match | Played scores and winners remain fixed |
 
@@ -98,8 +101,8 @@ Synthetic fixtures must state which criterion is intended to decide the tie.
 
 ### SIM-01: Pure Rules
 
-Rules tests must call pure functions with explicit match records, fair-play
-values, and a seeded lot-draw key. They must not load the production model or
+Rules tests must call pure functions with explicit match records, conduct-score
+values, and FIFA-ranking editions. They must not load the production model or
 run Monte Carlo tournament batches.
 
 Required assertions:
@@ -110,8 +113,8 @@ Required assertions:
 - A mini-table includes only the teams still tied at that step.
 - Three-way and four-way ties return each team exactly once.
 - Fair play is used only after all score and head-to-head criteria remain tied.
-- Drawing of lots is reproducible for a fixed seed and exchangeable when team
-  input order is reversed.
+- Residual ties after conduct score use the most recent FIFA ranking and then
+  preceding editions in order; missing data fails loudly rather than using randomness.
 - Best-third ranking never applies head-to-head across different groups.
 - Exactly eight third-placed teams qualify.
 - Official R32 assignment is not accepted until the `03-01` regulatory gate is
@@ -221,6 +224,21 @@ This validates the behavioral intent of `SIM-05` while honoring D-07/D-08:
 there is stochastic post-draw advancement with no order bias, but no separate
 extra-time goal model.
 
+### Integral Phase 3 Notebook
+
+`notebooks/03_simulador_torneo.ipynb` is a required Phase 3 artifact:
+
+- It imports production functions from `cdd_mundial.simulation`; notebook cells
+  do not define replacement functions or classes.
+- Every code cell follows Markdown `What and why` -> code -> Markdown
+  `Interpretation`.
+- One visible configuration cell exposes a lightweight default and explicit
+  10,000 / 100,000 options.
+- The committed file contains non-empty deterministic outputs from the
+  lightweight run, including marginal tables, diagnostics, and at least one plot.
+- Performance acceptance remains in `tests/test_simulation_performance.py`;
+  notebook execution must not force 10k/100k by default.
+
 ## Commands
 
 ### Per-Task Quick Suite
@@ -259,6 +277,12 @@ extra-time goal model.
   -m performance
 ```
 
+### Notebook Gate
+
+```powershell
+.\.venv\python.exe -m pytest -q -p no:cacheprovider tests/test_notebooks.py
+```
+
 ### Full Phase Gate
 
 ```powershell
@@ -273,12 +297,13 @@ extra-time goal model.
 | Rules and slot-resolution wave | Quick suite and regulatory provenance assertions |
 | Engine and state wave | Quick suite plus contract regression suite |
 | Output and knockout wave | Quick suite plus all output/symmetry invariants |
+| Notebook completion | Notebook gate plus successful deterministic Run All using the lightweight default |
 | Phase completion | Regulatory gate passed, full suite green, 10k performance gate green |
 
 ## Phase Acceptance Checklist
 
 - [ ] `SIM-01`: Historical and synthetic tie fixtures pass.
-- [ ] `SIM-01`: Fair play and seeded drawing of lots are covered.
+- [ ] `SIM-01`: Conduct score and successive FIFA-ranking fallbacks are covered.
 - [ ] `SIM-01`: Official best-third assignment gate from Plan `03-01` passes.
 - [ ] `SIM-01`: All tested third-place mappings are unique and token-compatible.
 - [ ] `SIM-02`: Same-seed results are bit-reproducible.
@@ -290,6 +315,7 @@ extra-time goal model.
 - [ ] `SIM-04`: Group-position row, group, and tournament totals pass.
 - [ ] `SIM-05`: Identical teams advance 50/50 within statistical tolerance.
 - [ ] `SIM-05`: Swapping team order complements advancement probability.
+- [ ] `notebooks/03_simulador_torneo.ipynb` imports production code, is committed executed, and passes `tests/test_notebooks.py`.
 - [ ] Existing fixture and Dixon-Coles contract tests remain green.
 - [ ] Full repository test suite is green.
 
@@ -304,4 +330,3 @@ extra-time goal model.
   not block Phase 3 if the 10k hard requirement passes.
 - Statistical tests must use fixed seeds and predeclared tolerances. Retrying a
   failed seed until it passes is prohibited.
-

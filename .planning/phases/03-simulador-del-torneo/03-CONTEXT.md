@@ -1,6 +1,6 @@
 # Phase 3: Simulador del Torneo - Context
 
-**Gathered:** 2026-06-12
+**Gathered:** 2026-06-13
 **Status:** Ready for planning
 
 <domain>
@@ -25,8 +25,8 @@ El alcance incluye:
 - **D-02:** El contrato interno para resultados jugados debe usar `team_a` / `team_b`, no `home_*` / `away_*`. La ventaja de anfitrion se modela solo via `ctx`, no via nombres de columnas.
 
 ### Rules engine scope
-- **D-03:** El rules engine de la fase SI incluye la cadena completa requerida por FIFA 2026, hasta `fair play` y `drawing of lots`. No se reduce a criterios deterministicos solamente.
-- **D-04:** El criterio de exito del rules engine se centra en que los criterios queden implementados correctamente en funciones puras y testeados; no se exige una capa extra de evidencia documental mas alla de fijar la referencia oficial como prerequisito de implementacion.
+- **D-03:** El rules engine sigue el Art. 13 oficial verificado en `03-01`: criterios head-to-head primero, reaplicacion residual, criterios globales, conduct score y, como fallback final, ediciones sucesivas del ranking FIFA. No existe `drawing of lots` en la regla oficial 2026.
+- **D-04:** El criterio de exito del rules engine se centra en que los criterios queden implementados correctamente en funciones puras y testeados, consumiendo la evidencia regulatoria y el mapping oficial fijados por `03-01`.
 
 ### Monte Carlo architecture
 - **D-05:** El simulador se diseña desde el inicio para miles de iteraciones con `numpy`. No se prioriza una version naive partido-por-partido como arquitectura principal.
@@ -41,10 +41,17 @@ El alcance incluye:
 - **D-10:** Phase 3 tambien debe producir probabilidades marginales de posicion de grupo por seleccion: `P(1st)`, `P(2nd)`, `P(3rd)`, `P(4th)`.
 - **D-11:** No se requieren tablas conjuntas completas de configuraciones de grupo en esta fase; solo marginals por equipo.
 
+### Simulation notebook
+- **D-12:** Phase 3 entrega un notebook integral `notebooks/03_simulador_torneo.ipynb` ademas de los modulos productivos `.py`.
+- **D-13:** El notebook es una capa de orquestacion didactica: importa las funciones productivas de `cdd_mundial.simulation` y no redefine el motor, las reglas ni la logica de outputs.
+- **D-14:** El notebook recorre estado, reglas, simulacion Monte Carlo y analisis; mantiene la estructura obligatoria Markdown `What and why` -> codigo -> Markdown `Interpretation`.
+- **D-15:** El notebook se versiona ejecutado con una demostracion rapida reproducible, tablas, diagnosticos y graficos. Una celda de configuracion permite solicitar 10k o 100k simulaciones sin forzar esas corridas pesadas al ejecutar el notebook por defecto.
+
 ### the agent's Discretion
 - Elegir la representacion concreta en memoria para `TournamentState`, siempre que cumpla con el principio de almacenar solo resultados ya jugados.
 - Elegir la forma numerica exacta de la aproximacion compacta para desempatar eliminatorias despues de 90 minutos, siempre que no introduzca un pseudo-modelo detallado de tiempo extra.
 - Elegir la estrategia de vectorizacion y acumulacion de resultados mas simple que cumpla la meta de rendimiento.
+- Elegir el tamano exacto de la demostracion rapida del notebook, siempre que sea suficientemente pequeno para ejecucion cotidiana y produzca resultados no vacios.
 
 </decisions>
 
@@ -76,6 +83,7 @@ El alcance incluye:
 - `tests/test_dixon_coles.py` - contract tests for `predict_lambdas` and context semantics.
 - `notebooks/01_data_foundation.ipynb` - documented fixture assumptions and tournament structure narrative.
 - `notebooks/02_modelos_baseline.ipynb` - documented baseline contract consumed by the simulator.
+- `tests/test_notebooks.py` - structural pedagogy, hygiene, production-import, and deterministic-kernel gates that the Phase 3 notebook must extend.
 
 </canonical_refs>
 
@@ -91,11 +99,13 @@ El alcance incluye:
 - Canonical team identity is slug-based and enforced across the project; simulator inputs should reject unknown teams rather than infer.
 - The repo already treats tournament structure as validated data plus pure transformations; Phase 3 should keep rules logic as pure functions where possible.
 - Existing model code uses `team_a` / `team_b` semantics with `ctx["neutral"]` controlling host advantage; simulator code should preserve that convention.
+- Project notebooks import production packages, do not redefine functions/classes, and enforce Markdown `What and why` -> code -> Markdown `Interpretation`.
 
 ### Integration Points
 - Phase 3 plugs directly into `predict_lambdas(team_a, team_b, ctx)` from Phase 2.
 - Phase 4 will consume Phase 3 outputs for daily reports and snapshots, so simulator outputs need stable, tabular probability artifacts.
 - The existing fixture slots (`3CDFGH`, `W74`, `L101`) define the bracket resolution interface for the rules engine.
+- `notebooks/03_simulador_torneo.ipynb` will import the public `cdd_mundial.simulation` API and present the same counts/tables tested by the engine and output modules.
 
 </code_context>
 
@@ -106,6 +116,8 @@ El alcance incluye:
 - Keep host advantage contextual rather than encoding a fake home/away worldview into the state model.
 - The first planning task should fetch, pin, and cite the official FIFA 2026 regulations PDF locally because `STATE.md` marks it as an unresolved blocker for tie-break order and best-third assignment.
 - Group outputs should be marginal probabilities per team, not full joint state enumerations.
+- The notebook should explain the flow end to end, but every reusable computation remains in `src/cdd_mundial/simulation/`.
+- The committed notebook keeps outputs from the quick deterministic run; large 10k/100k runs are opt-in through a visible configuration cell.
 
 </specifics>
 
@@ -121,4 +133,4 @@ El alcance incluye:
 ---
 
 *Phase: 03-simulador-del-torneo*
-*Context gathered: 2026-06-12*
+*Context gathered: 2026-06-13*

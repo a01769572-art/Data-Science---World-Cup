@@ -27,7 +27,7 @@
 | `tests/fixtures/tournament/three_way_tie.json` | config | file-I/O | `tests/fixtures/fixture/fixture_2026_sample.csv` | partial |
 | `tests/fixtures/tournament/four_way_tie.json` | config | file-I/O | `tests/fixtures/fixture/fixture_2026_sample.csv` | partial |
 | `tests/fixtures/tournament/fair_play_tie.json` | config | file-I/O | `tests/fixtures/fixture/fixture_2026_sample.csv` | partial |
-| `tests/fixtures/tournament/drawing_lots_tie.json` | config | file-I/O | `tests/fixtures/fixture/fixture_2026_sample.csv` | partial |
+| `tests/fixtures/tournament/fifa_ranking_tie.json` | config | file-I/O | `tests/fixtures/fixture/fixture_2026_sample.csv` | partial |
 | `tests/fixtures/tournament/best_thirds.json` | config | file-I/O | `tests/fixtures/fixture/fixture_2026_sample.csv` | partial |
 | `tests/fixtures/tournament/third_place_mapping_official.json` | config | file-I/O | `data/metadata/fixture_2026.csv.provenance.json` via provenance pattern | partial |
 | `tests/fixtures/tournament/conditioned_results.json` | config | file-I/O | `tests/fixtures/fixture/fixture_2026_sample.csv` | partial |
@@ -106,7 +106,7 @@ def rps(probs: np.ndarray, outcome_idx: np.ndarray) -> float:
     return float(((cum_p - cum_o) ** 2).sum(axis=1).mean() / 2)
 ```
 
-Use the same style for standings, mini-tables, best-thirds, and seeded lots: pure functions returning deterministic arrays/dataframes, no hidden global state, clear sorting at the boundary.
+Use the same style for standings, mini-tables, best-thirds, conduct scores, and FIFA-ranking fallbacks: pure functions returning deterministic arrays/dataframes, no hidden global state, clear sorting at the boundary. Plan `03-01` verified that the official 2026 fallback is successive FIFA-ranking editions, not drawing of lots.
 
 ### `src/cdd_mundial/simulation/slots.py` (utility, transform)
 
