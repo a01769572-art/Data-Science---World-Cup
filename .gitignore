@@ -26,6 +26,7 @@ anaconda_projects/
 data/raw/restricted/
 data/raw/odds/
 data/raw/eloratings/
+data/raw/regulations/
 data/processed/
 
 # Generated model artifacts
