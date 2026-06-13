@@ -232,6 +232,11 @@ def render_snapshot_report(
     ledger_path = Path(ledger_path)
     out = Path(output_dir) if output_dir is not None else snapshot_dir
     out.mkdir(parents=True, exist_ok=True)
+    # Image assets live in an ``assets/`` subdirectory beside ``report.html`` so a
+    # published snapshot bundle keeps its visuals grouped (referenced as
+    # ``assets/<name>`` in the HTML).
+    assets_dir = out / "assets"
+    assets_dir.mkdir(parents=True, exist_ok=True)
 
     # --- read ONLY frozen snapshot-local artifacts -------------------------
     metadata = json.loads((snapshot_dir / _METADATA).read_text(encoding="utf-8"))
@@ -281,26 +286,47 @@ def render_snapshot_report(
             )
 
     # --- cumulative metrics + evolution from the canonical ledger (D-22) ----
-    ledger = pd.read_parquet(ledger_path)
+    # A snapshot published before any market benchmark exists has no ledger yet;
+    # treat that as an empty (no resolved matches) calibration history.
+    if ledger_path.exists():
+        ledger = pd.read_parquet(ledger_path)
+    else:
+        ledger = pd.DataFrame(
+            columns=[
+                "match_id",
+                "snapshot_id",
+                "model_version",
+                "prob_a",
+                "prob_draw",
+                "prob_b",
+                "market_prob_a",
+                "market_prob_draw",
+                "market_prob_b",
+                "outcome_idx",
+            ]
+        )
     cumulative = cumulative_metrics(ledger)
     evolution = _evolution_series(ledger)
 
     # --- visuals (matplotlib / seaborn only) -------------------------------
+    # Asset references in the HTML are snapshot-relative ``assets/<name>``.
     assets: list[str] = []
     highlight_path = _champion_barplot(
-        top, out / "highlight_champion.png", title="Favoritos al titulo"
+        top, assets_dir / "highlight_champion.png", title="Favoritos al titulo"
     )
-    assets.append(highlight_path.name)
+    highlight_ref = f"assets/{highlight_path.name}"
+    assets.append(highlight_ref)
     champion_path = _champion_barplot(
-        top, out / "tournament_champion.png", title="Probabilidad de campeon"
+        top, assets_dir / "tournament_champion.png", title="Probabilidad de campeon"
     )
-    assets.append(champion_path.name)
+    champion_ref = f"assets/{champion_path.name}"
+    assets.append(champion_ref)
 
-    evolution_name: str | None = None
+    evolution_ref: str | None = None
     if not evolution.empty:
-        evolution_path = _evolution_plot(evolution, out / "calibration_evolution.png")
-        evolution_name = evolution_path.name
-        assets.append(evolution_name)
+        evolution_path = _evolution_plot(evolution, assets_dir / "calibration_evolution.png")
+        evolution_ref = f"assets/{evolution_path.name}"
+        assets.append(evolution_ref)
 
     # --- KPIs (D-16 mixed KPI + highlighted visual) ------------------------
     leader = advancement_sorted.iloc[0]
@@ -370,9 +396,9 @@ def render_snapshot_report(
     html = template.render(
         snapshot=snapshot_view,
         kpis=kpis,
-        highlight_visual=highlight_path.name,
-        champion_visual=champion_path.name,
-        evolution_visual=evolution_name or "",
+        highlight_visual=highlight_ref,
+        champion_visual=champion_ref,
+        evolution_visual=evolution_ref or "",
         upcoming_rows=upcoming_rows,
         advancement_rows=advancement_rows,
         temporal=temporal_comparison,
@@ -386,7 +412,7 @@ def render_snapshot_report(
 
     return {
         "html_path": str(html_path),
-        "assets": [str(out / name) for name in assets],
+        "assets": [str(out / ref) for ref in assets],
         "temporal_comparison": temporal_comparison,
         "cumulative_metrics": cumulative,
     }

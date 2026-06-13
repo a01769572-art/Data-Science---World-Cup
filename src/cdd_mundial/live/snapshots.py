@@ -26,6 +26,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 import shutil
+import time
 from typing import Any
 
 import pandas as pd
@@ -33,6 +34,13 @@ import pandas as pd
 from cdd_mundial.data.provenance import file_sha256
 
 _METADATA_NAME = "metadata.json"
+
+# Windows/OneDrive can transiently lock a directory mid-publish (sync scan, AV),
+# making the atomic staging->destination rename fail with PermissionError. A few
+# short bounded retries make publication robust without weakening append-only
+# semantics (the destination existence check still runs before each attempt).
+_PUBLISH_RETRIES = 8
+_PUBLISH_BACKOFF_SECONDS = 0.25
 
 
 class SnapshotWriter:
@@ -139,8 +147,24 @@ class SnapshotWriter:
             raise FileExistsError(
                 f"snapshot already published and is append-only: {self.destination}"
             )
-        self.staging_dir.rename(self.destination)
-        return self.destination
+        last_error: OSError | None = None
+        for attempt in range(_PUBLISH_RETRIES):
+            # Re-check append-only invariant before every attempt.
+            if self.destination.exists():
+                raise FileExistsError(
+                    f"snapshot already published and is append-only: {self.destination}"
+                )
+            try:
+                self.staging_dir.rename(self.destination)
+                return self.destination
+            except PermissionError as error:  # transient Windows/OneDrive lock
+                last_error = error
+                if attempt < _PUBLISH_RETRIES - 1:
+                    time.sleep(_PUBLISH_BACKOFF_SECONDS * (attempt + 1))
+        raise RuntimeError(
+            f"failed to atomically publish snapshot after {_PUBLISH_RETRIES} attempts: "
+            f"{self.destination}"
+        ) from last_error
 
     def abort(self) -> None:
         """Discard the staging directory without publishing (best-effort)."""

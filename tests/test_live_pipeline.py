@@ -384,13 +384,15 @@ def test_official_run_stages_one_snapshot_with_full_provenance(
     assert len(published) == 1
 
     metadata = json.loads((snapshot_dir / "metadata.json").read_text(encoding="utf-8"))
-    # Final metadata records commit hash, dirty status, live-training provenance,
-    # model provenance/fingerprint, and checksums for every required artifact.
-    assert "commit" in metadata
-    assert metadata["dirty"] is True  # allow_dirty was passed
-    assert len(metadata["live_training_sha256"]) == 64
-    assert len(metadata["input_fingerprint"]) == 64
-    assert metadata["model_version"].startswith("baseline-v1-")
+    # Final metadata records the git commit, dirty status, nested live-training
+    # provenance, model provenance/fingerprint, kickoff boundary, and checksums
+    # for every required artifact.
+    assert metadata["git_commit"]
+    assert metadata["git_dirty"] is True  # allow_dirty was passed
+    assert metadata["kickoff_boundary_utc"].endswith("Z")
+    assert len(metadata["live_training_provenance"]["artifact_sha256"]) == 64
+    assert len(metadata["model_provenance"]["input_fingerprint"]) == 64
+    assert metadata["model_provenance"]["model_version"].startswith("baseline-v1-")
     assert "team_probabilities.parquet" in metadata["checksums"]
     assert "upcoming_match_predictions.parquet" in metadata["checksums"]
     # The published team table is a real advancement table.

@@ -281,10 +281,13 @@ def test_top_block_mixes_kpis_and_highlighted_visual(
 
     # KPI figures: at least the leading champion probability surfaces as a KPI.
     assert 'class="kpi' in html
-    # Highlighted visual: a PNG asset referenced in the executive block.
-    assets = {Path(p).name for p in result["assets"]}
-    assert any(name.endswith(".png") for name in assets)
-    assert any(f'src="{name}"' in html for name in assets if name.endswith(".png"))
+    # Highlighted visual: a PNG asset (under assets/) referenced in the HTML.
+    names = {Path(p).name for p in result["assets"]}
+    assert any(name.endswith(".png") for name in names)
+    # PNG assets live in an assets/ subdirectory and are referenced as such.
+    assert any(f'src="assets/{name}"' in html for name in names if name.endswith(".png"))
+    for asset_path in result["assets"]:
+        assert Path(asset_path).parent.name == "assets"
 
 
 # --------------------------------------------------------------------------- #

@@ -91,7 +91,16 @@ def _manual_odds_csv(workspace: Path) -> Path:
     return path
 
 
-def _run(data_root: Path, snapshots_root: Path, *, seed: int, manual_odds: Path) -> dict:
+def _run(
+    data_root: Path,
+    snapshots_root: Path,
+    *,
+    seed: int,
+    manual_odds: Path,
+    snapshot_id: str = "snap",
+) -> dict:
+    # Short snapshot id keeps nested staging paths under the Windows MAX_PATH (260)
+    # limit given the deep test-workspace prefix; the real run uses dated ids.
     return run_official(
         results_path=REAL_RESULTS,
         fixture_path=REAL_FIXTURE,
@@ -102,6 +111,7 @@ def _run(data_root: Path, snapshots_root: Path, *, seed: int, manual_odds: Path)
         seed=seed,
         as_of=None,
         allow_dirty=True,
+        _snapshot_id=snapshot_id,
     )
 
 
@@ -112,7 +122,7 @@ def _run(data_root: Path, snapshots_root: Path, *, seed: int, manual_odds: Path)
 
 def test_official_run_publishes_full_chain_with_nested_metadata(test_workspace: Path) -> None:
     data_root = _isolated_data_root(test_workspace)
-    snapshots_root = test_workspace / "snapshots"
+    snapshots_root = test_workspace / "s"
     odds = _manual_odds_csv(test_workspace)
 
     summary = _run(data_root, snapshots_root, seed=20260613, manual_odds=odds)
@@ -157,7 +167,7 @@ def test_official_run_publishes_full_chain_with_nested_metadata(test_workspace: 
 
 def test_materialize_runs_before_simulation_and_report(test_workspace: Path) -> None:
     data_root = _isolated_data_root(test_workspace)
-    snapshots_root = test_workspace / "snapshots"
+    snapshots_root = test_workspace / "s"
     odds = _manual_odds_csv(test_workspace)
     summary = _run(data_root, snapshots_root, seed=7, manual_odds=odds)
     meta = json.loads((Path(summary["snapshot_dir"]) / "metadata.json").read_text(encoding="utf-8"))
@@ -176,8 +186,8 @@ def test_same_seed_reproduces_tables_and_fingerprints(test_workspace: Path) -> N
     odds = _manual_odds_csv(test_workspace)
     root_a = _isolated_data_root(test_workspace / "a")
     root_b = _isolated_data_root(test_workspace / "b")
-    snaps_a = test_workspace / "a" / "snapshots"
-    snaps_b = test_workspace / "b" / "snapshots"
+    snaps_a = test_workspace / "a" / "s"
+    snaps_b = test_workspace / "b" / "s"
 
     sum_a = _run(root_a, snaps_a, seed=20260613, manual_odds=odds)
     sum_b = _run(root_b, snaps_b, seed=20260613, manual_odds=odds)
@@ -205,7 +215,7 @@ def test_same_seed_reproduces_tables_and_fingerprints(test_workspace: Path) -> N
 
 def test_verify_only_writes_no_snapshot(test_workspace: Path) -> None:
     data_root = _isolated_data_root(test_workspace)
-    snaps = test_workspace / "snapshots"
+    snaps = test_workspace / "s"
     summary = verify_official(
         results_path=REAL_RESULTS,
         fixture_path=REAL_FIXTURE,
@@ -225,7 +235,7 @@ def test_verify_only_writes_no_snapshot(test_workspace: Path) -> None:
 
 def test_published_snapshot_is_not_mutated_on_rerun(test_workspace: Path) -> None:
     data_root = _isolated_data_root(test_workspace)
-    snapshots_root = test_workspace / "snapshots"
+    snapshots_root = test_workspace / "s"
     odds = _manual_odds_csv(test_workspace)
     summary = _run(data_root, snapshots_root, seed=99, manual_odds=odds)
     snapshot_dir = Path(summary["snapshot_dir"])
@@ -236,8 +246,10 @@ def test_published_snapshot_is_not_mutated_on_rerun(test_workspace: Path) -> Non
         if p.is_file()
     }
 
-    # Re-publishing the exact same snapshot id is append-only -> fails loud.
-    with pytest.raises(FileExistsError):
+    # Re-publishing the exact same snapshot id is append-only -> fails loud,
+    # either at the ledger append (duplicate snapshot/match key) or the snapshot
+    # rename (destination already exists). Both prove append-only discipline.
+    with pytest.raises((FileExistsError, ValueError)):
         run_official(
             results_path=REAL_RESULTS,
             fixture_path=REAL_FIXTURE,
