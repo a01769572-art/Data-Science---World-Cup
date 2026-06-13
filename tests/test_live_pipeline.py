@@ -19,6 +19,7 @@ and never touch the real production artifacts.
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import pandas as pd
@@ -30,7 +31,12 @@ from cdd_mundial.live.materialization import (
     materialize_live_training,
     select_model_artifact,
 )
+from cdd_mundial.live.pipeline import run_official, verify_official
 from cdd_mundial.simulation.state import PlayedMatchResult
+
+REAL_HISTORY = Path("data/processed/historical_matches.parquet")
+REAL_FIXTURE = Path("data/external/fixture_2026.csv")
+REAL_RESULTS = Path("data/external/results_2026.csv")
 
 # --- Tiny self-contained history + fixture --------------------------------
 
@@ -310,3 +316,104 @@ def test_select_reuses_when_fingerprint_unchanged_and_refits_when_changed(
     assert third["input_fingerprint"] != first["input_fingerprint"]
     assert Path(third["model_path"]).exists()
     assert third["model_path"] != first["model_path"]
+
+
+# --- official pipeline orchestration (verify-only + full run) -------------
+
+
+def _isolated_data_root(test_workspace: Path) -> Path:
+    """Copy the real historical parquet into an isolated data root for the run."""
+    import shutil
+
+    data_root = test_workspace / "data"
+    dst = data_root / "processed" / "historical_matches.parquet"
+    dst.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(REAL_HISTORY, dst)
+    return data_root
+
+
+def test_verify_only_reports_materialization_fingerprint_before_simulation(
+    test_workspace: Path,
+) -> None:
+    data_root = _isolated_data_root(test_workspace)
+    summary = verify_official(
+        results_path=REAL_RESULTS,
+        fixture_path=REAL_FIXTURE,
+        data_root=data_root,
+        snapshots_root=test_workspace / "snapshots",
+        as_of=None,
+        allow_dirty=True,
+    )
+    # The verify path resolves the materialization artifact + fingerprint that
+    # would feed model selection, and proves the intended order, without writing
+    # a published snapshot.
+    assert summary["order"] == [
+        "materialize",
+        "select_model",
+        "simulate",
+        "publish",
+    ]
+    assert len(summary["live_training_sha256"]) == 64
+    assert len(summary["input_fingerprint"]) == 64
+    assert summary["model_version"].startswith("baseline-v1-")
+    assert summary["published"] is False
+    # No snapshot directory was created by a verify-only invocation.
+    snaps = test_workspace / "snapshots"
+    assert not snaps.exists() or not any(snaps.iterdir())
+
+
+def test_official_run_stages_one_snapshot_with_full_provenance(
+    test_workspace: Path,
+) -> None:
+    data_root = _isolated_data_root(test_workspace)
+    snapshots_root = test_workspace / "snapshots"
+    summary = run_official(
+        results_path=REAL_RESULTS,
+        fixture_path=REAL_FIXTURE,
+        data_root=data_root,
+        snapshots_root=snapshots_root,
+        n_sims=64,
+        seed=20260613,
+        as_of=None,
+        allow_dirty=True,
+    )
+    snapshot_dir = Path(summary["snapshot_dir"])
+    assert snapshot_dir.exists()
+    # Exactly one published snapshot bundle.
+    published = [p for p in snapshots_root.iterdir() if p.is_dir()]
+    assert len(published) == 1
+
+    metadata = json.loads((snapshot_dir / "metadata.json").read_text(encoding="utf-8"))
+    # Final metadata records commit hash, dirty status, live-training provenance,
+    # model provenance/fingerprint, and checksums for every required artifact.
+    assert "commit" in metadata
+    assert metadata["dirty"] is True  # allow_dirty was passed
+    assert len(metadata["live_training_sha256"]) == 64
+    assert len(metadata["input_fingerprint"]) == 64
+    assert metadata["model_version"].startswith("baseline-v1-")
+    assert "team_probabilities.parquet" in metadata["checksums"]
+    assert "upcoming_match_predictions.parquet" in metadata["checksums"]
+    # The published team table is a real advancement table.
+    team_probs = pd.read_parquet(snapshot_dir / "team_probabilities.parquet")
+    assert "p_champion" in team_probs.columns
+    assert len(team_probs) == 48
+
+
+def test_official_run_fails_closed_on_dirty_worktree(test_workspace: Path) -> None:
+    import json as _json
+
+    data_root = _isolated_data_root(test_workspace)
+    # Simulate a dirty worktree by injecting a git-status probe override.
+    with pytest.raises(RuntimeError, match="dirty"):
+        run_official(
+            results_path=REAL_RESULTS,
+            fixture_path=REAL_FIXTURE,
+            data_root=data_root,
+            snapshots_root=test_workspace / "snapshots",
+            n_sims=16,
+            seed=1,
+            as_of=None,
+            allow_dirty=False,
+            _force_dirty=True,
+        )
+    del _json
