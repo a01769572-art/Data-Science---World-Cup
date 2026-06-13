@@ -40,3 +40,10 @@ artifacts/
 # Authored CSV reference files and provenance manifests are intentionally allowed.
 !data/external/**/*.csv
 !data/metadata/**/*.json
+
+# Per-run dated live-training provenance is a runtime byproduct of the official
+# daily pipeline (regenerated every official run), not a reviewed source artifact.
+data/metadata/live_training_*.parquet.provenance.json
+
+# Append-only published snapshot bundles are run outputs, not source.
+reports/snapshots/
