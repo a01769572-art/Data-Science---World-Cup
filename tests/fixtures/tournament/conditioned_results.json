@@ -1,0 +1,29 @@
+{
+  "description": "Minimal reviewable conditioned-state fixture: played results only (D-01), team_a/team_b semantics (D-02). Covers one decided group match with observed fair-play conduct scores (Art. 13 deductions, never simulated), one drawn group match, and one drawn knockout match whose advancing team was decided after 90 minutes. Scores are synthetic test data, not real outcomes.",
+  "results": [
+    {
+      "match_id": "WC26-001",
+      "team_a": "mexico",
+      "team_b": "south-africa",
+      "goals_a": 2,
+      "goals_b": 1,
+      "fair_play_a": -1,
+      "fair_play_b": -3
+    },
+    {
+      "match_id": "WC26-002",
+      "team_a": "south-korea",
+      "team_b": "czechia",
+      "goals_a": 0,
+      "goals_b": 0
+    },
+    {
+      "match_id": "WC26-073",
+      "team_a": "mexico",
+      "team_b": "canada",
+      "goals_a": 1,
+      "goals_b": 1,
+      "advanced_team": "mexico"
+    }
+  ]
+}
