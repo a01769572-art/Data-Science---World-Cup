@@ -24,7 +24,7 @@
 
 ### Simulador
 
-- [ ] **SIM-01**: `rules_fifa.py` implementa las reglas completas del formato 2026 — desempates de grupo FIFA con head-to-head y reaplicación residual primero, criterios globales, conduct score y ediciones sucesivas del ranking FIFA como fallback final, ranking de mejores terceros y su asignación oficial a la Ronda de 32 — verificadas contra el reglamento oficial FIFA y con tests unitarios contra casos históricos conocidos
+- [x] **SIM-01**: `rules_fifa.py` implementa las reglas completas del formato 2026 — desempates de grupo FIFA con head-to-head y reaplicación residual primero, criterios globales, conduct score y ediciones sucesivas del ranking FIFA como fallback final, ranking de mejores terceros y su asignación oficial a la Ronda de 32 — verificadas contra el reglamento oficial FIFA y con tests unitarios contra casos históricos conocidos
 - [ ] **SIM-02**: El motor Monte Carlo vectorizado en numpy corre ≥10,000 simulaciones del torneo (objetivo 100k con common random numbers entre jornadas) en menos de 1 minuto
 - [ ] **SIM-03**: La simulación es condicional al estado real del torneo: partidos jugados se fijan con su resultado y solo se simula lo restante
 - [ ] **SIM-04**: El sistema produce tablas de probabilidad de avance por selección: P(R32), P(R16), P(QF), P(SF), P(Final), P(Campeón)
@@ -90,7 +90,7 @@ Deferred — valiosos pero no bloquean el valor core de v1:
 | MODEL-02 | Phase 2 | Complete |
 | MODEL-03 | Phase 2 | Complete |
 | MODEL-04 | Phase 2 | Complete |
-| SIM-01 | Phase 3 | Pending |
+| SIM-01 | Phase 3 | Complete |
 | SIM-02 | Phase 3 | Pending |
 | SIM-03 | Phase 3 | Pending |
 | SIM-04 | Phase 3 | Pending |

@@ -77,7 +77,7 @@ Plans:
 - [x] 03-03-PLAN.md — Wave 0 Nyquist: fixtures/tests revisables para desempates, conduct score, ediciones sucesivas del ranking FIFA y slot resolution oficial
 
 **Wave 3** *(blocked on Wave 2 completion)*
-- [ ] 03-04-PLAN.md — Implementación pura de `rules_fifa.py` y `slots.py` sobre el fixture congelado y el mapping oficial
+- [x] 03-04-PLAN.md — Implementación pura de `rules_fifa.py` y `slots.py` sobre el fixture congelado y el mapping oficial
 
 **Wave 4** *(blocked on Wave 3 completion)*
 - [ ] 03-05-PLAN.md — Motor Monte Carlo vectorizado + outputs marginales + CRN determinístico por `match_id` + gates de performance
