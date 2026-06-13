@@ -60,7 +60,14 @@ DEFAULT_XI = 0.00095
 DEFAULT_SEED = 20260613
 
 
-def _git_status_porcelain() -> str:
+def _git_status_porcelain() -> str | None:
+    """Return porcelain status text, or ``None`` if git could not be queried.
+
+    A ``None`` return means the worktree cleanliness is *unknown* (git missing
+    or errored) — distinct from an empty string, which means a verified-clean
+    worktree (IN-03). The publication gate must fail closed on unknown rather
+    than treating it as clean.
+    """
     try:
         out = subprocess.run(
             ["git", "status", "--porcelain"],
@@ -70,7 +77,7 @@ def _git_status_porcelain() -> str:
         )
         return out.stdout
     except (subprocess.CalledProcessError, FileNotFoundError):
-        return ""
+        return None
 
 
 def _git_commit() -> str:
@@ -91,11 +98,22 @@ def _git_short_commit() -> str:
     return commit[:7] if commit != "unknown" else "unknown"
 
 
-def _resolve_dirty(allow_dirty: bool, force_dirty: bool) -> tuple[bool, list[str]]:
-    """Return (is_dirty, modified_files), honouring a test override."""
+def _resolve_dirty(*, force_dirty: bool) -> tuple[bool, list[str]]:
+    """Return (is_dirty, modified_files), honouring a test override.
+
+    The publication-gate decision (whether a dirty worktree blocks an official
+    run) lives entirely in ``run_official``; this helper only *detects*
+    dirtiness. The former ``allow_dirty`` parameter was dead and misleadingly
+    implied this function honoured the override (WR-03), so it has been dropped.
+    """
     if force_dirty:
         return True, ["<forced-dirty>"]
     porcelain = _git_status_porcelain()
+    if porcelain is None:
+        # Cleanliness could not be determined; fail closed on the publication
+        # gate by treating the worktree as dirty (IN-03) rather than failing
+        # open on an unverifiable repo state.
+        return True, ["<git-status-unknown>"]
     modified = [line[3:] for line in porcelain.splitlines() if line.strip()]
     return bool(modified), modified
 
@@ -133,19 +151,24 @@ def _build_frozen_benchmark(
     manual_odds_path: Path | None,
     fixture_path: Path,
     captured_at: datetime,
-) -> pd.DataFrame | None:
+) -> tuple[pd.DataFrame | None, str | None]:
     """Freeze the publication-time market benchmark from the manual-odds fallback.
 
-    Returns the per-match frozen slice (median primary, mean diagnostic), or
-    ``None`` when no usable odds are available (empty template / no provider
-    key). A missing benchmark is a documented fallback (D-04), not a failure:
-    the publication proceeds without market calibration rows for this run.
+    Returns ``(frozen_slice_or_None, error_summary_or_None)``:
+
+    * No odds path / missing file -> ``(None, None)``: a genuinely *absent*
+      benchmark is a documented fallback (D-04), not a data-quality regression.
+    * Present file that fails to parse -> ``(None, "<ExcType: msg>")``: the
+      benchmark is dropped, but the failure summary is surfaced so the caller
+      can record it in metadata, keeping the drop auditable rather than
+      invisible (WR-04).
+    * Usable odds -> ``(frozen_slice, None)``.
     """
     if manual_odds_path is None:
-        return None
+        return None, None
     manual_odds_path = Path(manual_odds_path)
     if not manual_odds_path.exists():
-        return None
+        return None, None
     try:
         # output_path=None: do not overwrite the canonical odds parquet from a run.
         per_book = build_odds_benchmark(
@@ -154,10 +177,13 @@ def _build_frozen_benchmark(
             captured_at_utc=captured_at,
             output_path=None,
         )
-    except (OddsValidationError, ValueError):
-        # Empty template or unusable manual rows -> documented no-benchmark fallback.
-        return None
-    return freeze_market_benchmark(per_book, captured_at_utc=captured_at)
+    except (OddsValidationError, ValueError) as exc:
+        # A PRESENT file that fails to parse is a data-quality signal, not the
+        # silent absent-file fallback: report the exception so the dropped
+        # benchmark is auditable in metadata (WR-04). (An empty template still
+        # raises here, but recording the reason is strictly more informative.)
+        return None, f"{type(exc).__name__}: {exc}"
+    return freeze_market_benchmark(per_book, captured_at_utc=captured_at), None
 
 
 def _prepare_run(
@@ -215,7 +241,7 @@ def verify_official(
     )
     selection = prep["selection"]
     materialization = prep["materialization"]
-    is_dirty, _ = _resolve_dirty(allow_dirty, force_dirty=False)
+    is_dirty, _ = _resolve_dirty(force_dirty=False)
     return {
         "order": list(OFFICIAL_ORDER),
         "as_of_date": prep["as_of_date"],
@@ -261,7 +287,7 @@ def run_official(
     set, in which case ``metadata.json`` records ``git_dirty=true`` and the
     modified files. ``_force_dirty`` / ``_snapshot_id`` are test hooks.
     """
-    is_dirty, modified = _resolve_dirty(allow_dirty, force_dirty=_force_dirty)
+    is_dirty, modified = _resolve_dirty(force_dirty=_force_dirty)
     if is_dirty and not allow_dirty:
         raise RuntimeError(
             "official publication requires a clean worktree; the repository is dirty. "
@@ -307,7 +333,7 @@ def run_official(
     snapshot_id = _snapshot_id or f"{published_at_id}_{selection['model_version']}"
 
     # --- freeze publication-time market benchmark (D-21) -------------------
-    frozen_benchmark = _build_frozen_benchmark(
+    frozen_benchmark, benchmark_error = _build_frozen_benchmark(
         manual_odds_path=manual_odds_path,
         fixture_path=fixture_path,
         captured_at=now,
@@ -375,6 +401,9 @@ def run_official(
                 "materialized_before_simulation": True,
                 "worktree_clean": not is_dirty,
                 "benchmark_frozen": benchmark_ref is not None,
+                # Auditable reason a present odds file was dropped (WR-04);
+                # None when odds were absent or successfully frozen.
+                "benchmark_error": benchmark_error,
             },
             "live_training_provenance": {
                 "artifact_path": materialization["live_training_path"],
