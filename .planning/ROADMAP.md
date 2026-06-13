@@ -66,7 +66,21 @@ Plans:
   3. Los partidos ya jugados se fijan con su resultado real y solo se simula lo restante (TournamentState)
   4. El sistema produce tablas P(R32), P(R16), P(QF), P(SF), P(Final), P(Campeón) por selección
   5. Las eliminatorias se resuelven con modelo de tiempo extra y penales (~50/50 ajustado) con desempate aleatorio por simulación, sin sesgo de orden
-**Plans**: TBD
+**Plans**: 5 plans
+
+Plans:
+**Wave 1**
+- [ ] 03-01-PLAN.md — Gate regulatorio FIFA fail-closed: provenance oficial, URL/checksum/artículos/anexo y mapping revisado de mejores terceros
+- [ ] 03-02-PLAN.md — Bootstrap de `simulation/` + TournamentState thin + resolución compacta post-90' sin sesgo de orden
+
+**Wave 2** *(blocked on Wave 1 completion)*
+- [ ] 03-03-PLAN.md — Wave 0 Nyquist: fixtures/tests revisables para desempates, fair play, seeded lots y slot resolution oficial
+
+**Wave 3** *(blocked on Wave 2 completion)*
+- [ ] 03-04-PLAN.md — Implementación pura de `rules_fifa.py` y `slots.py` sobre el fixture congelado y el mapping oficial
+
+**Wave 4** *(blocked on Wave 3 completion)*
+- [ ] 03-05-PLAN.md — Motor Monte Carlo vectorizado + outputs marginales + CRN determinístico por `match_id` + gates de performance
 
 ### Phase 4: Primer Pronóstico + Pipeline Diario
 **Goal**: El sistema publica pronósticos reproducibles cada jornada con un solo comando y archivo append-only pre-kickoff — SHIP antes del 27 de junio; cada día sin publicar encoge permanentemente el diferenciador del proyecto
@@ -111,7 +125,7 @@ Phases execute in numeric order: 1 → 2 ∥ 3 → 4 → 5 ∥ 6 (2-3 paraleliza
 |-------|----------------|--------|-----------|
 | 1. Fundación de Datos | 5/5 | Complete | 2026-06-12 |
 | 2. Modelos Baseline | 5/5 | Complete | 2026-06-12 |
-| 3. Simulador del Torneo | 0/TBD | Not started | - |
+| 3. Simulador del Torneo | 0/5 | Planned    |  |
 | 4. Primer Pronóstico + Pipeline Diario | 0/TBD | Not started | - |
 | 5. ML + Ensemble (gated) | 0/TBD | Not started | - |
 | 6. Operación en Vivo + Post-Mortem | 0/TBD | Not started | - |
