@@ -18,6 +18,8 @@ Un proyecto de portafolio metodológicamente riguroso y profundamente documentad
 - [x] Elo dinámico WFE recomputado sobre 49,405 partidos, con K canónico, ventaja local, margen de victoria y correlación de rangos 0.979 contra snapshot externo. Validado en Phase 2 / MODEL-01.
 - [x] Dixon-Coles con gradiente analítico, contrato `predict_lambdas`, W/D/L desde matriz de marcadores y modelo de producción fechado. Validado en Phase 2 / MODEL-02 y MODEL-03.
 - [x] Validación temporal estricta en cuatro holdouts con log-loss, Brier, RPS y gate D-13 aprobado; notebook didáctico ejecutado. Validado en Phase 2 / MODEL-04 y DOC-01.
+- [x] Motor Monte Carlo vectorizado con reglas FIFA 2026 verificadas contra el reglamento oficial (Art. 13 completo, mejores terceros, mapping Anexo C de 495 combinaciones), ≥10k torneos < 60s (100k en ~6.8s) con CRN reproducible por `match_id`, y salidas marginales por equipo. Validado en Phase 3 / SIM-01…SIM-05.
+- [x] Simulación condicional al estado real del torneo: los partidos jugados se fijan y solo los no resueltos invocan `predict_lambdas`. Validado en Phase 3 / SIM-03.
 
 ### Active
 
@@ -25,8 +27,6 @@ Un proyecto de portafolio metodológicamente riguroso y profundamente documentad
 - [ ] Pipeline de features reproducible (Elo dinámico, forma reciente, ranking FIFA, contexto anfitrión)
 - [ ] Clasificador ML (XGBoost/LightGBM) de 3 clases con validación temporal estricta
 - [ ] Ensemble ponderado + calibración isotónica de probabilidades
-- [ ] Motor de simulación Monte Carlo con reglas FIFA 2026 completas (48 equipos, 12 grupos, mejores terceros, desempates, penales)
-- [ ] Simulación condicional al estado real del torneo (partidos jugados se fijan)
 - [ ] Pipeline de actualización por jornada (ingesta resultados → re-cálculo → re-simulación → reporte)
 - [ ] Reportes de pronóstico por jornada con matplotlib/seaborn
 - [ ] Tracking de calibración en vivo (log-loss acumulado vs. benchmarks)
@@ -93,4 +93,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-06-12 after Phase 2 completion*
+*Last updated: 2026-06-13 after Phase 3 completion — simulador Monte Carlo operativo*
