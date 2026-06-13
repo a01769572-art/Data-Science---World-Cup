@@ -103,7 +103,7 @@ def test_frozen_benchmark_passes_contract() -> None:
     assert frozen.iloc[0]["captured_at_utc"].endswith("Z")
 
 
-def test_benchmark_capture_time_is_recorded_and_stable(tmp_path: Path) -> None:
+def test_benchmark_capture_time_is_recorded_and_stable(test_workspace: Path) -> None:
     captured_at = datetime(2026, 6, 13, 12, 0, tzinfo=timezone.utc)
     frozen = calibration.freeze_market_benchmark(
         _three_bookmaker_quotes(), captured_at_utc=captured_at
@@ -112,12 +112,12 @@ def test_benchmark_capture_time_is_recorded_and_stable(tmp_path: Path) -> None:
     assert (frozen["captured_at_utc"] == "2026-06-13T12:00:00Z").all()
 
 
-def test_register_frozen_benchmark_returns_checksum_and_row_ids(tmp_path: Path) -> None:
+def test_register_frozen_benchmark_returns_checksum_and_row_ids(test_workspace: Path) -> None:
     captured_at = datetime(2026, 6, 13, 12, 0, tzinfo=timezone.utc)
     frozen = calibration.freeze_market_benchmark(
         _three_bookmaker_quotes(), captured_at_utc=captured_at
     )
-    writer = SnapshotWriter(snapshots_root=tmp_path, snapshot_id="snap-1")
+    writer = SnapshotWriter(snapshots_root=test_workspace, snapshot_id="snap-1")
     ref = calibration.register_frozen_benchmark(writer, frozen)
 
     assert ref["filename"] == "frozen_benchmark.parquet"
@@ -130,7 +130,7 @@ def test_register_frozen_benchmark_returns_checksum_and_row_ids(tmp_path: Path) 
     # Checksum available for one-shot metadata finalization.
     writer.finalize_metadata({"order": []})
     writer.publish()
-    assert (tmp_path / "snap-1" / "frozen_benchmark.parquet").exists()
+    assert (test_workspace / "snap-1" / "frozen_benchmark.parquet").exists()
 
 
 # --------------------------------------------------------------------------- #
@@ -195,8 +195,8 @@ def test_build_ledger_rows_one_canonical_row_per_match() -> None:
     assert rows.iloc[0]["outcome_idx"] == 0
 
 
-def test_append_ledger_is_append_only(tmp_path: Path) -> None:
-    ledger_path = tmp_path / "calibration_matches.parquet"
+def test_append_ledger_is_append_only(test_workspace: Path) -> None:
+    ledger_path = test_workspace / "calibration_matches.parquet"
     rows1 = calibration.build_ledger_rows(
         predictions=_model_predictions().iloc[[0]],
         frozen_benchmark=_frozen_benchmark_for_ledger().iloc[[0]],
@@ -223,8 +223,8 @@ def test_append_ledger_is_append_only(tmp_path: Path) -> None:
     assert appended_ids == calibration.ledger_row_ids(rows2)
 
 
-def test_append_ledger_rejects_duplicate_match_snapshot(tmp_path: Path) -> None:
-    ledger_path = tmp_path / "calibration_matches.parquet"
+def test_append_ledger_rejects_duplicate_match_snapshot(test_workspace: Path) -> None:
+    ledger_path = test_workspace / "calibration_matches.parquet"
     rows = calibration.build_ledger_rows(
         predictions=_model_predictions().iloc[[0]],
         frozen_benchmark=_frozen_benchmark_for_ledger().iloc[[0]],
@@ -277,9 +277,9 @@ def test_cumulative_metrics_ignore_unresolved_matches() -> None:
     assert metrics["n_matches"] == 1
 
 
-def test_publication_slice_written_and_referenced(tmp_path: Path) -> None:
-    ledger_path = tmp_path / "calibration_matches.parquet"
-    writer = SnapshotWriter(snapshots_root=tmp_path, snapshot_id="snap-1")
+def test_publication_slice_written_and_referenced(test_workspace: Path) -> None:
+    ledger_path = test_workspace / "calibration_matches.parquet"
+    writer = SnapshotWriter(snapshots_root=test_workspace, snapshot_id="snap-1")
     rows = calibration.build_ledger_rows(
         predictions=_model_predictions(),
         frozen_benchmark=_frozen_benchmark_for_ledger(),

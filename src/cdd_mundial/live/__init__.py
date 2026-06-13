@@ -1,5 +1,15 @@
 """Live publication layer: canonical results ingestion and daily pipeline (Phase 4)."""
 
+from cdd_mundial.live.calibration import (
+    CANONICAL_LEDGER_PATH,
+    append_ledger,
+    build_ledger_rows,
+    cumulative_metrics,
+    derive_realized_outcomes,
+    freeze_market_benchmark,
+    publish_calibration,
+    register_frozen_benchmark,
+)
 from cdd_mundial.live.contracts import (
     CalibrationLedgerSchema,
     FrozenBenchmarkSchema,
@@ -26,6 +36,7 @@ from cdd_mundial.live.results import (
 from cdd_mundial.live.snapshots import SnapshotWriter
 
 __all__ = [
+    "CANONICAL_LEDGER_PATH",
     "CANONICAL_RESULTS_PATH",
     "LIVE_RESULTS_COLUMNS",
     "OFFICIAL_ORDER",
@@ -37,11 +48,18 @@ __all__ = [
     "OverrideToken",
     "SnapshotWriter",
     "UpcomingPredictionsSchema",
+    "append_ledger",
+    "build_ledger_rows",
     "build_live_state",
     "compute_input_fingerprint",
+    "cumulative_metrics",
+    "derive_realized_outcomes",
+    "freeze_market_benchmark",
     "load_live_results",
     "map_live_rows_to_canonical",
     "materialize_live_training",
+    "publish_calibration",
+    "register_frozen_benchmark",
     "run_official",
     "select_model_artifact",
     "upcoming_match_predictions",
