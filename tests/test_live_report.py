@@ -159,7 +159,9 @@ def _write_ledger(path: Path, snapshot_ids: list[str]) -> Path:
 
 @pytest.fixture
 def snapshots_root(test_workspace: Path) -> Path:
-    root = test_workspace / "snapshots"
+    # Short root keeps absolute paths under the Windows MAX_PATH (260) limit when
+    # snapshot ids embed the dated model_version (same pitfall as plan 04-02).
+    root = test_workspace / "s"
     root.mkdir()
     return root
 
@@ -167,9 +169,9 @@ def snapshots_root(test_workspace: Path) -> Path:
 @pytest.fixture
 def three_snapshots(snapshots_root: Path) -> list[str]:
     ids = [
-        "2026-06-11T18-00-00Z_baseline-v1-2026-06-13-aaaaaaa",  # first ever
-        "2026-06-12T18-00-00Z_baseline-v1-2026-06-13-aaaaaaa",  # previous
-        "2026-06-13T18-00-00Z_baseline-v1-2026-06-13-aaaaaaa",  # current
+        "2026-06-11T18-00-00Z_v1",  # first ever
+        "2026-06-12T18-00-00Z_v1",  # previous
+        "2026-06-13T18-00-00Z_v1",  # current
     ]
     _write_snapshot(snapshots_root, ids[0], published_at_utc="2026-06-11T18:00:00Z")
     _write_snapshot(snapshots_root, ids[1], published_at_utc="2026-06-12T18:00:00Z")
@@ -314,7 +316,7 @@ def test_single_snapshot_has_no_prior_baselines(
     snapshots_root: Path, test_workspace: Path
 ) -> None:
     """The first-ever snapshot has no previous/first peer -- renderer still works."""
-    only_id = "2026-06-11T18-00-00Z_baseline-v1-2026-06-13-aaaaaaa"
+    only_id = "2026-06-11T18-00-00Z_v1"
     _write_snapshot(snapshots_root, only_id, published_at_utc="2026-06-11T18:00:00Z")
     ledger = _write_ledger(
         test_workspace / "data" / "calibration_matches.parquet", [only_id]

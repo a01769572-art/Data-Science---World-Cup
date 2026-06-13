@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Pronostico Mundial 2026{% endblock %}</title>
+  <style>
+    :root {
+      --bg: #0f1729;
+      --panel: #182338;
+      --accent: #38bdf8;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --good: #4ade80;
+      --bad: #f87171;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    main { max-width: 1080px; margin: 0 auto; padding: 24px; }
+    header.report-header { border-bottom: 2px solid var(--accent); padding-bottom: 16px; margin-bottom: 24px; }
+    h1 { margin: 0 0 4px; font-size: 1.8rem; }
+    h2 { color: var(--accent); border-bottom: 1px solid #2a3a55; padding-bottom: 6px; margin-top: 40px; }
+    section { margin-bottom: 24px; }
+    .muted { color: var(--muted); font-size: 0.9rem; }
+    .kpi-grid { display: flex; flex-wrap: wrap; gap: 16px; margin: 16px 0; }
+    .kpi {
+      background: var(--panel);
+      border-radius: 10px;
+      padding: 16px 20px;
+      min-width: 160px;
+      flex: 1 1 160px;
+    }
+    .kpi .kpi-label { display: block; color: var(--muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .kpi .kpi-value { display: block; font-size: 1.6rem; font-weight: 700; margin-top: 4px; }
+    .top-block { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; }
+    .top-block .kpi-grid { flex: 1 1 320px; }
+    .top-block .highlight-visual { flex: 1 1 360px; }
+    img.report-visual { width: 100%; border-radius: 10px; background: #fff; }
+    table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 0.92rem; }
+    th, td { padding: 8px 10px; text-align: right; border-bottom: 1px solid #2a3a55; }
+    th:first-child, td:first-child { text-align: left; }
+    thead th { color: var(--accent); }
+    .delta-up { color: var(--good); }
+    .delta-down { color: var(--bad); }
+    footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid #2a3a55; color: var(--muted); font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="report-header">
+      <h1>{% block heading %}Pronostico Mundial 2026{% endblock %}</h1>
+      <p class="muted">{% block subheading %}{% endblock %}</p>
+    </header>
+    {% block content %}{% endblock %}
+    <footer>
+      {% block footer %}Generado de forma reproducible desde un snapshot congelado. Solo matplotlib/seaborn.{% endblock %}
+    </footer>
+  </main>
+</body>
+</html>

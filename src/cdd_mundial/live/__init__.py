@@ -24,6 +24,7 @@ from cdd_mundial.live.materialization import (
 )
 from cdd_mundial.live.pipeline import OFFICIAL_ORDER, run_official, verify_official
 from cdd_mundial.live.predict import upcoming_match_predictions
+from cdd_mundial.live.report import render_snapshot_report
 from cdd_mundial.live.results import (
     CANONICAL_RESULTS_PATH,
     LIVE_RESULTS_COLUMNS,
@@ -60,6 +61,7 @@ __all__ = [
     "materialize_live_training",
     "publish_calibration",
     "register_frozen_benchmark",
+    "render_snapshot_report",
     "run_official",
     "select_model_artifact",
     "upcoming_match_predictions",

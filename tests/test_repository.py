@@ -37,6 +37,7 @@ def test_python_and_tournament_safe_dependency_pins(pyproject: dict) -> None:
         "matplotlib~=3.10",
         "seaborn==0.13.2",
         "joblib>=1.4",
+        "Jinja2>=3.1,<4",
     }
     expected_dev = {
         "pytest>=8,<9",

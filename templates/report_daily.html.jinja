@@ -1,0 +1,136 @@
+{% extends "report_base.html.jinja" %}
+
+{% block title %}Pronostico Mundial 2026 - {{ snapshot.as_of_date }}{% endblock %}
+{% block heading %}Pronostico diario - Mundial 2026{% endblock %}
+{% block subheading %}Snapshot {{ snapshot.snapshot_id }} - publicado {{ snapshot.published_at_utc }} - modelo {{ snapshot.model_version }}{% endblock %}
+
+{% block content %}
+<section id="executive-summary">
+  <h2>Resumen ejecutivo</h2>
+  <div class="top-block">
+    <div class="kpi-grid">
+      {% for kpi in kpis %}
+      <div class="kpi">
+        <span class="kpi-label">{{ kpi.label }}</span>
+        <span class="kpi-value">{{ kpi.value }}</span>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="highlight-visual">
+      <img class="report-visual" src="{{ highlight_visual }}" alt="Probabilidad de campeon (top equipos)">
+    </div>
+  </div>
+</section>
+
+<section id="next-block">
+  <h2>Proximo bloque de partidos</h2>
+  {% if upcoming_rows %}
+  <table>
+    <thead>
+      <tr><th>Partido</th><th>Local</th><th>Visitante</th><th>P(1)</th><th>P(X)</th><th>P(2)</th></tr>
+    </thead>
+    <tbody>
+      {% for row in upcoming_rows %}
+      <tr>
+        <td>{{ row.match_id }}</td>
+        <td>{{ row.team_a }}</td>
+        <td>{{ row.team_b }}</td>
+        <td>{{ row.prob_a }}</td>
+        <td>{{ row.prob_draw }}</td>
+        <td>{{ row.prob_b }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="muted">No hay partidos de grupo pendientes en este snapshot.</p>
+  {% endif %}
+</section>
+
+<section id="tournament-probabilities">
+  <h2>Probabilidades del torneo</h2>
+  <img class="report-visual" src="{{ champion_visual }}" alt="Probabilidad de campeon por equipo">
+  <table>
+    <thead>
+      <tr><th>Equipo</th><th>P(R16)</th><th>P(QF)</th><th>P(SF)</th><th>P(Final)</th><th>P(Campeon)</th></tr>
+    </thead>
+    <tbody>
+      {% for row in advancement_rows %}
+      <tr>
+        <td>{{ row.team_id }}</td>
+        <td>{{ row.p_r16 }}</td>
+        <td>{{ row.p_qf }}</td>
+        <td>{{ row.p_sf }}</td>
+        <td>{{ row.p_final }}</td>
+        <td>{{ row.p_champion }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+<section id="temporal-evolution">
+  <h2>Evolucion temporal</h2>
+  <p class="muted">
+    Comparacion vs anterior ({{ temporal.previous_snapshot_id or "sin snapshot previo" }})
+    y vs primero ({{ temporal.first_snapshot_id or "sin snapshot inicial" }}).
+  </p>
+  {% if temporal_rows %}
+  <table>
+    <thead>
+      <tr><th>Equipo</th><th>P(Campeon) actual</th><th>vs anterior</th><th>vs primero</th></tr>
+    </thead>
+    <tbody>
+      {% for row in temporal_rows %}
+      <tr>
+        <td>{{ row.team_id }}</td>
+        <td>{{ row.current }}</td>
+        <td class="{{ row.delta_prev_class }}">{{ row.delta_prev }}</td>
+        <td class="{{ row.delta_first_class }}">{{ row.delta_first }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="muted">Primer snapshot publicado: aun no hay historia para comparar.</p>
+  {% endif %}
+
+  <h3>Calibracion acumulada (modelo vs mercado)</h3>
+  {% if cumulative.n_matches > 0 %}
+  <table>
+    <thead>
+      <tr><th>Fuente</th><th>Log-loss</th><th>RPS</th><th>Brier</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Modelo</td>
+        <td>{{ cumulative_fmt.model.log_loss }}</td>
+        <td>{{ cumulative_fmt.model.rps }}</td>
+        <td>{{ cumulative_fmt.model.brier }}</td>
+      </tr>
+      <tr>
+        <td>Mercado</td>
+        <td>{{ cumulative_fmt.market.log_loss }}</td>
+        <td>{{ cumulative_fmt.market.rps }}</td>
+        <td>{{ cumulative_fmt.market.brier }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="muted">{{ cumulative.n_matches }} partidos resueltos en el ledger canonico de calibracion.</p>
+  <img class="report-visual" src="{{ evolution_visual }}" alt="Evolucion de log-loss y RPS por snapshot">
+  {% else %}
+  <p class="muted">Aun no hay partidos resueltos para evaluar log-loss / RPS acumulados.</p>
+  {% endif %}
+</section>
+
+<section id="methodology">
+  <h2>Nota metodologica</h2>
+  <p class="muted">
+    Este reporte se renderiza exclusivamente desde artefactos congelados del snapshot
+    ({{ snapshot.snapshot_id }}) y el ledger canonico de calibracion; no reentrena el modelo
+    ni reejecuta simulaciones. Las probabilidades del torneo provienen de {{ snapshot.n_sims }}
+    simulaciones Monte Carlo (semilla {{ snapshot.seed }}) sobre el baseline Elo + Dixon-Coles.
+    El benchmark de mercado es la mediana de-margined entre casas, congelada al publicar.
+  </p>
+</section>
+{% endblock %}
