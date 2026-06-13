@@ -123,6 +123,13 @@ def _advance_prob(lam_a: float, lam_b: float) -> float:
     return p_a + p_draw * q
 
 
+_DEFAULT_CTX = {
+    "neutral": True,
+    "date": None,
+    "tournament_type": "FIFA World Cup",
+}
+
+
 def simulate_tournaments(
     *,
     fixture: pd.DataFrame,
@@ -130,14 +137,17 @@ def simulate_tournaments(
     predict_lambdas,
     n_sims: int,
     seed: int,
-    neutral: bool = True,
+    ctx: dict | None = None,
 ) -> SimulationResult:
     """Run ``n_sims`` complete tournaments conditioned on ``state``.
 
     ``predict_lambdas`` must honour the frozen
     ``predict_lambdas(team_a, team_b, ctx)`` contract; ``ctx['neutral']`` carries
-    host advantage and is not renamed. ``state`` is a
-    :class:`~cdd_mundial.simulation.state.TournamentState` of played results.
+    host advantage and is not renamed. ``ctx`` is passed through unchanged to the
+    predictor; when omitted it defaults to a neutral-venue World Cup context
+    (``{'neutral': True, 'date': None, 'tournament_type': 'FIFA World Cup'}``),
+    which matches the contract the Phase 2 Dixon-Coles model expects. ``state`` is
+    a :class:`~cdd_mundial.simulation.state.TournamentState` of played results.
     """
     if n_sims <= 0:
         raise ValueError(f"n_sims must be positive, got {n_sims}")
@@ -146,7 +156,7 @@ def simulate_tournaments(
     ordinals = _match_ordinals(fixture)
     base = np.random.SeedSequence([int(seed), _VERSION])
     played = dict(state.played)
-    ctx = {"neutral": neutral}
+    ctx = dict(_DEFAULT_CTX) if ctx is None else dict(ctx)
 
     group_rows = fixture[fixture["stage"] == "group"]
     teams = sorted(set(group_rows["home_team_id"]) | set(group_rows["away_team_id"]))
