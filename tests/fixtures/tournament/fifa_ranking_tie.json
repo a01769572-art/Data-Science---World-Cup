@@ -1,0 +1,68 @@
+{
+  "criterion_note": "Alpha and Beta remain tied through conduct score and the current FIFA ranking edition; Alpha ranks higher only in the preceding edition. No drawing of lots is permitted.",
+  "conduct_scores": {
+    "alpha": -2,
+    "beta": -2,
+    "delta": -5,
+    "gamma": 0
+  },
+  "expected_order": [
+    "delta",
+    "alpha",
+    "beta",
+    "gamma"
+  ],
+  "fifa_ranking_editions": [
+    {
+      "alpha": 20,
+      "beta": 20,
+      "delta": 70,
+      "gamma": 90
+    },
+    {
+      "alpha": 10,
+      "beta": 12,
+      "delta": 72,
+      "gamma": 88
+    }
+  ],
+  "matches": [
+    {
+      "goals_a": 0,
+      "goals_b": 0,
+      "team_a": "alpha",
+      "team_b": "beta"
+    },
+    {
+      "goals_a": 1,
+      "goals_b": 0,
+      "team_a": "alpha",
+      "team_b": "gamma"
+    },
+    {
+      "goals_a": 0,
+      "goals_b": 1,
+      "team_a": "alpha",
+      "team_b": "delta"
+    },
+    {
+      "goals_a": 1,
+      "goals_b": 0,
+      "team_a": "beta",
+      "team_b": "gamma"
+    },
+    {
+      "goals_a": 0,
+      "goals_b": 1,
+      "team_a": "beta",
+      "team_b": "delta"
+    },
+    {
+      "goals_a": 0,
+      "goals_b": 1,
+      "team_a": "gamma",
+      "team_b": "delta"
+    }
+  ],
+  "name": "Successive FIFA ranking editions fallback"
+}

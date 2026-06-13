@@ -1,0 +1,88 @@
+{
+  "criterion_note": "Japan and Senegal finished level on points, goal difference, goals scored, and their head-to-head match; Japan ranked higher on conduct score.",
+  "expected_order": [
+    "colombia",
+    "japan",
+    "senegal",
+    "poland"
+  ],
+  "expected_stats": {
+    "colombia": {
+      "goal_difference": 3,
+      "goals_against": 2,
+      "goals_for": 5,
+      "points": 6
+    },
+    "japan": {
+      "goal_difference": 0,
+      "goals_against": 4,
+      "goals_for": 4,
+      "points": 4
+    },
+    "poland": {
+      "goal_difference": -3,
+      "goals_against": 5,
+      "goals_for": 2,
+      "points": 3
+    },
+    "senegal": {
+      "goal_difference": 0,
+      "goals_against": 4,
+      "goals_for": 4,
+      "points": 4
+    }
+  },
+  "conduct_scores": {
+    "colombia": -3,
+    "japan": -4,
+    "poland": -5,
+    "senegal": -6
+  },
+  "fifa_ranking_editions": [
+    {
+      "colombia": 16,
+      "japan": 61,
+      "poland": 8,
+      "senegal": 27
+    }
+  ],
+  "matches": [
+    {
+      "goals_a": 1,
+      "goals_b": 2,
+      "team_a": "colombia",
+      "team_b": "japan"
+    },
+    {
+      "goals_a": 1,
+      "goals_b": 2,
+      "team_a": "poland",
+      "team_b": "senegal"
+    },
+    {
+      "goals_a": 2,
+      "goals_b": 2,
+      "team_a": "japan",
+      "team_b": "senegal"
+    },
+    {
+      "goals_a": 0,
+      "goals_b": 3,
+      "team_a": "poland",
+      "team_b": "colombia"
+    },
+    {
+      "goals_a": 0,
+      "goals_b": 1,
+      "team_a": "japan",
+      "team_b": "poland"
+    },
+    {
+      "goals_a": 0,
+      "goals_b": 1,
+      "team_a": "senegal",
+      "team_b": "colombia"
+    }
+  ],
+  "name": "2018 World Cup Group H"
+}

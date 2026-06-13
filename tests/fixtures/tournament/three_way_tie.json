@@ -1,0 +1,62 @@
+{
+  "criterion_note": "Alpha separates from a three-team mini-table on goals scored; Beta and Gamma remain tied, so the head-to-head criteria are reapplied and Beta's win ranks it above Gamma.",
+  "conduct_scores": {
+    "alpha": -4,
+    "beta": -4,
+    "delta": 0,
+    "gamma": -1
+  },
+  "expected_order": [
+    "alpha",
+    "beta",
+    "gamma",
+    "delta"
+  ],
+  "fifa_ranking_editions": [
+    {
+      "alpha": 50,
+      "beta": 60,
+      "delta": 80,
+      "gamma": 40
+    }
+  ],
+  "matches": [
+    {
+      "goals_a": 2,
+      "goals_b": 1,
+      "team_a": "alpha",
+      "team_b": "beta"
+    },
+    {
+      "goals_a": 2,
+      "goals_b": 1,
+      "team_a": "gamma",
+      "team_b": "alpha"
+    },
+    {
+      "goals_a": 1,
+      "goals_b": 0,
+      "team_a": "beta",
+      "team_b": "gamma"
+    },
+    {
+      "goals_a": 1,
+      "goals_b": 0,
+      "team_a": "alpha",
+      "team_b": "delta"
+    },
+    {
+      "goals_a": 1,
+      "goals_b": 0,
+      "team_a": "beta",
+      "team_b": "delta"
+    },
+    {
+      "goals_a": 1,
+      "goals_b": 0,
+      "team_a": "gamma",
+      "team_b": "delta"
+    }
+  ],
+  "name": "Three-way residual tie"
+}

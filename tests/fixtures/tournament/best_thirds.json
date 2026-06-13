@@ -1,0 +1,167 @@
+{
+  "criterion_note": "Third-placed teams are compared only by group-wide points, goal difference, goals scored, conduct score, and successive FIFA ranking editions; cross-group head-to-head data is deliberately contradictory and must be ignored.",
+  "expected_order": [
+    "third-a",
+    "third-b",
+    "third-c",
+    "third-d",
+    "third-e",
+    "third-f",
+    "third-g",
+    "third-h",
+    "third-i",
+    "third-j",
+    "third-k",
+    "third-l"
+  ],
+  "expected_qualifiers": [
+    "third-a",
+    "third-b",
+    "third-c",
+    "third-d",
+    "third-e",
+    "third-f",
+    "third-g",
+    "third-h"
+  ],
+  "fifa_ranking_editions": [
+    {
+      "third-a": 60,
+      "third-b": 55,
+      "third-c": 50,
+      "third-d": 45,
+      "third-e": 40,
+      "third-f": 35,
+      "third-g": 30,
+      "third-h": 20,
+      "third-i": 20,
+      "third-j": 15,
+      "third-k": 10,
+      "third-l": 5
+    },
+    {
+      "third-a": 61,
+      "third-b": 56,
+      "third-c": 51,
+      "third-d": 46,
+      "third-e": 41,
+      "third-f": 36,
+      "third-g": 31,
+      "third-h": 10,
+      "third-i": 12,
+      "third-j": 16,
+      "third-k": 11,
+      "third-l": 6
+    }
+  ],
+  "records": [
+    {
+      "conduct_score": -2,
+      "cross_group_head_to_head_points": 0,
+      "goal_difference": 2,
+      "goals_for": 4,
+      "group": "A",
+      "points": 6,
+      "team_id": "third-a"
+    },
+    {
+      "conduct_score": -1,
+      "cross_group_head_to_head_points": 3,
+      "goal_difference": 2,
+      "goals_for": 3,
+      "group": "B",
+      "points": 6,
+      "team_id": "third-b"
+    },
+    {
+      "conduct_score": -4,
+      "cross_group_head_to_head_points": 0,
+      "goal_difference": 3,
+      "goals_for": 4,
+      "group": "C",
+      "points": 5,
+      "team_id": "third-c"
+    },
+    {
+      "conduct_score": -2,
+      "cross_group_head_to_head_points": 3,
+      "goal_difference": 1,
+      "goals_for": 5,
+      "group": "D",
+      "points": 5,
+      "team_id": "third-d"
+    },
+    {
+      "conduct_score": -4,
+      "cross_group_head_to_head_points": 0,
+      "goal_difference": 2,
+      "goals_for": 3,
+      "group": "E",
+      "points": 4,
+      "team_id": "third-e"
+    },
+    {
+      "conduct_score": -4,
+      "cross_group_head_to_head_points": 3,
+      "goal_difference": 1,
+      "goals_for": 4,
+      "group": "F",
+      "points": 4,
+      "team_id": "third-f"
+    },
+    {
+      "conduct_score": -1,
+      "cross_group_head_to_head_points": 0,
+      "goal_difference": 1,
+      "goals_for": 3,
+      "group": "G",
+      "points": 4,
+      "team_id": "third-g"
+    },
+    {
+      "conduct_score": -3,
+      "cross_group_head_to_head_points": 0,
+      "goal_difference": 1,
+      "goals_for": 3,
+      "group": "H",
+      "points": 4,
+      "team_id": "third-h"
+    },
+    {
+      "conduct_score": -3,
+      "cross_group_head_to_head_points": 3,
+      "goal_difference": 1,
+      "goals_for": 3,
+      "group": "I",
+      "points": 4,
+      "team_id": "third-i"
+    },
+    {
+      "conduct_score": 0,
+      "cross_group_head_to_head_points": 3,
+      "goal_difference": 0,
+      "goals_for": 4,
+      "group": "J",
+      "points": 3,
+      "team_id": "third-j"
+    },
+    {
+      "conduct_score": 0,
+      "cross_group_head_to_head_points": 3,
+      "goal_difference": 0,
+      "goals_for": 3,
+      "group": "K",
+      "points": 3,
+      "team_id": "third-k"
+    },
+    {
+      "conduct_score": 0,
+      "cross_group_head_to_head_points": 3,
+      "goal_difference": -1,
+      "goals_for": 5,
+      "group": "L",
+      "points": 3,
+      "team_id": "third-l"
+    }
+  ]
+}

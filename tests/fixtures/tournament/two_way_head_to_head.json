@@ -1,0 +1,62 @@
+{
+  "criterion_note": "Alpha and Beta have identical overall points, goal difference, and goals scored; Alpha ranks first because it won their head-to-head match.",
+  "conduct_scores": {
+    "alpha": -2,
+    "beta": -1,
+    "delta": 0,
+    "gamma": -3
+  },
+  "expected_order": [
+    "alpha",
+    "beta",
+    "gamma",
+    "delta"
+  ],
+  "fifa_ranking_editions": [
+    {
+      "alpha": 40,
+      "beta": 20,
+      "delta": 80,
+      "gamma": 60
+    }
+  ],
+  "matches": [
+    {
+      "goals_a": 1,
+      "goals_b": 0,
+      "team_a": "alpha",
+      "team_b": "beta"
+    },
+    {
+      "goals_a": 0,
+      "goals_b": 1,
+      "team_a": "alpha",
+      "team_b": "gamma"
+    },
+    {
+      "goals_a": 1,
+      "goals_b": 0,
+      "team_a": "alpha",
+      "team_b": "delta"
+    },
+    {
+      "goals_a": 1,
+      "goals_b": 0,
+      "team_a": "beta",
+      "team_b": "gamma"
+    },
+    {
+      "goals_a": 1,
+      "goals_b": 0,
+      "team_a": "beta",
+      "team_b": "delta"
+    },
+    {
+      "goals_a": 0,
+      "goals_b": 0,
+      "team_a": "gamma",
+      "team_b": "delta"
+    }
+  ],
+  "name": "Two-way head-to-head tie"
+}

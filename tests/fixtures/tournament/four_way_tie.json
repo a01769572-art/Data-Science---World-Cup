@@ -1,0 +1,62 @@
+{
+  "criterion_note": "All six matches finish scoreless, leaving all four teams tied through every sporting criterion; distinct conduct scores produce a stable complete order.",
+  "conduct_scores": {
+    "alpha": -1,
+    "beta": -2,
+    "delta": -4,
+    "gamma": -3
+  },
+  "expected_order": [
+    "alpha",
+    "beta",
+    "gamma",
+    "delta"
+  ],
+  "fifa_ranking_editions": [
+    {
+      "alpha": 80,
+      "beta": 60,
+      "delta": 20,
+      "gamma": 40
+    }
+  ],
+  "matches": [
+    {
+      "goals_a": 0,
+      "goals_b": 0,
+      "team_a": "alpha",
+      "team_b": "beta"
+    },
+    {
+      "goals_a": 0,
+      "goals_b": 0,
+      "team_a": "alpha",
+      "team_b": "gamma"
+    },
+    {
+      "goals_a": 0,
+      "goals_b": 0,
+      "team_a": "alpha",
+      "team_b": "delta"
+    },
+    {
+      "goals_a": 0,
+      "goals_b": 0,
+      "team_a": "beta",
+      "team_b": "gamma"
+    },
+    {
+      "goals_a": 0,
+      "goals_b": 0,
+      "team_a": "beta",
+      "team_b": "delta"
+    },
+    {
+      "goals_a": 0,
+      "goals_b": 0,
+      "team_a": "gamma",
+      "team_b": "delta"
+    }
+  ],
+  "name": "Four-way conduct-score tie"
+}
