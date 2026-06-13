@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 03-04-PLAN.md; ready for 03-05
-last_updated: "2026-06-13T02:30:00.000Z"
-last_activity: 2026-06-13 -- Completed 03-04 (rules_fifa + slots)
+stopped_at: Completed 03-05-PLAN.md; Phase 03 complete, ready for Phase 04
+last_updated: "2026-06-13T02:33:00.000Z"
+last_activity: 2026-06-13 -- Completed 03-05 (engine + outputs + notebook)
 progress:
   total_phases: 6
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 15
-  completed_plans: 14
-  percent: 93
+  completed_plans: 15
+  percent: 100
 ---
 
 # Project State
@@ -25,12 +25,12 @@ See: .planning/PROJECT.md (updated 2026-06-11)
 
 ## Current Position
 
-Phase: 03 (simulador-del-torneo) — EXECUTING
-Plan: 5 of 5
-Status: Executing Phase 03
-Last activity: 2026-06-13 -- Completed 03-04 (rules_fifa + slots)
+Phase: 03 (simulador-del-torneo) — COMPLETE
+Plan: 5 of 5 (done)
+Status: Phase 03 complete; ready for Phase 04 (Primer Pronóstico + Pipeline Diario)
+Last activity: 2026-06-13 -- Completed 03-05 (engine + outputs + notebook)
 
-Progress: [█████████░] 93%
+Progress: [██████████] 100%
 
 **HARD DEADLINE:** Fases 1-4 deben estar publicando pronósticos antes del 2026-06-27 (fin de fase de grupos). El torneo empezó HOY.
 
@@ -68,6 +68,7 @@ Progress: [█████████░] 93%
 | Phase 03 P02 | 7min | 2 tasks | 6 files |
 | Phase 03 P03 | 15min | 2 tasks | 10 files |
 | Phase 03 P04 | 12min | 2 tasks | 3 files |
+| Phase 03 P05 | 11min | 3 tasks | 9 files |
 
 ## Accumulated Context
 
@@ -118,6 +119,9 @@ Recent decisions affecting current work:
 - [Phase 03]: rules_fifa.py implementa la cascada Art. 13 como un block-splitter recursivo (overall -> head-to-head con reaplicación residual -> conduct -> ediciones sucesivas del ranking FIFA); lógica branchy basada en dicts en vez de NumPy porque el desempate es inherentemente condicional. — SIM-01 cerrado; 20/20 tests Wave 0 verdes.
 - [Phase 03]: slots.py consume el mapping oficial Annexe C (nunca lo re-deriva) y valida que cada grupo asignado viva en el token del fixture (group in token[1:]); falla ruidoso ante casos ausentes/duplicados/incompatibles. — Fixture tokens autoritativos (D-06).
 - [Phase 03]: rank_best_thirds ignora estructuralmente cross_group_head_to_head_points (los terceros nunca se enfrentaron) y empates irresolubles desde la evidencia oficial lanzan error; no hay sorteo (D-03).
+- [Phase 03]: El motor vectorizado deriva todo el azar de SeedSequence([seed, _VERSION]) con un stream por partido vía spawn_key keyed por el ordinal estable de match_id; fijar partidos anteriores no perturba los streams de partidos no jugados (CRN, OQ3/T-03-14). — 10k <60s, 100k ~8.5s.
+- [Phase 03]: El ranking de grupos en la ruta batch usa solo criterios globales (puntos->GD->GF) con desempate determinista por orden canónico; la cascada branchy del Art. 13 (head-to-head, conduct, ediciones FIFA) vive en rules_fifa para los tests puros. Los partidos simulados no portan insumos de conduct/ranking, así que la ruta global es la correcta en batch.
+- [Phase 03]: simulate_tournaments recibe ctx del llamador (default neutral World Cup con neutral/date/tournament_type) y lo pasa intacto al predictor; el contrato congelado de predict_lambdas exige esas tres claves. — Permite que el notebook corra contra el modelo Dixon-Coles real.
 
 ### Pending Todos
 
@@ -139,6 +143,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-06-13T02:30:00.000Z
-Stopped at: Completed 03-04-PLAN.md; ready for 03-05
+Last session: 2026-06-13T02:33:00.000Z
+Stopped at: Completed 03-05-PLAN.md; Phase 03 complete, ready for Phase 04
 Resume file: None

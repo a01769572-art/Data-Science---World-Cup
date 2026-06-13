@@ -18,7 +18,7 @@ El torneo empezó HOY (2026-06-11) y termina 2026-07-19 — el roadmap está dic
 
 - [x] **Phase 1: Fundación de Datos** - Base histórica unificada, tabla maestra de selecciones, fixture 2026, Elo ratings y cuotas — todo validado con pandera
 - [x] **Phase 2: Modelos Baseline (Elo + Dixon-Coles)** - Elo dinámico custom y Dixon-Coles que expone `predict_lambdas`, validados temporalmente contra 4 torneos holdout
-- [ ] **Phase 3: Simulador del Torneo** - Reglas FIFA 2026 completas (48 equipos, mejores terceros) + Monte Carlo vectorizado condicional al estado real — paralelizable con Fase 2
+- [x] **Phase 3: Simulador del Torneo** - Reglas FIFA 2026 completas (48 equipos, mejores terceros) + Monte Carlo vectorizado condicional al estado real — paralelizable con Fase 2
 - [ ] **Phase 4: Primer Pronóstico + Pipeline Diario** - Pipeline de jornada de un comando, snapshot append-only pre-kickoff, primer reporte publicado ≤ 27 jun
 - [ ] **Phase 5: ML + Ensemble (upgrade gated)** - XGBoost + ensemble calibrado que solo reemplaza al baseline si lo vence en los 4 holdouts
 - [ ] **Phase 6: Operación en Vivo + Post-Mortem** - Disciplina diaria hasta el 19 jul, leverage por partido, post-mortem honesto y notas de aprendizaje
@@ -80,7 +80,7 @@ Plans:
 - [x] 03-04-PLAN.md — Implementación pura de `rules_fifa.py` y `slots.py` sobre el fixture congelado y el mapping oficial
 
 **Wave 4** *(blocked on Wave 3 completion)*
-- [ ] 03-05-PLAN.md — Motor Monte Carlo vectorizado + outputs marginales + CRN determinístico por `match_id` + gates de performance
+- [x] 03-05-PLAN.md — Motor Monte Carlo vectorizado + outputs marginales + CRN determinístico por `match_id` + gates de performance
 
 ### Phase 4: Primer Pronóstico + Pipeline Diario
 **Goal**: El sistema publica pronósticos reproducibles cada jornada con un solo comando y archivo append-only pre-kickoff — SHIP antes del 27 de junio; cada día sin publicar encoge permanentemente el diferenciador del proyecto
