@@ -376,6 +376,9 @@ def test_official_run_stages_one_snapshot_with_full_provenance(
         seed=20260613,
         as_of=None,
         allow_dirty=True,
+        # Deterministically simulate a dirty worktree so the recorded override is
+        # asserted regardless of the real repo state at test time.
+        _force_dirty=True,
     )
     snapshot_dir = Path(summary["snapshot_dir"])
     assert snapshot_dir.exists()
