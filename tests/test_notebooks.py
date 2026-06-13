@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 NOTEBOOKS_DIR = ROOT / "notebooks"
 PHASE1_NOTEBOOK = NOTEBOOKS_DIR / "01_data_foundation.ipynb"
 PHASE2_NOTEBOOK = NOTEBOOKS_DIR / "02_modelos_baseline.ipynb"
+PHASE3_NOTEBOOK = NOTEBOOKS_DIR / "03_simulador_torneo.ipynb"
 
 WHAT_AND_WHY = "What and why"
 INTERPRETATION = "Interpretation"
@@ -178,3 +179,85 @@ def test_phase2_notebook_uses_a_deterministic_python_kernel() -> None:
     kernelspec = notebook.metadata.get("kernelspec", {})
     assert kernelspec.get("name") == "python3"
     assert kernelspec.get("language") == "python"
+
+
+REQUIRED_PHASE3_KEYWORDS = (
+    "estado",  # state conditioning
+    "reglas",  # official FIFA rules
+    "monte carlo",  # simulation execution
+    "avance",  # advancement marginals
+    "grupo",  # group-position marginals
+    "diagn",  # diagnostics (reproducibilidad/tiempo)
+)
+
+
+def test_phase3_notebook_exists() -> None:
+    assert PHASE3_NOTEBOOK.exists(), (
+        "Phase 3 requires notebooks/03_simulador_torneo.ipynb"
+    )
+
+
+def test_phase3_notebook_imports_simulation_package() -> None:
+    notebook = read_notebook(PHASE3_NOTEBOOK)
+    code = "\n".join(cell.source for cell in notebook.cells if cell.cell_type == "code")
+    assert re.search(r"from\s+cdd_mundial\.simulation", code), (
+        "the Phase 3 notebook must import production functions from cdd_mundial.simulation"
+    )
+
+
+def test_phase3_notebook_does_not_redefine_production_logic() -> None:
+    notebook = read_notebook(PHASE3_NOTEBOOK)
+    for index, cell in enumerate(notebook.cells):
+        if cell.cell_type != "code":
+            continue
+        for fragment in FORBIDDEN_CODE_FRAGMENTS:
+            assert fragment not in cell.source, (
+                f"03_simulador_torneo.ipynb: code cell {index} contains forbidden "
+                f"fragment {fragment!r}; simulation logic belongs in cdd_mundial.simulation"
+            )
+
+
+def test_phase3_notebook_uses_a_deterministic_python_kernel() -> None:
+    notebook = read_notebook(PHASE3_NOTEBOOK)
+    kernelspec = notebook.metadata.get("kernelspec", {})
+    assert kernelspec.get("name") == "python3"
+    assert kernelspec.get("language") == "python"
+
+
+def test_phase3_notebook_has_required_analysis_sections() -> None:
+    notebook = read_notebook(PHASE3_NOTEBOOK)
+    headings = "\n".join(
+        line.lower()
+        for cell in notebook.cells
+        if cell.cell_type == "markdown"
+        for line in cell.source.splitlines()
+        if line.startswith("#")
+    )
+    for keyword in REQUIRED_PHASE3_KEYWORDS:
+        assert keyword in headings, f"missing Phase 3 section heading containing {keyword!r}"
+
+
+def test_phase3_notebook_has_configurable_batch_sizes() -> None:
+    notebook = read_notebook(PHASE3_NOTEBOOK)
+    code = "\n".join(cell.source for cell in notebook.cells if cell.cell_type == "code")
+    # A visible configuration must expose lightweight, 10k, and 100k options.
+    assert "10_000" in code or "10000" in code
+    assert "100_000" in code or "100000" in code
+    assert re.search(r"n_sims", code), "config must expose an n_sims simulation count"
+
+
+def test_phase3_notebook_is_executed_with_nonempty_outputs() -> None:
+    notebook = read_notebook(PHASE3_NOTEBOOK)
+    code_cells = [c for c in notebook.cells if c.cell_type == "code"]
+    assert code_cells, "the Phase 3 notebook must contain code cells"
+    executed = [c for c in code_cells if c.get("outputs")]
+    assert executed, "the committed Phase 3 notebook must contain executed outputs"
+    # At least one cell must carry a rendered image (the required plot).
+    has_image = any(
+        any(
+            "image/png" in (output.get("data") or {})
+            for output in cell.get("outputs", [])
+        )
+        for cell in code_cells
+    )
+    assert has_image, "the Phase 3 notebook must include at least one rendered plot"
