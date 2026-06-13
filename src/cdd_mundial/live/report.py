@@ -58,6 +58,10 @@ _TOP_N = 8
 # Deterministic seaborn theme; fixed so re-renders are byte-stable.
 _PALETTE = "crest"
 
+# Single point of control for figure resolution (IN-05). Fixed so re-renders of
+# the same data produce byte-stable PNGs across all report plots.
+_FIG_DPI = 110
+
 
 # --------------------------------------------------------------------------- #
 # Snapshot discovery (read-only over snapshots_root)                          #
@@ -66,7 +70,17 @@ _PALETTE = "crest"
 
 def _published_at(snapshot_dir: Path) -> str:
     metadata = json.loads((snapshot_dir / _METADATA).read_text(encoding="utf-8"))
-    return str(metadata.get("published_at_utc", snapshot_dir.name))
+    # A missing published_at_utc is a hard error during discovery (IN-04):
+    # directory names (<ts>_<model_version>) and ISO instants do not share a
+    # sort space, so silently substituting the directory name could order a
+    # malformed bundle incorrectly relative to well-formed ones. All official
+    # bundles set this field; its absence signals a corrupt/foreign bundle.
+    published_at = metadata.get("published_at_utc")
+    if published_at is None:
+        raise ValueError(
+            f"snapshot bundle is missing 'published_at_utc' in metadata: {snapshot_dir}"
+        )
+    return str(published_at)
 
 
 def _discover_baselines(
@@ -141,7 +155,7 @@ def _champion_barplot(top: pd.DataFrame, out_path: Path, *, title: str) -> Path:
     for container in ax.containers:
         ax.bar_label(container, fmt=lambda v: f"{v * 100:.1f}%", padding=3, fontsize=8)
     fig.tight_layout()
-    fig.savefig(out_path, dpi=110)
+    fig.savefig(out_path, dpi=_FIG_DPI)
     plt.close(fig)
     return out_path
 
@@ -158,7 +172,7 @@ def _evolution_plot(series: pd.DataFrame, out_path: Path) -> Path:
         ax.set_ylabel(label)
         ax.legend(fontsize=8)
     fig.tight_layout()
-    fig.savefig(out_path, dpi=110)
+    fig.savefig(out_path, dpi=_FIG_DPI)
     plt.close(fig)
     return out_path
 
