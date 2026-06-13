@@ -5,6 +5,11 @@ from cdd_mundial.simulation.knockout import (
     post_draw_advance_probability,
     sample_post_draw_advancers,
 )
+from cdd_mundial.simulation.slots import (
+    load_official_third_place_mapping,
+    resolve_slot,
+    resolve_third_place_assignments,
+)
 from cdd_mundial.simulation.state import (
     PlayedMatchResult,
     TournamentState,
@@ -15,7 +20,10 @@ __all__ = [
     "PlayedMatchResult",
     "TournamentState",
     "advance_probability",
+    "load_official_third_place_mapping",
     "played_results_from_json",
     "post_draw_advance_probability",
+    "resolve_slot",
+    "resolve_third_place_assignments",
     "sample_post_draw_advancers",
 ]
