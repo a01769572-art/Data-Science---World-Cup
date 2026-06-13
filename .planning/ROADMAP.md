@@ -141,8 +141,8 @@ Phases execute in numeric order: 1 → 2 ∥ 3 → 4 → 5 ∥ 6 (2-3 paraleliza
 |-------|----------------|--------|-----------|
 | 1. Fundación de Datos | 5/5 | Complete | 2026-06-12 |
 | 2. Modelos Baseline | 5/5 | Complete | 2026-06-12 |
-| 3. Simulador del Torneo | 2/5 | In Progress|  |
-| 4. Primer Pronóstico + Pipeline Diario | 0/TBD | Not started | - |
+| 3. Simulador del Torneo | 5/5 | Complete | 2026-06-13 |
+| 4. Primer Pronóstico + Pipeline Diario | 1/5 | In Progress | - |
 | 5. ML + Ensemble (gated) | 0/TBD | Not started | - |
 | 6. Operación en Vivo + Post-Mortem | 0/TBD | Not started | - |
 

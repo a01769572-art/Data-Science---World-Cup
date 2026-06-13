@@ -13,7 +13,7 @@
 - [x] **DATA-03**: El sistema ingesta ratings Elo actuales (eloratings.net TSV vía requests) con cobertura completa de las 48 selecciones; la recomputación Elo propia desde el histórico se implementa como `MODEL-01`
 - [x] **DATA-04**: El fixture oficial 2026 (104 partidos, 12 grupos, sedes, horarios) está cargado, validado y versionado en `data/external/`
 - [x] **DATA-05**: El sistema ingesta cuotas de mercado de una fuente y calcula probabilidades implícitas de-margined para usar como benchmark
-- [ ] **DATA-06**: Existe un pipeline de ingesta de resultados del torneo en curso con fallback manual editable (`results_2026.csv`) para que un scraper roto nunca bloquee la corrida diaria
+- [x] **DATA-06**: Existe un pipeline de ingesta de resultados del torneo en curso con fallback manual editable (`results_2026.csv`) para que un scraper roto nunca bloquee la corrida diaria
 
 ### Modelos baseline
 
@@ -85,7 +85,7 @@ Deferred — valiosos pero no bloquean el valor core de v1:
 | DATA-03 | Phase 1 | Complete |
 | DATA-04 | Phase 1 | Complete |
 | DATA-05 | Phase 1 | Complete |
-| DATA-06 | Phase 4 | Pending |
+| DATA-06 | Phase 4 | Complete |
 | MODEL-01 | Phase 2 | Complete |
 | MODEL-02 | Phase 2 | Complete |
 | MODEL-03 | Phase 2 | Complete |

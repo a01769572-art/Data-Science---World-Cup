@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: ready_to_execute
-stopped_at: Phase 04 planned; ready to execute 04-01-PLAN.md
-last_updated: "2026-06-13T17:30:00.000Z"
-last_activity: 2026-06-13
+status: executing
+stopped_at: Completed 04-01-PLAN.md; ready to execute 04-02
+last_updated: "2026-06-13T18:30:00.000Z"
+last_activity: 2026-06-13 -- Completed 04-01 (live-input contract + fail-closed loader)
 progress:
   total_phases: 6
   completed_phases: 3
   total_plans: 20
-  completed_plans: 15
-  percent: 75
+  completed_plans: 16
+  percent: 80
 ---
 
 # Project State
@@ -25,12 +25,12 @@ See: .planning/PROJECT.md (updated 2026-06-11)
 
 ## Current Position
 
-Phase: 4
-Plan: 0 of 5
-Status: Ready to execute Phase 04 (Primer Pronóstico + Pipeline Diario)
-Last activity: 2026-06-13
+Phase: 04 (primer-pronostico-pipeline-diario) — EXECUTING
+Plan: 2 of 5 (04-01 complete)
+Status: Executing Phase 04
+Last activity: 2026-06-13 -- Completed 04-01 (live-input contract + fail-closed loader)
 
-Progress: [███████░░░] 75%
+Progress: [████████░░] 80%
 
 **HARD DEADLINE:** Fases 1-4 deben estar publicando pronósticos antes del 2026-06-27 (fin de fase de grupos). El torneo empezó HOY.
 
@@ -70,6 +70,7 @@ Progress: [███████░░░] 75%
 | Phase 03 P03 | 15min | 2 tasks | 10 files |
 | Phase 03 P04 | 12min | 2 tasks | 3 files |
 | Phase 03 P05 | 11min | 3 tasks | 9 files |
+| Phase 04 P01 | 14min | 2 tasks (TDD) | 5 files |
 
 ## Accumulated Context
 
@@ -84,6 +85,10 @@ Recent decisions affecting current work:
 - [Roadmap]: Fases 2 y 3 paralelizables vía contrato `predict_lambdas(team_a, team_b, ctx)` — el simulador se construye contra λs stub
 - [Roadmap]: Fase 5 (ML) es upgrade gated, no critical path — solo reemplaza al baseline si lo vence en log-loss en los 4 holdouts
 - [Roadmap]: El snapshot log append-only arranca con el PRIMER pronóstico publicado (Fase 4) — no se puede rellenar retroactivamente
+- [Phase 04]: results_2026.csv es la fuente canónica con solo las 8 columnas de TournamentState; metadata operativa vive aparte (D-03).
+- [Phase 04]: El scraper-assist es solo verificación; las discrepancias fallan cerrado y el CSV canónico siempre gana (D-04).
+- [Phase 04]: Cobertura incompleta de partidos ya jugados falla por defecto; solo un OverrideToken explícito y trazable (con reason) la excusa por partido (D-05).
+- [Phase 04]: build_live_state es el único cargador en vivo y delega en TournamentState.from_results; ninguna ruta de parseo lo evade.
 - [Phase 01]: Canonical Pandera schemas inherit strict=True and coerce=True from one shared base contract. — Keeps every canonical stage exit consistent and rejects schema drift.
 - [Phase 01]: Immutable captures use exclusive creation and checksum comparison. — Identical replay is safe while changed payloads cannot mutate raw history.
 - [Phase 01]: Tests use workspace-local unique artifacts. — Windows and OneDrive temp ACLs were unreliable in the execution environment.
@@ -144,6 +149,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-06-13T17:30:00.000Z
-Stopped at: Phase 04 planned; ready to execute 04-01-PLAN.md
+Last session: 2026-06-13T18:30:00.000Z
+Stopped at: Completed 04-01-PLAN.md (DATA-06 closed); ready to execute 04-02
 Resume file: None
