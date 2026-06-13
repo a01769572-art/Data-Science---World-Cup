@@ -19,7 +19,7 @@ El torneo empezó HOY (2026-06-11) y termina 2026-07-19 — el roadmap está dic
 - [x] **Phase 1: Fundación de Datos** - Base histórica unificada, tabla maestra de selecciones, fixture 2026, Elo ratings y cuotas — todo validado con pandera
 - [x] **Phase 2: Modelos Baseline (Elo + Dixon-Coles)** - Elo dinámico custom y Dixon-Coles que expone `predict_lambdas`, validados temporalmente contra 4 torneos holdout
 - [x] **Phase 3: Simulador del Torneo** - Reglas FIFA 2026 completas (48 equipos, mejores terceros) + Monte Carlo vectorizado condicional al estado real — paralelizable con Fase 2
-- [ ] **Phase 4: Primer Pronóstico + Pipeline Diario** - Pipeline de jornada de un comando, snapshot append-only pre-kickoff, primer reporte publicado ≤ 27 jun
+- [x] **Phase 4: Primer Pronóstico + Pipeline Diario** - Pipeline de jornada de un comando, snapshot append-only pre-kickoff, primer reporte publicado ≤ 27 jun
 - [ ] **Phase 5: ML + Ensemble (upgrade gated)** - XGBoost + ensemble calibrado que solo reemplaza al baseline si lo vence en los 4 holdouts
 - [ ] **Phase 6: Operación en Vivo + Post-Mortem** - Disciplina diaria hasta el 19 jul, leverage por partido, post-mortem honesto y notas de aprendizaje
 
@@ -86,7 +86,7 @@ Plans:
 **Goal**: El sistema publica pronósticos reproducibles cada jornada con un solo comando y archivo append-only pre-kickoff — SHIP antes del 27 de junio; cada día sin publicar encoge permanentemente el diferenciador del proyecto
 **Depends on**: Phase 2, Phase 3
 **Requirements**: DATA-06, LIVE-01, LIVE-02, LIVE-03, LIVE-04, DOC-02
-**Progress**: 4/5 plans complete (04-01, 04-02, 04-03, 04-04 done; 04-05 e2e pending)
+**Progress**: 5/5 plans complete (04-01, 04-02, 04-03, 04-04, 04-05 done) — PHASE COMPLETE; first official pre-kickoff snapshot published 2026-06-13T22:02:08Z
 **Success Criteria** (what must be TRUE):
   1. Un comando corre el pipeline de jornada completo: ingesta de resultados → actualización Elo/forma → refresh Dixon-Coles → re-simulación (common random numbers entre jornadas) → reporte generado
   2. La ingesta de resultados del torneo tiene fallback manual editable (`results_2026.csv`) — un scraper roto nunca bloquea la corrida diaria
@@ -109,7 +109,7 @@ Plans:
 - [x] 04-03-PLAN.md — Renderer oficial HTML estático desde snapshot finalizado + slices/ledger de calibración con Jinja2 + pandas + Matplotlib/Seaborn
 
 **Wave 5**
-- [ ] 04-05-PLAN.md — Integración end-to-end, prueba del orden materialización→simulación→reporte, notebook/runbook y primera publicación oficial pre-kickoff con bundle inmutable verificado
+- [x] 04-05-PLAN.md — Integración end-to-end, prueba del orden materialización→simulación→reporte, notebook/runbook y primera publicación oficial pre-kickoff con bundle inmutable verificado
 
 ### Phase 5: ML + Ensemble (upgrade gated)
 **Goal**: Un ensemble ML calibrado mejora medible y honestamente al baseline — o el resultado negativo queda documentado como hallazgo; el baseline sigue publicando en paralelo en todo momento
