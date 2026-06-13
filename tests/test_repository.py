@@ -69,7 +69,10 @@ def test_sensitive_and_generated_paths_are_ignored(gitignore_lines: set[str]) ->
         ".test-artifacts/",
         "data/raw/restricted/",
         "data/raw/odds/",
-        "data/processed/",
+        # Processed contents are ignored via a globbing pattern so the official
+        # snapshot bundles + canonical calibration ledger can be re-included
+        # (versioned per D-12/D-18) while transient byproducts stay ignored.
+        "data/processed/**",
         "models/",
         "artifacts/",
     }
