@@ -6934,7 +6934,7 @@
   "description": "Official FIFA World Cup 26 best-third assignment lookup. Each case maps one qualifying-group combination to explicit round-of-32 fixture positions: assignment keys are real match_id values from data/external/fixture_2026.csv (side: away), and values are the third-placed team's group letter.",
   "provenance": {
     "annex": "Annexe C: Combinations for eight best third-placed teams (physical pages 80-98, options 1-495)",
-    "extracted_at_utc": "2026-06-13T00:40:00Z",
+    "extracted_at_utc": "2026-06-13T00:19:00Z",
     "extracted_by": "Claude (GSD executor, plan 03-01), reviewed against rendered page images of the official PDF",
     "regulations_manifest": "data/metadata/fifa_2026_regulations.provenance.json",
     "regulations_sha256": "bad4ea83cf1f51055598b0c12c3dab280a78777e08a623b9e9098508b4ecc8d9",

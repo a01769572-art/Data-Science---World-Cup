@@ -85,7 +85,7 @@
   "physical_pages": 98,
   "retrieved_at_utc": "2026-06-13T00:12:09Z",
   "reviewed_extraction": {
-    "extracted_at_utc": "2026-06-13T00:30:00Z",
+    "extracted_at_utc": "2026-06-13T00:15:00Z",
     "extracted_by": "Claude (GSD executor, plan 03-01), reviewed against rendered page images of the same PDF",
     "method": "Downloaded the official PDF over HTTPS from digitalhub.fifa.com with curl; computed SHA-256; read Articles 10-14 and Annexes A-C from rendered page images; parsed the 495 Annexe C option rows from physical pages 79-98 with pypdf using the strict row pattern '^\\d{1,3}(3[A-L]){8}$'.",
     "verification": "Parsed table passed: 495 contiguous options 1-495; 8 distinct groups per row; the 495 qualifying-group sets equal the complete C(12,8) enumeration with no duplicates; every assignment is contained in its fixture slot token; 14 rows (options 1, 2, 10, 18, 19, 46, 47, 48, 77, 105, 106, 127, 130, 131, 134, 495) cross-checked character-by-character against independently rendered page images with zero mismatches."
