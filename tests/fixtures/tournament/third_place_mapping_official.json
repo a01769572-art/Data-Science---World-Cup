@@ -1,0 +1,7001 @@
+{
+  "cases": [
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "G",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 1,
+      "qualified_groups": "EFGHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 2,
+      "qualified_groups": "DFGHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "G",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 3,
+      "qualified_groups": "DEGHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 4,
+      "qualified_groups": "DEFHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 5,
+      "qualified_groups": "DEFGIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 6,
+      "qualified_groups": "DEFGHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 7,
+      "qualified_groups": "DEFGHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "J",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 8,
+      "qualified_groups": "DEFGHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 9,
+      "qualified_groups": "DEFGHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 10,
+      "qualified_groups": "CFGHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "G",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 11,
+      "qualified_groups": "CEGHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 12,
+      "qualified_groups": "CEFHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 13,
+      "qualified_groups": "CEFGIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 14,
+      "qualified_groups": "CEFGHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 15,
+      "qualified_groups": "CEFGHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "J",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 16,
+      "qualified_groups": "CEFGHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 17,
+      "qualified_groups": "CEFGHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 18,
+      "qualified_groups": "CDGHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 19,
+      "qualified_groups": "CDFHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 20,
+      "qualified_groups": "CDFGIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 21,
+      "qualified_groups": "CDFGHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 22,
+      "qualified_groups": "CDFGHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "I",
+        "WC26-081": "J",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 23,
+      "qualified_groups": "CDFGHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 24,
+      "qualified_groups": "CDFGHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 25,
+      "qualified_groups": "CDEHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 26,
+      "qualified_groups": "CDEGIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 27,
+      "qualified_groups": "CDEGHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 28,
+      "qualified_groups": "CDEGHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "J",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 29,
+      "qualified_groups": "CDEGHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 30,
+      "qualified_groups": "CDEGHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "E",
+        "WC26-082": "I",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 31,
+      "qualified_groups": "CDEFIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "E",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 32,
+      "qualified_groups": "CDEFHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "H",
+        "WC26-085": "E",
+        "WC26-087": "L"
+      },
+      "option": 33,
+      "qualified_groups": "CDEFHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "I",
+        "WC26-081": "E",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 34,
+      "qualified_groups": "CDEFHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "E",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "I"
+      },
+      "option": 35,
+      "qualified_groups": "CDEFHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "E",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 36,
+      "qualified_groups": "CDEFGJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "E",
+        "WC26-082": "I",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 37,
+      "qualified_groups": "CDEFGIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "I",
+        "WC26-081": "E",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 38,
+      "qualified_groups": "CDEFGIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "E",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 39,
+      "qualified_groups": "CDEFGIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "E",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 40,
+      "qualified_groups": "CDEFGHKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "E",
+        "WC26-081": "J",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 41,
+      "qualified_groups": "CDEFGHJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "E"
+      },
+      "option": 42,
+      "qualified_groups": "CDEFGHJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "I",
+        "WC26-081": "E",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 43,
+      "qualified_groups": "CDEFGHIL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "E",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 44,
+      "qualified_groups": "CDEFGHIK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "I",
+        "WC26-081": "J",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "E"
+      },
+      "option": 45,
+      "qualified_groups": "CDEFGHIJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "G",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 46,
+      "qualified_groups": "BFGHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "B",
+        "WC26-077": "G",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 47,
+      "qualified_groups": "BEGHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 48,
+      "qualified_groups": "BEFHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "G",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 49,
+      "qualified_groups": "BEFGIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "G",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 50,
+      "qualified_groups": "BEFGHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 51,
+      "qualified_groups": "BEFGHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "G",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 52,
+      "qualified_groups": "BEFGHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "G",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "I"
+      },
+      "option": 53,
+      "qualified_groups": "BEFGHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "G",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 54,
+      "qualified_groups": "BDGHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 55,
+      "qualified_groups": "BDFHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "I",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 56,
+      "qualified_groups": "BDFGIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 57,
+      "qualified_groups": "BDFGHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 58,
+      "qualified_groups": "BDFGHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 59,
+      "qualified_groups": "BDFGHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 60,
+      "qualified_groups": "BDFGHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 61,
+      "qualified_groups": "BDEHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "G",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 62,
+      "qualified_groups": "BDEGIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "G",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 63,
+      "qualified_groups": "BDEGHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 64,
+      "qualified_groups": "BDEGHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "G",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 65,
+      "qualified_groups": "BDEGHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "G",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "I"
+      },
+      "option": 66,
+      "qualified_groups": "BDEGHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 67,
+      "qualified_groups": "BDEFIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 68,
+      "qualified_groups": "BDEFHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "I",
+        "WC26-087": "L"
+      },
+      "option": 69,
+      "qualified_groups": "BDEFHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 70,
+      "qualified_groups": "BDEFHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "I"
+      },
+      "option": 71,
+      "qualified_groups": "BDEFHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 72,
+      "qualified_groups": "BDEFGJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 73,
+      "qualified_groups": "BDEFGIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 74,
+      "qualified_groups": "BDEFGIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 75,
+      "qualified_groups": "BDEFGIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 76,
+      "qualified_groups": "BDEFGHKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "E",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 77,
+      "qualified_groups": "BDEFGHJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "E"
+      },
+      "option": 78,
+      "qualified_groups": "BDEFGHJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 79,
+      "qualified_groups": "BDEFGHIL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 80,
+      "qualified_groups": "BDEFGHIK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "E"
+      },
+      "option": 81,
+      "qualified_groups": "BDEFGHIJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "G",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 82,
+      "qualified_groups": "BCGHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 83,
+      "qualified_groups": "BCFHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "I",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 84,
+      "qualified_groups": "BCFGIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 85,
+      "qualified_groups": "BCFGHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 86,
+      "qualified_groups": "BCFGHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 87,
+      "qualified_groups": "BCFGHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 88,
+      "qualified_groups": "BCFGHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 89,
+      "qualified_groups": "BCEHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "G",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 90,
+      "qualified_groups": "BCEGIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "G",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 91,
+      "qualified_groups": "BCEGHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 92,
+      "qualified_groups": "BCEGHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "G",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 93,
+      "qualified_groups": "BCEGHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "G",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "I"
+      },
+      "option": 94,
+      "qualified_groups": "BCEGHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 95,
+      "qualified_groups": "BCEFIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 96,
+      "qualified_groups": "BCEFHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "I",
+        "WC26-087": "L"
+      },
+      "option": 97,
+      "qualified_groups": "BCEFHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 98,
+      "qualified_groups": "BCEFHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "I"
+      },
+      "option": 99,
+      "qualified_groups": "BCEFHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 100,
+      "qualified_groups": "BCEFGJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 101,
+      "qualified_groups": "BCEFGIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 102,
+      "qualified_groups": "BCEFGIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 103,
+      "qualified_groups": "BCEFGIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 104,
+      "qualified_groups": "BCEFGHKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "E",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 105,
+      "qualified_groups": "BCEFGHJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "E"
+      },
+      "option": 106,
+      "qualified_groups": "BCEFGHJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 107,
+      "qualified_groups": "BCEFGHIL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 108,
+      "qualified_groups": "BCEFGHIK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "E"
+      },
+      "option": 109,
+      "qualified_groups": "BCEFGHIJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 110,
+      "qualified_groups": "BCDHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "I",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 111,
+      "qualified_groups": "BCDGIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 112,
+      "qualified_groups": "BCDGHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 113,
+      "qualified_groups": "BCDGHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 114,
+      "qualified_groups": "BCDGHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 115,
+      "qualified_groups": "BCDGHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 116,
+      "qualified_groups": "BCDFIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 117,
+      "qualified_groups": "BCDFHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "I",
+        "WC26-087": "L"
+      },
+      "option": 118,
+      "qualified_groups": "BCDFHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 119,
+      "qualified_groups": "BCDFHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "I"
+      },
+      "option": 120,
+      "qualified_groups": "BCDFHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 121,
+      "qualified_groups": "BCDFGJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 122,
+      "qualified_groups": "BCDFGIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 123,
+      "qualified_groups": "BCDFGIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 124,
+      "qualified_groups": "BCDFGIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 125,
+      "qualified_groups": "BCDFGHKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "J",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 126,
+      "qualified_groups": "BCDFGHJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "D"
+      },
+      "option": 127,
+      "qualified_groups": "BCDFGHJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 128,
+      "qualified_groups": "BCDFGHIL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 129,
+      "qualified_groups": "BCDFGHIK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "D"
+      },
+      "option": 130,
+      "qualified_groups": "BCDFGHIJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 131,
+      "qualified_groups": "BCDEIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 132,
+      "qualified_groups": "BCDEHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "I",
+        "WC26-087": "L"
+      },
+      "option": 133,
+      "qualified_groups": "BCDEHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 134,
+      "qualified_groups": "BCDEHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "I"
+      },
+      "option": 135,
+      "qualified_groups": "BCDEHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 136,
+      "qualified_groups": "BCDEGJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 137,
+      "qualified_groups": "BCDEGIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 138,
+      "qualified_groups": "BCDEGIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 139,
+      "qualified_groups": "BCDEGIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 140,
+      "qualified_groups": "BCDEGHKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "E",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 141,
+      "qualified_groups": "BCDEGHJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "E"
+      },
+      "option": 142,
+      "qualified_groups": "BCDEGHJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 143,
+      "qualified_groups": "BCDEGHIL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 144,
+      "qualified_groups": "BCDEGHIK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "E"
+      },
+      "option": 145,
+      "qualified_groups": "BCDEGHIJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "E",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 146,
+      "qualified_groups": "BCDEFJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "E",
+        "WC26-087": "L"
+      },
+      "option": 147,
+      "qualified_groups": "BCDEFIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "E",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 148,
+      "qualified_groups": "BCDEFIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "E",
+        "WC26-085": "J",
+        "WC26-087": "I"
+      },
+      "option": 149,
+      "qualified_groups": "BCDEFIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "E",
+        "WC26-087": "L"
+      },
+      "option": 150,
+      "qualified_groups": "BCDEFHKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "E",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 151,
+      "qualified_groups": "BCDEFHJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "E"
+      },
+      "option": 152,
+      "qualified_groups": "BCDEFHJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "E",
+        "WC26-087": "L"
+      },
+      "option": 153,
+      "qualified_groups": "BCDEFHIL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "E",
+        "WC26-087": "I"
+      },
+      "option": 154,
+      "qualified_groups": "BCDEFHIK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "E"
+      },
+      "option": 155,
+      "qualified_groups": "BCDEFHIJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "E",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 156,
+      "qualified_groups": "BCDEFGKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "E",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 157,
+      "qualified_groups": "BCDEFGJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "E"
+      },
+      "option": 158,
+      "qualified_groups": "BCDEFGJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "E",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 159,
+      "qualified_groups": "BCDEFGIL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "E",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 160,
+      "qualified_groups": "BCDEFGIK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "E"
+      },
+      "option": 161,
+      "qualified_groups": "BCDEFGIJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "E",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 162,
+      "qualified_groups": "BCDEFGHL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "E"
+      },
+      "option": 163,
+      "qualified_groups": "BCDEFGHK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "E",
+        "WC26-081": "B",
+        "WC26-082": "J",
+        "WC26-085": "G",
+        "WC26-087": "D"
+      },
+      "option": 164,
+      "qualified_groups": "BCDEFGHJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "G",
+        "WC26-087": "E"
+      },
+      "option": 165,
+      "qualified_groups": "BCDEFGHI"
+    },
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "G",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 166,
+      "qualified_groups": "AFGHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "A",
+        "WC26-077": "G",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 167,
+      "qualified_groups": "AEGHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 168,
+      "qualified_groups": "AEFHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "G",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 169,
+      "qualified_groups": "AEFGIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 170,
+      "qualified_groups": "AEFGHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 171,
+      "qualified_groups": "AEFGHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 172,
+      "qualified_groups": "AEFGHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 173,
+      "qualified_groups": "AEFGHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "G",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 174,
+      "qualified_groups": "ADGHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 175,
+      "qualified_groups": "ADFHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "I",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 176,
+      "qualified_groups": "ADFGIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 177,
+      "qualified_groups": "ADFGHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 178,
+      "qualified_groups": "ADFGHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 179,
+      "qualified_groups": "ADFGHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 180,
+      "qualified_groups": "ADFGHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 181,
+      "qualified_groups": "ADEHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "G",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 182,
+      "qualified_groups": "ADEGIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 183,
+      "qualified_groups": "ADEGHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 184,
+      "qualified_groups": "ADEGHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 185,
+      "qualified_groups": "ADEGHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 186,
+      "qualified_groups": "ADEGHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 187,
+      "qualified_groups": "ADEFIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "E",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 188,
+      "qualified_groups": "ADEFHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "A",
+        "WC26-085": "E",
+        "WC26-087": "L"
+      },
+      "option": 189,
+      "qualified_groups": "ADEFHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "E",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 190,
+      "qualified_groups": "ADEFHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "E",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "I"
+      },
+      "option": 191,
+      "qualified_groups": "ADEFHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 192,
+      "qualified_groups": "ADEFGJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 193,
+      "qualified_groups": "ADEFGIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 194,
+      "qualified_groups": "ADEFGIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 195,
+      "qualified_groups": "ADEFGIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "E",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 196,
+      "qualified_groups": "ADEFGHKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "E",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 197,
+      "qualified_groups": "ADEFGHJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "E"
+      },
+      "option": 198,
+      "qualified_groups": "ADEFGHJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "E",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 199,
+      "qualified_groups": "ADEFGHIL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "E",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 200,
+      "qualified_groups": "ADEFGHIK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "E"
+      },
+      "option": 201,
+      "qualified_groups": "ADEFGHIJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "G",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 202,
+      "qualified_groups": "ACGHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 203,
+      "qualified_groups": "ACFHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "I",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 204,
+      "qualified_groups": "ACFGIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 205,
+      "qualified_groups": "ACFGHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 206,
+      "qualified_groups": "ACFGHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 207,
+      "qualified_groups": "ACFGHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 208,
+      "qualified_groups": "ACFGHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 209,
+      "qualified_groups": "ACEHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "G",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 210,
+      "qualified_groups": "ACEGIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 211,
+      "qualified_groups": "ACEGHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 212,
+      "qualified_groups": "ACEGHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 213,
+      "qualified_groups": "ACEGHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 214,
+      "qualified_groups": "ACEGHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 215,
+      "qualified_groups": "ACEFIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "E",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 216,
+      "qualified_groups": "ACEFHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "A",
+        "WC26-085": "E",
+        "WC26-087": "L"
+      },
+      "option": 217,
+      "qualified_groups": "ACEFHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "E",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 218,
+      "qualified_groups": "ACEFHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "E",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "I"
+      },
+      "option": 219,
+      "qualified_groups": "ACEFHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 220,
+      "qualified_groups": "ACEFGJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 221,
+      "qualified_groups": "ACEFGIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 222,
+      "qualified_groups": "ACEFGIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 223,
+      "qualified_groups": "ACEFGIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "E",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 224,
+      "qualified_groups": "ACEFGHKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "E",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 225,
+      "qualified_groups": "ACEFGHJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "E"
+      },
+      "option": 226,
+      "qualified_groups": "ACEFGHJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "E",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 227,
+      "qualified_groups": "ACEFGHIL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "E",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 228,
+      "qualified_groups": "ACEFGHIK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "E"
+      },
+      "option": 229,
+      "qualified_groups": "ACEFGHIJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 230,
+      "qualified_groups": "ACDHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "I",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 231,
+      "qualified_groups": "ACDGIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 232,
+      "qualified_groups": "ACDGHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 233,
+      "qualified_groups": "ACDGHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 234,
+      "qualified_groups": "ACDGHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 235,
+      "qualified_groups": "ACDGHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 236,
+      "qualified_groups": "ACDFIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "F",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 237,
+      "qualified_groups": "ACDFHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "A",
+        "WC26-085": "F",
+        "WC26-087": "L"
+      },
+      "option": 238,
+      "qualified_groups": "ACDFHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "F",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 239,
+      "qualified_groups": "ACDFHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "F",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "I"
+      },
+      "option": 240,
+      "qualified_groups": "ACDFHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 241,
+      "qualified_groups": "ACDFGJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 242,
+      "qualified_groups": "ACDFGIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "I",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 243,
+      "qualified_groups": "ACDFGIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 244,
+      "qualified_groups": "ACDFGIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "F",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 245,
+      "qualified_groups": "ACDFGHKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "H",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 246,
+      "qualified_groups": "ACDFGHJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "D"
+      },
+      "option": 247,
+      "qualified_groups": "ACDFGHJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "F",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 248,
+      "qualified_groups": "ACDFGHIL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "F",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 249,
+      "qualified_groups": "ACDFGHIK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "D"
+      },
+      "option": 250,
+      "qualified_groups": "ACDFGHIJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 251,
+      "qualified_groups": "ACDEIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "E",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 252,
+      "qualified_groups": "ACDEHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "A",
+        "WC26-085": "E",
+        "WC26-087": "L"
+      },
+      "option": 253,
+      "qualified_groups": "ACDEHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "E",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 254,
+      "qualified_groups": "ACDEHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "E",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "I"
+      },
+      "option": 255,
+      "qualified_groups": "ACDEHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 256,
+      "qualified_groups": "ACDEGJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 257,
+      "qualified_groups": "ACDEGIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 258,
+      "qualified_groups": "ACDEGIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 259,
+      "qualified_groups": "ACDEGIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "E",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 260,
+      "qualified_groups": "ACDEGHKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "E",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 261,
+      "qualified_groups": "ACDEGHJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "E"
+      },
+      "option": 262,
+      "qualified_groups": "ACDEGHJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "E",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 263,
+      "qualified_groups": "ACDEGHIL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "E",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 264,
+      "qualified_groups": "ACDEGHIK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "E"
+      },
+      "option": 265,
+      "qualified_groups": "ACDEGHIJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "E",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 266,
+      "qualified_groups": "ACDEFJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "I",
+        "WC26-082": "A",
+        "WC26-085": "E",
+        "WC26-087": "L"
+      },
+      "option": 267,
+      "qualified_groups": "ACDEFIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "I",
+        "WC26-081": "E",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 268,
+      "qualified_groups": "ACDEFIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "E",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "I"
+      },
+      "option": 269,
+      "qualified_groups": "ACDEFIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "F",
+        "WC26-082": "A",
+        "WC26-085": "E",
+        "WC26-087": "L"
+      },
+      "option": 270,
+      "qualified_groups": "ACDEFHKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "E",
+        "WC26-081": "F",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 271,
+      "qualified_groups": "ACDEFHJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "E",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "D"
+      },
+      "option": 272,
+      "qualified_groups": "ACDEFHJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "F",
+        "WC26-082": "A",
+        "WC26-085": "E",
+        "WC26-087": "L"
+      },
+      "option": 273,
+      "qualified_groups": "ACDEFHIL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "F",
+        "WC26-082": "A",
+        "WC26-085": "E",
+        "WC26-087": "I"
+      },
+      "option": 274,
+      "qualified_groups": "ACDEFHIK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "E",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "D"
+      },
+      "option": 275,
+      "qualified_groups": "ACDEFHIJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "E",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 276,
+      "qualified_groups": "ACDEFGKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "E",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 277,
+      "qualified_groups": "ACDEFGJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "E"
+      },
+      "option": 278,
+      "qualified_groups": "ACDEFGJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "I",
+        "WC26-081": "E",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 279,
+      "qualified_groups": "ACDEFGIL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "E",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 280,
+      "qualified_groups": "ACDEFGIK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "I",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "E"
+      },
+      "option": 281,
+      "qualified_groups": "ACDEFGIJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "E",
+        "WC26-081": "F",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 282,
+      "qualified_groups": "ACDEFGHL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "E",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "D"
+      },
+      "option": 283,
+      "qualified_groups": "ACDEFGHK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "E",
+        "WC26-081": "J",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "D"
+      },
+      "option": 284,
+      "qualified_groups": "ACDEFGHJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "E",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "D"
+      },
+      "option": 285,
+      "qualified_groups": "ACDEFGHI"
+    },
+    {
+      "assignments": {
+        "WC26-074": "A",
+        "WC26-077": "G",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 286,
+      "qualified_groups": "ABGHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "A",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 287,
+      "qualified_groups": "ABFHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "G",
+        "WC26-079": "I",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 288,
+      "qualified_groups": "ABFGIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "G",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 289,
+      "qualified_groups": "ABFGHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "A",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 290,
+      "qualified_groups": "ABFGHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "G",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 291,
+      "qualified_groups": "ABFGHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "G",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "I"
+      },
+      "option": 292,
+      "qualified_groups": "ABFGHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "A",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 293,
+      "qualified_groups": "ABEHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "A",
+        "WC26-077": "G",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 294,
+      "qualified_groups": "ABEGIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "A",
+        "WC26-077": "G",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 295,
+      "qualified_groups": "ABEGHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "A",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 296,
+      "qualified_groups": "ABEGHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "A",
+        "WC26-077": "G",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 297,
+      "qualified_groups": "ABEGHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "A",
+        "WC26-077": "G",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "H",
+        "WC26-085": "J",
+        "WC26-087": "I"
+      },
+      "option": 298,
+      "qualified_groups": "ABEGHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "A",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 299,
+      "qualified_groups": "ABEFIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 300,
+      "qualified_groups": "ABEFHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "I",
+        "WC26-087": "L"
+      },
+      "option": 301,
+      "qualified_groups": "ABEFHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 302,
+      "qualified_groups": "ABEFHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "I"
+      },
+      "option": 303,
+      "qualified_groups": "ABEFHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "G",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 304,
+      "qualified_groups": "ABEFGJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "A",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 305,
+      "qualified_groups": "ABEFGIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "G",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 306,
+      "qualified_groups": "ABEFGIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "G",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "I"
+      },
+      "option": 307,
+      "qualified_groups": "ABEFGIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 308,
+      "qualified_groups": "ABEFGHKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "G",
+        "WC26-079": "H",
+        "WC26-080": "E",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 309,
+      "qualified_groups": "ABEFGHJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "G",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "E"
+      },
+      "option": 310,
+      "qualified_groups": "ABEFGHJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 311,
+      "qualified_groups": "ABEFGHIL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 312,
+      "qualified_groups": "ABEFGHIK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "G",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "E"
+      },
+      "option": 313,
+      "qualified_groups": "ABEFGHIJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "H",
+        "WC26-079": "I",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 314,
+      "qualified_groups": "ABDHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "G",
+        "WC26-079": "I",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 315,
+      "qualified_groups": "ABDGIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "G",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 316,
+      "qualified_groups": "ABDGHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "H",
+        "WC26-079": "I",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 317,
+      "qualified_groups": "ABDGHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "G",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 318,
+      "qualified_groups": "ABDGHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "G",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "I"
+      },
+      "option": 319,
+      "qualified_groups": "ABDGHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "I",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 320,
+      "qualified_groups": "ABDFIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 321,
+      "qualified_groups": "ABDFHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "I",
+        "WC26-087": "L"
+      },
+      "option": 322,
+      "qualified_groups": "ABDFHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 323,
+      "qualified_groups": "ABDFHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "I"
+      },
+      "option": 324,
+      "qualified_groups": "ABDFHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "G",
+        "WC26-079": "F",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 325,
+      "qualified_groups": "ABDFGJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "I",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 326,
+      "qualified_groups": "ABDFGIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "G",
+        "WC26-079": "F",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 327,
+      "qualified_groups": "ABDFGIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "G",
+        "WC26-079": "F",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "I"
+      },
+      "option": 328,
+      "qualified_groups": "ABDFGIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 329,
+      "qualified_groups": "ABDFGHKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "J",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 330,
+      "qualified_groups": "ABDFGHJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "J"
+      },
+      "option": 331,
+      "qualified_groups": "ABDFGHJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 332,
+      "qualified_groups": "ABDFGHIL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 333,
+      "qualified_groups": "ABDFGHIK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "J",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 334,
+      "qualified_groups": "ABDFGHIJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "A",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 335,
+      "qualified_groups": "ABDEIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 336,
+      "qualified_groups": "ABDEHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "I",
+        "WC26-087": "L"
+      },
+      "option": 337,
+      "qualified_groups": "ABDEHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 338,
+      "qualified_groups": "ABDEHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "I"
+      },
+      "option": 339,
+      "qualified_groups": "ABDEHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "G",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 340,
+      "qualified_groups": "ABDEGJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "A",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 341,
+      "qualified_groups": "ABDEGIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "G",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 342,
+      "qualified_groups": "ABDEGIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "G",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "I"
+      },
+      "option": 343,
+      "qualified_groups": "ABDEGIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 344,
+      "qualified_groups": "ABDEGHKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "G",
+        "WC26-079": "H",
+        "WC26-080": "E",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 345,
+      "qualified_groups": "ABDEGHJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "G",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "E"
+      },
+      "option": 346,
+      "qualified_groups": "ABDEGHJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 347,
+      "qualified_groups": "ABDEGHIL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 348,
+      "qualified_groups": "ABDEGHIK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "G",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "E"
+      },
+      "option": 349,
+      "qualified_groups": "ABDEGHIJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 350,
+      "qualified_groups": "ABDEFJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "I",
+        "WC26-087": "L"
+      },
+      "option": 351,
+      "qualified_groups": "ABDEFIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 352,
+      "qualified_groups": "ABDEFIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "I"
+      },
+      "option": 353,
+      "qualified_groups": "ABDEFIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "E",
+        "WC26-087": "L"
+      },
+      "option": 354,
+      "qualified_groups": "ABDEFHKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "E",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 355,
+      "qualified_groups": "ABDEFHJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "E"
+      },
+      "option": 356,
+      "qualified_groups": "ABDEFHJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "E",
+        "WC26-087": "L"
+      },
+      "option": 357,
+      "qualified_groups": "ABDEFHIL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "E",
+        "WC26-087": "I"
+      },
+      "option": 358,
+      "qualified_groups": "ABDEFHIK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "E"
+      },
+      "option": 359,
+      "qualified_groups": "ABDEFHIJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 360,
+      "qualified_groups": "ABDEFGKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "J",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 361,
+      "qualified_groups": "ABDEFGJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "J"
+      },
+      "option": 362,
+      "qualified_groups": "ABDEFGJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 363,
+      "qualified_groups": "ABDEFGIL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 364,
+      "qualified_groups": "ABDEFGIK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "J",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 365,
+      "qualified_groups": "ABDEFGIJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "E",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 366,
+      "qualified_groups": "ABDEFGHL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "E"
+      },
+      "option": 367,
+      "qualified_groups": "ABDEFGHK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "J",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "E"
+      },
+      "option": 368,
+      "qualified_groups": "ABDEFGHJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "E"
+      },
+      "option": 369,
+      "qualified_groups": "ABDEFGHI"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "H",
+        "WC26-079": "I",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 370,
+      "qualified_groups": "ABCHIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "G",
+        "WC26-079": "I",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 371,
+      "qualified_groups": "ABCGIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "G",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 372,
+      "qualified_groups": "ABCGHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "H",
+        "WC26-079": "I",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 373,
+      "qualified_groups": "ABCGHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "G",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 374,
+      "qualified_groups": "ABCGHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "G",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "I"
+      },
+      "option": 375,
+      "qualified_groups": "ABCGHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "I",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 376,
+      "qualified_groups": "ABCFIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 377,
+      "qualified_groups": "ABCFHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "I",
+        "WC26-087": "L"
+      },
+      "option": 378,
+      "qualified_groups": "ABCFHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 379,
+      "qualified_groups": "ABCFHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "I"
+      },
+      "option": 380,
+      "qualified_groups": "ABCFHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "G",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 381,
+      "qualified_groups": "ABCFGJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "I",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 382,
+      "qualified_groups": "ABCFGIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "G",
+        "WC26-079": "C",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 383,
+      "qualified_groups": "ABCFGIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "F",
+        "WC26-077": "G",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "I"
+      },
+      "option": 384,
+      "qualified_groups": "ABCFGIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 385,
+      "qualified_groups": "ABCFGHKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "J",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 386,
+      "qualified_groups": "ABCFGHJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "J"
+      },
+      "option": 387,
+      "qualified_groups": "ABCFGHJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 388,
+      "qualified_groups": "ABCFGHIL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 389,
+      "qualified_groups": "ABCFGHIK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "J",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 390,
+      "qualified_groups": "ABCFGHIJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "A",
+        "WC26-077": "C",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 391,
+      "qualified_groups": "ABCEIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 392,
+      "qualified_groups": "ABCEHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "I",
+        "WC26-087": "L"
+      },
+      "option": 393,
+      "qualified_groups": "ABCEHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 394,
+      "qualified_groups": "ABCEHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "I"
+      },
+      "option": 395,
+      "qualified_groups": "ABCEHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "G",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 396,
+      "qualified_groups": "ABCEGJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "A",
+        "WC26-077": "C",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "I",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 397,
+      "qualified_groups": "ABCEGIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "G",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 398,
+      "qualified_groups": "ABCEGIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "G",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "I"
+      },
+      "option": 399,
+      "qualified_groups": "ABCEGIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 400,
+      "qualified_groups": "ABCEGHKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "G",
+        "WC26-079": "H",
+        "WC26-080": "E",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 401,
+      "qualified_groups": "ABCEGHJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "G",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "E"
+      },
+      "option": 402,
+      "qualified_groups": "ABCEGHJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 403,
+      "qualified_groups": "ABCEGHIL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "H",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 404,
+      "qualified_groups": "ABCEGHIK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "G",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "E"
+      },
+      "option": 405,
+      "qualified_groups": "ABCEGHIJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 406,
+      "qualified_groups": "ABCEFJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "I",
+        "WC26-087": "L"
+      },
+      "option": 407,
+      "qualified_groups": "ABCEFIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 408,
+      "qualified_groups": "ABCEFIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "I"
+      },
+      "option": 409,
+      "qualified_groups": "ABCEFIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "E",
+        "WC26-087": "L"
+      },
+      "option": 410,
+      "qualified_groups": "ABCEFHKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "E",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 411,
+      "qualified_groups": "ABCEFHJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "E"
+      },
+      "option": 412,
+      "qualified_groups": "ABCEFHJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "E",
+        "WC26-087": "L"
+      },
+      "option": 413,
+      "qualified_groups": "ABCEFHIL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "E",
+        "WC26-087": "I"
+      },
+      "option": 414,
+      "qualified_groups": "ABCEFHIK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "E"
+      },
+      "option": 415,
+      "qualified_groups": "ABCEFHIJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 416,
+      "qualified_groups": "ABCEFGKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "J",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 417,
+      "qualified_groups": "ABCEFGJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "J"
+      },
+      "option": 418,
+      "qualified_groups": "ABCEFGJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 419,
+      "qualified_groups": "ABCEFGIL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 420,
+      "qualified_groups": "ABCEFGIK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "E",
+        "WC26-080": "J",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 421,
+      "qualified_groups": "ABCEFGIJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "E",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 422,
+      "qualified_groups": "ABCEFGHL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "E"
+      },
+      "option": 423,
+      "qualified_groups": "ABCEFGHK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "J",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "E"
+      },
+      "option": 424,
+      "qualified_groups": "ABCEFGHJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "E"
+      },
+      "option": 425,
+      "qualified_groups": "ABCEFGHI"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "I",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 426,
+      "qualified_groups": "ABCDIJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 427,
+      "qualified_groups": "ABCDHJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "I",
+        "WC26-087": "L"
+      },
+      "option": 428,
+      "qualified_groups": "ABCDHIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 429,
+      "qualified_groups": "ABCDHIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "I"
+      },
+      "option": 430,
+      "qualified_groups": "ABCDHIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "G",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 431,
+      "qualified_groups": "ABCDGJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "I",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 432,
+      "qualified_groups": "ABCDGIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "G",
+        "WC26-079": "C",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 433,
+      "qualified_groups": "ABCDGIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "G",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "I"
+      },
+      "option": 434,
+      "qualified_groups": "ABCDGIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 435,
+      "qualified_groups": "ABCDGHKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "J",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 436,
+      "qualified_groups": "ABCDGHJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "J"
+      },
+      "option": 437,
+      "qualified_groups": "ABCDGHJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 438,
+      "qualified_groups": "ABCDGHIL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 439,
+      "qualified_groups": "ABCDGHIK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "J",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 440,
+      "qualified_groups": "ABCDGHIJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 441,
+      "qualified_groups": "ABCDFJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "I",
+        "WC26-087": "L"
+      },
+      "option": 442,
+      "qualified_groups": "ABCDFIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 443,
+      "qualified_groups": "ABCDFIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "I"
+      },
+      "option": 444,
+      "qualified_groups": "ABCDFIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "F",
+        "WC26-087": "L"
+      },
+      "option": 445,
+      "qualified_groups": "ABCDFHKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "H",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 446,
+      "qualified_groups": "ABCDFHJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "D"
+      },
+      "option": 447,
+      "qualified_groups": "ABCDFHJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "F",
+        "WC26-087": "L"
+      },
+      "option": 448,
+      "qualified_groups": "ABCDFHIL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "F",
+        "WC26-087": "I"
+      },
+      "option": 449,
+      "qualified_groups": "ABCDFHIK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "D"
+      },
+      "option": 450,
+      "qualified_groups": "ABCDFHIJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 451,
+      "qualified_groups": "ABCDFGKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "J",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 452,
+      "qualified_groups": "ABCDFGJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "J"
+      },
+      "option": 453,
+      "qualified_groups": "ABCDFGJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 454,
+      "qualified_groups": "ABCDFGIL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 455,
+      "qualified_groups": "ABCDFGIK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "J",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 456,
+      "qualified_groups": "ABCDFGIJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "H",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 457,
+      "qualified_groups": "ABCDFGHL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "D"
+      },
+      "option": 458,
+      "qualified_groups": "ABCDFGHK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "J",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "D"
+      },
+      "option": 459,
+      "qualified_groups": "ABCDFGHJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "D"
+      },
+      "option": 460,
+      "qualified_groups": "ABCDFGHI"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 461,
+      "qualified_groups": "ABCDEJKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "I",
+        "WC26-087": "L"
+      },
+      "option": 462,
+      "qualified_groups": "ABCDEIKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 463,
+      "qualified_groups": "ABCDEIJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "I"
+      },
+      "option": 464,
+      "qualified_groups": "ABCDEIJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "E",
+        "WC26-087": "L"
+      },
+      "option": 465,
+      "qualified_groups": "ABCDEHKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "E",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 466,
+      "qualified_groups": "ABCDEHJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "E"
+      },
+      "option": 467,
+      "qualified_groups": "ABCDEHJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "E",
+        "WC26-087": "L"
+      },
+      "option": 468,
+      "qualified_groups": "ABCDEHIL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "E",
+        "WC26-087": "I"
+      },
+      "option": 469,
+      "qualified_groups": "ABCDEHIK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "E"
+      },
+      "option": 470,
+      "qualified_groups": "ABCDEHIJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 471,
+      "qualified_groups": "ABCDEGKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "J",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 472,
+      "qualified_groups": "ABCDEGJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "J"
+      },
+      "option": 473,
+      "qualified_groups": "ABCDEGJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 474,
+      "qualified_groups": "ABCDEGIL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 475,
+      "qualified_groups": "ABCDEGIK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "E",
+        "WC26-080": "J",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "I"
+      },
+      "option": 476,
+      "qualified_groups": "ABCDEGIJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "E",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 477,
+      "qualified_groups": "ABCDEGHL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "E"
+      },
+      "option": 478,
+      "qualified_groups": "ABCDEGHK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "J",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "E"
+      },
+      "option": 479,
+      "qualified_groups": "ABCDEGHJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "E"
+      },
+      "option": 480,
+      "qualified_groups": "ABCDEGHI"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "E",
+        "WC26-087": "L"
+      },
+      "option": 481,
+      "qualified_groups": "ABCDEFKL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "E",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "L"
+      },
+      "option": 482,
+      "qualified_groups": "ABCDEFJL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "E"
+      },
+      "option": 483,
+      "qualified_groups": "ABCDEFJK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "E",
+        "WC26-087": "L"
+      },
+      "option": 484,
+      "qualified_groups": "ABCDEFIL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "E",
+        "WC26-087": "I"
+      },
+      "option": 485,
+      "qualified_groups": "ABCDEFIK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "E"
+      },
+      "option": 486,
+      "qualified_groups": "ABCDEFIJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "D",
+        "WC26-079": "H",
+        "WC26-080": "E",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "F",
+        "WC26-087": "L"
+      },
+      "option": 487,
+      "qualified_groups": "ABCDEFHL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "E",
+        "WC26-087": "D"
+      },
+      "option": 488,
+      "qualified_groups": "ABCDEFHK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "E",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "J",
+        "WC26-087": "D"
+      },
+      "option": 489,
+      "qualified_groups": "ABCDEFHJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "E",
+        "WC26-087": "D"
+      },
+      "option": 490,
+      "qualified_groups": "ABCDEFHI"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "E",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "L"
+      },
+      "option": 491,
+      "qualified_groups": "ABCDEFGL"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "K",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "E"
+      },
+      "option": 492,
+      "qualified_groups": "ABCDEFGK"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "J",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "E"
+      },
+      "option": 493,
+      "qualified_groups": "ABCDEFGJ"
+    },
+    {
+      "assignments": {
+        "WC26-074": "D",
+        "WC26-077": "F",
+        "WC26-079": "C",
+        "WC26-080": "I",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "E"
+      },
+      "option": 494,
+      "qualified_groups": "ABCDEFGI"
+    },
+    {
+      "assignments": {
+        "WC26-074": "C",
+        "WC26-077": "F",
+        "WC26-079": "H",
+        "WC26-080": "E",
+        "WC26-081": "B",
+        "WC26-082": "A",
+        "WC26-085": "G",
+        "WC26-087": "D"
+      },
+      "option": 495,
+      "qualified_groups": "ABCDEFGH"
+    }
+  ],
+  "description": "Official FIFA World Cup 26 best-third assignment lookup. Each case maps one qualifying-group combination to explicit round-of-32 fixture positions: assignment keys are real match_id values from data/external/fixture_2026.csv (side: away), and values are the third-placed team's group letter.",
+  "provenance": {
+    "annex": "Annexe C: Combinations for eight best third-placed teams (physical pages 80-98, options 1-495)",
+    "extracted_at_utc": "2026-06-13T00:40:00Z",
+    "extracted_by": "Claude (GSD executor, plan 03-01), reviewed against rendered page images of the official PDF",
+    "regulations_manifest": "data/metadata/fifa_2026_regulations.provenance.json",
+    "regulations_sha256": "bad4ea83cf1f51055598b0c12c3dab280a78777e08a623b9e9098508b4ecc8d9",
+    "review": "Structural verification at extraction time: 495 contiguous options; 8 distinct groups per option; qualifying sets equal the complete C(12,8) enumeration; every assignment allowed by the real fixture slot token; 14 option rows cross-checked character-by-character against independently rendered page images with zero mismatches. Selector positions taken from the frozen fixture_2026.csv rows, not inferred from token matching."
+  },
+  "selectors": {
+    "1A": {
+      "match_id": "WC26-079",
+      "official_match_number": "M79",
+      "side": "away",
+      "slot_token": "3CEFHI",
+      "winner_slot_home": "1A"
+    },
+    "1B": {
+      "match_id": "WC26-085",
+      "official_match_number": "M85",
+      "side": "away",
+      "slot_token": "3EFGIJ",
+      "winner_slot_home": "1B"
+    },
+    "1D": {
+      "match_id": "WC26-081",
+      "official_match_number": "M81",
+      "side": "away",
+      "slot_token": "3BEFIJ",
+      "winner_slot_home": "1D"
+    },
+    "1E": {
+      "match_id": "WC26-074",
+      "official_match_number": "M74",
+      "side": "away",
+      "slot_token": "3ABCDF",
+      "winner_slot_home": "1E"
+    },
+    "1G": {
+      "match_id": "WC26-082",
+      "official_match_number": "M82",
+      "side": "away",
+      "slot_token": "3AEHIJ",
+      "winner_slot_home": "1G"
+    },
+    "1I": {
+      "match_id": "WC26-077",
+      "official_match_number": "M77",
+      "side": "away",
+      "slot_token": "3CDFGH",
+      "winner_slot_home": "1I"
+    },
+    "1K": {
+      "match_id": "WC26-087",
+      "official_match_number": "M87",
+      "side": "away",
+      "slot_token": "3DEIJL",
+      "winner_slot_home": "1K"
+    },
+    "1L": {
+      "match_id": "WC26-080",
+      "official_match_number": "M80",
+      "side": "away",
+      "slot_token": "3EHIJK",
+      "winner_slot_home": "1L"
+    }
+  }
+}
