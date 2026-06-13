@@ -22,12 +22,28 @@ def _build_parser() -> argparse.ArgumentParser:
         prog="python -m cdd_mundial.live",
         description="Run the official daily forecast pipeline and publish a snapshot.",
     )
-    parser.add_argument("--results-path", type=Path, default=CANONICAL_RESULTS_PATH)
+    parser.add_argument(
+        "--results-path",
+        "--results-csv",
+        dest="results_path",
+        type=Path,
+        default=CANONICAL_RESULTS_PATH,
+        help="Canonical results_2026.csv (authoritative live results).",
+    )
     parser.add_argument(
         "--fixture-path", type=Path, default=Path("data/external/fixture_2026.csv")
     )
     parser.add_argument("--data-root", type=Path, default=Path("data"))
     parser.add_argument("--snapshots-root", type=Path, default=Path("reports/snapshots"))
+    parser.add_argument(
+        "--manual-odds",
+        type=Path,
+        default=None,
+        help=(
+            "Manual odds fallback CSV (data/external/odds_2026_template.csv shape) "
+            "used to freeze the market benchmark when no provider key is configured."
+        ),
+    )
     parser.add_argument("--n-sims", type=int, default=10000)
     parser.add_argument("--seed", type=int, default=DEFAULT_SEED)
     parser.add_argument("--xi", type=float, default=DEFAULT_XI)
@@ -36,6 +52,15 @@ def _build_parser() -> argparse.ArgumentParser:
         type=str,
         default=None,
         help="ISO date/time gating completeness; defaults to now (UTC).",
+    )
+    parser.add_argument(
+        "--official",
+        action="store_true",
+        help=(
+            "Explicit marker for an official publication run (the default mode); "
+            "accepted for documentation/runbook clarity. Has no effect unless "
+            "combined with --verify-only, which still only validates."
+        ),
     )
     parser.add_argument(
         "--allow-dirty",
@@ -68,6 +93,7 @@ def main(argv: list[str] | None = None) -> None:
             fixture_path=args.fixture_path,
             data_root=args.data_root,
             snapshots_root=args.snapshots_root,
+            manual_odds_path=args.manual_odds,
             n_sims=args.n_sims,
             seed=args.seed,
             as_of=args.as_of,
