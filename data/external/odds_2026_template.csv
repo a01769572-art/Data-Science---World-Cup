@@ -1,1 +1,10 @@
 provider,bookmaker,event_id,match_id,commence_time_utc,provider_update_utc,home_team,away_team,price_home,price_draw,price_away
+manual,book-alpha,EVT-2026-007-A,WC26-007,2026-06-13T22:00:00Z,2026-06-13T21:30:00Z,Brazil,Morocco,1.55,4.10,6.20
+manual,book-beta,EVT-2026-007-B,WC26-007,2026-06-13T22:00:00Z,2026-06-13T21:30:00Z,Brazil,Morocco,1.60,4.00,6.00
+manual,book-gamma,EVT-2026-007-C,WC26-007,2026-06-13T22:00:00Z,2026-06-13T21:30:00Z,Brazil,Morocco,1.57,4.20,6.10
+manual,book-alpha,EVT-2026-005-A,WC26-005,2026-06-14T01:00:00Z,2026-06-13T21:30:00Z,Haiti,Scotland,4.80,3.60,1.78
+manual,book-beta,EVT-2026-005-B,WC26-005,2026-06-14T01:00:00Z,2026-06-13T21:30:00Z,Haiti,Scotland,4.60,3.55,1.82
+manual,book-gamma,EVT-2026-005-C,WC26-005,2026-06-14T01:00:00Z,2026-06-13T21:30:00Z,Haiti,Scotland,4.90,3.50,1.80
+manual,book-alpha,EVT-2026-006-A,WC26-006,2026-06-14T04:00:00Z,2026-06-13T21:30:00Z,Australia,Turkey,3.10,3.30,2.30
+manual,book-beta,EVT-2026-006-B,WC26-006,2026-06-14T04:00:00Z,2026-06-13T21:30:00Z,Australia,Turkey,3.05,3.35,2.32
+manual,book-gamma,EVT-2026-006-C,WC26-006,2026-06-14T04:00:00Z,2026-06-13T21:30:00Z,Australia,Turkey,3.15,3.25,2.28
