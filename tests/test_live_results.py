@@ -41,6 +41,11 @@ from cdd_mundial.simulation.state import TournamentState
 
 RESULTS_PATH = Path("data/external/results_2026.csv")
 
+# Strict-column rejection raises SchemaErrors (plural); value checks raise
+# SchemaError (singular). They share no base beyond Exception, so tests that
+# assert "the schema rejected this" catch both.
+SCHEMA_ERRORS = (pa.errors.SchemaError, pa.errors.SchemaErrors)
+
 
 # --- Mini fixtures (table-driven, fixture-backed) ---
 
@@ -151,14 +156,14 @@ def test_live_results_schema_accepts_canonical_frame() -> None:
 def test_live_results_schema_rejects_extra_metadata_column() -> None:
     frame = results_frame()
     frame["captured_at_utc"] = "2026-06-13T00:00:00Z"
-    with pytest.raises(pa.errors.SchemaError):
+    with pytest.raises(SCHEMA_ERRORS):
         LiveResultsSchema.validate(frame)
 
 
 def test_live_results_schema_rejects_negative_goals() -> None:
     frame = results_frame()
     frame.loc[0, "goals_a"] = -1
-    with pytest.raises(pa.errors.SchemaError):
+    with pytest.raises(SCHEMA_ERRORS):
         LiveResultsSchema.validate(frame)
 
 
@@ -166,7 +171,7 @@ def test_live_results_schema_rejects_positive_fair_play() -> None:
     # Art. 13 conduct scores are deductions (<= 0).
     frame = results_frame()
     frame.loc[0, "fair_play_a"] = 2
-    with pytest.raises(pa.errors.SchemaError):
+    with pytest.raises(SCHEMA_ERRORS):
         LiveResultsSchema.validate(frame)
 
 
@@ -174,7 +179,7 @@ def test_live_results_schema_rejects_duplicate_match_id() -> None:
     frame = results_frame()
     dup = frame.iloc[[0]].copy()
     frame = pd.concat([frame, dup], ignore_index=True)
-    with pytest.raises(pa.errors.SchemaError):
+    with pytest.raises(SCHEMA_ERRORS):
         LiveResultsSchema.validate(frame)
 
 
@@ -208,7 +213,7 @@ def test_upcoming_predictions_schema_requires_normalized_probabilities() -> None
 
     bad = good.copy()
     bad.loc[0, "prob_a"] = 0.9
-    with pytest.raises(pa.errors.SchemaError):
+    with pytest.raises(SCHEMA_ERRORS):
         UpcomingPredictionsSchema.validate(bad)
 
 
@@ -224,7 +229,7 @@ def test_frozen_benchmark_schema_requires_normalized_probabilities() -> None:
             }
         ]
     )
-    with pytest.raises(pa.errors.SchemaError):
+    with pytest.raises(SCHEMA_ERRORS):
         FrozenBenchmarkSchema.validate(bad)
 
 
@@ -242,7 +247,7 @@ def test_calibration_ledger_schema_constrains_outcome_index() -> None:
             }
         ]
     )
-    with pytest.raises(pa.errors.SchemaError):
+    with pytest.raises(SCHEMA_ERRORS):
         CalibrationLedgerSchema.validate(bad)
 
 
@@ -305,7 +310,7 @@ def test_build_live_state_rejects_unknown_team(test_workspace: Path) -> None:
 def test_build_live_state_rejects_missing_required_column(test_workspace: Path) -> None:
     frame = results_frame().drop(columns=["goals_a"])
     path = write_results_csv(test_workspace / "results.csv", frame)
-    with pytest.raises((ValueError, pa.errors.SchemaError)):
+    with pytest.raises((ValueError,) + SCHEMA_ERRORS):
         build_live_state(path, fixture=mini_fixture())
 
 
