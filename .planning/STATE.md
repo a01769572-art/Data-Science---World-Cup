@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 03 planned; ready to execute
-last_updated: "2026-06-13T00:03:19.685Z"
-last_activity: 2026-06-13 -- Phase 03 planning complete
+stopped_at: Completed 03-01-PLAN.md (regulatory evidence gate)
+last_updated: "2026-06-13T00:25:20.086Z"
+last_activity: 2026-06-13
 progress:
   total_phases: 6
   completed_phases: 2
   total_plans: 15
-  completed_plans: 10
-  percent: 67
+  completed_plans: 11
+  percent: 73
 ---
 
 # Project State
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-11)
 
 **Core value:** Proyecto de portafolio metodológicamente riguroso y profundamente documentado que enseña ciencia de datos end-to-end real — si los pronósticos fallan pero el proceso es sólido y el aprendizaje quedó capturado, el proyecto cumplió.
-**Current focus:** Phase 03 - simulador-del-torneo
+**Current focus:** Phase 03 — simulador-del-torneo
 
 ## Current Position
 
-Phase: 03 (simulador-del-torneo) - READY TO EXECUTE
-Plan: 0 of 5
+Phase: 03 (simulador-del-torneo) — EXECUTING
+Plan: 2 of 5
 Status: Ready to execute
-Last activity: 2026-06-13 -- Phase 03 planning complete
+Last activity: 2026-06-13
 
 Progress: [███████░░░] 67%
 
@@ -64,6 +64,7 @@ Progress: [███████░░░] 67%
 | Phase 02 P03 | 10min | 2 tasks | 3 files |
 | Phase 02 P04 | 25min | 2 tasks | 7 files |
 | Phase 02 P05 | 13min | 2 tasks | 3 files |
+| Phase 03 P01 | 14min | 2 tasks + 1 fix tasks | 5 files files |
 
 ## Accumulated Context
 
@@ -104,6 +105,9 @@ Recent decisions affecting current work:
 - [Phase 02]: Cold-start 1000 sobre todo el historico; validacion por Spearman (0.979 vs eloratings.net) — Warm-start inviable: el snapshot cubre 48 de 336 equipos (pitfall 9); solo los rangos/diferencias importan
 - [Phase 02]: Identifiabilidad Dixon-Coles via penalizacion suave 1000*(sum att^2 + sum dfn^2) en la NLL con gradiente exacto — Elimina la direccion plana sin reparametrizar a n-1 libres (pitfall 7c); sumas del fit < 0.01 verificadas por test
 - [Phase 02]: Contrato D-09 congelado con cache de produccion por (path, mtime) y test de firma inspect.signature — Phase 3 consume predict_lambdas a ciegas; el cache evita releer JSON por llamada y se invalida solo con cada re-fit diario (T-02-12)
+- [Phase 03]: El fallback oficial de desempate FIFA 2026 (Art. 13 paso 3) es el ranking FIFA, NO sorteo; head-to-head va primero — rules_fifa.py debe seguir el texto oficial pineado, no el wording previo de SIM-01/D-03
+- [Phase 03]: El PDF oficial del reglamento no se versiona (data/raw/regulations/ gitignored); la evidencia commiteada es el manifest de procedencia + fixtures con sha256 cruzado, validados fail-closed
+- [Phase 03]: Las combinaciones esperadas de mejores terceros se derivan independientemente de C(12,8) + Art. 12.6, nunca de la tabla parseada del Anexo C; el mapping commiteado cubre las 495 con biyeccion y compatibilidad de tokens
 
 ### Pending Todos
 
@@ -111,7 +115,7 @@ None yet.
 
 ### Blockers/Concerns
 
-- [Phase 3 prerequisito]: Reglamento oficial FIFA 2026 (orden de desempates, asignación de mejores terceros a R32, puntos fair-play) NO verificado en research — fetch del PDF oficial es la primera tarea del simulador
+- ~~[Phase 3 prerequisito]: Reglamento oficial FIFA 2026 NO verificado~~ — RESUELTO en 03-01: reglamento oficial (edicion MAY 2026) pineado con SHA-256, Art. 13 + Anexo C (495 combinaciones) extraidos y validados fail-closed. OJO: el orden oficial difiere del wording de SIM-01 (head-to-head primero; fallback = ranking FIFA, no sorteo).
 - [Phase 3 planning override]: `03-03` modifica 10 archivos de fixtures/tests; el Director aceptó la advertencia de tamaño porque no quedan blockers funcionales ni de cobertura.
 - [Stack]: Pin pandas ~=2.3.3 (NO 3.x — seaborn 0.13.2 incompatible); no tocar el pin a mitad de torneo
 
@@ -125,6 +129,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-06-12T16:02:05Z
-Stopped at: Phase 02 verified and completed
+Last session: 2026-06-13T00:25:20.079Z
+Stopped at: Completed 03-01-PLAN.md (regulatory evidence gate)
 Resume file: None

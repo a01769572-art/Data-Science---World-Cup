@@ -70,7 +70,7 @@ Plans:
 
 Plans:
 **Wave 1**
-- [ ] 03-01-PLAN.md — Gate regulatorio FIFA fail-closed: provenance oficial, URL/checksum/artículos/anexo y mapping revisado de mejores terceros
+- [x] 03-01-PLAN.md — Gate regulatorio FIFA fail-closed: provenance oficial, URL/checksum/artículos/anexo y mapping revisado de mejores terceros
 - [ ] 03-02-PLAN.md — Bootstrap de `simulation/` + TournamentState thin + resolución compacta post-90' sin sesgo de orden
 
 **Wave 2** *(blocked on Wave 1 completion)*
