@@ -232,10 +232,21 @@ def test_doc03_no_secrets_or_restricted_data_are_tracked() -> None:
         "data/raw/restricted/",
         "data/processed/",
     )
+    # D-18 (Phase 4): the canonical append-only live calibration ledger is
+    # authoritative state that MUST be versioned for reproducibility, and is
+    # explicitly re-included in .gitignore. It is small, generated-but-canonical,
+    # carries no secrets or licensed raw data, and is required for every forecast
+    # to be regenerable from versioned code — so it is the one sanctioned
+    # exception to the blanket data/processed/ ban. The exemption is a single
+    # explicit file path, keeping the gate intact for all other generated data.
+    sanctioned_versioned_data = frozenset(
+        {"data/processed/live/calibration/calibration_matches.parquet"}
+    )
     offenders = [
         path
         for path in tracked
         if path.startswith(forbidden_prefixes)
+        and path not in sanctioned_versioned_data
     ]
     assert not offenders, f"restricted or generated data is tracked: {offenders}"
 
