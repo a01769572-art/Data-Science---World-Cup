@@ -155,8 +155,17 @@ def _check_completeness(
     if "kickoff_utc" not in fixture.columns:
         raise ValueError("completeness check requires a 'kickoff_utc' fixture column")
 
+    # Compare instants, not strings: ``kickoff_utc`` is a full ISO-8601 instant
+    # (``...TZ``) while ``--as-of`` may be a date-only value (``YYYY-MM-DD``).
+    # A lexicographic ``<=`` would treat every match on/after the as-of day as
+    # not-yet-due (the longer string sorts after), silently defeating the
+    # fail-closed completeness gate (CR-01). Parse both sides to tz-aware
+    # datetimes and reject a malformed ``as_of`` instead of failing open.
+    as_of_ts = pd.to_datetime(as_of, utc=True, errors="raise")
+    kickoffs = pd.to_datetime(fixture["kickoff_utc"], utc=True, errors="coerce")
+
     present = {record.match_id for record in records}
-    due = fixture.loc[fixture["kickoff_utc"].notna() & (fixture["kickoff_utc"] <= as_of), "match_id"]
+    due = fixture.loc[kickoffs.notna() & (kickoffs <= as_of_ts), "match_id"]
     missing = sorted(str(match_id) for match_id in due if str(match_id) not in present)
     if not missing:
         return
@@ -169,7 +178,13 @@ def _check_completeness(
             f"{blocking}; supply the results or an explicit override"
         )
     if override is not None:
-        for match_id in missing:
+        # Record only the IDs this token actually excused (those in
+        # ``allow_missing``) for precise audit traceability, not the full
+        # missing set (IN-01). When this branch is reached every missing ID is
+        # excused, so the recorded set equals ``missing`` in practice, but the
+        # intersection keeps the trace field semantically exact.
+        excused_missing = [match_id for match_id in missing if match_id in excused]
+        for match_id in excused_missing:
             if match_id not in override.missing_matches:
                 override.missing_matches.append(match_id)
 
@@ -191,12 +206,22 @@ def _check_scraper_assist(
         if record is None:
             continue
         assist_a, assist_b = int(row.goals_a), int(row.goals_b)
-        if (assist_a, assist_b) != (record.goals_a, record.goals_b):
+        assist_team_a = str(row.team_a)
+        assist_team_b = str(row.team_b)
+        # Verify participant identity as well as goals (IN-02): an assist source
+        # with swapped/wrong teams but coincidentally equal goals must not pass
+        # verification silently. A normalized participant *set* comparison
+        # tolerates a/b ordering differences while catching genuine mismatches.
+        goals_mismatch = (assist_a, assist_b) != (record.goals_a, record.goals_b)
+        teams_mismatch = {assist_team_a, assist_team_b} != {record.team_a, record.team_b}
+        if goals_mismatch or teams_mismatch:
             discrepancies.append(
                 {
                     "match_id": match_id,
                     "canonical": (record.goals_a, record.goals_b),
                     "assist": (assist_a, assist_b),
+                    "canonical_teams": (record.team_a, record.team_b),
+                    "assist_teams": (assist_team_a, assist_team_b),
                 }
             )
 
