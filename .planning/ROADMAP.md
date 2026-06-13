@@ -71,7 +71,7 @@ Plans:
 Plans:
 **Wave 1**
 - [x] 03-01-PLAN.md — Gate regulatorio FIFA fail-closed: provenance oficial, URL/checksum/artículos/anexo y mapping revisado de mejores terceros
-- [ ] 03-02-PLAN.md — Bootstrap de `simulation/` + TournamentState thin + resolución compacta post-90' sin sesgo de orden
+- [x] 03-02-PLAN.md — Bootstrap de `simulation/` + TournamentState thin + resolución compacta post-90' sin sesgo de orden
 
 **Wave 2** *(blocked on Wave 1 completion)*
 - [ ] 03-03-PLAN.md — Wave 0 Nyquist: fixtures/tests revisables para desempates, fair play, seeded lots y slot resolution oficial
@@ -125,7 +125,7 @@ Phases execute in numeric order: 1 → 2 ∥ 3 → 4 → 5 ∥ 6 (2-3 paraleliza
 |-------|----------------|--------|-----------|
 | 1. Fundación de Datos | 5/5 | Complete | 2026-06-12 |
 | 2. Modelos Baseline | 5/5 | Complete | 2026-06-12 |
-| 3. Simulador del Torneo | 0/5 | Planned    |  |
+| 3. Simulador del Torneo | 2/5 | In Progress|  |
 | 4. Primer Pronóstico + Pipeline Diario | 0/TBD | Not started | - |
 | 5. ML + Ensemble (gated) | 0/TBD | Not started | - |
 | 6. Operación en Vivo + Post-Mortem | 0/TBD | Not started | - |

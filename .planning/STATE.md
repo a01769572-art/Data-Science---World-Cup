@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 03-01-PLAN.md (regulatory evidence gate)
-last_updated: "2026-06-13T00:25:20.086Z"
+stopped_at: Completed 03-02-PLAN.md (estado del torneo + resolver de eliminatorias)
+last_updated: "2026-06-13T00:37:08.255Z"
 last_activity: 2026-06-13
 progress:
   total_phases: 6
   completed_phases: 2
   total_plans: 15
-  completed_plans: 11
-  percent: 73
+  completed_plans: 12
+  percent: 80
 ---
 
 # Project State
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-06-11)
 ## Current Position
 
 Phase: 03 (simulador-del-torneo) — EXECUTING
-Plan: 2 of 5
+Plan: 3 of 5
 Status: Ready to execute
 Last activity: 2026-06-13
 
@@ -65,6 +65,7 @@ Progress: [███████░░░] 67%
 | Phase 02 P04 | 25min | 2 tasks | 7 files |
 | Phase 02 P05 | 13min | 2 tasks | 3 files |
 | Phase 03 P01 | 14min | 2 tasks + 1 fix tasks | 5 files files |
+| Phase 03 P02 | 7min | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -108,6 +109,8 @@ Recent decisions affecting current work:
 - [Phase 03]: El fallback oficial de desempate FIFA 2026 (Art. 13 paso 3) es el ranking FIFA, NO sorteo; head-to-head va primero — rules_fifa.py debe seguir el texto oficial pineado, no el wording previo de SIM-01/D-03
 - [Phase 03]: El PDF oficial del reglamento no se versiona (data/raw/regulations/ gitignored); la evidencia commiteada es el manifest de procedencia + fixtures con sha256 cruzado, validados fail-closed
 - [Phase 03]: Las combinaciones esperadas de mejores terceros se derivan independientemente de C(12,8) + Art. 12.6, nunca de la tabla parseada del Anexo C; el mapping commiteado cubre las 495 con biyeccion y compatibilidad de tokens
+- [Phase 03]: TournamentState delgado validado contra fixture: solo resultados jugados team_a/team_b; advanced_team requerido en empates de eliminatoria y prohibido en grupos; fair-play como conduct scores observados (<=0), nunca simulados
+- [Phase 03]: Resolver compacto post-empate: q=p_win/(p_win+p_loss) con shrink opcional hacia 0.5; complemento exacto al intercambiar equipos, sin lambdas de ET (D-07/D-08); el engine debe alimentar uniformes de streams keyed por match_id + semilla
 
 ### Pending Todos
 
@@ -129,6 +132,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-06-13T00:25:20.079Z
-Stopped at: Completed 03-01-PLAN.md (regulatory evidence gate)
+Last session: 2026-06-13T00:36:58.412Z
+Stopped at: Completed 03-02-PLAN.md (estado del torneo + resolver de eliminatorias)
 Resume file: None
