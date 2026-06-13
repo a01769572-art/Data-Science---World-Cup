@@ -192,7 +192,7 @@ def test_group_match_cannot_carry_advanced_team() -> None:
 
 def test_drawn_knockout_match_requires_advanced_team() -> None:
     drawn = PlayedMatchResult(
-        match_id="WC26-073", team_a="mexico", team_b="canada", goals_a=1, goals_b=1
+        match_id="WC26-073", team_a="mexico", team_b="south-korea", goals_a=1, goals_b=1
     )
 
     with pytest.raises(ValueError, match="advanced_team"):
