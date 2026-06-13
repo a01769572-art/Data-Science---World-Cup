@@ -41,6 +41,7 @@ markers = [
     "network: tests that access external services",
     "manual: tests that require explicit human review",
     "data_acceptance: tests that require real materialized data artifacts",
+    "performance: slow benchmarks excluded from the quick suite, run at the phase gate",
 ]
 
 [tool.ruff]
