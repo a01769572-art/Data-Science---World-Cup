@@ -398,6 +398,10 @@ def _ko_advance_probabilities(
     q = np.empty(n_sims, dtype=float)
     pairs = np.stack([a_idx, b_idx], axis=1)
     unique_pairs, inverse = np.unique(pairs, axis=0, return_inverse=True)
+    # numpy 2.0/2.1 return a 2-D ``(n, 1)`` inverse for ``axis=0`` (fixed in 2.2);
+    # the project pins ``numpy>=2,<2.5``, so flatten to keep the 1-D boolean mask
+    # below valid across the entire supported range.
+    inverse = np.asarray(inverse).reshape(-1)
     for p_idx, (ai, bi) in enumerate(unique_pairs):
         lam_a, lam_b = lambdas_fn(teams[ai], teams[bi])
         q_val = _advance_prob(lam_a, lam_b)
