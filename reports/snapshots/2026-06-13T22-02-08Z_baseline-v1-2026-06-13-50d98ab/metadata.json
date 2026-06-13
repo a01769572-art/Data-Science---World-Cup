@@ -1,0 +1,85 @@
+{
+  "allow_dirty_override": false,
+  "artifacts": [
+    "frozen_benchmark.parquet",
+    "group_positions.parquet",
+    "report_inputs/calibration_publication_slice.parquet",
+    "team_probabilities.parquet",
+    "upcoming_match_predictions.parquet"
+  ],
+  "as_of_date": "2026-06-13",
+  "calibration": {
+    "ledger_path": "data/processed/live/calibration/calibration_matches.parquet",
+    "ledger_row_ids": [
+      "0865cd8909c5fcf23138486ea220ff2812d0383bc96f17612403e96c3fd8586c",
+      "3d0f03edc6668fead30ecc2b2c356ba5985b907448654fec3d676c2a4d1969a5",
+      "32bc726da0ba711120de26887ebb808dbbeae56bbdd95ba63cc31989ec77d2c6"
+    ],
+    "publication_slice": "report_inputs/calibration_publication_slice.parquet",
+    "publication_slice_sha256": "fa6438d883d1b2dc41cac7902ac94597b5e8c9ecf372a676884a71a3c5dbc388"
+  },
+  "checksums": {
+    "frozen_benchmark.parquet": "cc997b370194d373ef9cb856831e9f12625dc8ad410c737c68714aeea381598f",
+    "group_positions.parquet": "fcda032a91810563ba9e941dd321d43ad7027de437aea8f6158e28c0fb408d7b",
+    "report_inputs/calibration_publication_slice.parquet": "fa6438d883d1b2dc41cac7902ac94597b5e8c9ecf372a676884a71a3c5dbc388",
+    "team_probabilities.parquet": "d4c2b97827737c52fedb1c63da01f326ea42938c28eceeda83626309090ff5e7",
+    "upcoming_match_predictions.parquet": "e04dda45f00e85e1cecba44a206f0ef65ec28a80d25046436f350a6beaa204ca"
+  },
+  "frozen_benchmark": {
+    "filename": "frozen_benchmark.parquet",
+    "row_ids": [
+      "e988609874d110c6086e25f9d569ba20c8a0b8e84436ce8121ddf6c6983a606c",
+      "4664fc7fe3ffe222bc87df825ba784b995daf5b8ab302be10d87a68104d018d5",
+      "8659185b5fe13db2775bfc0a0546de1a059f4bd2fc29699cc317474b1522bd30"
+    ],
+    "sha256": "cc997b370194d373ef9cb856831e9f12625dc8ad410c737c68714aeea381598f"
+  },
+  "generated_at_utc": "2026-06-13T22:02:08Z",
+  "git_commit": "7269efb6475b3ec7819bf09065bec3c5277b7465",
+  "git_commit_short": "7269efb",
+  "git_dirty": false,
+  "input_fingerprint": "50d98ab2142b50c71273b5e69474ed82d8300190fdcf2d4797cadd2c460b35de",
+  "kickoff_boundary_utc": "2026-06-14T01:00:00Z",
+  "live_training_provenance": {
+    "artifact_path": "data/processed/live/live_training_2026-06-13.parquet",
+    "artifact_sha256": "56aaf68afc162d3e106346dbae170ea2643d021ebf5931905352388ea4421dd8",
+    "live_match_ids": [
+      "WC26-001",
+      "WC26-002",
+      "WC26-003"
+    ],
+    "source_version": "2026-06-11"
+  },
+  "live_training_sha256": "56aaf68afc162d3e106346dbae170ea2643d021ebf5931905352388ea4421dd8",
+  "model_provenance": {
+    "artifact_sha256": "eee2483f564163fe201717289a6337ab444b31fc224afa97138fb98113e24eac",
+    "input_fingerprint": "50d98ab2142b50c71273b5e69474ed82d8300190fdcf2d4797cadd2c460b35de",
+    "model_path": "data/processed/models/dc_params_2026-06-13.json",
+    "model_version": "baseline-v1-2026-06-13-50d98ab",
+    "reused": true
+  },
+  "model_version": "baseline-v1-2026-06-13-50d98ab",
+  "modified_files": [],
+  "n_sims": 10000,
+  "order": [
+    "materialize",
+    "select_model",
+    "simulate",
+    "publish"
+  ],
+  "preflight": {
+    "benchmark_frozen": true,
+    "materialized_before_simulation": true,
+    "results_validated": true,
+    "worktree_clean": true
+  },
+  "publication_row_ids": [
+    "0865cd8909c5fcf23138486ea220ff2812d0383bc96f17612403e96c3fd8586c",
+    "3d0f03edc6668fead30ecc2b2c356ba5985b907448654fec3d676c2a4d1969a5",
+    "32bc726da0ba711120de26887ebb808dbbeae56bbdd95ba63cc31989ec77d2c6"
+  ],
+  "published_at_utc": "2026-06-13T22:02:08Z",
+  "seed": 20260613,
+  "snapshot_id": "2026-06-13T22-02-08Z_baseline-v1-2026-06-13-50d98ab",
+  "xi": 0.00095
+}

@@ -27,7 +27,14 @@ data/raw/restricted/
 data/raw/odds/
 data/raw/eloratings/
 data/raw/regulations/
-data/processed/
+# Ignore processed contents (not the directory itself, so nested re-includes work).
+data/processed/**
+# The canonical append-only live calibration ledger is authoritative state that
+# must be versioned for reproducibility (D-18); the dated live-training artifacts
+# remain ignored runtime byproducts.
+!data/processed/live/
+!data/processed/live/calibration/
+!data/processed/live/calibration/calibration_matches.parquet
 
 # Generated model artifacts
 models/
@@ -45,5 +52,7 @@ artifacts/
 # daily pipeline (regenerated every official run), not a reviewed source artifact.
 data/metadata/live_training_*.parquet.provenance.json
 
-# Append-only published snapshot bundles are run outputs, not source.
-reports/snapshots/
+# Staging directories for in-progress snapshot publication are transient.
+reports/snapshots/.stg-*
+# Official append-only published snapshot bundles ARE versioned per D-12 (canonical
+# snapshot data + rendered report committed before kickoff for auditability).
