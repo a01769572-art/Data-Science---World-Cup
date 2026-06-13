@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pronostico Mundial 2026 - 2026-06-13</title>
+  <style>
+    :root {
+      --bg: #0f1729;
+      --panel: #182338;
+      --accent: #38bdf8;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --good: #4ade80;
+      --bad: #f87171;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    main { max-width: 1080px; margin: 0 auto; padding: 24px; }
+    header.report-header { border-bottom: 2px solid var(--accent); padding-bottom: 16px; margin-bottom: 24px; }
+    h1 { margin: 0 0 4px; font-size: 1.8rem; }
+    h2 { color: var(--accent); border-bottom: 1px solid #2a3a55; padding-bottom: 6px; margin-top: 40px; }
+    section { margin-bottom: 24px; }
+    .muted { color: var(--muted); font-size: 0.9rem; }
+    .kpi-grid { display: flex; flex-wrap: wrap; gap: 16px; margin: 16px 0; }
+    .kpi {
+      background: var(--panel);
+      border-radius: 10px;
+      padding: 16px 20px;
+      min-width: 160px;
+      flex: 1 1 160px;
+    }
+    .kpi .kpi-label { display: block; color: var(--muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .kpi .kpi-value { display: block; font-size: 1.6rem; font-weight: 700; margin-top: 4px; }
+    .top-block { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; }
+    .top-block .kpi-grid { flex: 1 1 320px; }
+    .top-block .highlight-visual { flex: 1 1 360px; }
+    img.report-visual { width: 100%; border-radius: 10px; background: #fff; }
+    table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 0.92rem; }
+    th, td { padding: 8px 10px; text-align: right; border-bottom: 1px solid #2a3a55; }
+    th:first-child, td:first-child { text-align: left; }
+    thead th { color: var(--accent); }
+    .delta-up { color: var(--good); }
+    .delta-down { color: var(--bad); }
+    footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid #2a3a55; color: var(--muted); font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="report-header">
+      <h1>Pronostico diario - Mundial 2026</h1>
+      <p class="muted">Snapshot 2026-06-13T22-07-38Z_baseline-v1-2026-06-13-50d98ab - publicado 2026-06-13T22:07:38Z - modelo baseline-v1-2026-06-13-50d98ab</p>
+    </header>
+<section id="executive-summary">
+  <h2>Resumen ejecutivo</h2>
+  <div class="top-block">
+    <div class="kpi-grid">
+      <div class="kpi">
+        <span class="kpi-label">Favorito</span>
+        <span class="kpi-value">ARGENTINA</span>
+      </div>
+      <div class="kpi">
+        <span class="kpi-label">P(Campeon) lider</span>
+        <span class="kpi-value">21.4%</span>
+      </div>
+      <div class="kpi">
+        <span class="kpi-label">Partidos proximos</span>
+        <span class="kpi-value">69</span>
+      </div>
+      <div class="kpi">
+        <span class="kpi-label">Partidos evaluados</span>
+        <span class="kpi-value">0</span>
+      </div>
+    </div>
+    <div class="highlight-visual">
+      <img class="report-visual" src="assets/highlight_champion.png" alt="Probabilidad de campeon (top equipos)">
+    </div>
+  </div>
+</section>
+
+<section id="next-block">
+  <h2>Proximo bloque de partidos</h2>
+  <table>
+    <thead>
+      <tr><th>Partido</th><th>Local</th><th>Visitante</th><th>P(1)</th><th>P(X)</th><th>P(2)</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>WC26-004</td>
+        <td>united-states</td>
+        <td>paraguay</td>
+        <td>29.8%</td>
+        <td>31.8%</td>
+        <td>38.4%</td>
+      </tr>
+      <tr>
+        <td>WC26-005</td>
+        <td>haiti</td>
+        <td>scotland</td>
+        <td>11.8%</td>
+        <td>19.4%</td>
+        <td>68.8%</td>
+      </tr>
+      <tr>
+        <td>WC26-006</td>
+        <td>australia</td>
+        <td>turkiye</td>
+        <td>33.5%</td>
+        <td>29.2%</td>
+        <td>37.3%</td>
+      </tr>
+      <tr>
+        <td>WC26-007</td>
+        <td>brazil</td>
+        <td>morocco</td>
+        <td>40.1%</td>
+        <td>33.3%</td>
+        <td>26.5%</td>
+      </tr>
+      <tr>
+        <td>WC26-008</td>
+        <td>qatar</td>
+        <td>switzerland</td>
+        <td>5.3%</td>
+        <td>12.1%</td>
+        <td>82.6%</td>
+      </tr>
+      <tr>
+        <td>WC26-009</td>
+        <td>ivory-coast</td>
+        <td>ecuador</td>
+        <td>20.9%</td>
+        <td>37.4%</td>
+        <td>41.6%</td>
+      </tr>
+      <tr>
+        <td>WC26-010</td>
+        <td>germany</td>
+        <td>curacao</td>
+        <td>94.1%</td>
+        <td>4.6%</td>
+        <td>1.3%</td>
+      </tr>
+      <tr>
+        <td>WC26-011</td>
+        <td>netherlands</td>
+        <td>japan</td>
+        <td>40.1%</td>
+        <td>29.2%</td>
+        <td>30.7%</td>
+      </tr>
+      <tr>
+        <td>WC26-012</td>
+        <td>sweden</td>
+        <td>tunisia</td>
+        <td>42.6%</td>
+        <td>29.5%</td>
+        <td>27.9%</td>
+      </tr>
+      <tr>
+        <td>WC26-013</td>
+        <td>saudi-arabia</td>
+        <td>uruguay</td>
+        <td>10.8%</td>
+        <td>28.0%</td>
+        <td>61.3%</td>
+      </tr>
+      <tr>
+        <td>WC26-014</td>
+        <td>spain</td>
+        <td>cape-verde</td>
+        <td>87.3%</td>
+        <td>9.9%</td>
+        <td>2.9%</td>
+      </tr>
+      <tr>
+        <td>WC26-015</td>
+        <td>iran</td>
+        <td>new-zealand</td>
+        <td>60.6%</td>
+        <td>26.8%</td>
+        <td>12.6%</td>
+      </tr>
+      <tr>
+        <td>WC26-016</td>
+        <td>belgium</td>
+        <td>egypt</td>
+        <td>55.0%</td>
+        <td>28.0%</td>
+        <td>17.0%</td>
+      </tr>
+      <tr>
+        <td>WC26-017</td>
+        <td>france</td>
+        <td>senegal</td>
+        <td>50.8%</td>
+        <td>28.3%</td>
+        <td>20.9%</td>
+      </tr>
+      <tr>
+        <td>WC26-018</td>
+        <td>iraq</td>
+        <td>norway</td>
+        <td>9.9%</td>
+        <td>21.6%</td>
+        <td>68.5%</td>
+      </tr>
+      <tr>
+        <td>WC26-019</td>
+        <td>argentina</td>
+        <td>algeria</td>
+        <td>61.6%</td>
+        <td>26.1%</td>
+        <td>12.3%</td>
+      </tr>
+      <tr>
+        <td>WC26-020</td>
+        <td>austria</td>
+        <td>jordan</td>
+        <td>66.9%</td>
+        <td>21.1%</td>
+        <td>12.0%</td>
+      </tr>
+      <tr>
+        <td>WC26-021</td>
+        <td>ghana</td>
+        <td>panama</td>
+        <td>37.9%</td>
+        <td>29.9%</td>
+        <td>32.2%</td>
+      </tr>
+      <tr>
+        <td>WC26-022</td>
+        <td>england</td>
+        <td>croatia</td>
+        <td>49.3%</td>
+        <td>29.9%</td>
+        <td>20.7%</td>
+      </tr>
+      <tr>
+        <td>WC26-023</td>
+        <td>portugal</td>
+        <td>dr-congo</td>
+        <td>64.3%</td>
+        <td>25.0%</td>
+        <td>10.7%</td>
+      </tr>
+      <tr>
+        <td>WC26-024</td>
+        <td>uzbekistan</td>
+        <td>colombia</td>
+        <td>11.2%</td>
+        <td>23.8%</td>
+        <td>65.0%</td>
+      </tr>
+      <tr>
+        <td>WC26-025</td>
+        <td>czechia</td>
+        <td>south-africa</td>
+        <td>50.7%</td>
+        <td>28.5%</td>
+        <td>20.8%</td>
+      </tr>
+      <tr>
+        <td>WC26-026</td>
+        <td>switzerland</td>
+        <td>bosnia-and-herzegovina</td>
+        <td>69.1%</td>
+        <td>20.2%</td>
+        <td>10.7%</td>
+      </tr>
+      <tr>
+        <td>WC26-027</td>
+        <td>canada</td>
+        <td>qatar</td>
+        <td>66.8%</td>
+        <td>21.5%</td>
+        <td>11.7%</td>
+      </tr>
+      <tr>
+        <td>WC26-028</td>
+        <td>mexico</td>
+        <td>south-korea</td>
+        <td>40.8%</td>
+        <td>31.0%</td>
+        <td>28.2%</td>
+      </tr>
+      <tr>
+        <td>WC26-029</td>
+        <td>brazil</td>
+        <td>haiti</td>
+        <td>92.5%</td>
+        <td>5.7%</td>
+        <td>1.8%</td>
+      </tr>
+      <tr>
+        <td>WC26-030</td>
+        <td>scotland</td>
+        <td>morocco</td>
+        <td>17.5%</td>
+        <td>31.5%</td>
+        <td>51.0%</td>
+      </tr>
+      <tr>
+        <td>WC26-031</td>
+        <td>turkiye</td>
+        <td>paraguay</td>
+        <td>37.7%</td>
+        <td>30.4%</td>
+        <td>31.9%</td>
+      </tr>
+      <tr>
+        <td>WC26-032</td>
+        <td>united-states</td>
+        <td>australia</td>
+        <td>29.3%</td>
+        <td>30.3%</td>
+        <td>40.4%</td>
+      </tr>
+      <tr>
+        <td>WC26-033</td>
+        <td>germany</td>
+        <td>ivory-coast</td>
+        <td>55.2%</td>
+        <td>26.2%</td>
+        <td>18.6%</td>
+      </tr>
+      <tr>
+        <td>WC26-034</td>
+        <td>ecuador</td>
+        <td>curacao</td>
+        <td>82.4%</td>
+        <td>14.2%</td>
+        <td>3.4%</td>
+      </tr>
+      <tr>
+        <td>WC26-035</td>
+        <td>netherlands</td>
+        <td>sweden</td>
+        <td>60.9%</td>
+        <td>21.3%</td>
+        <td>17.7%</td>
+      </tr>
+      <tr>
+        <td>WC26-036</td>
+        <td>tunisia</td>
+        <td>japan</td>
+        <td>16.3%</td>
+        <td>30.1%</td>
+        <td>53.6%</td>
+      </tr>
+      <tr>
+        <td>WC26-037</td>
+        <td>uruguay</td>
+        <td>cape-verde</td>
+        <td>65.9%</td>
+        <td>24.9%</td>
+        <td>9.3%</td>
+      </tr>
+      <tr>
+        <td>WC26-038</td>
+        <td>spain</td>
+        <td>saudi-arabia</td>
+        <td>83.7%</td>
+        <td>12.5%</td>
+        <td>3.8%</td>
+      </tr>
+      <tr>
+        <td>WC26-039</td>
+        <td>belgium</td>
+        <td>iran</td>
+        <td>53.5%</td>
+        <td>26.3%</td>
+        <td>20.2%</td>
+      </tr>
+      <tr>
+        <td>WC26-040</td>
+        <td>new-zealand</td>
+        <td>egypt</td>
+        <td>15.0%</td>
+        <td>32.7%</td>
+        <td>52.3%</td>
+      </tr>
+      <tr>
+        <td>WC26-041</td>
+        <td>norway</td>
+        <td>senegal</td>
+        <td>40.8%</td>
+        <td>29.5%</td>
+        <td>29.8%</td>
+      </tr>
+      <tr>
+        <td>WC26-042</td>
+        <td>france</td>
+        <td>iraq</td>
+        <td>76.4%</td>
+        <td>17.5%</td>
+        <td>6.1%</td>
+      </tr>
+      <tr>
+        <td>WC26-043</td>
+        <td>argentina</td>
+        <td>austria</td>
+        <td>57.8%</td>
+        <td>28.6%</td>
+        <td>13.6%</td>
+      </tr>
+      <tr>
+        <td>WC26-044</td>
+        <td>jordan</td>
+        <td>algeria</td>
+        <td>13.2%</td>
+        <td>21.0%</td>
+        <td>65.8%</td>
+      </tr>
+      <tr>
+        <td>WC26-045</td>
+        <td>england</td>
+        <td>ghana</td>
+        <td>76.8%</td>
+        <td>17.5%</td>
+        <td>5.7%</td>
+      </tr>
+      <tr>
+        <td>WC26-046</td>
+        <td>panama</td>
+        <td>croatia</td>
+        <td>9.9%</td>
+        <td>19.1%</td>
+        <td>71.0%</td>
+      </tr>
+      <tr>
+        <td>WC26-047</td>
+        <td>portugal</td>
+        <td>uzbekistan</td>
+        <td>68.0%</td>
+        <td>22.1%</td>
+        <td>9.9%</td>
+      </tr>
+      <tr>
+        <td>WC26-048</td>
+        <td>colombia</td>
+        <td>dr-congo</td>
+        <td>61.3%</td>
+        <td>26.7%</td>
+        <td>12.0%</td>
+      </tr>
+      <tr>
+        <td>WC26-049</td>
+        <td>scotland</td>
+        <td>brazil</td>
+        <td>12.2%</td>
+        <td>20.3%</td>
+        <td>67.5%</td>
+      </tr>
+      <tr>
+        <td>WC26-050</td>
+        <td>morocco</td>
+        <td>haiti</td>
+        <td>79.6%</td>
+        <td>15.6%</td>
+        <td>4.8%</td>
+      </tr>
+      <tr>
+        <td>WC26-051</td>
+        <td>switzerland</td>
+        <td>canada</td>
+        <td>48.1%</td>
+        <td>28.6%</td>
+        <td>23.3%</td>
+      </tr>
+      <tr>
+        <td>WC26-052</td>
+        <td>bosnia-and-herzegovina</td>
+        <td>qatar</td>
+        <td>47.6%</td>
+        <td>27.4%</td>
+        <td>24.9%</td>
+      </tr>
+      <tr>
+        <td>WC26-053</td>
+        <td>czechia</td>
+        <td>mexico</td>
+        <td>29.0%</td>
+        <td>29.9%</td>
+        <td>41.2%</td>
+      </tr>
+      <tr>
+        <td>WC26-054</td>
+        <td>south-africa</td>
+        <td>south-korea</td>
+        <td>21.0%</td>
+        <td>29.9%</td>
+        <td>49.1%</td>
+      </tr>
+      <tr>
+        <td>WC26-055</td>
+        <td>curacao</td>
+        <td>ivory-coast</td>
+        <td>6.6%</td>
+        <td>18.2%</td>
+        <td>75.2%</td>
+      </tr>
+      <tr>
+        <td>WC26-056</td>
+        <td>ecuador</td>
+        <td>germany</td>
+        <td>29.4%</td>
+        <td>32.0%</td>
+        <td>38.6%</td>
+      </tr>
+      <tr>
+        <td>WC26-057</td>
+        <td>japan</td>
+        <td>sweden</td>
+        <td>52.4%</td>
+        <td>25.9%</td>
+        <td>21.7%</td>
+      </tr>
+      <tr>
+        <td>WC26-058</td>
+        <td>tunisia</td>
+        <td>netherlands</td>
+        <td>13.4%</td>
+        <td>24.5%</td>
+        <td>62.0%</td>
+      </tr>
+      <tr>
+        <td>WC26-059</td>
+        <td>turkiye</td>
+        <td>united-states</td>
+        <td>45.4%</td>
+        <td>25.9%</td>
+        <td>28.6%</td>
+      </tr>
+      <tr>
+        <td>WC26-060</td>
+        <td>paraguay</td>
+        <td>australia</td>
+        <td>31.5%</td>
+        <td>35.0%</td>
+        <td>33.4%</td>
+      </tr>
+      <tr>
+        <td>WC26-061</td>
+        <td>norway</td>
+        <td>france</td>
+        <td>25.8%</td>
+        <td>26.6%</td>
+        <td>47.5%</td>
+      </tr>
+      <tr>
+        <td>WC26-062</td>
+        <td>senegal</td>
+        <td>iraq</td>
+        <td>59.0%</td>
+        <td>28.0%</td>
+        <td>12.9%</td>
+      </tr>
+      <tr>
+        <td>WC26-063</td>
+        <td>egypt</td>
+        <td>iran</td>
+        <td>29.1%</td>
+        <td>33.9%</td>
+        <td>37.0%</td>
+      </tr>
+      <tr>
+        <td>WC26-064</td>
+        <td>new-zealand</td>
+        <td>belgium</td>
+        <td>5.5%</td>
+        <td>16.3%</td>
+        <td>78.1%</td>
+      </tr>
+      <tr>
+        <td>WC26-065</td>
+        <td>cape-verde</td>
+        <td>saudi-arabia</td>
+        <td>30.0%</td>
+        <td>34.2%</td>
+        <td>35.8%</td>
+      </tr>
+      <tr>
+        <td>WC26-066</td>
+        <td>uruguay</td>
+        <td>spain</td>
+        <td>18.8%</td>
+        <td>29.7%</td>
+        <td>51.5%</td>
+      </tr>
+      <tr>
+        <td>WC26-067</td>
+        <td>panama</td>
+        <td>england</td>
+        <td>4.5%</td>
+        <td>13.8%</td>
+        <td>81.7%</td>
+      </tr>
+      <tr>
+        <td>WC26-068</td>
+        <td>croatia</td>
+        <td>ghana</td>
+        <td>65.6%</td>
+        <td>22.7%</td>
+        <td>11.7%</td>
+      </tr>
+      <tr>
+        <td>WC26-069</td>
+        <td>algeria</td>
+        <td>austria</td>
+        <td>32.5%</td>
+        <td>30.4%</td>
+        <td>37.1%</td>
+      </tr>
+      <tr>
+        <td>WC26-070</td>
+        <td>jordan</td>
+        <td>argentina</td>
+        <td>3.0%</td>
+        <td>11.2%</td>
+        <td>85.8%</td>
+      </tr>
+      <tr>
+        <td>WC26-071</td>
+        <td>colombia</td>
+        <td>portugal</td>
+        <td>33.0%</td>
+        <td>28.5%</td>
+        <td>38.5%</td>
+      </tr>
+      <tr>
+        <td>WC26-072</td>
+        <td>dr-congo</td>
+        <td>uzbekistan</td>
+        <td>31.5%</td>
+        <td>38.8%</td>
+        <td>29.7%</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="tournament-probabilities">
+  <h2>Probabilidades del torneo</h2>
+  <img class="report-visual" src="assets/tournament_champion.png" alt="Probabilidad de campeon por equipo">
+  <table>
+    <thead>
+      <tr><th>Equipo</th><th>P(R16)</th><th>P(QF)</th><th>P(SF)</th><th>P(Final)</th><th>P(Campeon)</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>argentina</td>
+        <td>72.3%</td>
+        <td>59.3%</td>
+        <td>44.1%</td>
+        <td>31.1%</td>
+        <td>21.4%</td>
+      </tr>
+      <tr>
+        <td>spain</td>
+        <td>66.7%</td>
+        <td>47.9%</td>
+        <td>36.4%</td>
+        <td>24.0%</td>
+        <td>14.3%</td>
+      </tr>
+      <tr>
+        <td>england</td>
+        <td>70.4%</td>
+        <td>49.1%</td>
+        <td>30.7%</td>
+        <td>17.5%</td>
+        <td>10.1%</td>
+      </tr>
+      <tr>
+        <td>brazil</td>
+        <td>69.6%</td>
+        <td>48.7%</td>
+        <td>31.1%</td>
+        <td>17.5%</td>
+        <td>9.6%</td>
+      </tr>
+      <tr>
+        <td>france</td>
+        <td>67.0%</td>
+        <td>41.1%</td>
+        <td>24.6%</td>
+        <td>13.0%</td>
+        <td>6.5%</td>
+      </tr>
+      <tr>
+        <td>portugal</td>
+        <td>66.7%</td>
+        <td>42.0%</td>
+        <td>23.4%</td>
+        <td>13.0%</td>
+        <td>6.4%</td>
+      </tr>
+      <tr>
+        <td>colombia</td>
+        <td>60.1%</td>
+        <td>34.8%</td>
+        <td>18.4%</td>
+        <td>9.4%</td>
+        <td>4.3%</td>
+      </tr>
+      <tr>
+        <td>belgium</td>
+        <td>70.9%</td>
+        <td>44.1%</td>
+        <td>18.9%</td>
+        <td>9.2%</td>
+        <td>4.1%</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="temporal-evolution">
+  <h2>Evolucion temporal</h2>
+  <p class="muted">
+    Comparacion vs anterior (2026-06-13T22-02-08Z_baseline-v1-2026-06-13-50d98ab)
+    y vs primero (2026-06-13T22-02-08Z_baseline-v1-2026-06-13-50d98ab).
+  </p>
+  <table>
+    <thead>
+      <tr><th>Equipo</th><th>P(Campeon) actual</th><th>vs anterior</th><th>vs primero</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>argentina</td>
+        <td>21.4%</td>
+        <td class="">+0.0 pp</td>
+        <td class="">+0.0 pp</td>
+      </tr>
+      <tr>
+        <td>spain</td>
+        <td>14.3%</td>
+        <td class="">+0.0 pp</td>
+        <td class="">+0.0 pp</td>
+      </tr>
+      <tr>
+        <td>england</td>
+        <td>10.1%</td>
+        <td class="">+0.0 pp</td>
+        <td class="">+0.0 pp</td>
+      </tr>
+      <tr>
+        <td>brazil</td>
+        <td>9.6%</td>
+        <td class="">+0.0 pp</td>
+        <td class="">+0.0 pp</td>
+      </tr>
+      <tr>
+        <td>france</td>
+        <td>6.5%</td>
+        <td class="">+0.0 pp</td>
+        <td class="">+0.0 pp</td>
+      </tr>
+      <tr>
+        <td>portugal</td>
+        <td>6.4%</td>
+        <td class="">+0.0 pp</td>
+        <td class="">+0.0 pp</td>
+      </tr>
+      <tr>
+        <td>colombia</td>
+        <td>4.3%</td>
+        <td class="">+0.0 pp</td>
+        <td class="">+0.0 pp</td>
+      </tr>
+      <tr>
+        <td>belgium</td>
+        <td>4.1%</td>
+        <td class="">+0.0 pp</td>
+        <td class="">+0.0 pp</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Calibracion acumulada (modelo vs mercado)</h3>
+  <p class="muted">Aun no hay partidos resueltos para evaluar log-loss / RPS acumulados.</p>
+</section>
+
+<section id="methodology">
+  <h2>Nota metodologica</h2>
+  <p class="muted">
+    Este reporte se renderiza exclusivamente desde artefactos congelados del snapshot
+    (2026-06-13T22-07-38Z_baseline-v1-2026-06-13-50d98ab) y el ledger canonico de calibracion; no reentrena el modelo
+    ni reejecuta simulaciones. Las probabilidades del torneo provienen de 10000
+    simulaciones Monte Carlo (semilla 20260613) sobre el baseline Elo + Dixon-Coles.
+    El benchmark de mercado es la mediana de-margined entre casas, congelada al publicar.
+  </p>
+</section>
+    <footer>
+Generado de forma reproducible desde un snapshot congelado. Solo matplotlib/seaborn.    </footer>
+  </main>
+</body>
+</html>
