@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 04-02-PLAN.md; ready to execute 04-03
-last_updated: "2026-06-13T18:45:00.000Z"
-last_activity: 2026-06-13 -- Completed 04-02 (official run core + append-only snapshot writer)
+stopped_at: Completed 04-04-PLAN.md (calibration tracker + frozen benchmark); ready to execute 04-03
+last_updated: "2026-06-13T19:05:00.000Z"
+last_activity: 2026-06-13 -- Completed 04-04 (live calibration tracker + frozen market benchmark, LIVE-04/DOC-02)
 progress:
   total_phases: 6
   completed_phases: 3
   total_plans: 20
-  completed_plans: 17
-  percent: 85
+  completed_plans: 18
+  percent: 90
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-06-11)
 ## Current Position
 
 Phase: 04 (primer-pronostico-pipeline-diario) — EXECUTING
-Plan: 3 of 5 (04-01, 04-02 complete)
+Plan: 3 of 5 done (04-01, 04-02, 04-04 complete; 04-03 + 04-05 pending)
 Status: Executing Phase 04
-Last activity: 2026-06-13 -- Completed 04-02 (official run core + append-only snapshot writer)
+Last activity: 2026-06-13 -- Completed 04-04 (live calibration tracker + frozen market benchmark)
 
-Progress: [████████▌░] 85%
+Progress: [█████████░] 90%
 
 **HARD DEADLINE:** Fases 1-4 deben estar publicando pronósticos antes del 2026-06-27 (fin de fase de grupos). El torneo empezó HOY.
 
@@ -72,6 +72,7 @@ Progress: [████████▌░] 85%
 | Phase 03 P05 | 11min | 3 tasks | 9 files |
 | Phase 04 P01 | 14min | 2 tasks (TDD) | 5 files |
 | Phase 04 P02 | 16min | 2 tasks (TDD) | 9 files |
+| Phase 04 P04 | 12min | 2 tasks (TDD) | 3 files |
 
 ## Accumulated Context
 
@@ -133,6 +134,10 @@ Recent decisions affecting current work:
 - [Phase 03]: El motor vectorizado deriva todo el azar de SeedSequence([seed, _VERSION]) con un stream por partido vía spawn_key keyed por el ordinal estable de match_id; fijar partidos anteriores no perturba los streams de partidos no jugados (CRN, OQ3/T-03-14). — 10k <60s, 100k ~8.5s.
 - [Phase 03]: El ranking de grupos en la ruta batch usa solo criterios globales (puntos->GD->GF) con desempate determinista por orden canónico; la cascada branchy del Art. 13 (head-to-head, conduct, ediciones FIFA) vive en rules_fifa para los tests puros. Los partidos simulados no portan insumos de conduct/ranking, así que la ruta global es la correcta en batch.
 - [Phase 03]: simulate_tournaments recibe ctx del llamador (default neutral World Cup con neutral/date/tournament_type) y lo pasa intacto al predictor; el contrato congelado de predict_lambdas exige esas tres claves. — Permite que el notebook corra contra el modelo Dixon-Coles real.
+- [Phase 04]: El benchmark de mercado primario es la MEDIANA por columna de las probabilidades de-margined entre bookmakers válidos (robusta a un libro mal preciado), renormalizada; el promedio se conserva solo como diagnóstico auxiliar (prob_*_mean + n_bookmakers) (D-19/D-20).
+- [Phase 04]: El benchmark se congela al publicar (captured_at_utc) y la ruta de evaluación nunca lee odds más frescos después del snapshot (D-21, T-04-10).
+- [Phase 04]: Una sola fuente de verdad append-only por partido/publicación (calibration_matches.parquet); re-append de (match_id, snapshot_id) falla cerrado; las vistas por jornada/series temporales son agregaciones derivadas, nunca un segundo dataset mutable (D-18/D-22, T-04-11).
+- [Phase 04]: Partidos no resueltos llevan outcome_idx <NA> (Int64) en el ledger; cumulative_metrics los omite hasta que llega el resultado, reusando rps/brier_multiclass + log_loss(labels=[0,1,2]) de Phase 2 (T-04-12).
 
 ### Pending Todos
 
@@ -154,6 +159,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-06-13T18:45:00.000Z
-Stopped at: Completed 04-02-PLAN.md (LIVE-01, LIVE-02, DOC-02 structurally reachable); ready to execute 04-03
+Last session: 2026-06-13T19:05:00.000Z
+Stopped at: Completed 04-04-PLAN.md (LIVE-04 + calibration portion of DOC-02 complete); ready to execute 04-03 (report renderer) and 04-05 (e2e)
 Resume file: None
