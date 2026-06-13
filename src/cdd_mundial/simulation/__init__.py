@@ -5,6 +5,11 @@ from cdd_mundial.simulation.knockout import (
     post_draw_advance_probability,
     sample_post_draw_advancers,
 )
+from cdd_mundial.simulation.rules_fifa import (
+    calculate_group_table,
+    rank_best_thirds,
+    rank_group,
+)
 from cdd_mundial.simulation.slots import (
     load_official_third_place_mapping,
     resolve_slot,
@@ -20,7 +25,10 @@ __all__ = [
     "PlayedMatchResult",
     "TournamentState",
     "advance_probability",
+    "calculate_group_table",
     "load_official_third_place_mapping",
+    "rank_best_thirds",
+    "rank_group",
     "played_results_from_json",
     "post_draw_advance_probability",
     "resolve_slot",
