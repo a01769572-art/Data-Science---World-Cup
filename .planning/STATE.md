@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 04-04-PLAN.md (calibration tracker + frozen benchmark); ready to execute 04-03
-last_updated: "2026-06-13T19:05:00.000Z"
-last_activity: 2026-06-13 -- Completed 04-04 (live calibration tracker + frozen market benchmark, LIVE-04/DOC-02)
+stopped_at: Completed 04-03-PLAN.md (snapshot-only HTML report renderer, LIVE-03); ready to execute 04-05
+last_updated: "2026-06-13T19:20:00.000Z"
+last_activity: 2026-06-13 -- Completed 04-03 (snapshot-only static HTML report renderer, LIVE-03)
 progress:
   total_phases: 6
   completed_phases: 3
   total_plans: 20
-  completed_plans: 18
-  percent: 90
+  completed_plans: 19
+  percent: 95
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-06-11)
 ## Current Position
 
 Phase: 04 (primer-pronostico-pipeline-diario) — EXECUTING
-Plan: 3 of 5 done (04-01, 04-02, 04-04 complete; 04-03 + 04-05 pending)
+Plan: 4 of 5 done (04-01, 04-02, 04-03, 04-04 complete; 04-05 pending)
 Status: Executing Phase 04
-Last activity: 2026-06-13 -- Completed 04-04 (live calibration tracker + frozen market benchmark)
+Last activity: 2026-06-13 -- Completed 04-03 (snapshot-only static HTML report renderer)
 
-Progress: [█████████░] 90%
+Progress: [█████████▌] 95%
 
 **HARD DEADLINE:** Fases 1-4 deben estar publicando pronósticos antes del 2026-06-27 (fin de fase de grupos). El torneo empezó HOY.
 
@@ -73,6 +73,7 @@ Progress: [█████████░] 90%
 | Phase 04 P01 | 14min | 2 tasks (TDD) | 5 files |
 | Phase 04 P02 | 16min | 2 tasks (TDD) | 9 files |
 | Phase 04 P04 | 12min | 2 tasks (TDD) | 3 files |
+| Phase 04 P03 | 18min | 2 tasks (TDD) | 7 files |
 
 ## Accumulated Context
 
@@ -138,6 +139,10 @@ Recent decisions affecting current work:
 - [Phase 04]: El benchmark se congela al publicar (captured_at_utc) y la ruta de evaluación nunca lee odds más frescos después del snapshot (D-21, T-04-10).
 - [Phase 04]: Una sola fuente de verdad append-only por partido/publicación (calibration_matches.parquet); re-append de (match_id, snapshot_id) falla cerrado; las vistas por jornada/series temporales son agregaciones derivadas, nunca un segundo dataset mutable (D-18/D-22, T-04-11).
 - [Phase 04]: Partidos no resueltos llevan outcome_idx <NA> (Int64) en el ledger; cumulative_metrics los omite hasta que llega el resultado, reusando rps/brier_multiclass + log_loss(labels=[0,1,2]) de Phase 2 (T-04-12).
+- [Phase 04]: El renderer del reporte (LIVE-03) es snapshot-only: lee solo artefactos congelados del snapshot + el ledger canónico de calibración, nunca llama fit_dixon_coles ni simulate_tournaments (D-12, T-04-07); un test monkeypatchea ambos para fallar si se invocan.
+- [Phase 04]: Visuales del reporte con matplotlib backend Agg + tema/paleta seaborn fijos -> HTML byte-idéntico y PNGs reproducibles al re-renderizar el mismo snapshot.
+- [Phase 04]: Las líneas base temporales (snapshot anterior + primero) se resuelven ordenando los directorios de snapshot por published_at_utc de metadata congelada, no por estado mutable (D-17, T-04-09).
+- [Phase 04]: Jinja2 pineado >=3.1,<4 (major acotado, política tournament-safe) y añadido como dependencia directa + al test guardrail de dependencias.
 
 ### Pending Todos
 
@@ -159,6 +164,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-06-13T19:05:00.000Z
-Stopped at: Completed 04-04-PLAN.md (LIVE-04 + calibration portion of DOC-02 complete); ready to execute 04-03 (report renderer) and 04-05 (e2e)
+Last session: 2026-06-13T19:20:00.000Z
+Stopped at: Completed 04-03-PLAN.md (LIVE-03 snapshot-only HTML report renderer); ready to execute 04-05 (end-to-end integration + first official pre-kickoff publication)
 Resume file: None

@@ -41,7 +41,7 @@
 
 - [ ] **LIVE-01**: El pipeline de jornada corre con un comando: ingesta de resultados → actualización Elo/forma → re-simulación → reporte generado
 - [ ] **LIVE-02**: Cada pronóstico se persiste como snapshot append-only con timestamp y `model_version`, commiteado a git ANTES del kickoff, desde el primer pronóstico publicado — habilita gráficas de evolución y evaluación honesta sin posibilidad de edición retrospectiva
-- [ ] **LIVE-03**: Cada jornada genera un reporte estático con matplotlib/seaborn: tabla de avance, barras P(Campeón), distribución de posiciones por grupo, evolución de probabilidades en el tiempo
+- [x] **LIVE-03**: Cada jornada genera un reporte estático con matplotlib/seaborn: tabla de avance, barras P(Campeón), distribución de posiciones por grupo, evolución de probabilidades en el tiempo
 - [x] **LIVE-04**: El sistema trackea calibración en vivo: log-loss/RPS acumulado del modelo vs. benchmark de mercado de-margined sobre los partidos ya jugados
 - [ ] **LIVE-05**: El sistema calcula leverage por partido próximo: ΔP(avanzar) condicionado a victoria/empate/derrota vía simulaciones condicionales
 
@@ -101,7 +101,7 @@ Deferred — valiosos pero no bloquean el valor core de v1:
 | ML-04 | Phase 5 | Pending |
 | LIVE-01 | Phase 4 | Pending |
 | LIVE-02 | Phase 4 | Pending |
-| LIVE-03 | Phase 4 | Pending |
+| LIVE-03 | Phase 4 | Complete (04-03) |
 | LIVE-04 | Phase 4 | Complete (04-04) |
 | LIVE-05 | Phase 6 | Pending |
 | DOC-01 | Phase 1 | Complete |

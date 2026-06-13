@@ -86,7 +86,7 @@ Plans:
 **Goal**: El sistema publica pronósticos reproducibles cada jornada con un solo comando y archivo append-only pre-kickoff — SHIP antes del 27 de junio; cada día sin publicar encoge permanentemente el diferenciador del proyecto
 **Depends on**: Phase 2, Phase 3
 **Requirements**: DATA-06, LIVE-01, LIVE-02, LIVE-03, LIVE-04, DOC-02
-**Progress**: 3/5 plans complete (04-01, 04-02, 04-04 done; 04-03 renderer + 04-05 e2e pending)
+**Progress**: 4/5 plans complete (04-01, 04-02, 04-03, 04-04 done; 04-05 e2e pending)
 **Success Criteria** (what must be TRUE):
   1. Un comando corre el pipeline de jornada completo: ingesta de resultados → actualización Elo/forma → refresh Dixon-Coles → re-simulación (common random numbers entre jornadas) → reporte generado
   2. La ingesta de resultados del torneo tiene fallback manual editable (`results_2026.csv`) — un scraper roto nunca bloquea la corrida diaria
@@ -106,7 +106,7 @@ Plans:
 - [x] 04-04-PLAN.md — Freeze del benchmark, slices de publicación y ledger canónico append-only de calibración por partido
 
 **Wave 4**
-- [ ] 04-03-PLAN.md — Renderer oficial HTML estático desde snapshot finalizado + slices/ledger de calibración con Jinja2 + pandas + Matplotlib/Seaborn
+- [x] 04-03-PLAN.md — Renderer oficial HTML estático desde snapshot finalizado + slices/ledger de calibración con Jinja2 + pandas + Matplotlib/Seaborn
 
 **Wave 5**
 - [ ] 04-05-PLAN.md — Integración end-to-end, prueba del orden materialización→simulación→reporte, notebook/runbook y primera publicación oficial pre-kickoff con bundle inmutable verificado
