@@ -96,10 +96,10 @@ Plans:
 
 Plans:
 **Wave 1**
-- [ ] 04-01-PLAN.md — Contrato canónico de `results_2026.csv`, esquemas `live` y carga fail-closed a `TournamentState`
+- [x] 04-01-PLAN.md — Contrato canónico de `results_2026.csv`, esquemas `live` y carga fail-closed a `TournamentState`
 
 **Wave 2**
-- [ ] 04-02-PLAN.md — Materialización live-training inmutable + refit/reuse determinista + staging atómico del snapshot + CLI `python -m cdd_mundial.live`
+- [x] 04-02-PLAN.md — Materialización live-training inmutable + refit/reuse determinista + staging atómico del snapshot + CLI `python -m cdd_mundial.live`
 
 **Wave 3**
 - [ ] 04-04-PLAN.md — Freeze del benchmark, slices de publicación y ledger canónico append-only de calibración por partido
@@ -142,7 +142,7 @@ Phases execute in numeric order: 1 → 2 ∥ 3 → 4 → 5 ∥ 6 (2-3 paraleliza
 | 1. Fundación de Datos | 5/5 | Complete | 2026-06-12 |
 | 2. Modelos Baseline | 5/5 | Complete | 2026-06-12 |
 | 3. Simulador del Torneo | 5/5 | Complete | 2026-06-13 |
-| 4. Primer Pronóstico + Pipeline Diario | 1/5 | In Progress | - |
+| 4. Primer Pronóstico + Pipeline Diario | 2/5 | In Progress | - |
 | 5. ML + Ensemble (gated) | 0/TBD | Not started | - |
 | 6. Operación en Vivo + Post-Mortem | 0/TBD | Not started | - |
 
