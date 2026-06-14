@@ -20,6 +20,9 @@ Un proyecto de portafolio metodológicamente riguroso y profundamente documentad
 - [x] Validación temporal estricta en cuatro holdouts con log-loss, Brier, RPS y gate D-13 aprobado; notebook didáctico ejecutado. Validado en Phase 2 / MODEL-04 y DOC-01.
 - [x] Motor Monte Carlo vectorizado con reglas FIFA 2026 verificadas contra el reglamento oficial (Art. 13 completo, mejores terceros, mapping Anexo C de 495 combinaciones), ≥10k torneos < 60s (100k en ~6.8s) con CRN reproducible por `match_id`, y salidas marginales por equipo. Validado en Phase 3 / SIM-01…SIM-05.
 - [x] Simulación condicional al estado real del torneo: los partidos jugados se fijan y solo los no resueltos invocan `predict_lambdas`. Validado en Phase 3 / SIM-03.
+- [x] Pipeline de jornada de un comando (`python -m cdd_mundial.live`): ingesta fail-closed de `results_2026.csv` → materialización inmutable + refit/reuse determinista por content-hash → re-simulación CRN → snapshot append-only con timestamp UTC y `model_version`, commiteado a git ANTES del kickoff. Primera publicación oficial pre-kickoff verificada (`dirty=false`). Validado en Phase 4 / DATA-06, LIVE-01, LIVE-02, DOC-02.
+- [x] Reporte estático matplotlib/seaborn por jornada renderizado solo desde artefactos congelados del snapshot (tabla de avance, barras P(Campeón), posiciones por grupo, evolución temporal). Validado en Phase 4 / LIVE-03.
+- [x] Tracker de calibración en vivo: ledger canónico append-only por partido + log-loss/RPS acumulado del modelo vs. benchmark de mercado de-margined congelado. Validado en Phase 4 / LIVE-04.
 
 ### Active
 
@@ -27,9 +30,6 @@ Un proyecto de portafolio metodológicamente riguroso y profundamente documentad
 - [ ] Pipeline de features reproducible (Elo dinámico, forma reciente, ranking FIFA, contexto anfitrión)
 - [ ] Clasificador ML (XGBoost/LightGBM) de 3 clases con validación temporal estricta
 - [ ] Ensemble ponderado + calibración isotónica de probabilidades
-- [ ] Pipeline de actualización por jornada (ingesta resultados → re-cálculo → re-simulación → reporte)
-- [ ] Reportes de pronóstico por jornada con matplotlib/seaborn
-- [ ] Tracking de calibración en vivo (log-loss acumulado vs. benchmarks)
 - [ ] Post-mortem de precisión al final del torneo
 - [ ] Notas de aprendizaje en Obsidian (SecondBrain) al cerrar cada fase
 
@@ -93,4 +93,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-06-13 after Phase 3 completion — simulador Monte Carlo operativo*
+*Last updated: 2026-06-14 after Phase 4 completion — pipeline diario publicando pronósticos reproducibles, primera publicación oficial pre-kickoff commiteada*
