@@ -6,6 +6,7 @@ from cdd_mundial.models.ml_features import (  # contrato ML-01 (Phase 5)
     MIN_PRIOR_MATCHES,
     build_ml_dataset,
 )
+from cdd_mundial.models.ml_xgboost import MulticlassXGBoost  # contrato ML-02 (Phase 5)
 
 __all__ = [
     "DixonColesModel",
@@ -13,4 +14,5 @@ __all__ = [
     "ML_FEATURE_COLUMNS",
     "MIN_PRIOR_MATCHES",
     "build_ml_dataset",
+    "MulticlassXGBoost",
 ]
