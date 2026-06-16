@@ -120,7 +120,7 @@ Plans:
   2. El clasificador XGBoost de 3 clases (constrained: depth ≤ 3–4, ≤ ~10 features) está entrenado y evaluado con la misma validación temporal que el baseline
   3. El gate de aceptación pre-registrado se aplica: el ensemble solo reemplaza al baseline si lo vence en log-loss en los 4 torneos holdout — si no, el resultado negativo se documenta y el baseline sigue
   4. La calibración isotónica vs. Platt se compara empíricamente en folds temporales y se elige por evidencia (isotónica no asumida superior con <1,000 muestras)
-**Plans**: 4 plans
+**Plans**: 5 plans
 
 Plans:
 **Wave 1**
@@ -134,6 +134,9 @@ Plans:
 
 **Wave 4** *(blocked on Wave 3 completion)*
 - [x] 05-04-PLAN.md — Integración live con publicación dual, fallback explícito al baseline, reporte y notebook de evidencia
+
+**Wave 5** *(blocked on Wave 4 completion; verification gap closure)*
+- [ ] 05-05-PLAN.md — Cierre CR-01: identidad train/serve en calibración de `run_ml_comparison` + regresión anti-mismatch
 
 ### Phase 6: Operación en Vivo + Post-Mortem
 **Goal**: El sistema opera con disciplina diaria hasta el 19 de julio y cierra con evaluación final honesta y aprendizaje capturado — corre desde Fase 4 en adelante; el post-mortem está fijado al final del torneo

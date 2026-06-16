@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: gaps_found
-stopped_at: Phase 05 verified — gaps_found (2/4); CR-01 train/serve calibration mismatch in run_ml_comparison. Next: /gsd-plan-phase 5 --gaps
-last_updated: "2026-06-16T02:18:55.153Z"
+status: ready_to_execute
+stopped_at: Phase 05 gap closure planned; 05-05-PLAN.md closes CR-01 train/serve calibration mismatch in run_ml_comparison. Next: /gsd-execute-phase 5
+last_updated: "2026-06-16T07:19:07.3552531-06:00"
 last_activity: 2026-06-16
 progress:
   total_phases: 6
   completed_phases: 4
-  total_plans: 19
+  total_plans: 20
   completed_plans: 19
-  percent: 100
+  percent: 95
 ---
 
 # Project State
@@ -25,12 +25,12 @@ See: .planning/PROJECT.md (updated 2026-06-11)
 
 ## Current Position
 
-Phase: 05 (ml-ensemble-upgrade-gated) — GAPS FOUND (not complete)
-Plan: 4 of 4 built; verification 2/4 must-haves
-Status: gaps_found — CR-01 (confirmado por code review + verificador): los calibradores se ajustan con inner_model (~75% pre-cutoff) pero el holdout se puntúa con final_model re-entrenado al 100% → log-losses del gate mal calibrados. Criterios #1 y #2 OK. Arreglo localizado en run_ml_comparison. Siguiente: /gsd-plan-phase 5 --gaps. Ver 05-VERIFICATION.md + 05-REVIEW.md
+Phase: 05 (ml-ensemble-upgrade-gated) — READY TO EXECUTE GAP CLOSURE
+Plan: 4 of 5 built/executed; 05-05 planned for CR-01 closure
+Status: ready_to_execute — 05-05-PLAN.md closes the verified CR-01 gap: calibrators/ensemble weight were fit on inner_model probabilities but holdout scoring used final_model probabilities. Next: /gsd-execute-phase 5. Ver 05-VERIFICATION.md + 05-REVIEW.md + 05-05-PLAN.md
 Last activity: 2026-06-16
 
-Progress: [██████████] 100%
+Progress: [█████████░] 95%
 
 **HARD DEADLINE:** Fases 1-4 deben estar publicando pronósticos antes del 2026-06-27 (fin de fase de grupos). El torneo empezó HOY.
 
@@ -175,6 +175,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-06-16T02:18:48.959Z
-Stopped at: Completed 05-04-PLAN.md
+Last session: 2026-06-16T07:19:07.3552531-06:00
+Stopped at: Planned 05-05-PLAN.md gap closure
 Resume file: None
