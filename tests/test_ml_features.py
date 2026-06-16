@@ -59,51 +59,34 @@ def _toy_history() -> pd.DataFrame:
         ("home", "away", 1, 0),
         ("away", "home", 2, 2),
     ]
+    def _row(match_id, day, h, a, hs, as_, neutral):
+        # Emit every canonical column so the builder's internal load_matches
+        # validation (strict schema) passes on this synthetic frame.
+        return {
+            "match_id": match_id,
+            "date": (base + pd.Timedelta(days=day)).strftime("%Y-%m-%d"),
+            "home_team_id": h,
+            "away_team_id": a,
+            "home_team_source_name": h,
+            "away_team_source_name": a,
+            "home_score": hs,
+            "away_score": as_,
+            "tournament": "Friendly",
+            "city": "Testville",
+            "country": "TST",
+            "neutral": neutral,
+            "shootout_winner_team_id": None,
+            "result_after_extra_time": False,
+            "source": "synthetic",
+            "source_version": "test-1",
+        }
+
     for i, (h, a, hs, as_) in enumerate(scripted):
-        rows.append(
-            {
-                "match_id": f"m{i}",
-                "date": base + pd.Timedelta(days=30 * i),
-                "home_team_id": h,
-                "away_team_id": a,
-                "home_score": hs,
-                "away_score": as_,
-                "tournament": "Friendly",
-                "neutral": False,
-                "shootout_winner_team_id": None,
-                "result_after_extra_time": False,
-            }
-        )
+        rows.append(_row(f"m{i}", 30 * i, h, a, hs, as_, False))
     # Target match: home vs away, both now have 6 priors -> ML-eligible.
-    rows.append(
-        {
-            "match_id": "target_eligible",
-            "date": base + pd.Timedelta(days=400),
-            "home_team_id": "home",
-            "away_team_id": "away",
-            "home_score": 2,
-            "away_score": 1,
-            "tournament": "Friendly",
-            "neutral": False,
-            "shootout_winner_team_id": None,
-            "result_after_extra_time": False,
-        }
-    )
+    rows.append(_row("target_eligible", 400, "home", "away", 2, 1, False))
     # Target match involving a brand-new team -> ML-ineligible (newbie 0 priors).
-    rows.append(
-        {
-            "match_id": "target_newbie",
-            "date": base + pd.Timedelta(days=410),
-            "home_team_id": "home",
-            "away_team_id": "newbie",
-            "home_score": 0,
-            "away_score": 0,
-            "tournament": "Friendly",
-            "neutral": True,
-            "shootout_winner_team_id": None,
-            "result_after_extra_time": False,
-        }
-    )
+    rows.append(_row("target_newbie", 410, "home", "newbie", 0, 0, True))
     return pd.DataFrame(rows)
 
 
