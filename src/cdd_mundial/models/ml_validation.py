@@ -351,8 +351,12 @@ def run_ml_comparison(
     a latest inner calibration slice (both strictly pre-cutoff). Calibrators (sigmoid /
     isotonic / none) for the ML candidate and for the ensemble are selected empirically
     on the calibration slice, and the convex ensemble weight is chosen there too — never
-    on the scored holdout (D-11/D-12, T-05-07). The model is then re-fit on all pre-cutoff
-    eligible rows and the selected calibrators/weight are applied to score the holdout.
+    on the scored holdout (D-11/D-12, T-05-07). The SAME model that produced the raw
+    probabilities those calibrators/weight were fit on is also the model that scores the
+    holdout (CR-01 train/serve identity, T-05-13): the calibrators learned per-class maps
+    for *this* model's output distribution, so applying them to a different, re-fit
+    model's probabilities would feed the gate a miscalibrated distribution. We therefore
+    score the holdout with the inner model rather than re-fitting on all pre-cutoff rows.
 
     The baseline candidate uses the point-in-time Dixon-Coles WDL columns already present
     in the ML dataset (D-02), so all three candidates share one feature surface and one
@@ -418,15 +422,20 @@ def run_ml_comparison(
 
         calibration_max_date = str(inner_cal["date"].max().date())
 
-        # --- 4) re-fit on ALL pre-cutoff eligible rows, score the actual holdout ---
-        x_train = train[list(_FEATURES)].to_numpy(dtype=float)
-        y_train = train["target_outcome_idx"].to_numpy(dtype=int)
-        final_model = MulticlassXGBoost(seed=seed).fit(x_train, y_train)
+        # --- 4) score the holdout with the SAME model the calibrators/weight were fit
+        #        on (CR-01 train/serve identity, T-05-13). ``inner_model`` produced the
+        #        ml_fit_raw/ml_cal_raw probabilities used to select and fit
+        #        ml_calibrator/ens_calibrator and the ensemble weight; the per-class
+        #        isotonic/sigmoid maps are only valid for *its* output distribution.
+        #        Re-fitting a separate final model on all pre-cutoff rows and applying
+        #        these calibrators to its (differently-distributed) probabilities was
+        #        the CR-01 defect that fed the gate miscalibrated inputs.
+        scoring_model = inner_model
 
         x_holdout = holdout_eligible[list(_FEATURES)].to_numpy(dtype=float)
         outcome_idx = holdout_eligible["target_outcome_idx"].to_numpy(dtype=int)
 
-        ml_holdout_raw = final_model.predict_proba(x_holdout)
+        ml_holdout_raw = scoring_model.predict_proba(x_holdout)
         ml_holdout = ml_calibrator.transform(ml_holdout_raw)
         baseline_holdout = holdout_eligible[list(_DC_PROB_COLUMNS)].to_numpy(dtype=float)
         baseline_holdout = baseline_holdout / baseline_holdout.sum(axis=1, keepdims=True)
@@ -452,6 +461,13 @@ def run_ml_comparison(
             "n_scored": int(len(holdout_eligible)),
             "n_excluded": n_holdout_excluded,
             "calibration_max_date": calibration_max_date,
+            # CR-01 audit (T-05-13): the holdout is scored by the same model the
+            # calibrators/weight were fit on, so the gate inputs are calibrated for the
+            # distribution actually served. ``n_train`` counts ALL pre-cutoff eligible
+            # rows; ``n_inner_fit`` is the subset the scoring model was fit on.
+            "scoring_model": "inner_calibration_model",
+            "n_inner_fit": int(len(inner_fit)),
+            "n_inner_cal": int(len(inner_cal)),
             "chosen_ml_calibrator": ml_choice["method"],
             "chosen_ensemble_calibrator": ens_choice["method"],
             "ensemble_weight": float(weight),

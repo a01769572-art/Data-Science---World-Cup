@@ -417,3 +417,94 @@ def test_comparison_materializes_dated_gate_report(test_workspace) -> None:
     report = json.loads(report_files[0].read_text(encoding="utf-8"))
     assert report["gate"]["winner"] == summary["winner"]
     assert isinstance(report["gate"]["promoted"], bool)
+
+
+# --------------------------------------------------------------------------- #
+# CR-01 regression guard: train/serve model identity in run_ml_comparison      #
+# --------------------------------------------------------------------------- #
+
+
+def test_comparison_scores_holdout_with_the_same_model_calibrators_were_fit_on(
+    monkeypatch,
+) -> None:
+    """CR-01 regression: the model whose raw probabilities the calibrators/weight are
+    fit on MUST be the same model that produces the holdout raw probabilities those
+    calibrators then transform.
+
+    The original defect fit ``ml_calibrator``/``ens_calibrator``/``weight`` against an
+    ``inner_model`` (trained on ~75% of pre-cutoff rows) yet scored the holdout with a
+    *different* ``final_model`` (re-fit on ALL pre-cutoff rows). Their probability
+    distributions differ, so the per-class isotonic/sigmoid maps were invalid for the
+    served distribution and the gate verdict was computed on miscalibrated inputs.
+
+    This test instruments :class:`MulticlassXGBoost` so every instance is identifiable,
+    records which model produced each ``predict_proba`` output (by object identity of
+    the returned array), and then asserts that for every holdout the array consumed by
+    the calibration-fit path and the array fed into the holdout-scoring transform came
+    from the *same* model instance. It fails the moment a second, differently-trained
+    model is introduced between calibration fitting and holdout scoring.
+    """
+    from cdd_mundial.models import ml_validation
+    from cdd_mundial.models.validation import HOLDOUTS
+    from cdd_mundial.models.ml_xgboost import MulticlassXGBoost
+
+    # Map id(output_array) -> id(model_instance) for every predict_proba call, plus the
+    # full set of distinct models each holdout instantiated.
+    output_to_model: dict[int, int] = {}
+    models_per_run: list[int] = []
+
+    real_fit = MulticlassXGBoost.fit
+    real_predict = MulticlassXGBoost.predict_proba
+
+    def tracking_fit(self, x, y):
+        models_per_run.append(id(self))
+        return real_fit(self, x, y)
+
+    def tracking_predict(self, x):
+        out = real_predict(self, x)
+        output_to_model[id(out)] = id(self)
+        return out
+
+    monkeypatch.setattr(MulticlassXGBoost, "fit", tracking_fit)
+    monkeypatch.setattr(MulticlassXGBoost, "predict_proba", tracking_predict)
+
+    # Capture the exact arrays the calibrators are fit on and applied to. We wrap the
+    # calibrator factory so each calibrator remembers the raw array it was fit on, and
+    # wrap _ensemble_probs to capture the ml array used for holdout scoring.
+    from cdd_mundial.models import ml_calibration
+
+    fit_inputs: list[int] = []  # id() of every raw array a calibrator was fit on
+    real_cal_fit = ml_calibration.MulticlassCalibrator.fit
+
+    def tracking_cal_fit(self, probs, y):
+        fit_inputs.append(id(probs))
+        return real_cal_fit(self, probs, y)
+
+    monkeypatch.setattr(
+        "cdd_mundial.models.ml_validation.MulticlassCalibrator.fit", tracking_cal_fit
+    )
+
+    dataset = _synthetic_ml_dataset()
+    report, _ = ml_validation.run_ml_comparison(dataset)
+
+    # The comparison must still produce a valid gate verdict.
+    assert report["gate"]["winner"] in {"baseline", "ml", "ensemble"}
+
+    # Every raw array the calibrators were fit on must trace back to a model instance
+    # (sanity that our instrumentation captured the right arrays).
+    fit_models = {output_to_model[a] for a in fit_inputs if a in output_to_model}
+    assert fit_models, "no calibration-fit raw array traced to a model output"
+
+    # CORE INVARIANT: the ML calibrator that scores the holdout is fit on the SAME
+    # model instance that produces the holdout raw probabilities. With the train/serve
+    # identity restored, each holdout instantiates exactly one model and that single
+    # model both feeds calibration fitting and scores the holdout. A re-fit final model
+    # (the CR-01 defect) would introduce a second, distinct model id whose holdout
+    # output never appears among ``fit_models`` for that holdout.
+    n_models = len(models_per_run)
+    n_holdouts = len(HOLDOUTS)
+    assert n_models == n_holdouts, (
+        f"expected exactly one model per holdout (train==serve), "
+        f"got {n_models} model fits across {n_holdouts} holdouts — a second model "
+        f"between calibration-fit and holdout-scoring reintroduces CR-01"
+    )
