@@ -163,6 +163,16 @@ def _synthetic_ml_dataset() -> pd.DataFrame:
         feat = {col: float(rng.normal()) for col in ML_FEATURE_COLUMNS}
         # Inject a weak but learnable signal so the model is not pathological.
         feat["elo_diff"] = float((outcome - 1) * 120.0 + rng.normal(0, 20))
+        # The DC probability features must be valid 3-class distributions: they double
+        # as the baseline candidate's point-in-time predictions (D-02). Bias them
+        # toward the realized outcome so the baseline is a non-trivial competitor.
+        dc_logits = rng.normal(0.0, 0.6, size=3)
+        dc_logits[outcome] += 1.2
+        dc_p = np.exp(dc_logits)
+        dc_p /= dc_p.sum()
+        feat["p_home_win_dc"] = float(dc_p[0])
+        feat["p_draw_dc"] = float(dc_p[1])
+        feat["p_away_win_dc"] = float(dc_p[2])
         rows.append(
             {
                 "match_id": f"s{match_counter}",
@@ -277,3 +287,133 @@ def test_harness_materializes_dated_artifacts(test_workspace) -> None:
     # The report records the ML feature contract it trained on (auditability).
     assert tuple(report["feature_columns"]) == tuple(ML_FEATURE_COLUMNS)
     assert report["min_prior_matches"] >= 1
+
+
+# --------------------------------------------------------------------------- #
+# Plan 03: calibrated baseline-vs-ML-vs-ensemble comparison + promotion gate   #
+# --------------------------------------------------------------------------- #
+
+
+def test_pure_gate_passes_only_when_candidate_beats_baseline_on_all_four() -> None:
+    """T-05-08: the promotion gate is a pure 4-holdout log-loss criterion.
+
+    A candidate is promoted only if it beats the baseline in log-loss on EVERY
+    holdout. Beating it on three of four (or tying on one) must NOT promote.
+    """
+    from cdd_mundial.models.ml_validation import evaluate_ml_gate
+    from cdd_mundial.models.validation import HOLDOUTS
+
+    names = list(HOLDOUTS)
+    baseline = {h: 1.00 for h in names}
+
+    # ML wins on all four -> ML promoted.
+    ml_all_win = {h: 0.90 for h in names}
+    ens_worse = {h: 1.10 for h in names}
+    gate = evaluate_ml_gate(baseline, ml_all_win, ens_worse)
+    assert gate["promoted"] is True
+    assert gate["winner"] == "ml"
+
+    # ML ties on one holdout -> not strictly better everywhere -> no promotion.
+    ml_one_tie = {**{h: 0.90 for h in names}, names[0]: 1.00}
+    gate2 = evaluate_ml_gate(baseline, ml_one_tie, ens_worse)
+    assert gate2["promoted"] is False
+    assert gate2["winner"] == "baseline"
+
+
+def test_pure_gate_negative_result_is_first_class() -> None:
+    """T-05-09: 'baseline wins' is an explicit successful outcome, not an absence."""
+    from cdd_mundial.models.ml_validation import evaluate_ml_gate
+    from cdd_mundial.models.validation import HOLDOUTS
+
+    names = list(HOLDOUTS)
+    baseline = {h: 0.80 for h in names}
+    ml = {h: 0.95 for h in names}
+    ensemble = {h: 0.90 for h in names}
+
+    gate = evaluate_ml_gate(baseline, ml, ensemble)
+    assert gate["promoted"] is False
+    assert gate["winner"] == "baseline"
+    # The report explains WHY, per holdout, the candidates failed (auditable).
+    assert set(gate["beats_baseline_all_holdouts"]) == {"ml", "ensemble"}
+    assert gate["beats_baseline_all_holdouts"]["ml"] is False
+    assert gate["beats_baseline_all_holdouts"]["ensemble"] is False
+
+
+def test_comparison_scores_three_candidates_per_holdout() -> None:
+    """D-10: every holdout reports baseline, ml, and ensemble metrics."""
+    from cdd_mundial.models import ml_validation
+
+    dataset = _synthetic_ml_dataset()
+    report, predictions = ml_validation.run_ml_comparison(dataset)
+
+    for info in report["per_holdout"].values():
+        assert set(info["candidates"]) == {"baseline", "ml", "ensemble"}
+        for cand in ("baseline", "ml", "ensemble"):
+            assert set(info["candidates"][cand]["metrics"]) == {"log_loss", "brier", "rps"}
+
+    # Predictions carry all three candidate families.
+    assert set(predictions["model"].unique()) == {"baseline", "ml", "ensemble"}
+
+
+def test_comparison_records_chosen_calibrator_and_weight_per_holdout() -> None:
+    """D-11/D-12: each holdout names the calibrator used and the ensemble weight."""
+    from cdd_mundial.models import ml_validation
+
+    dataset = _synthetic_ml_dataset()
+    report, _ = ml_validation.run_ml_comparison(dataset)
+
+    for info in report["per_holdout"].values():
+        assert info["chosen_ml_calibrator"] in {"none", "sigmoid", "isotonic"}
+        assert info["chosen_ensemble_calibrator"] in {"none", "sigmoid", "isotonic"}
+        w = info["ensemble_weight"]
+        assert 0.0 <= w <= 1.0
+
+
+def test_comparison_calibration_uses_only_pre_holdout_rows(monkeypatch) -> None:
+    """T-05-07: calibrators/weights are selected without touching the scored holdout.
+
+    We assert that the dates of every row used to fit calibration are strictly before
+    the holdout cutoff, via the per-holdout audit field the harness must expose.
+    """
+    from cdd_mundial.models import ml_validation
+    from cdd_mundial.models.validation import HOLDOUTS
+
+    dataset = _synthetic_ml_dataset()
+    report, _ = ml_validation.run_ml_comparison(dataset)
+
+    for holdout_name, holdout in HOLDOUTS.items():
+        info = report["per_holdout"][holdout_name]
+        # The latest date used anywhere in calibration/selection predates the cutoff.
+        assert info["calibration_max_date"] < holdout.start
+
+
+def test_comparison_emits_top_level_gate_verdict() -> None:
+    """The phase-level gate verdict is reproducible from the report alone."""
+    from cdd_mundial.models import ml_validation
+
+    dataset = _synthetic_ml_dataset()
+    report, _ = ml_validation.run_ml_comparison(dataset)
+
+    gate = report["gate"]
+    assert isinstance(gate["promoted"], bool)
+    assert gate["winner"] in {"baseline", "ml", "ensemble"}
+    # Mean log-loss per candidate over the four holdouts is recorded.
+    assert set(gate["mean_log_loss"]) == {"baseline", "ml", "ensemble"}
+
+
+def test_comparison_materializes_dated_gate_report(test_workspace) -> None:
+    from cdd_mundial.models import ml_validation
+
+    dataset = _synthetic_ml_dataset()
+    data_root = test_workspace / "data"
+    summary = ml_validation.materialize_ml_comparison(dataset, data_root=data_root)
+
+    models_root = data_root / "processed" / "models"
+    report_files = list(models_root.glob("ml_comparison_report_*.json"))
+    pred_files = list(models_root.glob("ml_comparison_predictions_*.parquet"))
+    assert len(report_files) == 1
+    assert len(pred_files) == 1
+
+    report = json.loads(report_files[0].read_text(encoding="utf-8"))
+    assert report["gate"]["winner"] == summary["winner"]
+    assert isinstance(report["gate"]["promoted"], bool)
