@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 05-01-PLAN.md (ML v1 feature builder); ready to execute 05-02
-last_updated: "2026-06-16T01:33:20.518Z"
+stopped_at: Completed 05-02-PLAN.md (XGBoost candidate + ML-only temporal harness); ready to execute 05-03
+last_updated: "2026-06-16T01:42:37.166Z"
 last_activity: 2026-06-16
 progress:
   total_phases: 6
   completed_phases: 3
   total_plans: 19
-  completed_plans: 16
-  percent: 84
+  completed_plans: 17
+  percent: 89
 ---
 
 # Project State
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-06-11)
 ## Current Position
 
 Phase: 05 (ml-ensemble-upgrade-gated) — EXECUTING
-Plan: 2 of 4
+Plan: 3 of 4
 Status: Ready to execute
 Last activity: 2026-06-16
 
@@ -76,6 +76,7 @@ Progress: [██████████] 100%
 | Phase 04 P04 | 12min | 2 tasks (TDD) | 3 files |
 | Phase 04 P03 | 18min | 2 tasks (TDD) | 7 files |
 | Phase 05 P01 | 8min | 2 tasks | 5 files |
+| Phase Phase 05 P02 P05-02 | 5min | 2 tasks (TDD) tasks | 4 files files |
 
 ## Accumulated Context
 
@@ -146,6 +147,7 @@ Recent decisions affecting current work:
 - [Phase 04]: Las líneas base temporales (snapshot anterior + primero) se resuelven ordenando los directorios de snapshot por published_at_utc de metadata congelada, no por estado mutable (D-17, T-04-09).
 - [Phase 04]: Jinja2 pineado >=3.1,<4 (major acotado, política tournament-safe) y añadido como dependencia directa + al test guardrail de dependencias.
 - [Phase 05]: ML v1 feature builder es point-in-time con dc_predict inyectable (default predict_lambdas) y rollings last_5 estrictamente previos; D-04 se codifica como metadata ml_eligible (audita, no descarta); un solo builder sirve parquet historico y frame live-training. FIFA ranking omitido (D-08/D-09).
+- [Phase Phase 05]: Primer candidato ML = MulticlassXGBoost conservador (multi:softprob, num_class=3, max_depth=3, seed fijo, determinista bit-identico). D-04 se excluye duro en fit Y score dentro de ml_validation (no en el wrapper), reusando HOLDOUTS y log_loss/Brier/RPS del baseline verbatim. Artefactos ML fechados aparte del HoldoutPredictionsSchema congelado del baseline.
 
 ### Pending Todos
 
@@ -167,6 +169,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-06-16T01:33:20.505Z
-Stopped at: Completed 05-01-PLAN.md (ML v1 feature builder); ready to execute 05-02
+Last session: 2026-06-16T01:42:37.153Z
+Stopped at: Completed 05-02-PLAN.md (XGBoost candidate + ML-only temporal harness); ready to execute 05-03
 Resume file: None

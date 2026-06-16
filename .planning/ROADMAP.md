@@ -127,7 +127,7 @@ Plans:
 - [x] 05-01-PLAN.md — Contrato del dataset ML point-in-time v1, 12 features fijas, metadata de elegibilidad/fallback y pruebas anti-leakage
 
 **Wave 2** *(blocked on Wave 1 completion)*
-- [ ] 05-02-PLAN.md — XGBoost multiclass conservador + harness temporal fechado sobre los 4 holdouts
+- [x] 05-02-PLAN.md — XGBoost multiclass conservador + harness temporal fechado sobre los 4 holdouts
 
 **Wave 3** *(blocked on Wave 2 completion)*
 - [ ] 05-03-PLAN.md — Calibración temporal de ML solo/ensemble + gate explícito baseline vs ML vs ensemble

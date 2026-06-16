@@ -33,7 +33,7 @@
 ### ML y ensemble
 
 - [x] **ML-01**: Pipeline de features para ML: diferencia de Elo, forma reciente ponderada, rolling de goles, ranking FIFA point-in-time, condición de anfitrión, descanso entre partidos
-- [ ] **ML-02**: Clasificador XGBoost de 3 clases (1/X/2) entrenado y evaluado con la misma validación temporal que el baseline
+- [x] **ML-02**: Clasificador XGBoost de 3 clases (1/X/2) entrenado y evaluado con la misma validación temporal que el baseline
 - [ ] **ML-03**: Ensemble ponderado (estructural + ML) con gate de aceptación pre-registrado: solo reemplaza al baseline si lo vence en log-loss en los 4 torneos holdout
 - [ ] **ML-04**: Calibración de probabilidades comparando isotónica vs. Platt empíricamente en folds de validación temporal (isotónica no se asume superior con <1,000 muestras)
 
@@ -96,7 +96,7 @@ Deferred — valiosos pero no bloquean el valor core de v1:
 | SIM-04 | Phase 3 | Complete |
 | SIM-05 | Phase 3 | Complete |
 | ML-01 | Phase 5 | Complete |
-| ML-02 | Phase 5 | Pending |
+| ML-02 | Phase 5 | Complete |
 | ML-03 | Phase 5 | Pending |
 | ML-04 | Phase 5 | Pending |
 | LIVE-01 | Phase 4 | Complete (04-05) |
