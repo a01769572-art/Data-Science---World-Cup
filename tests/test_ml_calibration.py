@@ -126,3 +126,76 @@ def test_select_best_calibration_names_a_method_and_improves_or_ties() -> None:
     assert chosen_score == min(result["log_loss_by_method"].values())
     # On an over-confident problem, calibration should not hurt vs raw.
     assert chosen_score <= result["log_loss_by_method"]["none"] + 1e-9
+
+
+# --------------------------------------------------------------------------- #
+# CR-01: calibration contract under the repaired train/serve-identity flow      #
+# --------------------------------------------------------------------------- #
+
+
+def test_calibrator_applied_to_same_producers_later_rows_stays_valid() -> None:
+    """CR-01 contract: a calibrator fit on one producer's distribution and applied to
+    that SAME producer's later (holdout) rows yields valid distributions.
+
+    The repaired ``run_ml_comparison`` fits the calibrator on the inner model's raw
+    probabilities and then transforms that *same* inner model's holdout raw
+    probabilities. This freezes the property that flow relies on: per-class maps learned
+    on a producer's output distribution remain a valid, mass-preserving transform when
+    applied to fresh rows drawn from the identical distribution.
+    """
+    from cdd_mundial.models.ml_calibration import MulticlassCalibrator
+
+    # One producer, two disjoint draws from its identical output distribution: the slice
+    # used to fit the calibrator (mirrors inner_fit/inner_cal) and a later slice that
+    # mirrors the holdout the SAME producer scores.
+    raw, y = _miscalibrated_probs(n=900, seed=11)
+    fit_raw, fit_y = raw[:600], y[:600]
+    serve_raw = raw[600:]
+
+    for method in ("none", "sigmoid", "isotonic"):
+        cal = MulticlassCalibrator(method=method).fit(fit_raw, fit_y)
+        served = cal.transform(serve_raw)
+        assert served.shape == serve_raw.shape
+        assert (served >= 0.0).all()
+        assert (served <= 1.0).all()
+        np.testing.assert_allclose(served.sum(axis=1), 1.0, atol=1e-6)
+
+
+def test_calibration_choice_describes_the_distribution_it_is_applied_to() -> None:
+    """CR-01: the empirical isotonic/Platt/none choice must describe the SAME producer
+    distribution it is later applied to.
+
+    Under the defect, the method was selected on the inner model's distribution but
+    applied to a re-fit final model's (different) distribution, so the recorded log-loss
+    evidence no longer described the scored probabilities. With train/serve identity the
+    method selected on a producer's validation slice and the method that wins when scored
+    on a fresh slice from the SAME producer agree, and the chosen calibrator does not
+    worsen log-loss on the served distribution versus raw.
+    """
+    from cdd_mundial.models.ml_calibration import (
+        MulticlassCalibrator,
+        select_best_calibration,
+    )
+    from sklearn.metrics import log_loss
+
+    raw, y = _miscalibrated_probs(n=1500, seed=12)
+    fit_raw, fit_y = raw[:600], y[:600]
+    val_raw, val_y = raw[600:1050], y[600:1050]
+    serve_raw, serve_y = raw[1050:], y[1050:]  # same producer, fresh rows (the holdout)
+
+    result = select_best_calibration(fit_raw, fit_y, val_raw, val_y)
+    chosen = result["method"]
+
+    # Apply the chosen calibrator (fit on the producer's fit slice) to the producer's
+    # own later rows — exactly the repaired harness pattern.
+    cal = MulticlassCalibrator(method=chosen).fit(fit_raw, fit_y)
+    served = cal.transform(serve_raw)
+
+    served_ll = float(log_loss(serve_y, served, labels=[0, 1, 2]))
+    raw_served = serve_raw / serve_raw.sum(axis=1, keepdims=True)
+    raw_ll = float(log_loss(serve_y, raw_served, labels=[0, 1, 2]))
+
+    # Because the evidence and the served rows come from one distribution, the empirical
+    # choice generalizes: the calibrated served log-loss is no worse than raw by more
+    # than sampling noise (it is honestly calibrated for the served distribution).
+    assert served_ll <= raw_ll + 0.02
