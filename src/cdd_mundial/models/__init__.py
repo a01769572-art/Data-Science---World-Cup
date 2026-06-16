@@ -7,6 +7,10 @@ from cdd_mundial.models.ml_features import (  # contrato ML-01 (Phase 5)
     build_ml_dataset,
 )
 from cdd_mundial.models.ml_xgboost import MulticlassXGBoost  # contrato ML-02 (Phase 5)
+from cdd_mundial.models.ml_calibration import (  # contrato ML-04 (Phase 5)
+    MulticlassCalibrator,
+    select_best_calibration,
+)
 
 __all__ = [
     "DixonColesModel",
@@ -15,4 +19,6 @@ __all__ = [
     "MIN_PRIOR_MATCHES",
     "build_ml_dataset",
     "MulticlassXGBoost",
+    "MulticlassCalibrator",
+    "select_best_calibration",
 ]
