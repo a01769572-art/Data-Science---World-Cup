@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: completed
-stopped_at: Completed 04-03-PLAN.md (LIVE-03 snapshot-only HTML report renderer); ready to execute 04-05 (end-to-end integration + first official pre-kickoff publication)
-last_updated: "2026-06-14T14:51:03.752Z"
-last_activity: 2026-06-14
+status: executing
+stopped_at: Completed 05-01-PLAN.md (ML v1 feature builder); ready to execute 05-02
+last_updated: "2026-06-16T01:33:20.518Z"
+last_activity: 2026-06-16
 progress:
   total_phases: 6
   completed_phases: 3
-  total_plans: 15
-  completed_plans: 15
-  percent: 100
+  total_plans: 19
+  completed_plans: 16
+  percent: 84
 ---
 
 # Project State
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-11)
 
 **Core value:** Proyecto de portafolio metodológicamente riguroso y profundamente documentado que enseña ciencia de datos end-to-end real — si los pronósticos fallan pero el proceso es sólido y el aprendizaje quedó capturado, el proyecto cumplió.
-**Current focus:** Phase 04 — primer-pronostico-pipeline-diario
+**Current focus:** Phase 05 — ml-ensemble-upgrade-gated
 
 ## Current Position
 
-Phase: 5
-Plan: Not started
-Status: Phase 04 complete — first official pre-kickoff snapshot published & committed (2026-06-13T22:02:08Z, boundary 2026-06-14T01:00:00Z)
-Last activity: 2026-06-14
+Phase: 05 (ml-ensemble-upgrade-gated) — EXECUTING
+Plan: 2 of 4
+Status: Ready to execute
+Last activity: 2026-06-16
 
 Progress: [██████████] 100%
 
@@ -75,6 +75,7 @@ Progress: [██████████] 100%
 | Phase 04 P02 | 16min | 2 tasks (TDD) | 9 files |
 | Phase 04 P04 | 12min | 2 tasks (TDD) | 3 files |
 | Phase 04 P03 | 18min | 2 tasks (TDD) | 7 files |
+| Phase 05 P01 | 8min | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -144,6 +145,7 @@ Recent decisions affecting current work:
 - [Phase 04]: Visuales del reporte con matplotlib backend Agg + tema/paleta seaborn fijos -> HTML byte-idéntico y PNGs reproducibles al re-renderizar el mismo snapshot.
 - [Phase 04]: Las líneas base temporales (snapshot anterior + primero) se resuelven ordenando los directorios de snapshot por published_at_utc de metadata congelada, no por estado mutable (D-17, T-04-09).
 - [Phase 04]: Jinja2 pineado >=3.1,<4 (major acotado, política tournament-safe) y añadido como dependencia directa + al test guardrail de dependencias.
+- [Phase 05]: ML v1 feature builder es point-in-time con dc_predict inyectable (default predict_lambdas) y rollings last_5 estrictamente previos; D-04 se codifica como metadata ml_eligible (audita, no descarta); un solo builder sirve parquet historico y frame live-training. FIFA ranking omitido (D-08/D-09).
 
 ### Pending Todos
 
@@ -165,6 +167,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-06-13T19:20:00.000Z
-Stopped at: Completed 04-03-PLAN.md (LIVE-03 snapshot-only HTML report renderer); ready to execute 04-05 (end-to-end integration + first official pre-kickoff publication)
+Last session: 2026-06-16T01:33:20.505Z
+Stopped at: Completed 05-01-PLAN.md (ML v1 feature builder); ready to execute 05-02
 Resume file: None

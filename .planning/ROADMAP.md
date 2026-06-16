@@ -120,7 +120,20 @@ Plans:
   2. El clasificador XGBoost de 3 clases (constrained: depth ≤ 3–4, ≤ ~10 features) está entrenado y evaluado con la misma validación temporal que el baseline
   3. El gate de aceptación pre-registrado se aplica: el ensemble solo reemplaza al baseline si lo vence en log-loss en los 4 torneos holdout — si no, el resultado negativo se documenta y el baseline sigue
   4. La calibración isotónica vs. Platt se compara empíricamente en folds temporales y se elige por evidencia (isotónica no asumida superior con <1,000 muestras)
-**Plans**: TBD
+**Plans**: 4 plans
+
+Plans:
+**Wave 1**
+- [x] 05-01-PLAN.md — Contrato del dataset ML point-in-time v1, 12 features fijas, metadata de elegibilidad/fallback y pruebas anti-leakage
+
+**Wave 2** *(blocked on Wave 1 completion)*
+- [ ] 05-02-PLAN.md — XGBoost multiclass conservador + harness temporal fechado sobre los 4 holdouts
+
+**Wave 3** *(blocked on Wave 2 completion)*
+- [ ] 05-03-PLAN.md — Calibración temporal de ML solo/ensemble + gate explícito baseline vs ML vs ensemble
+
+**Wave 4** *(blocked on Wave 3 completion)*
+- [ ] 05-04-PLAN.md — Integración live con publicación dual, fallback explícito al baseline, reporte y notebook de evidencia
 
 ### Phase 6: Operación en Vivo + Post-Mortem
 **Goal**: El sistema opera con disciplina diaria hasta el 19 de julio y cierra con evaluación final honesta y aprendizaje capturado — corre desde Fase 4 en adelante; el post-mortem está fijado al final del torneo
@@ -144,7 +157,7 @@ Phases execute in numeric order: 1 → 2 ∥ 3 → 4 → 5 ∥ 6 (2-3 paraleliza
 | 2. Modelos Baseline | 5/5 | Complete | 2026-06-12 |
 | 3. Simulador del Torneo | 5/5 | Complete | 2026-06-13 |
 | 4. Primer Pronóstico + Pipeline Diario | 2/5 | In Progress | - |
-| 5. ML + Ensemble (gated) | 0/TBD | Not started | - |
+| 5. ML + Ensemble (gated) | 0/4 | Planned | - |
 | 6. Operación en Vivo + Post-Mortem | 0/TBD | Not started | - |
 
 ---

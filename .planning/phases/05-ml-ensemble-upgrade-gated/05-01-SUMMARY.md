@@ -131,6 +131,19 @@ Omitted from v1: no reproducible, leakage-free point-in-time FIFA-ranking source
 - Plan 02 (XGBoost training) can call `build_ml_dataset` under the existing temporal holdouts, supplying a cutoff-correct `dc_predict` and the real `elo_history`, and filter on `ml_eligible`.
 - No blockers.
 
+## Self-Check: PASSED
+
+- FOUND: src/cdd_mundial/models/ml_features.py
+- FOUND: tests/test_ml_features.py
+- FOUND: .planning/phases/05-ml-ensemble-upgrade-gated/05-01-SUMMARY.md
+- Commits verified: 5971175 (RED), 2b90045 (Task 1 GREEN), 0ede926 (Task 2), d398afe (summary)
+
+## TDD Gate Compliance
+
+- RED gate: `test(05-01)` commit `5971175` (failing contract tests committed before implementation).
+- GREEN gate: `feat(05-01)` commits `2b90045` and `0ede926` after RED.
+- No unexpected pass during RED (module did not exist; `ModuleNotFoundError` confirmed).
+
 ---
 *Phase: 05-ml-ensemble-upgrade-gated*
 *Completed: 2026-06-16*
