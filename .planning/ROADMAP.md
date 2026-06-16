@@ -133,7 +133,7 @@ Plans:
 - [x] 05-03-PLAN.md — Calibración temporal de ML solo/ensemble + gate explícito baseline vs ML vs ensemble
 
 **Wave 4** *(blocked on Wave 3 completion)*
-- [ ] 05-04-PLAN.md — Integración live con publicación dual, fallback explícito al baseline, reporte y notebook de evidencia
+- [x] 05-04-PLAN.md — Integración live con publicación dual, fallback explícito al baseline, reporte y notebook de evidencia
 
 ### Phase 6: Operación en Vivo + Post-Mortem
 **Goal**: El sistema opera con disciplina diaria hasta el 19 de julio y cierra con evaluación final honesta y aprendizaje capturado — corre desde Fase 4 en adelante; el post-mortem está fijado al final del torneo

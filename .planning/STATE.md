@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: executing
-stopped_at: Completed 05-03-PLAN.md (calibration + ensemble + 4-holdout promotion gate); ready to execute 05-04
-last_updated: "2026-06-16T01:54:16.153Z"
+status: verifying
+stopped_at: Completed 05-04-PLAN.md
+last_updated: "2026-06-16T02:18:55.153Z"
 last_activity: 2026-06-16
 progress:
   total_phases: 6
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 19
-  completed_plans: 18
-  percent: 95
+  completed_plans: 19
+  percent: 100
 ---
 
 # Project State
@@ -27,7 +27,7 @@ See: .planning/PROJECT.md (updated 2026-06-11)
 
 Phase: 05 (ml-ensemble-upgrade-gated) — EXECUTING
 Plan: 4 of 4
-Status: Ready to execute
+Status: Phase complete — ready for verification
 Last activity: 2026-06-16
 
 Progress: [██████████] 100%
@@ -78,6 +78,7 @@ Progress: [██████████] 100%
 | Phase 05 P01 | 8min | 2 tasks | 5 files |
 | Phase Phase 05 P02 P05-02 | 5min | 2 tasks (TDD) tasks | 4 files files |
 | Phase 05 P05-03 | 14min | 2 tasks | 5 files |
+| Phase 05 P04 | 18min | 2 tasks | 11 files |
 
 ## Accumulated Context
 
@@ -151,6 +152,8 @@ Recent decisions affecting current work:
 - [Phase Phase 05]: Primer candidato ML = MulticlassXGBoost conservador (multi:softprob, num_class=3, max_depth=3, seed fijo, determinista bit-identico). D-04 se excluye duro en fit Y score dentro de ml_validation (no en el wrapper), reusando HOLDOUTS y log_loss/Brier/RPS del baseline verbatim. Artefactos ML fechados aparte del HoldoutPredictionsSchema congelado del baseline.
 - [Phase ?]: [Phase 05]: Calibracion multiclass one-vs-rest (isotonic/Platt/none) sobre probabilidades ya calculadas, no envoltura de estimador; 'none' es pass-through exacto y gana en empates; isotonic NUNCA se asume superior (D-11/D-12).
 - [Phase ?]: [Phase 05]: Gate de promocion ML-03 = funcion pura de 4 holdouts; se promueve SOLO si el candidato vence al baseline en log-loss en los CUATRO holdouts (estricto). 'baseline gana' es resultado de primera clase explicito (promoted=False), no ausencia. Candidato baseline = columnas DC WDL point-in-time del dataset ML (D-02).
+- [Phase ?]: Phase-5 live integration is opt-in via run_official(ml_selection_provider=...): baseline-only by default, dual table added only when a candidate is promoted (D-14)
+- [Phase ?]: Dual publication always keeps the baseline row; the promoted candidate is published alongside only for ML-eligible matches, else explicit baseline fallback with recorded reason (D-13)
 
 ### Pending Todos
 
@@ -172,6 +175,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-06-16T01:54:16.141Z
-Stopped at: Completed 05-03-PLAN.md (calibration + ensemble + 4-holdout promotion gate); ready to execute 05-04
+Last session: 2026-06-16T02:18:48.959Z
+Stopped at: Completed 05-04-PLAN.md
 Resume file: None
