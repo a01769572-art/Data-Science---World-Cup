@@ -1,302 +1,216 @@
 ---
 phase: 05-ml-ensemble-upgrade-gated
-reviewed: 2026-06-15T00:00:00Z
+reviewed: 2026-06-16T00:00:00Z
 depth: standard
-files_reviewed: 17
+files_reviewed: 3
 files_reviewed_list:
-  - src/cdd_mundial/models/ml_features.py
-  - src/cdd_mundial/models/ml_xgboost.py
   - src/cdd_mundial/models/ml_validation.py
-  - src/cdd_mundial/models/ml_calibration.py
-  - src/cdd_mundial/models/__init__.py
-  - src/cdd_mundial/live/ml_selection.py
-  - src/cdd_mundial/live/pipeline.py
-  - src/cdd_mundial/live/report.py
-  - src/cdd_mundial/live/__init__.py
-  - scripts/build_notebook_05.py
-  - templates/report_daily.html.jinja
-  - pyproject.toml
-  - tests/test_ml_features.py
   - tests/test_ml_validation.py
   - tests/test_ml_calibration.py
-  - tests/test_ml_selection.py
-  - tests/test_live_pipeline.py
 findings:
-  critical: 1
-  warning: 6
-  info: 6
-  total: 13
+  critical: 0
+  warning: 3
+  info: 3
+  total: 6
 status: issues_found
 ---
 
-# Phase 5: Code Review Report
+# Fase 5: Reporte de Revisión de Código
 
-**Reviewed:** 2026-06-15T00:00:00Z
-**Depth:** standard
-**Files Reviewed:** 17
-**Status:** issues_found
+**Revisado:** 2026-06-16
+**Profundidad:** standard
+**Archivos revisados:** 3
+**Estado:** issues_found
 
-## Summary
+## Resumen
 
-Phase 5 adds the gated ML/ensemble upgrade. The temporal-leakage discipline in
-`ml_features.py` (strict `date < kickoff`, state updated only after reading
-features, tie-break by `match_id`) is correct and well-encoded, and the live
-dual-publication / fallback path (`ml_selection.py`, `pipeline.py`) preserves the
-baseline unconditionally with per-row provenance as required (D-13/D-14). The
-seeding/determinism story in `ml_xgboost.py` is sound for the configured
-`tree_method="exact"` + `nthread=1`.
+Se revisó adversarialmente el fix de cierre de brecha del plan 05-05, que corrige el
+blocker CR-01 (desajuste tren/servicio en `run_ml_comparison`): los calibradores y el
+peso del ensemble se ajustaban sobre las probabilidades de `inner_model` pero el holdout
+se puntuaba con un `final_model` re-ajustado por separado.
 
-The blocking issue is a **calibrator train/serve model mismatch** in
-`run_ml_comparison`: the calibrators and the ensemble weight are fit against the
-*inner* model's probabilities but then applied to a *differently-trained* final
-model's probabilities at holdout scoring time. This silently degrades the very
-log-loss numbers the promotion gate consumes, so the gate verdict — the central
-deliverable of the phase — is computed on miscalibrated inputs. Several warnings
-concern robustness (NaN-producing features fed to XGBoost, non-positive ensemble
-denominators, an unused `winner` parameter) and one dead/duplicated code path.
+**Veredicto sobre la corrección del fix (foco 1): el arreglo es correcto y completo en
+cuanto a la identidad tren/servicio.** El step 4 ahora asigna `scoring_model = inner_model`
+y elimina por completo el `final_model` re-ajustado. Tracé las cuatro dependencias de
+distribución y todas son consistentes:
 
-## Critical Issues
+- `ml_calibrator` se ajusta sobre `ml_fit_raw` (de `inner_model`) y se aplica a
+  `ml_holdout_raw` (de `scoring_model = inner_model`). ✓
+- `weight` se selecciona sobre `ml_cal_calibrated`/`baseline_cal` y se aplica al mismo
+  par de distribuciones en el holdout. ✓
+- `ens_calibrator` se ajusta sobre `ens_fit_raw` (derivado de `inner_model`) y se aplica
+  al ensemble de probabilidades del holdout derivadas de `inner_model`. ✓
 
-### CR-01: Calibrators and ensemble weight are fit on the inner model but applied to a different final model
+No queda ningún camino donde la distribución de ajuste-de-calibración y la de
+puntuación-de-holdout diverjan. **No se encontró ningún BLOCKER** ni regresión de
+validez estadística (fuga temporal, contaminación, recalibración inválida) introducida
+por el cambio. La disciplina pre-cutoff (`_split_inner`, `calibration_max_date`) se
+mantiene intacta.
 
-**File:** `src/cdd_mundial/models/ml_validation.py:393-435`
-**Issue:**
-Inside each holdout, `run_ml_comparison` fits `ml_calibrator` and selects the
-ensemble `weight` and `ens_calibrator` against the predictions of `inner_model`
-(trained only on `inner_fit`, ~75% of pre-cutoff rows):
-
-```python
-inner_model = MulticlassXGBoost(seed=seed).fit(x_fit, y_fit)   # inner_fit only
-...
-ml_calibrator = MulticlassCalibrator(method=ml_choice["method"]).fit(ml_fit_raw, y_fit)
-weight = _select_weight(ml_cal_calibrated, baseline_cal, y_cal)
-ens_calibrator = MulticlassCalibrator(method=ens_choice["method"]).fit(ens_fit_raw, y_fit)
-```
-
-Then at step 4 it re-fits a **different** model on *all* pre-cutoff rows and
-applies those same calibrators to its outputs:
-
-```python
-final_model = MulticlassXGBoost(seed=seed).fit(x_train, y_train)   # all pre-cutoff
-ml_holdout = ml_calibrator.transform(final_model.predict_proba(x_holdout))
-ensemble_holdout = ens_calibrator.transform(_ensemble_probs(ml_holdout, baseline_holdout, weight))
-```
-
-`inner_model` and `final_model` are trained on different data and therefore emit
-differently-distributed probabilities. A per-class isotonic/sigmoid map learned
-on `inner_model`'s output distribution is not valid for `final_model`'s output
-distribution; the calibrated holdout probabilities are systematically off. Because
-these holdout log-losses are exactly what `evaluate_ml_gate` compares against the
-baseline, the promotion decision — the phase's headline artifact — is made on
-miscalibrated numbers. This is a correctness defect in the gate, not a style issue.
-
-Note this is *not* a leakage bug (nothing peeks past the cutoff); the anti-leakage
-invariants T-05-07 hold. The defect is that the calibrator's training distribution
-(inner model) and serving distribution (final model) differ.
-
-**Fix:** Apply each calibrator to the same model whose outputs it was fit on. The
-simplest correct option is to score the holdout with `inner_model` (the one the
-calibrators/weight were tuned for) and drop the re-fit, or — if the extra 25% of
-data is wanted — re-derive the calibrators/weight from `final_model`'s own
-predictions on a held-out slice before scoring. For example, score with the inner
-model:
-
-```python
-# Score the holdout with the SAME model the calibrators/weight were fit on.
-ml_holdout_raw = inner_model.predict_proba(x_holdout)
-ml_holdout = ml_calibrator.transform(ml_holdout_raw)
-ensemble_holdout = ens_calibrator.transform(
-    _ensemble_probs(ml_holdout, baseline_holdout, weight)
-)
-```
-
-Whichever path is chosen, the model that produces `*_fit_raw`/`*_cal_raw` must be
-the model that produces the holdout probabilities the calibrators transform.
+Sin embargo, el fix introduce una **decisión metodológica con coste no documentado** y
+el test de regresión, aunque pasa, **no prueba el invariante exacto que su docstring
+afirma probar** — ambos son WARNING en un proyecto que se define por su rigor
+metodológico. A continuación el detalle.
 
 ## Warnings
 
-### WR-01: NaN-valued features (`days_rest_diff`, `elo_diff`) are passed straight into XGBoost training/scoring
+### WR-01: El test de regresión CR-01 no prueba identidad de modelo entre fit-de-calibración y scoring-de-holdout; solo cuenta el número de fits
 
-**File:** `src/cdd_mundial/models/ml_features.py:130-134, 223-231` and `ml_validation.py:172-177`
-**Issue:**
-`_days_rest` returns `float("nan")` when a team has no prior match, and `elo_diff`
-is NaN whenever `elo_history` is absent or a `(match_id, team_id)` key is missing
-(`elo_by_key.get(..., float("nan"))`). These columns flow unchanged into
-`x_train = train[list(_FEATURES)].to_numpy(dtype=float)` and into
-`MulticlassXGBoost.fit`. XGBoost tolerates NaN as "missing", but: (a) a fold where
-`elo_history` was never injected trains every tree's `elo_diff` split on *all*
-NaN, silently neutering a feature the contract claims is present; (b) `days_rest`
-NaN only occurs for a team's first-ever match, which is excluded by the
-`MIN_PRIOR_MATCHES>=5` eligibility filter, so that case is benign — but the
-`elo_diff` all-NaN case is not. The model can be trained on a feature matrix with
-an entirely-missing column with no warning, and the gate then judges that
-crippled candidate against the baseline.
-**Fix:** Either assert in `run_ml_comparison`/`run_ml_validation` that the eligible
-training slice has no all-NaN feature column (fail loudly), or document and test
-that `elo_diff` is intentionally NaN-as-missing and ensure the production live path
-always injects `elo_history`. At minimum log/record per-fold NaN coverage so a
-silently-dead feature is auditable.
+**File:** `tests/test_ml_validation.py:493-510`
+**Issue:** El docstring del test afirma (líneas 442-445) que "asserts that for every
+holdout the array consumed by the calibration-fit path and the array fed into the
+holdout-scoring transform came from the *same* model instance". Pero la aserción real
+NO comprueba eso. El test instrumenta `output_to_model` (id de array → id de modelo) y
+`fit_inputs` (ids de arrays sobre los que se ajustó un calibrador), pero el único uso
+real es:
 
-### WR-02: `_ensemble_probs` can divide by a non-positive row sum
-
-**File:** `src/cdd_mundial/models/ml_validation.py:305-308`
-**Issue:**
 ```python
-blended = weight * ml_probs + (1.0 - weight) * baseline_probs
-return blended / blended.sum(axis=1, keepdims=True)
+fit_models = {output_to_model[a] for a in fit_inputs if a in output_to_model}
+assert fit_models, "no calibration-fit raw array traced to a model output"   # solo "no vacío"
+...
+assert n_models == n_holdouts   # el invariante de verdad probado
 ```
-There is no guard that `blended.sum(axis=1)` is strictly positive. If a calibrated
-ML row and a baseline row are both ~0 in some column and the blend underflows, or
-if upstream calibration emitted a zero row (the `_renormalize` fallback can yield a
-uniform row, which is fine, but `method="none"` does a raw divide with no floor),
-a zero or near-zero denominator produces `inf`/`nan` probabilities that then feed
-`log_loss`. Compare with `ml_selection._normalize_triplet`, which *does* guard
-(`if total <= 0.0: raise`). The ensemble blend should be at least as defensive.
-**Fix:** Floor the denominator or validate it, e.g.
-`denom = blended.sum(axis=1, keepdims=True); denom = np.where(denom <= _EPS, 1.0, denom)`
-and reset all-zero rows to uniform, mirroring `ml_calibration._renormalize`.
 
-### WR-03: `decide_publication` accepts a `winner` argument it never uses
+El invariante efectivo es **"se ajusta exactamente un modelo por holdout"** (conteo de
+`fit`), no "el modelo que puntúa el holdout es el mismo que alimentó la calibración".
+El elaborado rastreo `output_to_model`/`fit_inputs` se construye y luego se descarta:
+`fit_models` solo se asevera como no-vacío, nunca se compara contra el id del modelo que
+produjo `ml_holdout_raw`. La prueba de scoring-de-holdout jamás se captura ni se
+contrasta.
 
-**File:** `src/cdd_mundial/live/ml_selection.py:91-123`
-**Issue:**
-`decide_publication(..., winner: str, ...)` takes `winner` but the body never
-references it; the decision is driven entirely by `gate_promoted`, `ml_eligible`,
-`has_ml_prob`. Callers (`build_dual_publication:188`) pass it, and the tests pass
-it, but it is dead in the function. This is misleading: a reader assumes the winning
-family (`ml` vs `ensemble`) influences the per-match decision, and a future change
-that *should* branch on `winner` (e.g. publishing the ml-vs-ensemble family label
-on the upgrade row) has a parameter that looks wired but is inert. The upgrade row
-in `build_dual_publication:225` hardcodes `UPGRADE_FAMILY` rather than `winner`, so
-the promoted family identity is never stamped on the row beyond the separate
-`winner` column.
-**Fix:** Either drop the unused parameter from `decide_publication`, or actually use
-it — e.g. stamp the promoted candidate family (`winner`) onto the upgrade row's
-`model_family` so a reviewer can distinguish an `ml` upgrade from an `ensemble`
-upgrade at the row level.
+Esto importa porque el conteo `n_models == n_holdouts` es un proxy frágil: una futura
+refactorización que, por ejemplo, re-ajustara el modelo final PERO reutilizara la misma
+instancia, o que entrenara un segundo modelo dentro de `select_best_calibration`, podría
+violar la identidad tren/servicio sin cambiar el conteo, o cambiar el conteo sin violar
+la identidad. El test es un proxy del invariante que su nombre y docstring prometen, no
+una prueba directa de él. (Además, el comentario de las líneas 472-473 menciona "wrap
+_ensemble_probs to capture the ml array used for holdout scoring", pero ese wrapper
+nunca se implementa — confirma que el rastreo de scoring quedó a medias.)
 
-### WR-04: `MulticlassCalibrator.transform` has a dead, duplicated isotonic/sigmoid branch
+**Fix:** Capturar el id del modelo que produce el array de scoring del holdout
+(`ml_holdout_raw`) y aseverar que coincide con el id del modelo cuyas salidas
+alimentaron `ml_calibrator.fit` para el mismo holdout. Idealmente instrumentar
+por-holdout (no agregado sobre los cuatro) para que el invariante se verifique holdout a
+holdout. Como mínimo, sustituir el `assert fit_models` no-vacío por una comparación
+real entre el modelo de scoring y el modelo de calibración. El conteo `n_models ==
+n_holdouts` puede quedarse como aserción complementaria, no como la única.
 
-**File:** `src/cdd_mundial/models/ml_calibration.py:147-154`
-**Issue:**
+### WR-02: El fix cambia el modelo servido a uno entrenado con ~75% de los datos pre-cutoff sin documentar ni mitigar la pérdida de potencia estadística y la asimetría del gate
+
+**File:** `src/cdd_mundial/models/ml_validation.py:433`, `342-365`
+**Issue:** El fix corrige el desajuste tren/servicio descartando el `final_model`
+(ajustado sobre TODAS las filas pre-cutoff) y sirviendo `inner_model` (ajustado solo
+sobre `inner_fit`, es decir `1 - _INNER_CAL_FRACTION` ≈ 75% de las filas pre-cutoff;
+ver `_split_inner`, línea 320). Esto es metodológicamente defendible (prioriza la
+identidad tren/servicio sobre el uso máximo de datos), pero tiene un coste real que el
+código y la documentación no reconocen:
+
+1. **Pérdida de ~25% de los datos de entrenamiento** para el modelo que efectivamente
+   produce los inputs del gate de promoción. En un proyecto con ~5k partidos
+   internacionales relevantes (ver CLAUDE.md), descartar el 25% más reciente de cada
+   ventana pre-cutoff puede degradar materialmente el candidato ML — y precisamente la
+   porción descartada (`inner_cal`, la más reciente por fecha) es la más informativa
+   para predecir el holdout inmediatamente posterior.
+2. **Sesgo sistemático contra el candidato ML y el ensemble en el gate.** El baseline
+   Dixon-Coles (columnas `_DC_PROB_COLUMNS`) son probabilidades point-in-time que NO
+   sufren este recorte del 25%; reflejan toda la historia disponible. El gate
+   (`evaluate_ml_gate`) exige que ML/ensemble batan al baseline en log-loss en los
+   cuatro holdouts — pero ahora compite un ML entrenado con ~75% de datos contra un
+   baseline con 100%. El gate podría rechazar un candidato ML que, entrenado con todos
+   los datos pre-cutoff, sí superaría al baseline. Es un sesgo de validez metodológica en
+   el corazón mismo de la decisión de promoción del proyecto.
+
+El docstring (líneas 357-359) justifica la elección ("We therefore score the holdout
+with the inner model rather than re-fitting on all pre-cutoff rows") pero no menciona
+que esto reduce los datos de entrenamiento del modelo servido ni que introduce la
+asimetría baseline-vs-ML en el gate. El campo de auditoría `n_inner_fit`/`n_inner_cal`
+(líneas 469-470) expone el conteo pero no la implicación.
+
+**Fix:** Es una decisión del Director (Jesús), no un bug puro — pero debe ser una
+decisión informada y documentada, no un efecto colateral silencioso del fix de CR-01.
+Opciones:
+- Documentar explícitamente en el docstring y en el reporte del gate que el modelo ML
+  servido usa `_INNER_CAL_FRACTION` menos datos que el baseline, y registrar esto como
+  limitación conocida del veredicto.
+- Considerar el patrón que preserva AMBAS propiedades: re-ajustar el modelo final sobre
+  todas las filas pre-cutoff Y ajustar los calibradores/peso sobre predicciones
+  out-of-fold de ese mismo modelo final (CV temporal interna), de modo que tren==servicio
+  sin sacrificar el 25% de datos. Más trabajo, pero elimina el sesgo.
+- Como mínimo, elevar el trade-off al Director de forma explícita.
+
+### WR-03: `_select_ml_holdout(frame, holdout)` se invoca dos veces por holdout, duplicando filtrado y sort sobre el frame completo
+
+**File:** `src/cdd_mundial/models/ml_validation.py:382-385`
+**Issue:** Dentro del bucle de holdouts:
+
 ```python
-for cls, calibrator in enumerate(self._per_class):
-    column = arr[:, cls]
-    if self.method == "isotonic":
-        calibrated[:, cls] = calibrator.predict(column)
-    else:
-        calibrated[:, cls] = calibrator.predict(column)
+holdout_eligible = _eligible(_select_ml_holdout(frame, holdout))
+n_holdout_excluded = int(
+    len(_select_ml_holdout(frame, holdout)) - len(holdout_eligible)
+)
 ```
-Both branches are identical (`calibrator.predict(column)`). The `if/else` is dead
-code that implies a behavioral difference between isotonic and sigmoid transforms
-that does not exist. It will confuse a future maintainer into thinking the two
-paths must diverge.
-**Fix:** Collapse to a single line:
-`calibrated[:, cls] = calibrator.predict(column)`.
 
-### WR-05: `_split_inner` can hand the model a 1-row inner-fit slice on small folds
+`_select_ml_holdout` filtra el frame completo por torneo+año y hace `sort_values` +
+`reset_index` (líneas 89-93). Se ejecuta dos veces sobre el mismo `frame` y `holdout`
+solo para obtener un escalar (`len`). No es un bug de correctitud — ambas llamadas
+devuelven el mismo resultado — pero es trabajo duplicado y una pequeña trampa de
+mantenibilidad: si la selección llegara a depender de estado mutable o de un índice no
+determinista, las dos rutas podrían divergir silenciosamente. (La versión
+`run_ml_validation`, líneas 162-164, ya lo hace correctamente con una sola llamada, de
+modo que las dos funciones hermanas son inconsistentes entre sí.)
 
-**File:** `src/cdd_mundial/models/ml_validation.py:311-324`
-**Issue:**
-`n_cal = min(n_cal, n - 1)` guarantees at least one *fitting* row, but the fitting
-slice can shrink to a single row (or to a slice missing one of the three classes).
-`MulticlassXGBoost.fit` then raises the hard "requires exactly the canonical 3
-classes" error (`ml_xgboost.py:122`), turning a small-but-valid fold into a crash
-rather than a graceful skip. On the real ~5k dataset the early holdout (`wc2018`)
-has the fewest pre-cutoff rows; an unlucky 75/25 split that drops a class from
-`inner_fit` aborts the entire comparison run.
-**Fix:** Validate after `_split_inner` that `inner_fit` contains all three classes
-(and a minimum row count), and raise a clear, holdout-named error or fall back to a
-larger fit fraction, rather than surfacing the generic class-count error from deep
-inside the model wrapper.
+**Fix:** Calcular una sola vez, igual que el harness hermano:
 
-### WR-06: Use of scikit-learn private API `_SigmoidCalibration` is fragility risk
-
-**File:** `src/cdd_mundial/models/ml_calibration.py:37, 130`
-**Issue:**
-`from sklearn.calibration import _SigmoidCalibration` imports a leading-underscore
-private symbol. The project pins `scikit-learn~=1.9` (pyproject), which allows
-1.9.x patch upgrades; private internals carry no API-stability guarantee and can be
-renamed/removed in a minor release, breaking the sigmoid calibration path with an
-`ImportError` at runtime. The module docstring even acknowledges this is "internal."
-For a system meant to keep publishing forecasts through July 2026, a silent
-dependency drift here disables Platt calibration entirely.
-**Fix:** Pin sklearn more tightly (e.g. `==1.9.*` exact) and add a smoke test that
-imports `_SigmoidCalibration`, or replace it with a self-contained Platt fit
-(`LogisticRegression` on the single calibrated column) so no private symbol is
-depended upon.
+```python
+holdout_all = _select_ml_holdout(frame, holdout)
+holdout_eligible = _eligible(holdout_all)
+n_holdout_excluded = int(len(holdout_all) - len(holdout_eligible))
+```
 
 ## Info
 
-### IN-01: `_select_ml_holdout` is recomputed 2-3x per holdout
+### IN-01: Rama if/else idéntica en `MulticlassCalibrator.transform`
 
-**File:** `src/cdd_mundial/models/ml_validation.py:378-381`
-**Issue:** `run_ml_comparison` calls `_select_ml_holdout(frame, holdout)` once for
-`holdout_eligible` and again inside the `n_holdout_excluded` computation, repeating
-the filter+sort. Correctness is unaffected but it is wasteful and invites the two
-copies to drift.
-**Fix:** Compute `holdout_all = _select_ml_holdout(frame, holdout)` once and derive
-both `holdout_eligible` and the excluded count from it.
+**File:** `src/cdd_mundial/models/ml_calibration.py:150-153`
+**Issue:** Las dos ramas del condicional ejecutan código idéntico:
 
-### IN-02: `_DEFAULT_RHO = 0.0` for the DC WDL features may not match the fitted model's rho
+```python
+if self.method == "isotonic":
+    calibrated[:, cls] = calibrator.predict(column)
+else:
+    calibrated[:, cls] = calibrator.predict(column)
+```
 
-**File:** `src/cdd_mundial/models/ml_features.py:79, 246`
-**Issue:** The point-in-time DC probabilities baked into the feature matrix (and
-reused as the *baseline candidate* in the comparison) are computed with a hardcoded
-`rho=0.0`, which drops the Dixon-Coles low-score correction. The docstring admits
-this is a "small, stable value," but it means the baseline candidate's WDL vector is
-not the production DC model's actual output. The gate then compares ML/ensemble
-against a slightly-wrong baseline.
-**Fix:** Thread the fitted model's `rho` through `dc_predict`/`dc_rho` in the live
-and backtest paths, or document explicitly that the feature-surface baseline is a
-rho=0 approximation and is intentionally distinct from the production DC line.
+Tanto `IsotonicRegression` como `_SigmoidCalibration` exponen `.predict(column)`, así
+que la rama es código muerto que sugiere una diferencia que no existe. (Fuera del diff
+de 05-05, pero en un archivo central del flujo CR-01.)
+**Fix:** Colapsar a una sola línea: `calibrated[:, cls] = calibrator.predict(column)`.
 
-### IN-03: `_evolution_series` plots a non-contiguous `order` axis when snapshots are skipped
+### IN-02: `fit_selected_calibrator` parece no usarse en el flujo de producción
 
-**File:** `src/cdd_mundial/live/report.py:195-210`
-**Issue:** `order` is assigned by `enumerate(snapshot_ids)` before the
-`cumulative["n_matches"] == 0` skip, so any snapshot with no resolved matches leaves
-a gap in the `order` sequence used as the x-axis in `_evolution_plot`. The plot's x
-positions then jump (e.g. 1, 3, 4), which is misleading for "Snapshot (orden)".
-**Fix:** Assign `order` after filtering, or use a contiguous index over the emitted
-rows.
+**File:** `src/cdd_mundial/models/ml_calibration.py:197-203`
+**Issue:** `run_ml_comparison` construye calibradores directamente vía
+`MulticlassCalibrator(method=...).fit(...)` (líneas 408, 421), no a través de
+`fit_selected_calibrator`. La función parece un helper huérfano.
+**Fix:** Confirmar uso con búsqueda en el repo; eliminarla si no tiene consumidores para
+reducir superficie de mantenimiento.
 
-### IN-04: Notebook `dc_predict` lambda ignores neutral/host context
+### IN-03: El test de regresión usa umbral de tolerancia mágico `0.02` sin justificación derivada
 
-**File:** `scripts/build_notebook_05.py:108-111`
-**Issue:** The notebook's `dc_predict = lambda a, b, ctx: (...)` ignores `ctx`
-(neutral, date, tournament), so the didactic structural features never reflect home
-advantage even on non-neutral matches. Since the synthetic history is all
-`neutral=True`, the output is unaffected, but the example silently models away a
-feature the prose emphasizes (the +100 host bonus). A learner copying this stub for
-real data would lose host advantage.
-**Fix:** Have the demo predictor read `ctx["neutral"]` (even trivially) so the
-pedagogical example mirrors the production contract it is teaching.
-
-### IN-05: `build_notebook_05._capture` swallows exceptions silently in the last-expression path
-
-**File:** `scripts/build_notebook_05.py:244-251`
-**Issue:** If the final line compiles as an expression but raises at `eval` time,
-the exception propagates (good), but if an *earlier* `exec(head)` succeeds and the
-last expression raises, the cell's partial stdout is still emitted with no error
-output — a failed cell can be written to the notebook looking partially successful.
-The broader `try/except SyntaxError` only catches `SyntaxError`, so this is mostly
-fine, but the generator has no per-cell "this cell raised" record; a runtime error
-surfaces only via the top-level `traceback.print_exc()` + `sys.exit(1)`, losing
-which cell failed.
-**Fix:** Wrap per-cell execution and, on failure, emit an `error` output (or at
-least print the cell index) so a broken notebook build is diagnosable.
-
-### IN-06: `run_official` calls `_git_commit()` twice and re-derives the short SHA
-
-**File:** `src/cdd_mundial/live/pipeline.py:439-441` (`_git_commit` + `_git_short_commit`)
-**Issue:** `_git_short_commit()` internally calls `_git_commit()` again, so metadata
-finalization shells out to `git rev-parse HEAD` twice per run. Minor, but it doubles
-a subprocess call and the two calls could in principle observe different HEADs.
-**Fix:** Call `_git_commit()` once and slice `[:7]` for the short form.
+**File:** `tests/test_ml_calibration.py:201`
+**Issue:** `assert served_ll <= raw_ll + 0.02` usa un margen de 0.02 nats descrito como
+"sampling noise" pero sin derivación (tamaño de muestra, varianza esperada). Con
+`serve` de ~450 filas y semilla fija el test es determinista, pero el umbral es un
+número mágico: si el comportamiento del calibrador cambia ligeramente, no queda claro si
+0.02 sigue siendo el margen correcto o si enmascara una regresión real. Riesgo bajo
+(test determinista por semilla), pero documentar el origen del 0.02 mejoraría la
+auditabilidad que el proyecto exige.
+**Fix:** Comentar cómo se eligió 0.02 (p. ej. derivado empíricamente de la varianza de
+log-loss bajo la semilla fija) o reemplazar por una tolerancia derivada del tamaño de
+muestra.
 
 ---
 
-_Reviewed: 2026-06-15T00:00:00Z_
-_Reviewer: Claude (gsd-code-reviewer)_
-_Depth: standard_
+_Revisado: 2026-06-16_
+_Revisor: Claude (gsd-code-reviewer)_
+_Profundidad: standard_
