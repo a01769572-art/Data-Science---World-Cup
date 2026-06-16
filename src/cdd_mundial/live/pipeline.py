@@ -26,6 +26,7 @@ override in metadata, it never hides it.
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from datetime import datetime, timezone
 from pathlib import Path
 import subprocess
@@ -46,6 +47,7 @@ from cdd_mundial.live.materialization import (
     materialize_live_training,
     select_model_artifact,
 )
+from cdd_mundial.live.ml_selection import build_dual_publication
 from cdd_mundial.live.predict import upcoming_match_predictions
 from cdd_mundial.live.report import render_snapshot_report
 from cdd_mundial.live.results import CANONICAL_RESULTS_PATH, build_live_state
@@ -58,6 +60,33 @@ from cdd_mundial.simulation.outputs import advancement_table, group_position_tab
 OFFICIAL_ORDER = ["materialize", "select_model", "simulate", "publish"]
 DEFAULT_XI = 0.00095
 DEFAULT_SEED = 20260613
+
+# A Phase-5 model-selection provider. Given the baseline upcoming-match table (and the
+# resolved state / baseline model), it returns the promotion-gate verdict plus the
+# per-match ML eligibility and calibrated promoted-candidate probabilities needed to
+# build a dual-publication table. ``None`` (the default) keeps the official run on the
+# pure, stable baseline-only publication path so the upgrade is strictly opt-in and can
+# never silently destabilize the baseline (D-14).
+MlSelectionProvider = Callable[..., dict[str, Any]]
+
+
+def _build_dual_table(
+    upcoming: pd.DataFrame,
+    provider_result: dict[str, Any],
+) -> tuple[pd.DataFrame, dict[str, Any]]:
+    """Turn a provider's gate verdict + ML probabilities into a labelled dual table.
+
+    Delegates the per-match baseline/upgrade/fallback decision to the single explicit
+    selection module (:mod:`cdd_mundial.live.ml_selection`) so the live path reuses one
+    auditable decision surface (T-05-10). Returns ``(dual_table, selection_summary)``.
+    """
+    dual = build_dual_publication(
+        baseline_predictions=upcoming,
+        gate=provider_result.get("gate", {"promoted": False, "winner": "baseline"}),
+        ml_eligible=provider_result.get("ml_eligible", {}),
+        ml_probs=provider_result.get("ml_probs", {}),
+    )
+    return dual.published, dual.summary
 
 
 def _git_status_porcelain() -> str | None:
@@ -269,6 +298,7 @@ def run_official(
     as_of: str | None = None,
     xi: float = DEFAULT_XI,
     allow_dirty: bool = False,
+    ml_selection_provider: MlSelectionProvider | None = None,
     _force_dirty: bool = False,
     _snapshot_id: str | None = None,
 ) -> dict[str, Any]:
@@ -286,6 +316,15 @@ def run_official(
     Fails closed (``RuntimeError``) on a dirty worktree unless ``allow_dirty`` is
     set, in which case ``metadata.json`` records ``git_dirty=true`` and the
     modified files. ``_force_dirty`` / ``_snapshot_id`` are test hooks.
+
+    When ``ml_selection_provider`` is supplied (Phase 5, D-13/D-14) it is called with
+    the baseline upcoming-match table and the resolved ``state`` / ``model`` and must
+    return ``{"gate", "ml_eligible", "ml_probs"}``. The official run then *adds* a
+    ``upcoming_match_predictions_dual.parquet`` table — the baseline rows are always
+    preserved and the promoted candidate is published *alongside* them for every
+    ML-eligible match, with explicit per-match baseline fallback otherwise — and records
+    an auditable ``model_selection`` block in ``metadata.json``. With no provider (the
+    default) the run is byte-for-byte the existing baseline-only publication.
     """
     is_dirty, modified = _resolve_dirty(force_dirty=_force_dirty)
     if is_dirty and not allow_dirty:
@@ -325,6 +364,13 @@ def run_official(
     group_positions = group_position_table(result)
     upcoming = upcoming_match_predictions(fixture, state=state, model=model)
 
+    # --- Phase 5 dual publication (opt-in; baseline-only otherwise, D-14) ---
+    dual_table: pd.DataFrame | None = None
+    selection_summary: dict[str, Any] | None = None
+    if ml_selection_provider is not None and not upcoming.empty:
+        provider_result = ml_selection_provider(upcoming, state=state, model=model)
+        dual_table, selection_summary = _build_dual_table(upcoming, provider_result)
+
     # --- timestamps + kickoff boundary ------------------------------------
     now = datetime.now(timezone.utc)
     generated_at_iso = now.isoformat(timespec="seconds").replace("+00:00", "Z")
@@ -348,6 +394,14 @@ def run_official(
         writer.add_table("team_probabilities", team_probs)
         writer.add_table("group_positions", group_positions)
         writer.add_table("upcoming_match_predictions", upcoming)
+
+        # The dual table is added ONLY when a Phase-5 candidate was supplied; the
+        # baseline ``upcoming_match_predictions`` above is never replaced (D-14). The
+        # short ``upcoming_dual`` name keeps the staging path under the Windows
+        # MAX_PATH (260) limit once the dated model_version is embedded in the
+        # snapshot id (same pitfall guarded across the live layer).
+        if dual_table is not None:
+            writer.add_table("upcoming_dual", dual_table)
 
         if frozen_benchmark is not None and not frozen_benchmark.empty:
             benchmark_ref = register_frozen_benchmark(writer, frozen_benchmark)
@@ -421,6 +475,22 @@ def run_official(
             "publication_row_ids": publication_row_ids,
             "frozen_benchmark": benchmark_ref,
             "calibration": calibration_ref,
+            # Phase-5 per-match selection provenance (D-13/D-14, T-05-11). Always
+            # present so a reviewer can see the upgrade decision (or its absence)
+            # without reading the dual table: a default no-promotion block records
+            # that the run stayed on the stable baseline-only line.
+            "model_selection": selection_summary
+            if selection_summary is not None
+            else {
+                "promoted": False,
+                "winner": "baseline",
+                "n_input_matches": int(len(upcoming)),
+                "n_baseline_published": int(len(upcoming)),
+                "n_upgrade_published": 0,
+                "n_baseline_fallback": 0,
+                "fallback_reasons": {},
+                "gate_mean_log_loss": {},
+            },
             # Back-compat fields consumed by the report renderer / earlier tests.
             "published_at_utc": generated_at_iso,
             "model_version": selection["model_version"],
@@ -452,6 +522,7 @@ def run_official(
         "report_html": report["html_path"],
         "dirty": is_dirty,
         "published": True,
+        "model_selection": metadata["model_selection"],
     }
 
 

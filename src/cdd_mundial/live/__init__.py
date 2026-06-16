@@ -22,6 +22,14 @@ from cdd_mundial.live.materialization import (
     materialize_live_training,
     select_model_artifact,
 )
+from cdd_mundial.live.ml_selection import (
+    BASELINE_FAMILY,
+    UPGRADE_FAMILY,
+    DualPublication,
+    PublicationDecision,
+    build_dual_publication,
+    decide_publication,
+)
 from cdd_mundial.live.pipeline import OFFICIAL_ORDER, run_official, verify_official
 from cdd_mundial.live.predict import upcoming_match_predictions
 from cdd_mundial.live.report import render_snapshot_report
@@ -37,21 +45,27 @@ from cdd_mundial.live.results import (
 from cdd_mundial.live.snapshots import SnapshotWriter
 
 __all__ = [
+    "BASELINE_FAMILY",
     "CANONICAL_LEDGER_PATH",
     "CANONICAL_RESULTS_PATH",
     "LIVE_RESULTS_COLUMNS",
     "OFFICIAL_ORDER",
+    "UPGRADE_FAMILY",
     "CalibrationLedgerSchema",
     "DiscrepancyError",
+    "DualPublication",
     "FrozenBenchmarkSchema",
     "IncompleteResultsError",
     "LiveResultsSchema",
     "OverrideToken",
+    "PublicationDecision",
     "SnapshotWriter",
     "UpcomingPredictionsSchema",
     "append_ledger",
+    "build_dual_publication",
     "build_ledger_rows",
     "build_live_state",
+    "decide_publication",
     "compute_input_fingerprint",
     "cumulative_metrics",
     "derive_realized_outcomes",

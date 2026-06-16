@@ -422,3 +422,120 @@ def test_official_run_fails_closed_on_dirty_worktree(test_workspace: Path) -> No
             _force_dirty=True,
         )
     del _json
+
+
+# --- Phase 5 dual-publication integration (ML-03, D-13/D-14) ---------------
+
+
+def _promoted_provider(upcoming: pd.DataFrame, *, state, model):
+    """A Phase-5 candidate provider that promotes an upgrade for eligible matches."""
+    import numpy as np
+
+    gate = {"promoted": True, "winner": "ensemble", "mean_log_loss": {"baseline": 1.0}}
+    ml_eligible = {}
+    ml_probs = {}
+    for i, row in enumerate(upcoming.itertuples(index=False)):
+        # Mark the first upcoming match eligible, the rest ineligible, so the test
+        # exercises both the dual-publish and the explicit baseline-fallback paths.
+        eligible = i == 0
+        ml_eligible[str(row.match_id)] = eligible
+        if eligible:
+            ml_probs[str(row.match_id)] = np.array([0.5, 0.3, 0.2])
+    return {"gate": gate, "ml_eligible": ml_eligible, "ml_probs": ml_probs}
+
+
+def _no_promotion_provider(upcoming: pd.DataFrame, *, state, model):
+    gate = {"promoted": False, "winner": "baseline", "mean_log_loss": {"baseline": 1.0}}
+    ml_eligible = {str(r.match_id): True for r in upcoming.itertuples(index=False)}
+    return {"gate": gate, "ml_eligible": ml_eligible, "ml_probs": {}}
+
+
+def test_baseline_path_is_unchanged_without_a_phase5_provider(
+    test_workspace: Path,
+) -> None:
+    """No provider -> the existing baseline-only publication is byte-for-byte intact."""
+    data_root = _isolated_data_root(test_workspace)
+    snapshots_root = test_workspace / "snapshots"
+    summary = run_official(
+        results_path=REAL_RESULTS,
+        fixture_path=REAL_FIXTURE,
+        data_root=data_root,
+        snapshots_root=snapshots_root,
+        n_sims=32,
+        seed=20260613,
+        as_of=None,
+        allow_dirty=True,
+        _force_dirty=True,
+    )
+    snapshot_dir = Path(summary["snapshot_dir"])
+    metadata = json.loads((snapshot_dir / "metadata.json").read_text(encoding="utf-8"))
+    # No dual table and no model-selection block when no upgrade candidate is supplied.
+    assert not (snapshot_dir / "upcoming_dual.parquet").exists()
+    assert metadata.get("model_selection", {"promoted": False})["promoted"] is False
+
+
+def test_promoted_candidate_publishes_dual_table_with_explicit_fallback(
+    test_workspace: Path,
+) -> None:
+    data_root = _isolated_data_root(test_workspace)
+    snapshots_root = test_workspace / "snapshots"
+    summary = run_official(
+        results_path=REAL_RESULTS,
+        fixture_path=REAL_FIXTURE,
+        data_root=data_root,
+        snapshots_root=snapshots_root,
+        n_sims=32,
+        seed=20260613,
+        as_of=None,
+        allow_dirty=True,
+        _force_dirty=True,
+        ml_selection_provider=_promoted_provider,
+    )
+    snapshot_dir = Path(summary["snapshot_dir"])
+    dual_path = snapshot_dir / "upcoming_dual.parquet"
+    assert dual_path.exists()
+    dual = pd.read_parquet(dual_path)
+
+    # Every upcoming match keeps a baseline row (dual publication never drops baseline).
+    baseline = pd.read_parquet(snapshot_dir / "upcoming_match_predictions.parquet")
+    baseline_rows = dual[dual["model_family"] == "baseline"]
+    assert set(baseline_rows["match_id"]) == set(baseline["match_id"])
+
+    # Exactly the eligible matches gained an upgrade row.
+    upgrade_rows = dual[dual["model_family"] == "upgrade"]
+    assert len(upgrade_rows) >= 1
+    # The selection metadata records promotion + an explicit fallback breakdown.
+    metadata = json.loads((snapshot_dir / "metadata.json").read_text(encoding="utf-8"))
+    selection = metadata["model_selection"]
+    assert selection["promoted"] is True
+    assert selection["winner"] == "ensemble"
+    assert selection["n_baseline_published"] == len(baseline)
+    assert selection["n_upgrade_published"] == len(upgrade_rows)
+    # Ineligible upcoming matches are recorded as explicit baseline fallbacks.
+    assert selection["fallback_reasons"].get("ml_ineligible", 0) >= 1
+    assert summary["model_selection"]["promoted"] is True
+
+
+def test_failed_gate_publishes_baseline_only_dual_table(test_workspace: Path) -> None:
+    data_root = _isolated_data_root(test_workspace)
+    snapshots_root = test_workspace / "snapshots"
+    summary = run_official(
+        results_path=REAL_RESULTS,
+        fixture_path=REAL_FIXTURE,
+        data_root=data_root,
+        snapshots_root=snapshots_root,
+        n_sims=32,
+        seed=20260613,
+        as_of=None,
+        allow_dirty=True,
+        _force_dirty=True,
+        ml_selection_provider=_no_promotion_provider,
+    )
+    snapshot_dir = Path(summary["snapshot_dir"])
+    dual = pd.read_parquet(snapshot_dir / "upcoming_dual.parquet")
+    # Failed gate: zero upgrade rows, every row baseline with the negative-result reason.
+    assert (dual["model_family"] == "upgrade").sum() == 0
+    assert (dual["model_family"] == "baseline").all()
+    metadata = json.loads((snapshot_dir / "metadata.json").read_text(encoding="utf-8"))
+    assert metadata["model_selection"]["promoted"] is False
+    assert metadata["model_selection"]["fallback_reasons"].get("gate_not_promoted", 0) >= 1
