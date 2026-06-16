@@ -130,7 +130,7 @@ Plans:
 - [x] 05-02-PLAN.md — XGBoost multiclass conservador + harness temporal fechado sobre los 4 holdouts
 
 **Wave 3** *(blocked on Wave 2 completion)*
-- [ ] 05-03-PLAN.md — Calibración temporal de ML solo/ensemble + gate explícito baseline vs ML vs ensemble
+- [x] 05-03-PLAN.md — Calibración temporal de ML solo/ensemble + gate explícito baseline vs ML vs ensemble
 
 **Wave 4** *(blocked on Wave 3 completion)*
 - [ ] 05-04-PLAN.md — Integración live con publicación dual, fallback explícito al baseline, reporte y notebook de evidencia
