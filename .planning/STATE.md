@@ -2,8 +2,8 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: verifying
-stopped_at: Completed 05-04-PLAN.md
+status: gaps_found
+stopped_at: Phase 05 verified — gaps_found (2/4); CR-01 train/serve calibration mismatch in run_ml_comparison. Next: /gsd-plan-phase 5 --gaps
 last_updated: "2026-06-16T02:18:55.153Z"
 last_activity: 2026-06-16
 progress:
@@ -25,9 +25,9 @@ See: .planning/PROJECT.md (updated 2026-06-11)
 
 ## Current Position
 
-Phase: 05 (ml-ensemble-upgrade-gated) — EXECUTING
-Plan: 4 of 4
-Status: Phase complete — ready for verification
+Phase: 05 (ml-ensemble-upgrade-gated) — GAPS FOUND (not complete)
+Plan: 4 of 4 built; verification 2/4 must-haves
+Status: gaps_found — CR-01 (confirmado por code review + verificador): los calibradores se ajustan con inner_model (~75% pre-cutoff) pero el holdout se puntúa con final_model re-entrenado al 100% → log-losses del gate mal calibrados. Criterios #1 y #2 OK. Arreglo localizado en run_ml_comparison. Siguiente: /gsd-plan-phase 5 --gaps. Ver 05-VERIFICATION.md + 05-REVIEW.md
 Last activity: 2026-06-16
 
 Progress: [██████████] 100%
