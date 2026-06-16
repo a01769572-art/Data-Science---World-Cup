@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: ready_to_execute
-stopped_at: Phase 05 gap closure planned; 05-05-PLAN.md closes CR-01 train/serve calibration mismatch in run_ml_comparison. Next: /gsd-execute-phase 5
-last_updated: "2026-06-16T07:19:07.3552531-06:00"
-last_activity: 2026-06-16
+status: executing
+stopped_at: Ejecutado 05-05-PLAN.md (cierre CR-01) — 5/5 planes Fase 05 completos; listo para re-verificación
+last_updated: "2026-06-16T13:35:58.155Z"
+last_activity: 2026-06-16 -- 05-05 ejecutado: identidad train/serve restaurada en run_ml_comparison
 progress:
   total_phases: 6
-  completed_phases: 4
+  completed_phases: 3
   total_plans: 20
   completed_plans: 19
   percent: 95
@@ -25,10 +25,10 @@ See: .planning/PROJECT.md (updated 2026-06-11)
 
 ## Current Position
 
-Phase: 05 (ml-ensemble-upgrade-gated) — READY TO EXECUTE GAP CLOSURE
-Plan: 4 of 5 built/executed; 05-05 planned for CR-01 closure
-Status: ready_to_execute — 05-05-PLAN.md closes the verified CR-01 gap: calibrators/ensemble weight were fit on inner_model probabilities but holdout scoring used final_model probabilities. Next: /gsd-execute-phase 5. Ver 05-VERIFICATION.md + 05-REVIEW.md + 05-05-PLAN.md
-Last activity: 2026-06-16
+Phase: 05 (ml-ensemble-upgrade-gated) — EXECUTING (gap closure done)
+Plan: 5 of 5 (05-05 ejecutado — cierre CR-01)
+Status: 05-05-PLAN.md completado. CR-01 cerrado: el holdout se puntúa con inner_model (el modelo de fit/calibración), eliminando el re-fit de final_model; regresión anti-mismatch verde. ML-03/ML-04 ahora honestamente satisfechos. Próximo: re-verificar criterios #3/#4 de la Fase 05 (ver 05-VERIFICATION.md).
+Last activity: 2026-06-16 -- 05-05 ejecutado: identidad train/serve restaurada en run_ml_comparison
 
 Progress: [█████████░] 95%
 
@@ -79,6 +79,7 @@ Progress: [█████████░] 95%
 | Phase Phase 05 P02 P05-02 | 5min | 2 tasks (TDD) tasks | 4 files files |
 | Phase 05 P05-03 | 14min | 2 tasks | 5 files |
 | Phase 05 P04 | 18min | 2 tasks | 11 files |
+| Phase 05 P05 | 18min | 2 tasks (TDD, gap closure) | 3 files |
 
 ## Accumulated Context
 
@@ -154,6 +155,7 @@ Recent decisions affecting current work:
 - [Phase ?]: [Phase 05]: Gate de promocion ML-03 = funcion pura de 4 holdouts; se promueve SOLO si el candidato vence al baseline en log-loss en los CUATRO holdouts (estricto). 'baseline gana' es resultado de primera clase explicito (promoted=False), no ausencia. Candidato baseline = columnas DC WDL point-in-time del dataset ML (D-02).
 - [Phase ?]: Phase-5 live integration is opt-in via run_official(ml_selection_provider=...): baseline-only by default, dual table added only when a candidate is promoted (D-14)
 - [Phase ?]: Dual publication always keeps the baseline row; the promoted candidate is published alongside only for ML-eligible matches, else explicit baseline fallback with recorded reason (D-13)
+- [Phase 05]: CR-01 cerrado — run_ml_comparison puntúa el holdout con inner_model (el modelo sobre cuyas probabilidades se ajustaron calibradores y peso de ensemble), eliminando el re-fit de final_model. Los mapas isotonic/sigmoid por clase y el peso se aplican a la misma distribución sobre la que se ajustaron, así que las entradas del gate quedan honestamente calibradas (T-05-13). Regresión por identidad de instancia (un solo modelo por holdout) bloquea la reaparición del mismatch; el reporte por holdout registra scoring_model/n_inner_fit/n_inner_cal para auditoría.
 
 ### Pending Todos
 
@@ -175,6 +177,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-06-16T07:19:07.3552531-06:00
-Stopped at: Planned 05-05-PLAN.md gap closure
+Last session: 2026-06-16 -- ejecución 05-05 (cierre CR-01)
+Stopped at: 05-05-PLAN.md completado; CR-01 cerrado; 5/5 planes Fase 05. Próximo: re-verificación de criterios #3/#4
 Resume file: None

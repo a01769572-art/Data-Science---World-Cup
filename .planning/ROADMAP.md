@@ -136,7 +136,9 @@ Plans:
 - [x] 05-04-PLAN.md — Integración live con publicación dual, fallback explícito al baseline, reporte y notebook de evidencia
 
 **Wave 5** *(blocked on Wave 4 completion; verification gap closure)*
-- [ ] 05-05-PLAN.md — Cierre CR-01: identidad train/serve en calibración de `run_ml_comparison` + regresión anti-mismatch
+- [x] 05-05-PLAN.md — Cierre CR-01: identidad train/serve en calibración de `run_ml_comparison` (holdout puntuado con inner_model) + regresión anti-mismatch + cobertura de calibración del flujo reparado
+
+**Progress**: 5/5 plans complete (05-01..05-05 done) — CR-01 cerrado; listo para re-verificación de criterios #3/#4
 
 ### Phase 6: Operación en Vivo + Post-Mortem
 **Goal**: El sistema opera con disciplina diaria hasta el 19 de julio y cierra con evaluación final honesta y aprendizaje capturado — corre desde Fase 4 en adelante; el post-mortem está fijado al final del torneo
