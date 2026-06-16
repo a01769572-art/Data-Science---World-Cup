@@ -123,6 +123,43 @@
   {% endif %}
 </section>
 
+<section id="model-selection">
+  <h2>Decision de modelo (upgrade gated)</h2>
+  <p class="{{ 'delta-up' if selection.promoted else 'muted' }}">{{ selection.headline }}</p>
+  <ul>
+    <li>Familia ganadora del gate: <strong>{{ selection.winner }}</strong></li>
+    <li>Filas baseline publicadas: {{ selection.n_baseline_published }}</li>
+    <li>Filas upgrade publicadas (junto al baseline): {{ selection.n_upgrade_published }}</li>
+    <li>Partidos con fallback explicito al baseline: {{ selection.n_baseline_fallback }}</li>
+  </ul>
+  {% if selection.log_loss_rows %}
+  <h3>Log-loss medio por candidato (holdouts)</h3>
+  <table>
+    <thead>
+      <tr><th>Candidato</th><th>Log-loss medio</th></tr>
+    </thead>
+    <tbody>
+      {% for row in selection.log_loss_rows %}
+      <tr><td>{{ row.candidate }}</td><td>{{ row.log_loss }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+  {% if selection.fallback_rows %}
+  <h3>Motivos de fallback al baseline</h3>
+  <table>
+    <thead>
+      <tr><th>Motivo</th><th>Partidos</th></tr>
+    </thead>
+    <tbody>
+      {% for row in selection.fallback_rows %}
+      <tr><td>{{ row.reason }}</td><td>{{ row.count }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+</section>
+
 <section id="methodology">
   <h2>Nota metodologica</h2>
   <p class="muted">

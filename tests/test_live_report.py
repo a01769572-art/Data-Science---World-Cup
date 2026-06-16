@@ -108,12 +108,31 @@ def _publication_slice(snapshot_id: str, *, resolved: bool) -> pd.DataFrame:
     return frame
 
 
+def _dual_table(snapshot_id: str) -> pd.DataFrame:
+    """A dual-publication table: baseline rows for both matches, one upgrade row."""
+    return pd.DataFrame(
+        {
+            "match_id": ["WC26-010", "WC26-010", "WC26-011"],
+            "team_a": ["esp", "esp", "fra"],
+            "team_b": ["arg", "arg", "bra"],
+            "prob_a": [0.45, 0.52, 0.50],
+            "prob_draw": [0.27, 0.24, 0.25],
+            "prob_b": [0.28, 0.24, 0.25],
+            "model_family": ["baseline", "upgrade", "baseline"],
+            "published_family": ["upgrade", "upgrade", "baseline"],
+            "fallback_reason": [None, None, "ml_ineligible"],
+            "winner": ["ensemble", "ensemble", "ensemble"],
+        }
+    )
+
+
 def _write_snapshot(
     root: Path,
     snapshot_id: str,
     *,
     published_at_utc: str,
     resolved: bool = True,
+    model_selection: dict | None = None,
 ) -> Path:
     """Assemble a frozen snapshot directory exactly like the official run does."""
     snap = root / snapshot_id
@@ -125,6 +144,13 @@ def _write_snapshot(
     _publication_slice(snapshot_id, resolved=resolved).to_parquet(
         snap / "report_inputs" / "calibration_publication_slice.parquet", index=False
     )
+    artifacts = [
+        "team_probabilities.parquet",
+        "group_positions.parquet",
+        "upcoming_match_predictions.parquet",
+        "frozen_benchmark.parquet",
+        "report_inputs/calibration_publication_slice.parquet",
+    ]
     metadata = {
         "snapshot_id": snapshot_id,
         "published_at_utc": published_at_utc,
@@ -132,14 +158,13 @@ def _write_snapshot(
         "model_version": "baseline-v1-2026-06-13-aaaaaaa",
         "n_sims": 10000,
         "seed": 20260613,
-        "artifacts": [
-            "team_probabilities.parquet",
-            "group_positions.parquet",
-            "upcoming_match_predictions.parquet",
-            "frozen_benchmark.parquet",
-            "report_inputs/calibration_publication_slice.parquet",
-        ],
+        "artifacts": artifacts,
     }
+    if model_selection is not None:
+        metadata["model_selection"] = model_selection
+        if model_selection.get("promoted"):
+            _dual_table(snapshot_id).to_parquet(snap / "upcoming_dual.parquet", index=False)
+            artifacts.append("upcoming_dual.parquet")
     (snap / "metadata.json").write_text(
         json.dumps(metadata, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
@@ -362,3 +387,101 @@ def test_cumulative_metrics_and_evolution_rendered(
     html = Path(result["html_path"]).read_text(encoding="utf-8")
     assert "log-loss" in html.lower() or "log_loss" in html.lower()
     assert "rps" in html.lower()
+
+
+# --------------------------------------------------------------------------- #
+# Phase 5: upgrade decision is legible in the report (D-13/D-14, T-05-12)      #
+# --------------------------------------------------------------------------- #
+
+
+def _promoted_selection() -> dict:
+    return {
+        "promoted": True,
+        "winner": "ensemble",
+        "n_input_matches": 2,
+        "n_baseline_published": 2,
+        "n_upgrade_published": 1,
+        "n_baseline_fallback": 1,
+        "fallback_reasons": {"ml_ineligible": 1},
+        "gate_mean_log_loss": {"baseline": 1.02, "ml": 1.00, "ensemble": 0.98},
+    }
+
+
+def _no_promotion_selection() -> dict:
+    return {
+        "promoted": False,
+        "winner": "baseline",
+        "n_input_matches": 2,
+        "n_baseline_published": 2,
+        "n_upgrade_published": 0,
+        "n_baseline_fallback": 2,
+        "fallback_reasons": {"gate_not_promoted": 2},
+        "gate_mean_log_loss": {"baseline": 1.00, "ml": 1.03, "ensemble": 1.01},
+    }
+
+
+def test_promoted_upgrade_is_visible_in_report(
+    snapshots_root: Path, test_workspace: Path
+) -> None:
+    only_id = "2026-06-13T18-00-00Z_v1"
+    _write_snapshot(
+        snapshots_root,
+        only_id,
+        published_at_utc="2026-06-13T18:00:00Z",
+        model_selection=_promoted_selection(),
+    )
+    ledger = _write_ledger(
+        test_workspace / "data" / "calibration_matches.parquet", [only_id]
+    )
+    current = snapshots_root / only_id
+    result = report.render_snapshot_report(
+        current, snapshots_root=snapshots_root, ledger_path=ledger
+    )
+    html = Path(result["html_path"]).read_text(encoding="utf-8")
+    # The Phase 5 decision section exists and names the promoted family + dual semantics.
+    assert 'id="model-selection"' in html
+    assert "ensemble" in html.lower()
+    assert "dual" in html.lower() or "publicaci" in html.lower()
+    # The result dict surfaces the structured selection for downstream callers.
+    assert result["model_selection"]["promoted"] is True
+    assert result["model_selection"]["winner"] == "ensemble"
+
+
+def test_no_promotion_negative_result_is_visible(
+    snapshots_root: Path, test_workspace: Path
+) -> None:
+    only_id = "2026-06-13T18-00-00Z_v1"
+    _write_snapshot(
+        snapshots_root,
+        only_id,
+        published_at_utc="2026-06-13T18:00:00Z",
+        model_selection=_no_promotion_selection(),
+    )
+    ledger = _write_ledger(
+        test_workspace / "data" / "calibration_matches.parquet", [only_id]
+    )
+    current = snapshots_root / only_id
+    result = report.render_snapshot_report(
+        current, snapshots_root=snapshots_root, ledger_path=ledger
+    )
+    html = Path(result["html_path"]).read_text(encoding="utf-8")
+    # The negative result is surfaced, not buried: the section explains baseline stays.
+    assert 'id="model-selection"' in html
+    assert "baseline" in html.lower()
+    assert result["model_selection"]["promoted"] is False
+
+
+def test_report_without_selection_metadata_still_renders(
+    snapshots_root: Path, three_snapshots: list[str], test_workspace: Path
+) -> None:
+    """Legacy baseline-only snapshots (no model_selection block) render unchanged."""
+    ledger = _write_ledger(
+        test_workspace / "data" / "calibration_matches.parquet", three_snapshots
+    )
+    current = snapshots_root / three_snapshots[-1]
+    result = report.render_snapshot_report(
+        current, snapshots_root=snapshots_root, ledger_path=ledger
+    )
+    # No selection metadata -> the report still renders and reports baseline-only.
+    assert Path(result["html_path"]).exists()
+    assert result["model_selection"]["promoted"] is False

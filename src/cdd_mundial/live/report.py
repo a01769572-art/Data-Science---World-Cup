@@ -211,6 +211,60 @@ def _evolution_series(ledger: pd.DataFrame) -> pd.DataFrame:
 
 
 # --------------------------------------------------------------------------- #
+# Phase 5 model-selection view-model                                          #
+# --------------------------------------------------------------------------- #
+
+# Human-readable Spanish labels for the explicit fallback reasons, so the negative
+# result is surfaced legibly rather than as an internal token (T-05-12).
+_FALLBACK_LABELS = {
+    "gate_not_promoted": "El gate no promovio ningun candidato (se mantiene baseline)",
+    "ml_ineligible": "Partido inelegible para ML (cobertura insuficiente, D-04)",
+    "ml_probability_unavailable": "Sin probabilidad ML disponible para el partido",
+}
+
+
+def _selection_view(selection: dict[str, Any]) -> dict[str, Any]:
+    """Turn the raw ``model_selection`` metadata into a legible report view-model.
+
+    Surfaces the upgrade decision (promoted family + dual-publication semantics) or,
+    when no candidate cleared the gate, the explicit negative result and why the
+    baseline stays live (D-13/D-14, T-05-12).
+    """
+    promoted = bool(selection.get("promoted", False))
+    winner = str(selection.get("winner", "baseline"))
+    reasons = selection.get("fallback_reasons", {}) or {}
+    fallback_rows = [
+        {"reason": _FALLBACK_LABELS.get(key, key), "count": int(count)}
+        for key, count in sorted(reasons.items())
+    ]
+    mean_ll = selection.get("gate_mean_log_loss", {}) or {}
+    log_loss_rows = [
+        {"candidate": name, "log_loss": f"{float(value):.4f}"}
+        for name, value in sorted(mean_ll.items())
+    ]
+    if promoted:
+        headline = (
+            f"Upgrade promovido ({winner}): publicacion DUAL baseline + candidato. "
+            "El baseline permanece como linea operativa estable."
+        )
+    else:
+        headline = (
+            "Sin promocion: ningun candidato vencio al baseline en los cuatro holdouts. "
+            "Se publica unicamente el baseline (resultado negativo explicito)."
+        )
+    return {
+        "promoted": promoted,
+        "winner": winner,
+        "headline": headline,
+        "n_baseline_published": int(selection.get("n_baseline_published", 0)),
+        "n_upgrade_published": int(selection.get("n_upgrade_published", 0)),
+        "n_baseline_fallback": int(selection.get("n_baseline_fallback", 0)),
+        "fallback_rows": fallback_rows,
+        "log_loss_rows": log_loss_rows,
+    }
+
+
+# --------------------------------------------------------------------------- #
 # Public renderer                                                             #
 # --------------------------------------------------------------------------- #
 
@@ -398,6 +452,25 @@ def render_snapshot_report(
         "seed": metadata.get("seed", ""),
     }
 
+    # --- Phase 5 model-selection block (D-13/D-14, T-05-12) ----------------
+    # The upgrade decision (or its absence) must be legible to a reviewer without
+    # reading raw artifacts. A snapshot with no ``model_selection`` block is a
+    # legacy/baseline-only run; we synthesize an explicit baseline-only summary so
+    # the section never silently disappears.
+    selection = metadata.get(
+        "model_selection",
+        {
+            "promoted": False,
+            "winner": "baseline",
+            "n_baseline_published": 0,
+            "n_upgrade_published": 0,
+            "n_baseline_fallback": 0,
+            "fallback_reasons": {},
+            "gate_mean_log_loss": {},
+        },
+    )
+    selection_view = _selection_view(selection)
+
     # --- render ------------------------------------------------------------
     env = Environment(
         loader=FileSystemLoader(str(_TEMPLATES_DIR)),
@@ -419,6 +492,7 @@ def render_snapshot_report(
         temporal_rows=temporal_rows,
         cumulative=cumulative,
         cumulative_fmt=cumulative_fmt,
+        selection=selection_view,
     )
 
     html_path = out / "report.html"
@@ -429,6 +503,7 @@ def render_snapshot_report(
         "assets": [str(out / ref) for ref in assets],
         "temporal_comparison": temporal_comparison,
         "cumulative_metrics": cumulative,
+        "model_selection": selection_view,
     }
 
 

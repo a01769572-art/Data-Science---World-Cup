@@ -18,6 +18,7 @@ NOTEBOOKS_DIR = ROOT / "notebooks"
 PHASE1_NOTEBOOK = NOTEBOOKS_DIR / "01_data_foundation.ipynb"
 PHASE2_NOTEBOOK = NOTEBOOKS_DIR / "02_modelos_baseline.ipynb"
 PHASE3_NOTEBOOK = NOTEBOOKS_DIR / "03_simulador_torneo.ipynb"
+PHASE5_NOTEBOOK = NOTEBOOKS_DIR / "05_ml_ensemble.ipynb"
 
 WHAT_AND_WHY = "What and why"
 INTERPRETATION = "Interpretation"
@@ -261,3 +262,75 @@ def test_phase3_notebook_is_executed_with_nonempty_outputs() -> None:
         for cell in code_cells
     )
     assert has_image, "the Phase 3 notebook must include at least one rendered plot"
+
+
+# --------------------------------------------------------------------------- #
+# Phase 5: ML + ensemble upgrade-gated evidence notebook (ML-03, DOC-01)       #
+# --------------------------------------------------------------------------- #
+
+REQUIRED_PHASE5_KEYWORDS = (
+    "feature",  # the ML feature table
+    "calibra",  # calibration (isotonic/Platt)
+    "ensemble",  # the convex ensemble candidate
+    "gate",  # the promotion gate
+    "publicaci",  # dual publication / fallback
+)
+
+
+def test_phase5_notebook_exists() -> None:
+    assert PHASE5_NOTEBOOK.exists(), (
+        "Phase 5 requires notebooks/05_ml_ensemble.ipynb"
+    )
+
+
+def test_phase5_notebook_imports_production_apis() -> None:
+    notebook = read_notebook(PHASE5_NOTEBOOK)
+    code = "\n".join(cell.source for cell in notebook.cells if cell.cell_type == "code")
+    # The notebook orchestrates over production APIs; logic lives in src/.
+    assert re.search(r"from\s+cdd_mundial\.models", code), (
+        "the Phase 5 notebook must import production functions from cdd_mundial.models"
+    )
+    assert "build_ml_dataset" in code
+    assert "run_ml_comparison" in code or "evaluate_ml_gate" in code
+    # The dual-publication / fallback decision is the live integration surface.
+    assert "build_dual_publication" in code or "cdd_mundial.live" in code
+
+
+def test_phase5_notebook_does_not_redefine_production_logic() -> None:
+    notebook = read_notebook(PHASE5_NOTEBOOK)
+    for index, cell in enumerate(notebook.cells):
+        if cell.cell_type != "code":
+            continue
+        for fragment in FORBIDDEN_CODE_FRAGMENTS:
+            assert fragment not in cell.source, (
+                f"05_ml_ensemble.ipynb: code cell {index} contains forbidden "
+                f"fragment {fragment!r}; ML logic belongs in cdd_mundial.models/live"
+            )
+
+
+def test_phase5_notebook_uses_a_deterministic_python_kernel() -> None:
+    notebook = read_notebook(PHASE5_NOTEBOOK)
+    kernelspec = notebook.metadata.get("kernelspec", {})
+    assert kernelspec.get("name") == "python3"
+    assert kernelspec.get("language") == "python"
+
+
+def test_phase5_notebook_has_required_analysis_sections() -> None:
+    notebook = read_notebook(PHASE5_NOTEBOOK)
+    headings = "\n".join(
+        line.lower()
+        for cell in notebook.cells
+        if cell.cell_type == "markdown"
+        for line in cell.source.splitlines()
+        if line.startswith("#")
+    )
+    for keyword in REQUIRED_PHASE5_KEYWORDS:
+        assert keyword in headings, f"missing Phase 5 section heading containing {keyword!r}"
+
+
+def test_phase5_notebook_is_executed_with_nonempty_outputs() -> None:
+    notebook = read_notebook(PHASE5_NOTEBOOK)
+    code_cells = [c for c in notebook.cells if c.cell_type == "code"]
+    assert code_cells, "the Phase 5 notebook must contain code cells"
+    executed = [c for c in code_cells if c.get("outputs")]
+    assert executed, "the committed Phase 5 notebook must contain executed outputs"
