@@ -178,3 +178,63 @@ def test_is_host_home_reflects_real_home_advantage() -> None:
     # Newbie target is neutral -> host_home = 0.
     newbie = dataset.loc[dataset["match_id"] == "target_newbie"].iloc[0]
     assert int(newbie["is_host_home"]) == 0
+
+
+# --- Task 2: one builder, two sources (historical parquet vs live frame) ---
+
+
+def test_public_builder_is_exported_from_models_package() -> None:
+    """Later plans import the builder from the package, not the private module."""
+    from cdd_mundial.models import build_ml_dataset as exported
+    from cdd_mundial.models import ML_FEATURE_COLUMNS as exported_cols
+
+    assert exported is build_ml_dataset
+    assert tuple(exported_cols) == EXPECTED_FEATURES
+
+
+def test_path_and_frame_sources_yield_identical_contract(test_workspace) -> None:
+    """The source switch (disk parquet vs passed-in frame) must not alter output.
+
+    This is the live-vs-backtest guarantee: ``materialize_live_training`` hands a
+    dated frame, backtests read the canonical parquet, and both must flow through
+    one feature path with identical column semantics and values.
+
+    Uses the workspace-local fixture (not ``tmp_path``) because the OS temp dir's
+    ACLs are unreliable on this OneDrive Windows checkout.
+    """
+    history = _toy_history()
+    parquet_path = test_workspace / "history.parquet"
+    history.to_parquet(parquet_path, index=False)
+
+    from_frame = build_ml_dataset(frame=history, dc_predict=_stub_dc_predict)
+    from_path = build_ml_dataset(path=parquet_path, dc_predict=_stub_dc_predict)
+
+    # Identical columns (contract) and identical values (semantics).
+    assert list(from_frame.columns) == list(from_path.columns)
+    pd.testing.assert_frame_equal(
+        from_frame.reset_index(drop=True),
+        from_path.reset_index(drop=True),
+    )
+
+
+def test_elo_history_injection_populates_elo_diff() -> None:
+    """A live-training caller can supply pre-match Elo without changing the contract."""
+    history = _toy_history()
+    elo_rows = []
+    for row in history.itertuples(index=False):
+        elo_rows.append({"match_id": row.match_id, "team_id": row.home_team_id, "rating_pre": 1500.0})
+        elo_rows.append({"match_id": row.match_id, "team_id": row.away_team_id, "rating_pre": 1400.0})
+    elo_history = pd.DataFrame(elo_rows)
+
+    dataset = build_ml_dataset(
+        frame=history, elo_history=elo_history, dc_predict=_stub_dc_predict
+    )
+    # Same 12-feature contract regardless of the Elo source switch.
+    for column in EXPECTED_FEATURES:
+        assert column in dataset.columns
+    # Non-neutral home match: 1500 + 100 host bonus - 1400 = 200.
+    eligible = dataset.loc[dataset["match_id"] == "target_eligible"].iloc[0]
+    assert eligible["elo_diff"] == pytest.approx(200.0)
+    # Neutral match: no host bonus -> 1500 - 1400 = 100.
+    newbie = dataset.loc[dataset["match_id"] == "target_newbie"].iloc[0]
+    assert newbie["elo_diff"] == pytest.approx(100.0)
