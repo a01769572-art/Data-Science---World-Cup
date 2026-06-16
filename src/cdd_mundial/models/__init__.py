@@ -11,6 +11,10 @@ from cdd_mundial.models.ml_calibration import (  # contrato ML-04 (Phase 5)
     MulticlassCalibrator,
     select_best_calibration,
 )
+from cdd_mundial.models.ml_validation import (  # contrato ML-03 (Phase 5)
+    evaluate_ml_gate,
+    run_ml_comparison,
+)
 
 __all__ = [
     "DixonColesModel",
@@ -21,4 +25,6 @@ __all__ = [
     "MulticlassXGBoost",
     "MulticlassCalibrator",
     "select_best_calibration",
+    "evaluate_ml_gate",
+    "run_ml_comparison",
 ]
