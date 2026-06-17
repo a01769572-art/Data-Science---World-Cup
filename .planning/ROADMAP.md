@@ -120,7 +120,7 @@ Plans:
   2. El clasificador XGBoost de 3 clases (constrained: depth ≤ 3–4, ≤ ~10 features) está entrenado y evaluado con la misma validación temporal que el baseline
   3. El gate de aceptación pre-registrado se aplica: el ensemble solo reemplaza al baseline si lo vence en log-loss en los 4 torneos holdout — si no, el resultado negativo se documenta y el baseline sigue
   4. La calibración isotónica vs. Platt se compara empíricamente en folds temporales y se elige por evidencia (isotónica no asumida superior con <1,000 muestras)
-**Plans**: 5 plans
+**Plans**: 6 plans
 
 Plans:
 **Wave 1**
@@ -138,7 +138,10 @@ Plans:
 **Wave 5** *(blocked on Wave 4 completion; verification gap closure)*
 - [x] 05-05-PLAN.md — Cierre CR-01: identidad train/serve en calibración de `run_ml_comparison` (holdout puntuado con inner_model) + regresión anti-mismatch + cobertura de calibración del flujo reparado
 
-**Progress**: 5/5 plans complete (05-01..05-05 done) — CR-01 cerrado; listo para re-verificación de criterios #3/#4
+**Wave 6** *(blocked on Wave 5 completion; gap closure WR-01)*
+- [ ] 05-06-PLAN.md — Fortalecer el guardrail de regresión CR-01: probar identidad real de modelo/distribución (el array de scoring del holdout es salida verbatim de predict_proba del mismo modelo calibrado), haciéndolo fallar ante el probe de mismatch-sin-fit-extra del verificador
+
+**Progress**: 5/6 plans complete (05-01..05-05 done) — CR-01 cerrado en producción; queda 05-06 para blindar el guardrail (WR-01) antes de re-verificar el must_have del gate
 
 ### Phase 6: Operación en Vivo + Post-Mortem
 **Goal**: El sistema opera con disciplina diaria hasta el 19 de julio y cierra con evaluación final honesta y aprendizaje capturado — corre desde Fase 4 en adelante; el post-mortem está fijado al final del torneo
@@ -162,7 +165,7 @@ Phases execute in numeric order: 1 → 2 ∥ 3 → 4 → 5 ∥ 6 (2-3 paraleliza
 | 2. Modelos Baseline | 5/5 | Complete | 2026-06-12 |
 | 3. Simulador del Torneo | 5/5 | Complete | 2026-06-13 |
 | 4. Primer Pronóstico + Pipeline Diario | 2/5 | In Progress | - |
-| 5. ML + Ensemble (gated) | 0/4 | Planned | - |
+| 5. ML + Ensemble (gated) | 5/6 | In Progress | - |
 | 6. Operación en Vivo + Post-Mortem | 0/TBD | Not started | - |
 
 ---
