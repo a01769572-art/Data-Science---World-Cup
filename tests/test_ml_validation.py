@@ -508,3 +508,65 @@ def test_comparison_scores_holdout_with_the_same_model_calibrators_were_fit_on(
         f"got {n_models} model fits across {n_holdouts} holdouts — a second model "
         f"between calibration-fit and holdout-scoring reintroduces CR-01"
     )
+
+
+def test_PROBE_distortion_without_extra_fit_must_fail(monkeypatch) -> None:
+    """RED scaffold (Task 1, removed in Task 2): freeze the verifier's WR-01 probe.
+
+    The verifier confirmed WR-01 empirically: distorting ``ml_holdout_raw`` (cube +
+    renormalize) so the distribution the calibrators *transform* at scoring time differs
+    from the one they were *fit* on — WITHOUT adding any extra ``fit()`` call — does NOT
+    trip the current guard. The count invariant ``n_models == n_holdouts`` stays at 4==4
+    because no second model is created; only the served distribution is corrupted.
+
+    This temporary test reproduces that probe and asserts the *current count-based guard*
+    still PASSES under it (i.e. proves the bug). Task 2 replaces the count assertion with
+    a real identity check that this same probe will FAIL, then deletes this scaffold.
+    """
+    from cdd_mundial.models import ml_validation
+    from cdd_mundial.models.validation import HOLDOUTS
+    from cdd_mundial.models.ml_xgboost import MulticlassXGBoost
+
+    output_to_model: dict[int, int] = {}
+    models_per_run: list[int] = []
+
+    real_fit = MulticlassXGBoost.fit
+    real_predict = MulticlassXGBoost.predict_proba
+
+    def tracking_fit(self, x, y):
+        models_per_run.append(id(self))
+        return real_fit(self, x, y)
+
+    # Distort ONLY the holdout-scoring raw (rows == x_holdout count) with x**3 + renorm.
+    # The synthetic holdouts each have a distinct, known eligible-row count; we distort
+    # any predict_proba call whose input row count matches a holdout's scored count.
+    dataset = _synthetic_ml_dataset()
+    holdout_scored_counts: set[int] = set()
+    for holdout in HOLDOUTS.values():
+        sel = dataset[
+            (dataset["tournament"] == holdout.tournament)
+            & (pd.to_datetime(dataset["date"]).dt.year == holdout.year)
+        ]
+        holdout_scored_counts.add(int(sel["ml_eligible"].astype(bool).sum()))
+
+    def distorting_predict(self, x):
+        out = real_predict(self, x)
+        if len(x) in holdout_scored_counts:
+            out = out**3
+            out = out / out.sum(axis=1, keepdims=True)
+        # tracking is applied OVER distortion on purpose for this RED scaffold: it shows
+        # that even mapping id(distorted_out)->id(self) the count guard cannot tell the
+        # served distribution was corrupted (no extra fit() was added).
+        output_to_model[id(out)] = id(self)
+        return out
+
+    monkeypatch.setattr(MulticlassXGBoost, "fit", tracking_fit)
+    monkeypatch.setattr(MulticlassXGBoost, "predict_proba", distorting_predict)
+
+    report, _ = ml_validation.run_ml_comparison(dataset)
+
+    # RED probe (WR-01): the fit COUNT is untouched by a distribution mismatch with no
+    # extra fit() — exactly one model per holdout, so the current count-based guard PASSES
+    # when it should FAIL. This frozen evidence is what Task 2's identity assertion kills.
+    assert len(models_per_run) == len(HOLDOUTS)  # count guard cannot detect the mismatch
+    assert report["gate"]["winner"] in {"baseline", "ml", "ensemble"}
