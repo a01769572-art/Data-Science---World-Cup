@@ -424,6 +424,199 @@ def test_comparison_materializes_dated_gate_report(test_workspace) -> None:
 # --------------------------------------------------------------------------- #
 
 
+def _instrument_identity(monkeypatch, *, distort_holdout_scoring: bool = False):
+    """Install identity instrumentation over ``run_ml_comparison`` and run it.
+
+    Returns a dict of captured maps that let a caller assert the CR-01 *identity*
+    invariant — not a fit count. The instrumentation is layered so the assertion can
+    anchor on the VERBATIM ``predict_proba`` output of the calibration model (WR-01
+    note #1), and pairs calibration-fit with scoring-transform by CALIBRATOR OBJECT
+    identity, never by call-sequence index (WR-01 note #2):
+
+    * ``verbatim_output_ids``     -- ``set`` of ``id(out)`` for every UNDISTORTED
+      ``predict_proba`` return value (the raw the model actually produced);
+    * ``output_to_model``         -- ``id(verbatim_out) -> id(producing model)``;
+    * ``models_per_run``          -- ``id(model)`` in fit order (kept as a COMPLEMENTARY
+      count guard for the literal ``final_model`` defect);
+    * ``cal_fit_producer``        -- ``id(calibrator) -> id(model whose verbatim raw it
+      was fit on)`` (``None`` if the fit array was not a verbatim model output);
+    * ``cal_transform_inputs``    -- ``list[(id(calibrator), id(probs))]`` for every
+      ``transform`` call, in order.
+
+    When ``distort_holdout_scoring`` is True the verifier's WR-01 probe is applied: the
+    holdout-scoring raw (``ml_holdout_raw``) is replaced by ``out**3`` renormalized,
+    WITHOUT adding any extra ``fit()``. Critically the distortion wraps OVER the verbatim
+    tracker, so the array the scoring ``transform`` receives is a DERIVED array whose
+    ``id`` is absent from ``verbatim_output_ids`` — exactly the signal the identity
+    assertion must catch and the count guard cannot.
+    """
+    from cdd_mundial.models.ml_xgboost import MulticlassXGBoost
+    from cdd_mundial.models import ml_calibration
+
+    verbatim_output_ids: set[int] = set()
+    output_to_model: dict[int, int] = {}
+    models_per_run: list[int] = []
+    cal_fit_producer: dict[int, int | None] = {}
+    cal_transform_inputs: list[tuple[int, int]] = []
+    # Keep a strong reference to every array we identify by ``id`` for the duration of the
+    # run. Without this, numpy arrays returned by ``predict_proba`` are garbage-collected
+    # once unused and CPython recycles their ``id`` for a later array, silently corrupting
+    # the id->model map (cross-call id reuse). Holding references pins every id unique.
+    _retained: list[object] = []
+
+    real_fit = MulticlassXGBoost.fit
+    real_predict = MulticlassXGBoost.predict_proba
+    real_cal_fit = ml_calibration.MulticlassCalibrator.fit
+    real_cal_transform = ml_calibration.MulticlassCalibrator.transform
+
+    def tracking_fit(self, x, y):
+        models_per_run.append(id(self))
+        return real_fit(self, x, y)
+
+    # Inner tracker: record the VERBATIM output the model produced. This is the array
+    # whose id legitimately means "produced by this model".
+    def tracking_predict(self, x):
+        out = real_predict(self, x)
+        _retained.append(out)  # pin id(out) so it cannot be recycled (id-reuse hazard)
+        verbatim_output_ids.add(id(out))
+        output_to_model[id(out)] = id(self)
+        return out
+
+    monkeypatch.setattr(MulticlassXGBoost, "fit", tracking_fit)
+    monkeypatch.setattr(MulticlassXGBoost, "predict_proba", tracking_predict)
+
+    if distort_holdout_scoring:
+        # The synthetic holdouts each scored a known eligible-row count; distort only the
+        # predict_proba whose input row count matches a holdout's scored count, i.e. only
+        # ``ml_holdout_raw``. No extra fit() is added (count stays n_holdouts).
+        from cdd_mundial.models.validation import HOLDOUTS as _HOLDOUTS
+
+        probe_dataset = _synthetic_ml_dataset()
+        holdout_scored_counts: set[int] = set()
+        for holdout in _HOLDOUTS.values():
+            sel = probe_dataset[
+                (probe_dataset["tournament"] == holdout.tournament)
+                & (pd.to_datetime(probe_dataset["date"]).dt.year == holdout.year)
+            ]
+            holdout_scored_counts.add(int(sel["ml_eligible"].astype(bool).sum()))
+
+        inner_predict = MulticlassXGBoost.predict_proba  # == tracking_predict
+
+        def distorting_predict(self, x):
+            out = inner_predict(self, x)  # verbatim id already registered by the tracker
+            if len(x) in holdout_scored_counts:
+                distorted = out**3
+                distorted = distorted / distorted.sum(axis=1, keepdims=True)
+                _retained.append(distorted)  # pin id so it can't collide with a verbatim id
+                # NOTE: distorted is a NEW array; its id is NOT in verbatim_output_ids,
+                # and we deliberately do NOT register it — that is the mismatch signal.
+                return distorted
+            return out
+
+        monkeypatch.setattr(MulticlassXGBoost, "predict_proba", distorting_predict)
+
+    def tracking_cal_fit(self, probs, y):
+        # Pair by calibrator OBJECT identity: remember which verbatim model produced the
+        # raw THIS calibrator was fit on (None if the fit array is not a verbatim output).
+        _retained.append(probs)  # pin the fit array's id for the run
+        cal_fit_producer[id(self)] = output_to_model.get(id(probs))
+        return real_cal_fit(self, probs, y)
+
+    def tracking_cal_transform(self, probs):
+        _retained.append(probs)  # pin id(probs) for the run so comparisons stay valid
+        cal_transform_inputs.append((id(self), id(probs)))
+        return real_cal_transform(self, probs)
+
+    monkeypatch.setattr(
+        "cdd_mundial.models.ml_validation.MulticlassCalibrator.fit", tracking_cal_fit
+    )
+    monkeypatch.setattr(
+        "cdd_mundial.models.ml_validation.MulticlassCalibrator.transform",
+        tracking_cal_transform,
+    )
+
+    from cdd_mundial.models import ml_validation
+
+    dataset = _synthetic_ml_dataset()
+    report, _ = ml_validation.run_ml_comparison(dataset)
+
+    return {
+        "report": report,
+        "verbatim_output_ids": verbatim_output_ids,
+        "output_to_model": output_to_model,
+        "models_per_run": models_per_run,
+        "cal_fit_producer": cal_fit_producer,
+        "cal_transform_inputs": cal_transform_inputs,
+        # Return the strong references so every tracked id stays pinned through the
+        # assertion that runs AFTER this function returns. Dropping these would let
+        # CPython recycle ids mid-assertion and corrupt the verbatim/producer maps.
+        "_retained": _retained,
+    }
+
+
+def _assert_train_serve_identity(captured) -> None:
+    """Load-bearing CR-01 IDENTITY assertion (replaces the old fit-count proxy).
+
+    For the ML calibrator that scores each holdout, the array it transforms at scoring
+    time MUST be a VERBATIM ``predict_proba`` output (``id`` in ``verbatim_output_ids``)
+    produced by the SAME model whose verbatim raw fed that calibrator's ``fit``. This is
+    identity of model AND of distribution, paired by calibrator object — so it fails both
+    the literal ``final_model`` re-fit (different producing model) and a distribution
+    mismatch with no extra fit (a derived, non-verbatim scoring array).
+    """
+    from cdd_mundial.models.validation import HOLDOUTS
+
+    output_to_model = captured["output_to_model"]
+    verbatim_output_ids = captured["verbatim_output_ids"]
+    cal_fit_producer = captured["cal_fit_producer"]
+    cal_transform_inputs = captured["cal_transform_inputs"]
+
+    # Sanity: instrumentation actually captured calibration-fit producers.
+    fit_models = {m for m in cal_fit_producer.values() if m is not None}
+    assert fit_models, "no calibration-fit raw array traced to a verbatim model output"
+
+    # The ML scoring transform for each holdout is the FIRST transform call made by a
+    # calibrator that was fit on a verbatim model output (ml_calibrator.transform of
+    # ml_holdout_raw at ml_validation.py:439). Iterate transform calls; for each
+    # calibrator that was fit on a verbatim producer, the first array it transforms after
+    # being fit on the holdout-scoring path must itself be a verbatim output of THAT SAME
+    # model. We check every transform whose calibrator has a known fit producer.
+    checked = 0
+    for cal_id, probs_id in cal_transform_inputs:
+        producer = cal_fit_producer.get(cal_id)
+        if producer is None:
+            # Calibrator fit on a derived (ensemble) array — its scoring distribution
+            # identity is enforced transitively via the ML calibrator below; skip.
+            continue
+        # IDENTITY: the transformed scoring array must be a VERBATIM model output ...
+        assert probs_id in verbatim_output_ids, (
+            "CR-01 identity violation: a calibrator fit on a model's verbatim raw is "
+            "transforming a NON-verbatim (derived/distorted) array at scoring time — the "
+            "served distribution differs from the one calibrated (mismatch without an "
+            "extra fit())"
+        )
+        # ... produced by the SAME model whose raw the calibrator was fit on.
+        assert output_to_model.get(probs_id) == producer, (
+            "CR-01 identity violation: the holdout-scoring array was produced by a "
+            "DIFFERENT model than the one the calibrator was fit on (re-fit final_model)"
+        )
+        checked += 1
+
+    # One ML calibrator transforms a verbatim scoring array per holdout.
+    assert checked >= len(HOLDOUTS), (
+        f"expected at least one verbatim-producer scoring transform per holdout "
+        f"({len(HOLDOUTS)}), checked {checked}"
+    )
+
+    # COMPLEMENTARY count guard (not the only assertion): the literal final_model defect
+    # also re-fits a second model per holdout, doubling the fit count.
+    n_models = len(captured["models_per_run"])
+    assert n_models == len(HOLDOUTS), (
+        f"expected exactly one model per holdout (train==serve), got {n_models} "
+        f"across {len(HOLDOUTS)} holdouts — a second model reintroduces CR-01"
+    )
+
+
 def test_comparison_scores_holdout_with_the_same_model_calibrators_were_fit_on(
     monkeypatch,
 ) -> None:
@@ -437,136 +630,42 @@ def test_comparison_scores_holdout_with_the_same_model_calibrators_were_fit_on(
     distributions differ, so the per-class isotonic/sigmoid maps were invalid for the
     served distribution and the gate verdict was computed on miscalibrated inputs.
 
-    This test instruments :class:`MulticlassXGBoost` so every instance is identifiable,
-    records which model produced each ``predict_proba`` output (by object identity of
-    the returned array), and then asserts that for every holdout the array consumed by
-    the calibration-fit path and the array fed into the holdout-scoring transform came
-    from the *same* model instance. It fails the moment a second, differently-trained
-    model is introduced between calibration fitting and holdout scoring.
+    The load-bearing assertion (``_assert_train_serve_identity``) proves IDENTITY, not a
+    fit count: per holdout, the array the ML calibrator transforms at scoring time is a
+    VERBATIM ``predict_proba`` output of the SAME model whose verbatim raw fed that same
+    calibrator's ``fit`` — paired by calibrator object, anchored on the verbatim output
+    of the calibration model. It fails on a re-fit ``final_model`` AND on a distribution
+    mismatch with no extra fit (see the sibling ``...guard_fails_on_distribution...``).
     """
-    from cdd_mundial.models import ml_validation
-    from cdd_mundial.models.validation import HOLDOUTS
-    from cdd_mundial.models.ml_xgboost import MulticlassXGBoost
-
-    # Map id(output_array) -> id(model_instance) for every predict_proba call, plus the
-    # full set of distinct models each holdout instantiated.
-    output_to_model: dict[int, int] = {}
-    models_per_run: list[int] = []
-
-    real_fit = MulticlassXGBoost.fit
-    real_predict = MulticlassXGBoost.predict_proba
-
-    def tracking_fit(self, x, y):
-        models_per_run.append(id(self))
-        return real_fit(self, x, y)
-
-    def tracking_predict(self, x):
-        out = real_predict(self, x)
-        output_to_model[id(out)] = id(self)
-        return out
-
-    monkeypatch.setattr(MulticlassXGBoost, "fit", tracking_fit)
-    monkeypatch.setattr(MulticlassXGBoost, "predict_proba", tracking_predict)
-
-    # Capture the exact arrays the calibrators are fit on and applied to. We wrap the
-    # calibrator factory so each calibrator remembers the raw array it was fit on, and
-    # wrap _ensemble_probs to capture the ml array used for holdout scoring.
-    from cdd_mundial.models import ml_calibration
-
-    fit_inputs: list[int] = []  # id() of every raw array a calibrator was fit on
-    real_cal_fit = ml_calibration.MulticlassCalibrator.fit
-
-    def tracking_cal_fit(self, probs, y):
-        fit_inputs.append(id(probs))
-        return real_cal_fit(self, probs, y)
-
-    monkeypatch.setattr(
-        "cdd_mundial.models.ml_validation.MulticlassCalibrator.fit", tracking_cal_fit
-    )
-
-    dataset = _synthetic_ml_dataset()
-    report, _ = ml_validation.run_ml_comparison(dataset)
+    captured = _instrument_identity(monkeypatch, distort_holdout_scoring=False)
 
     # The comparison must still produce a valid gate verdict.
-    assert report["gate"]["winner"] in {"baseline", "ml", "ensemble"}
+    assert captured["report"]["gate"]["winner"] in {"baseline", "ml", "ensemble"}
 
-    # Every raw array the calibrators were fit on must trace back to a model instance
-    # (sanity that our instrumentation captured the right arrays).
-    fit_models = {output_to_model[a] for a in fit_inputs if a in output_to_model}
-    assert fit_models, "no calibration-fit raw array traced to a model output"
-
-    # CORE INVARIANT: the ML calibrator that scores the holdout is fit on the SAME
-    # model instance that produces the holdout raw probabilities. With the train/serve
-    # identity restored, each holdout instantiates exactly one model and that single
-    # model both feeds calibration fitting and scores the holdout. A re-fit final model
-    # (the CR-01 defect) would introduce a second, distinct model id whose holdout
-    # output never appears among ``fit_models`` for that holdout.
-    n_models = len(models_per_run)
-    n_holdouts = len(HOLDOUTS)
-    assert n_models == n_holdouts, (
-        f"expected exactly one model per holdout (train==serve), "
-        f"got {n_models} model fits across {n_holdouts} holdouts — a second model "
-        f"between calibration-fit and holdout-scoring reintroduces CR-01"
-    )
+    _assert_train_serve_identity(captured)
 
 
-def test_PROBE_distortion_without_extra_fit_must_fail(monkeypatch) -> None:
-    """RED scaffold (Task 1, removed in Task 2): freeze the verifier's WR-01 probe.
+def test_comparison_guard_fails_on_distribution_mismatch_without_extra_fit(
+    monkeypatch,
+) -> None:
+    """WR-01: the strengthened guard MUST fail the verifier's mismatch-without-extra-fit
+    probe — distorting ``ml_holdout_raw`` (cube + renormalize) so the distribution the
+    calibrators transform at scoring time differs from the one they were fit on, WITHOUT
+    adding any ``fit()`` call (the per-holdout fit count stays at ``len(HOLDOUTS)``).
 
-    The verifier confirmed WR-01 empirically: distorting ``ml_holdout_raw`` (cube +
-    renormalize) so the distribution the calibrators *transform* at scoring time differs
-    from the one they were *fit* on — WITHOUT adding any extra ``fit()`` call — does NOT
-    trip the current guard. The count invariant ``n_models == n_holdouts`` stays at 4==4
-    because no second model is created; only the served distribution is corrupted.
-
-    This temporary test reproduces that probe and asserts the *current count-based guard*
-    still PASSES under it (i.e. proves the bug). Task 2 replaces the count assertion with
-    a real identity check that this same probe will FAIL, then deletes this scaffold.
+    Under the old count-based guard this probe PASSED (the documented WR-01 defect). The
+    identity assertion now catches it: the scoring array is a DERIVED (non-verbatim)
+    array, so ``id(probs) not in verbatim_output_ids`` and the guard raises. This turns
+    the Task-1 RED scaffold into a permanent green assertion that the guard bites.
     """
-    from cdd_mundial.models import ml_validation
+    captured = _instrument_identity(monkeypatch, distort_holdout_scoring=True)
+
+    # No extra fit() was added: the count proxy alone would still pass (proves the probe
+    # is a distribution mismatch, not a literal final_model re-fit).
     from cdd_mundial.models.validation import HOLDOUTS
-    from cdd_mundial.models.ml_xgboost import MulticlassXGBoost
 
-    output_to_model: dict[int, int] = {}
-    models_per_run: list[int] = []
+    assert len(captured["models_per_run"]) == len(HOLDOUTS)
 
-    real_fit = MulticlassXGBoost.fit
-    real_predict = MulticlassXGBoost.predict_proba
-
-    def tracking_fit(self, x, y):
-        models_per_run.append(id(self))
-        return real_fit(self, x, y)
-
-    # Distort ONLY the holdout-scoring raw (rows == x_holdout count) with x**3 + renorm.
-    # The synthetic holdouts each have a distinct, known eligible-row count; we distort
-    # any predict_proba call whose input row count matches a holdout's scored count.
-    dataset = _synthetic_ml_dataset()
-    holdout_scored_counts: set[int] = set()
-    for holdout in HOLDOUTS.values():
-        sel = dataset[
-            (dataset["tournament"] == holdout.tournament)
-            & (pd.to_datetime(dataset["date"]).dt.year == holdout.year)
-        ]
-        holdout_scored_counts.add(int(sel["ml_eligible"].astype(bool).sum()))
-
-    def distorting_predict(self, x):
-        out = real_predict(self, x)
-        if len(x) in holdout_scored_counts:
-            out = out**3
-            out = out / out.sum(axis=1, keepdims=True)
-        # tracking is applied OVER distortion on purpose for this RED scaffold: it shows
-        # that even mapping id(distorted_out)->id(self) the count guard cannot tell the
-        # served distribution was corrupted (no extra fit() was added).
-        output_to_model[id(out)] = id(self)
-        return out
-
-    monkeypatch.setattr(MulticlassXGBoost, "fit", tracking_fit)
-    monkeypatch.setattr(MulticlassXGBoost, "predict_proba", distorting_predict)
-
-    report, _ = ml_validation.run_ml_comparison(dataset)
-
-    # RED probe (WR-01): the fit COUNT is untouched by a distribution mismatch with no
-    # extra fit() — exactly one model per holdout, so the current count-based guard PASSES
-    # when it should FAIL. This frozen evidence is what Task 2's identity assertion kills.
-    assert len(models_per_run) == len(HOLDOUTS)  # count guard cannot detect the mismatch
-    assert report["gate"]["winner"] in {"baseline", "ml", "ensemble"}
+    # The strengthened identity guard MUST raise on this mismatch.
+    with pytest.raises(AssertionError, match="CR-01 identity violation"):
+        _assert_train_serve_identity(captured)
