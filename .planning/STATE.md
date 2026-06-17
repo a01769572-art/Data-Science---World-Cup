@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: executing
-stopped_at: Ejecutado 05-06-PLAN.md (fortalecimiento del guardrail CR-01, WR-01) — 6/6 planes Fase 05 completos; listo para re-verificación
-last_updated: "2026-06-17T00:00:00.000Z"
-last_activity: 2026-06-17 -- 05-06 ejecutado: guardrail CR-01 fortalecido a identidad train/serve por holdout (WR-01 cerrado)
+status: verifying
+stopped_at: "05-06-PLAN.md completado; WR-01 cerrado; 6/6 planes Fase 05. Próximo: re-verificación del cuarto must_have del gate"
+last_updated: "2026-06-17T13:57:22.437Z"
+last_activity: 2026-06-17
 progress:
   total_phases: 6
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 21
-  completed_plans: 20
-  percent: 95
+  completed_plans: 21
+  percent: 100
 ---
 
 # Project State
@@ -25,10 +25,10 @@ See: .planning/PROJECT.md (updated 2026-06-11)
 
 ## Current Position
 
-Phase: 05 (ml-ensemble-upgrade-gated) — EXECUTING (gap closure done, 6/6)
-Plan: 6 of 6 (05-06 ejecutado — fortalecimiento del guardrail CR-01, WR-01)
+Phase: 6
+Plan: Not started
 Status: 05-06-PLAN.md completado. El guardrail de regresión CR-01 ahora prueba IDENTIDAD train/serve por holdout (el array de scoring es salida verbatim de predict_proba del mismo modelo cuyo raw calibró), FALLA ante el probe x^3+renorm del verificador (mismatch sin fit extra) vía pytest.raises, y FALLA ante el re-fit literal final_model — verde contra producción. TEST-ONLY: src/ intacto, final_model count == 0. WR-01 cerrado. Próximo: re-verificar el cuarto must_have del gate (ver 05-VERIFICATION.md).
-Last activity: 2026-06-17 -- 05-06 ejecutado: guardrail CR-01 fortalecido a identidad train/serve por holdout
+Last activity: 2026-06-17
 
 Progress: [█████████░] 95%
 
@@ -38,7 +38,7 @@ Progress: [█████████░] 95%
 
 **Velocity:**
 
-- Total plans completed: 15
+- Total plans completed: 21
 - Average duration: 19 min
 - Total execution time: 93 min
 
@@ -49,6 +49,7 @@ Progress: [█████████░] 95%
 | Phase 01 | 5 | 93 min | 19 min |
 | 03 | 5 | - | - |
 | 04 | 5 | - | - |
+| 05 | 6 | - | - |
 
 **Recent Trend:**
 
