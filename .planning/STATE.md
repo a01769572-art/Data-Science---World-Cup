@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: verifying
-stopped_at: "05-06-PLAN.md completado; WR-01 cerrado; 6/6 planes Fase 05. Próximo: re-verificación del cuarto must_have del gate"
+status: ready
+stopped_at: "Fase 05 COMPLETA y verificada (passed 4/4); WR-01 cerrado. Próximo: Fase 06 (operación en vivo + post-mortem) — discutir/planear"
 last_updated: "2026-06-17T13:57:22.437Z"
 last_activity: 2026-06-17
 progress:
   total_phases: 6
-  completed_phases: 4
+  completed_phases: 5
   total_plans: 21
   completed_plans: 21
   percent: 100
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-11)
 
 **Core value:** Proyecto de portafolio metodológicamente riguroso y profundamente documentado que enseña ciencia de datos end-to-end real — si los pronósticos fallan pero el proceso es sólido y el aprendizaje quedó capturado, el proyecto cumplió.
-**Current focus:** Phase 05 — ml-ensemble-upgrade-gated
+**Current focus:** Phase 06 — operación en vivo + post-mortem (no iniciada)
 
 ## Current Position
 
 Phase: 6
 Plan: Not started
-Status: 05-06-PLAN.md completado. El guardrail de regresión CR-01 ahora prueba IDENTIDAD train/serve por holdout (el array de scoring es salida verbatim de predict_proba del mismo modelo cuyo raw calibró), FALLA ante el probe x^3+renorm del verificador (mismatch sin fit extra) vía pytest.raises, y FALLA ante el re-fit literal final_model — verde contra producción. TEST-ONLY: src/ intacto, final_model count == 0. WR-01 cerrado. Próximo: re-verificar el cuarto must_have del gate (ver 05-VERIFICATION.md).
+Status: Fase 05 COMPLETA y verificada (passed 4/4). El guardrail de regresión CR-01 ahora prueba IDENTIDAD train/serve por holdout (el array de scoring es salida verbatim de predict_proba del mismo modelo cuyo raw calibró), FALLA ante el probe x^3+renorm del verificador (mismatch sin fit extra) vía pytest.raises, y FALLA ante el re-fit literal final_model — verde contra producción. TEST-ONLY: src/ intacto, final_model count == 0. WR-01 cerrado; suite completa 394 passed. Próximo: Fase 06 (operación en vivo + post-mortem).
 Last activity: 2026-06-17
 
-Progress: [█████████░] 95%
+Progress: [████████░░] 83%
 
 **HARD DEADLINE:** Fases 1-4 deben estar publicando pronósticos antes del 2026-06-27 (fin de fase de grupos). El torneo empezó HOY.
 
