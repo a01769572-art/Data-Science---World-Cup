@@ -139,9 +139,9 @@ Plans:
 - [x] 05-05-PLAN.md — Cierre CR-01: identidad train/serve en calibración de `run_ml_comparison` (holdout puntuado con inner_model) + regresión anti-mismatch + cobertura de calibración del flujo reparado
 
 **Wave 6** *(blocked on Wave 5 completion; gap closure WR-01)*
-- [ ] 05-06-PLAN.md — Fortalecer el guardrail de regresión CR-01: probar identidad real de modelo/distribución (el array de scoring del holdout es salida verbatim de predict_proba del mismo modelo calibrado), haciéndolo fallar ante el probe de mismatch-sin-fit-extra del verificador
+- [x] 05-06-PLAN.md — Fortalecer el guardrail de regresión CR-01: probar identidad real de modelo/distribución (el array de scoring del holdout es salida verbatim de predict_proba del mismo modelo calibrado), haciéndolo fallar ante el probe de mismatch-sin-fit-extra del verificador
 
-**Progress**: 5/6 plans complete (05-01..05-05 done) — CR-01 cerrado en producción; queda 05-06 para blindar el guardrail (WR-01) antes de re-verificar el must_have del gate
+**Progress**: 6/6 plans complete (05-01..05-06 done) — CR-01 cerrado en producción y blindado por el guardrail de identidad fortalecido (WR-01 cerrado); listo para re-verificar el must_have del gate
 
 ### Phase 6: Operación en Vivo + Post-Mortem
 **Goal**: El sistema opera con disciplina diaria hasta el 19 de julio y cierra con evaluación final honesta y aprendizaje capturado — corre desde Fase 4 en adelante; el post-mortem está fijado al final del torneo

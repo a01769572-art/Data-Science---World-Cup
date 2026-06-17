@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Ejecutado 05-05-PLAN.md (cierre CR-01) — 5/5 planes Fase 05 completos; listo para re-verificación
-last_updated: "2026-06-16T13:35:58.155Z"
-last_activity: 2026-06-16 -- 05-05 ejecutado: identidad train/serve restaurada en run_ml_comparison
+stopped_at: Ejecutado 05-06-PLAN.md (fortalecimiento del guardrail CR-01, WR-01) — 6/6 planes Fase 05 completos; listo para re-verificación
+last_updated: "2026-06-17T00:00:00.000Z"
+last_activity: 2026-06-17 -- 05-06 ejecutado: guardrail CR-01 fortalecido a identidad train/serve por holdout (WR-01 cerrado)
 progress:
   total_phases: 6
   completed_phases: 3
-  total_plans: 20
-  completed_plans: 19
+  total_plans: 21
+  completed_plans: 20
   percent: 95
 ---
 
@@ -25,10 +25,10 @@ See: .planning/PROJECT.md (updated 2026-06-11)
 
 ## Current Position
 
-Phase: 05 (ml-ensemble-upgrade-gated) — EXECUTING (gap closure done)
-Plan: 5 of 5 (05-05 ejecutado — cierre CR-01)
-Status: 05-05-PLAN.md completado. CR-01 cerrado: el holdout se puntúa con inner_model (el modelo de fit/calibración), eliminando el re-fit de final_model; regresión anti-mismatch verde. ML-03/ML-04 ahora honestamente satisfechos. Próximo: re-verificar criterios #3/#4 de la Fase 05 (ver 05-VERIFICATION.md).
-Last activity: 2026-06-16 -- 05-05 ejecutado: identidad train/serve restaurada en run_ml_comparison
+Phase: 05 (ml-ensemble-upgrade-gated) — EXECUTING (gap closure done, 6/6)
+Plan: 6 of 6 (05-06 ejecutado — fortalecimiento del guardrail CR-01, WR-01)
+Status: 05-06-PLAN.md completado. El guardrail de regresión CR-01 ahora prueba IDENTIDAD train/serve por holdout (el array de scoring es salida verbatim de predict_proba del mismo modelo cuyo raw calibró), FALLA ante el probe x^3+renorm del verificador (mismatch sin fit extra) vía pytest.raises, y FALLA ante el re-fit literal final_model — verde contra producción. TEST-ONLY: src/ intacto, final_model count == 0. WR-01 cerrado. Próximo: re-verificar el cuarto must_have del gate (ver 05-VERIFICATION.md).
+Last activity: 2026-06-17 -- 05-06 ejecutado: guardrail CR-01 fortalecido a identidad train/serve por holdout
 
 Progress: [█████████░] 95%
 
@@ -80,6 +80,7 @@ Progress: [█████████░] 95%
 | Phase 05 P05-03 | 14min | 2 tasks | 5 files |
 | Phase 05 P04 | 18min | 2 tasks | 11 files |
 | Phase 05 P05 | 18min | 2 tasks (TDD, gap closure) | 3 files |
+| Phase 05 P06 | 25min | 2 tasks (TDD, gap closure WR-01) | 1 file |
 
 ## Accumulated Context
 
@@ -156,6 +157,7 @@ Recent decisions affecting current work:
 - [Phase ?]: Phase-5 live integration is opt-in via run_official(ml_selection_provider=...): baseline-only by default, dual table added only when a candidate is promoted (D-14)
 - [Phase ?]: Dual publication always keeps the baseline row; the promoted candidate is published alongside only for ML-eligible matches, else explicit baseline fallback with recorded reason (D-13)
 - [Phase 05]: CR-01 cerrado — run_ml_comparison puntúa el holdout con inner_model (el modelo sobre cuyas probabilidades se ajustaron calibradores y peso de ensemble), eliminando el re-fit de final_model. Los mapas isotonic/sigmoid por clase y el peso se aplican a la misma distribución sobre la que se ajustaron, así que las entradas del gate quedan honestamente calibradas (T-05-13). Regresión por identidad de instancia (un solo modelo por holdout) bloquea la reaparición del mismatch; el reporte por holdout registra scoring_model/n_inner_fit/n_inner_cal para auditoría.
+- [Phase 05]: WR-01 cerrado — el guardrail de regresión CR-01 ahora prueba IDENTIDAD de modelo/distribución por holdout (el array que ml_calibrator.transform recibe al puntuar es salida VERBATIM de predict_proba del MISMO modelo cuyo raw alimentó ml_calibrator.fit), no el proxy de conteo n_models==n_holdouts. Falla ante el probe x^3+renorm del verificador (mismatch sin fit extra) y ante el re-fit literal final_model; verde contra producción. Pareo por object-id de calibrador (no por índice de secuencia); anclaje en verbatim_output_ids; referencias pinneadas contra reuse de id() de CPython. TEST-ONLY: src/ intacto (final_model count == 0); el conteo se conserva como aserción complementaria.
 
 ### Pending Todos
 
@@ -177,6 +179,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-06-16 -- ejecución 05-05 (cierre CR-01)
-Stopped at: 05-05-PLAN.md completado; CR-01 cerrado; 5/5 planes Fase 05. Próximo: re-verificación de criterios #3/#4
+Last session: 2026-06-17 -- ejecución 05-06 (fortalecimiento del guardrail CR-01, WR-01)
+Stopped at: 05-06-PLAN.md completado; WR-01 cerrado; 6/6 planes Fase 05. Próximo: re-verificación del cuarto must_have del gate
 Resume file: None
