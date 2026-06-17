@@ -458,10 +458,12 @@ def _instrument_identity(monkeypatch, *, distort_holdout_scoring: bool = False):
     models_per_run: list[int] = []
     cal_fit_producer: dict[int, int | None] = {}
     cal_transform_inputs: list[tuple[int, int]] = []
-    # Keep a strong reference to every array we identify by ``id`` for the duration of the
-    # run. Without this, numpy arrays returned by ``predict_proba`` are garbage-collected
-    # once unused and CPython recycles their ``id`` for a later array, silently corrupting
-    # the id->model map (cross-call id reuse). Holding references pins every id unique.
+    # Keep a strong reference to every object we identify by ``id`` for the duration of the
+    # run: the predict_proba arrays AND the model/calibrator objects whose ids are stored as
+    # dict keys/values. Without this, those objects are garbage-collected once unused and
+    # CPython recycles their ``id`` for a later object, silently corrupting the id->model map
+    # and the calibrator-keyed producer map (cross-holdout id reuse — the source of the
+    # full-suite-only false positive). Holding references pins every id unique for the run.
     _retained: list[object] = []
 
     real_fit = MulticlassXGBoost.fit
@@ -470,6 +472,7 @@ def _instrument_identity(monkeypatch, *, distort_holdout_scoring: bool = False):
     real_cal_transform = ml_calibration.MulticlassCalibrator.transform
 
     def tracking_fit(self, x, y):
+        _retained.append(self)  # pin the model OBJECT so its id can't be recycled
         models_per_run.append(id(self))
         return real_fit(self, x, y)
 
@@ -478,6 +481,7 @@ def _instrument_identity(monkeypatch, *, distort_holdout_scoring: bool = False):
     def tracking_predict(self, x):
         out = real_predict(self, x)
         _retained.append(out)  # pin id(out) so it cannot be recycled (id-reuse hazard)
+        _retained.append(self)  # pin the producing model OBJECT (id stored as a value)
         verbatim_output_ids.add(id(out))
         output_to_model[id(out)] = id(self)
         return out
@@ -519,11 +523,13 @@ def _instrument_identity(monkeypatch, *, distort_holdout_scoring: bool = False):
         # Pair by calibrator OBJECT identity: remember which verbatim model produced the
         # raw THIS calibrator was fit on (None if the fit array is not a verbatim output).
         _retained.append(probs)  # pin the fit array's id for the run
+        _retained.append(self)  # pin the calibrator OBJECT so id(self) (the dict key) is unique
         cal_fit_producer[id(self)] = output_to_model.get(id(probs))
         return real_cal_fit(self, probs, y)
 
     def tracking_cal_transform(self, probs):
         _retained.append(probs)  # pin id(probs) for the run so comparisons stay valid
+        _retained.append(self)  # pin the calibrator OBJECT so id(self) cannot be recycled
         cal_transform_inputs.append((id(self), id(probs)))
         return real_cal_transform(self, probs)
 
