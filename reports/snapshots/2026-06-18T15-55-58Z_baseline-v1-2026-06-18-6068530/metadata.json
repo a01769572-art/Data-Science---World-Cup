@@ -1,0 +1,100 @@
+{
+  "allow_dirty_override": true,
+  "artifacts": [
+    "group_positions.parquet",
+    "team_probabilities.parquet",
+    "upcoming_match_predictions.parquet"
+  ],
+  "as_of_date": "2026-06-18",
+  "calibration": null,
+  "checksums": {
+    "group_positions.parquet": "057ba990e57da1db801753bcb15b6b27ff546a6075ffb5c0f3b66fcc1afdfd69",
+    "team_probabilities.parquet": "a28da54639cb9b744e55e29d9c644ca523c07eea69f67dac8c04aea84aed8f9f",
+    "upcoming_match_predictions.parquet": "6576523d05a36da5d4ebe49796bf656cae891897ec06906be631a80bd296d175"
+  },
+  "frozen_benchmark": null,
+  "generated_at_utc": "2026-06-18T15:55:58Z",
+  "git_commit": "e12e0086721dc1a7101e072fce700c19eed70378",
+  "git_commit_short": "e12e008",
+  "git_dirty": true,
+  "input_fingerprint": "6068530ecf97cc1e87cf0ffb386dd7fce6fd69102e9c3f53ca64d5df711389f5",
+  "kickoff_boundary_utc": "2026-06-18T16:00:00Z",
+  "live_training_provenance": {
+    "artifact_path": "data/processed/live/live_training_2026-06-18.parquet",
+    "artifact_sha256": "dc685eccb2e2f3abd2d3eabfc4737423eba210397a919e9367802e134ed45233",
+    "live_match_ids": [
+      "WC26-001",
+      "WC26-002",
+      "WC26-003",
+      "WC26-004",
+      "WC26-005",
+      "WC26-006",
+      "WC26-007",
+      "WC26-008",
+      "WC26-009",
+      "WC26-010",
+      "WC26-011",
+      "WC26-012",
+      "WC26-013",
+      "WC26-014",
+      "WC26-015",
+      "WC26-016",
+      "WC26-017",
+      "WC26-018",
+      "WC26-019",
+      "WC26-020",
+      "WC26-021",
+      "WC26-022",
+      "WC26-023",
+      "WC26-024"
+    ],
+    "source_version": "2026-06-11"
+  },
+  "live_training_sha256": "dc685eccb2e2f3abd2d3eabfc4737423eba210397a919e9367802e134ed45233",
+  "model_provenance": {
+    "artifact_sha256": "cae0c0cbb64dff230a5f2d3cfc5df493a288be4e8f8db5a38555579a2caa26c5",
+    "input_fingerprint": "6068530ecf97cc1e87cf0ffb386dd7fce6fd69102e9c3f53ca64d5df711389f5",
+    "model_path": "data/processed/models/dc_params_2026-06-18.json",
+    "model_version": "baseline-v1-2026-06-18-6068530",
+    "reused": true
+  },
+  "model_selection": {
+    "fallback_reasons": {},
+    "gate_mean_log_loss": {},
+    "n_baseline_fallback": 0,
+    "n_baseline_published": 48,
+    "n_input_matches": 48,
+    "n_upgrade_published": 0,
+    "promoted": false,
+    "winner": "baseline"
+  },
+  "model_version": "baseline-v1-2026-06-18-6068530",
+  "modified_files": [
+    ".planning/debug/venv-onedrive-dehydration.md",
+    ".planning/phases/04-primer-pronostico-pipeline-diario/04-05-SUMMARY.md",
+    "data/external/odds_2026_template.csv",
+    "data/external/results_2026.csv",
+    "notebooks/02_modelos_baseline.ipynb",
+    ".claude/scheduled_tasks.lock",
+    ".claude/settings.local.json"
+  ],
+  "n_sims": 10000,
+  "order": [
+    "materialize",
+    "select_model",
+    "simulate",
+    "publish"
+  ],
+  "preflight": {
+    "benchmark_error": "OddsValidationError: event EVT-2026-007-A bookmaker book-alpha quote is stale: provider update 2026-06-13T21:30:00Z is more than 1 day, 0:00:00 before capture 2026-06-18T15:55:58.525676Z",
+    "benchmark_frozen": false,
+    "materialized_before_simulation": true,
+    "results_validated": true,
+    "worktree_clean": false
+  },
+  "publication_row_ids": [],
+  "published_at_utc": "2026-06-18T15:55:58Z",
+  "seed": 20260613,
+  "snapshot_id": "2026-06-18T15-55-58Z_baseline-v1-2026-06-18-6068530",
+  "xi": 0.00095
+}
