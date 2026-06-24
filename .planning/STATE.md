@@ -4,8 +4,8 @@ milestone: v1.0
 milestone_name: milestone
 status: ready
 stopped_at: "Fase 05 COMPLETA y verificada (passed 4/4); WR-01 cerrado. Próximo: Fase 06 (operación en vivo + post-mortem) — discutir/planear"
-last_updated: "2026-06-17T13:57:22.437Z"
-last_activity: 2026-06-17
+last_updated: "2026-06-24T16:39:00Z"
+last_activity: 2026-06-24
 progress:
   total_phases: 6
   completed_phases: 5
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-06-11)
 Phase: 6
 Plan: Not started
 Status: Fase 05 COMPLETA y verificada (passed 4/4). El guardrail de regresión CR-01 ahora prueba IDENTIDAD train/serve por holdout (el array de scoring es salida verbatim de predict_proba del mismo modelo cuyo raw calibró), FALLA ante el probe x^3+renorm del verificador (mismatch sin fit extra) vía pytest.raises, y FALLA ante el re-fit literal final_model — verde contra producción. TEST-ONLY: src/ intacto, final_model count == 0. WR-01 cerrado; suite completa 394 passed. Próximo: Fase 06 (operación en vivo + post-mortem).
-Last activity: 2026-06-17
+Last activity: 2026-06-24 - Completed quick task 260624-esi: Publicar el tercer snapshot oficial del 2026-06-24 post jornada 2
 
 Progress: [████████░░] 83%
 
@@ -169,6 +169,12 @@ None yet.
 - ~~[Phase 3 prerequisito]: Reglamento oficial FIFA 2026 NO verificado~~ — RESUELTO en 03-01: reglamento oficial (edicion MAY 2026) pineado con SHA-256, Art. 13 + Anexo C (495 combinaciones) extraidos y validados fail-closed. OJO: el orden oficial difiere del wording de SIM-01 (head-to-head primero; fallback = ranking FIFA, no sorteo).
 - [Phase 3 planning override]: `03-03` modifica 10 archivos de fixtures/tests; el Director aceptó la advertencia de tamaño porque no quedan blockers funcionales ni de cobertura.
 - [Stack]: Pin pandas ~=2.3.3 (NO 3.x — seaborn 0.13.2 incompatible); no tocar el pin a mitad de torneo
+
+### Quick Tasks Completed
+
+| # | Description | Date | Commit | Directory |
+|---|-------------|------|--------|-----------|
+| 260624-esi | Publicar el tercer snapshot oficial del 2026-06-24 post jornada 2 | 2026-06-24 | bc2b2ce | [260624-esi-publicar-tercer-snapshot-post-jornada-2](./quick/260624-esi-publicar-tercer-snapshot-post-jornada-2/) |
 
 ## Deferred Items
 
