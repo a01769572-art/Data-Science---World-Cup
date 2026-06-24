@@ -16,7 +16,9 @@ El valor central no es acertar pronósticos — es que el proceso sea sólido, r
 
 El torneo inició el 11 de junio de 2026 (México/EUA/Canadá, 48 selecciones, 12 grupos, 104 partidos). El proyecto se construye en modo exprés durante la fase de grupos: la simulación es **condicional al estado real del torneo** — los partidos ya jugados se fijan con su resultado y solo se simula lo restante — así que el sistema es válido en cualquier punto del calendario.
 
-**Estado actual: Fase 1 (Fundación de Datos) completa.** Histórico de 49,405 partidos internacionales (1872–2026), identidades canónicas de las 48 selecciones, snapshot Elo con cobertura total, fixture oficial congelado y benchmark de cuotas de-margined.
+**Estado actual (24 jun 2026): Fases 1–5 completas; Fase 6 pendiente.** El sistema ya opera en vivo: publica snapshots oficiales append-only condicionados al estado real del torneo, congela benchmark de mercado al momento de publicación y renderiza un `report.html` estático por corrida. A la fecha se han publicado tres snapshots oficiales (`2026-06-13`, `2026-06-18` y `2026-06-24`); el más reciente es `2026-06-24T16-37-53Z_baseline-v1-2026-06-24-7404300`, condicionado a 48 partidos ya jugados.
+
+El upgrade ML existe, pero la publicación oficial sigue gateada por desempeño: el snapshot del `2026-06-24` volvió a publicar el baseline estructural (`winner = baseline`, `promoted = false`) y dejó trazabilidad completa en `metadata.json`, el ledger canónico de calibración y el bundle congelado bajo `reports/snapshots/`.
 
 Fuera de alcance: dashboards interactivos (la salida son reportes estáticos matplotlib/seaborn), deep learning (muestras pequeñas; gradient boosting es el techo razonable), datos a nivel jugador, y cualquier uso de apuestas reales.
 
@@ -132,12 +134,12 @@ Validación de modelos (Fases 2+): splits temporales estrictos (nunca aleatorios
 | Fase | Entregable | Estado |
 |------|-----------|--------|
 | 1. Fundación de datos | Histórico canónico, identidades, Elo snapshot, fixture congelado, benchmark de cuotas | ✅ Completa |
-| 2. Features y Elo propio | Recomputación World Football Elo desde el histórico, features reproducibles | ⏳ Siguiente |
-| 3. Modelos y simulador | Dixon-Coles (λ), Monte Carlo con reglas FIFA 2026 completas | Pendiente |
-| 4. Pipeline en vivo | Actualización por jornada: resultados → re-cálculo → re-simulación → reporte | Pendiente |
-| 5. Ensemble ML | XGBoost + calibración isotónica (solo si vence al baseline en log-loss) | Pendiente |
-| 6. Evaluación | Tracking de calibración vs. mercado, post-mortem final | Pendiente |
+| 2. Features y Elo propio | Recomputación World Football Elo desde el histórico, features reproducibles | ✅ Completa |
+| 3. Modelos y simulador | Dixon-Coles (λ), Monte Carlo con reglas FIFA 2026 completas | ✅ Completa |
+| 4. Pipeline en vivo | Actualización por jornada: resultados → re-cálculo → re-simulación → reporte | ✅ Completa |
+| 5. Ensemble ML | XGBoost + calibración isotónica (solo si vence al baseline en log-loss) | ✅ Completa |
+| 6. Evaluación | Tracking de calibración vs. mercado, post-mortem final | ⏳ Siguiente |
 
-**Deadline duro:** el baseline (Fases 1–4) debe publicar pronósticos antes del fin de la fase de grupos (27 jun 2026).
+**Hito cumplido:** el baseline (Fases 1–4) ya publica pronósticos antes del fin de la fase de grupos (`27 jun 2026`). El tercer snapshot oficial quedó publicado el `24 jun 2026`.
 
 Nota de transparencia: el requisito DATA-03 cubre dos partes — la ingesta del snapshot Elo actual (completa, cobertura 48/48 verificada por tests) y la recomputación de Elo propio desde el histórico, que es el primer entregable de la Fase 2.
