@@ -1,10 +1,25 @@
 provider,bookmaker,event_id,match_id,commence_time_utc,provider_update_utc,home_team,away_team,price_home,price_draw,price_away
-manual,book-alpha,EVT-2026-007-A,WC26-007,2026-06-13T22:00:00Z,2026-06-13T21:30:00Z,Brazil,Morocco,1.55,4.10,6.20
-manual,book-beta,EVT-2026-007-B,WC26-007,2026-06-13T22:00:00Z,2026-06-13T21:30:00Z,Brazil,Morocco,1.60,4.00,6.00
-manual,book-gamma,EVT-2026-007-C,WC26-007,2026-06-13T22:00:00Z,2026-06-13T21:30:00Z,Brazil,Morocco,1.57,4.20,6.10
-manual,book-alpha,EVT-2026-005-A,WC26-005,2026-06-14T01:00:00Z,2026-06-13T21:30:00Z,Haiti,Scotland,4.80,3.60,1.78
-manual,book-beta,EVT-2026-005-B,WC26-005,2026-06-14T01:00:00Z,2026-06-13T21:30:00Z,Haiti,Scotland,4.60,3.55,1.82
-manual,book-gamma,EVT-2026-005-C,WC26-005,2026-06-14T01:00:00Z,2026-06-13T21:30:00Z,Haiti,Scotland,4.90,3.50,1.80
-manual,book-alpha,EVT-2026-006-A,WC26-006,2026-06-14T04:00:00Z,2026-06-13T21:30:00Z,Australia,Turkey,3.10,3.30,2.30
-manual,book-beta,EVT-2026-006-B,WC26-006,2026-06-14T04:00:00Z,2026-06-13T21:30:00Z,Australia,Turkey,3.05,3.35,2.32
-manual,book-gamma,EVT-2026-006-C,WC26-006,2026-06-14T04:00:00Z,2026-06-13T21:30:00Z,Australia,Turkey,3.15,3.25,2.28
+manual,book-consensus,885ba95805db310a7bcc3fb1a7a6dd28,WC26-049,2026-06-24T22:00:00Z,2026-06-24T15:16:33Z,Scotland,Brazil,9.9,5.75,1.32
+manual,book-consensus,d1279ce7f33136a33e99ad442fc855e8,WC26-050,2026-06-24T22:00:00Z,2026-06-24T15:16:33Z,Morocco,Haiti,1.17,7.58,17.72
+manual,book-consensus,c9ef5822ee64fd5275f7c73251bb56c7,WC26-051,2026-06-24T19:00:00Z,2026-06-24T15:16:33Z,Switzerland,Canada,2.45,3.05,3.32
+manual,book-consensus,512ac18beb5aa936a59f7ea3e497ada2,WC26-052,2026-06-24T19:00:00Z,2026-06-24T15:16:33Z,Bosnia & Herzegovina,Qatar,1.36,5.5,8
+manual,book-consensus,5993bd5196ca09f83990f0c3261e442e,WC26-053,2026-06-25T01:00:00Z,2026-06-24T15:16:33Z,Czech Republic,Mexico,3.72,3.9,1.94
+manual,book-consensus,c0355dfc6e26ec327e379b6ef5824a5f,WC26-054,2026-06-25T01:00:00Z,2026-06-24T15:16:33Z,South Africa,South Korea,6.1,4,1.6
+manual,book-consensus,a5a0b544a984ab16e564264f3e859b43,WC26-055,2026-06-25T20:00:00Z,2026-06-24T15:16:33Z,Curacao,Ivory Coast,18.81,8,1.15
+manual,book-consensus,0ec28b84ec399bd4dffbe8d1bc72b3c4,WC26-056,2026-06-25T20:00:00Z,2026-06-24T15:16:33Z,Ecuador,Germany,3.88,4.06,1.85
+manual,book-consensus,0ed0233bddc4eafc8507f86a9c17b998,WC26-057,2026-06-25T23:00:00Z,2026-06-24T15:16:33Z,Japan,Sweden,1.88,3.54,4.3
+manual,book-consensus,f3c4657daa143a0c5bd62cb370d01ce4,WC26-058,2026-06-25T23:00:00Z,2026-06-24T15:16:33Z,Tunisia,Netherlands,24,9.75,1.12
+manual,book-consensus,f41aeac9a8343a84b4950f15ea25fba2,WC26-059,2026-06-26T02:00:00Z,2026-06-24T15:16:33Z,Turkey,USA,3.6,4.1,1.91
+manual,book-consensus,22f6ac06dfcc88a847920f62633e6459,WC26-060,2026-06-26T02:00:00Z,2026-06-24T15:16:33Z,Paraguay,Australia,2.9,2.25,3.88
+manual,book-consensus,b86b4d60f773e9e3c46c00e9a6496e79,WC26-061,2026-06-26T19:00:00Z,2026-06-24T15:16:33Z,Norway,France,4.72,4.38,1.65
+manual,book-consensus,7e6aee294ea1a4792c59558791084528,WC26-062,2026-06-26T19:00:00Z,2026-06-24T15:16:33Z,Senegal,Iraq,1.23,6.75,13
+manual,book-consensus,3e3b5fa2b3c963e74cf044c60db0b573,WC26-063,2026-06-27T03:00:00Z,2026-06-24T15:16:33Z,Egypt,Iran,2.48,2.68,3.72
+manual,book-consensus,581691da05dcd75b5c6d3be91ee9d2ab,WC26-064,2026-06-27T03:00:00Z,2026-06-24T15:16:33Z,New Zealand,Belgium,15,7.5,1.18
+manual,book-consensus,e07b1926be5a4d515c7eb108dbcee9c5,WC26-065,2026-06-27T00:00:00Z,2026-06-24T15:16:33Z,Cape Verde,Saudi Arabia,2.43,3.45,2.91
+manual,book-consensus,dcff2e31c0bce001a4db5caaf4fa8822,WC26-066,2026-06-27T00:00:00Z,2026-06-24T15:16:33Z,Uruguay,Spain,7,4.19,1.5
+manual,book-consensus,4be17c8e1ccfecb0f2a5ef79e045c415,WC26-067,2026-06-27T21:00:00Z,2026-06-24T15:16:33Z,Panama,England,15.74,8,1.17
+manual,book-consensus,537c0997cd899394f47f16545b7068b2,WC26-068,2026-06-27T21:00:00Z,2026-06-24T15:16:33Z,Croatia,Ghana,1.76,3.3,5.74
+manual,book-consensus,8756200e539155e571557c4f2e0d7f05,WC26-069,2026-06-28T02:00:00Z,2026-06-24T15:16:33Z,Algeria,Austria,3.9,2.3,2.82
+manual,book-consensus,54697f453437ab26276d773be1d72e9b,WC26-070,2026-06-28T02:00:00Z,2026-06-24T15:16:33Z,Jordan,Argentina,14.82,7.25,1.19
+manual,book-consensus,67ae5751c401a98409b8566ae4897069,WC26-071,2026-06-27T23:30:00Z,2026-06-24T15:16:33Z,Colombia,Portugal,3.94,3.75,1.91
+manual,book-consensus,13eab94a136b9c264ba974cf437a5f71,WC26-072,2026-06-27T23:30:00Z,2026-06-24T15:16:33Z,DR Congo,Uzbekistan,1.81,4.12,4.16
